@@ -2,7 +2,15 @@
   "name": "rana",
   "version": "1.0.0",
   "main": "index.js",
+  "private": true,
   "author": "Evgeny Bykovskikh <redzumi.tao@gmail.com>",
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redzumi/rana.git"
+  },
   "license": "MIT",
   "dependencies": {
     "lerna": "^4.0.0"
