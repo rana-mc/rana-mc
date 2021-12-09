@@ -1,0 +1,10 @@
+{
+  "name": "rana",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Evgeny Bykovskikh <redzumi.tao@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lerna": "^4.0.0"
+  }
+}
