@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "build",
+    "lib": [
+      "DOM",
+      "ES2015"
+    ],
     "typeRoots": [
       "./node_modules/@types"
     ],
