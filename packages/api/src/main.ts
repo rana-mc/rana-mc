@@ -1,17 +1,13 @@
 import express from 'express';
-import { createProxyMiddleware, responseInterceptor } from 'http-proxy-middleware';
 import { config as makeEnvs } from 'dotenv';
 import RanaDB from '@rana/db';
+import { log } from './utils';
+import { getCurseForgeProxy } from './proxy';
+import { getRanaAPIRouter } from './ranaApi';
 
-const CURSEFORGE_API_URL = 'https://api.curseforge.com/';
-
-const log = (message: string) => {
-  console.log(`[API]: ${message}`);
-};
+const API_PORT = 3000;
 
 const main = () => {
-  makeEnvs();
-
   const db = new RanaDB();
   db.init();
 
@@ -21,30 +17,15 @@ const main = () => {
   log(`API key is ${process.env.CURSE_API_KEY}`);
 
   const app = express();
-  createCurseForgeProxy(app);
 
-  app.listen(3000);
+  app.use('/api', getRanaAPIRouter());
+  app.use('/v1', getCurseForgeProxy());
+
+  app.listen(API_PORT, () => {
+    log(`Working on ${API_PORT} port...`);
+  });
 };
 
-const createCurseForgeProxy = (app) => {
-  app.use('/', createProxyMiddleware({
-    target: CURSEFORGE_API_URL,
-    selfHandleResponse: true,
-    changeOrigin: true,
-    onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
-      const response = responseBuffer.toString('utf8');
-      handleResponse(response);
-      return responseBuffer;
-    }),
-    onProxyReq(proxyReq, req, res) {
-      proxyReq.setHeader('x-api-key', process.env.CURSE_API_KEY);
-    }
-  }));
-};
 
-const handleResponse = (response) => {
-  log(`(ProxyResponse): ${response}`);
-};
-
-log('hello from @rana/api');
+makeEnvs();
 main();

@@ -5,15 +5,14 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": [
-      "DOM",
-      "ES2015"
-    ],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "lib": ["DOM", "ES2015"],
+    "typeRoots": ["./node_modules/@types"],
+    "plugins": [
+      {
+        "transform": "typescript-transform-extensions",
+        "extensions": { ".ts": ".js" }
+      }
+    ]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
