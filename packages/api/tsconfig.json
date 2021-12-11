@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "build",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "lib": [
       "DOM",
       "ES2015"

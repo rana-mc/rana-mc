@@ -1,13 +1,5 @@
+/// <reference path="../types/index.d.ts" />
 import { JSONFile, Low } from "lowdb";
-
-type GameVersion = {
-    name: string;
-    gameTypeId: string;
-};
-
-type RanaDBData = {
-    gameVersions: GameVersion[];
-}
 
 export default class RanaDB {
     public static DB_PATH = './storage/db.json';
@@ -18,9 +10,7 @@ export default class RanaDB {
 
     private db: Low<RanaDBData>;
 
-    constructor() {
-        this.init();
-    }
+    constructor() { }
 
     async init() {
         const adapter = new JSONFile<RanaDBData>(RanaDB.DB_PATH);
@@ -32,6 +22,8 @@ export default class RanaDB {
         this.db.data = this.db.data || RanaDB.DB_DEFAULT;
         await this.db.write();
     }
-}
 
-new RanaDB();
+    async data() {
+        return this.db.data;
+    }
+}

@@ -1,6 +1,7 @@
-import * as express from 'express';
+import express from 'express';
 import { createProxyMiddleware, responseInterceptor } from 'http-proxy-middleware';
 import { config as makeEnvs } from 'dotenv';
+import RanaDB from '@rana/db';
 
 const CURSEFORGE_API_URL = 'https://api.curseforge.com/';
 
@@ -10,6 +11,11 @@ const log = (message: string) => {
 
 const main = () => {
   makeEnvs();
+
+  const db = new RanaDB();
+  db.init();
+
+  log(`RanaDB: ${JSON.stringify(db.data())}`);
 
   // TODO: not secure? debug mode?
   log(`API key is ${process.env.CURSE_API_KEY}`);

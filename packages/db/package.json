@@ -1,7 +1,8 @@
 {
   "name": "@rana/db",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./build/main.js",
+  "types": "./build/main.d.ts",
   "type": "module",
   "license": "MIT",
   "scripts": {
