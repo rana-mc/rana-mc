@@ -4,7 +4,7 @@ import { fetchGameVersions } from "./gameVersionsAPI";
 
 export interface GameVersionsState {
   values: GameVersion[] | null;
-  current: GameVersion | null;
+  current: string | null;
   status: 'idle' | 'loading' | 'failed';
 };
 
@@ -26,7 +26,7 @@ export const gameVersionSlice = createSlice({
   name: 'gameVersions',
   initialState,
   reducers: {
-    setCurrentGameVersion: (state, action: PayloadAction<GameVersion>) => {
+    setCurrentGameVersion: (state, action: PayloadAction<string>) => {
       state.current = action.payload;
     },
   },

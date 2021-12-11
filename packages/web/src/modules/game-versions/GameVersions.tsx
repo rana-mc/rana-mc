@@ -16,14 +16,23 @@ const GameVersions = () => {
     if (!gameVersions) dispatch(fetchGameVersionsAC());
   }, [dispatch, gameVersions]);
 
+  if (!gameVersions) {
+    return null;
+  }
+
   return (
     <div>
       {gameVersions?.map((gameVersion) => (
-        <div
-          role="presentation"
-          onClick={() => dispatch(setCurrentGameVersion(gameVersion))}>
-          {JSON.stringify(gameVersion)}
-        </div>
+        <React.Fragment>
+          type: {gameVersion.type}
+          {gameVersion.versions.map((version) => (
+            <div
+              role="presentation"
+              onClick={() => dispatch(setCurrentGameVersion(version))}>
+              {version}
+            </div>
+          ))}
+        </React.Fragment>
       ))}
       <button
         className={styles.button}

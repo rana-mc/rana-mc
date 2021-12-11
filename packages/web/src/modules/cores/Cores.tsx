@@ -1,17 +1,18 @@
 import React from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectCurrentGameVersion } from '../game-versions/gameVersionsSlice';
 
 import styles from './Cores.module.css';
-import { selectCores } from './coresSlice';
+import { fetchCoresAC, selectCores } from './coresSlice';
 
 const Cores = () => {
+  const dispatch = useAppDispatch();
+
   const cores = useAppSelector(selectCores);
   const currentVersion = useAppSelector(selectCurrentGameVersion);
 
   const handleClick = () => {
-    // if (currentVersion) dispatch(fetchCoresAC(currentVersion.name));
-    console.log(currentVersion);
+    if (currentVersion) dispatch(fetchCoresAC(currentVersion));
   };
 
   return (
