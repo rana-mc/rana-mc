@@ -5,7 +5,8 @@ export default class RanaDB {
     public static DB_PATH = './db.json';
     public static DB_DEFAULT: RanaDBData =
         {
-            gameVersions: []
+            gameVersions: [],
+            cores: {}
         };
 
     private db: Low<RanaDBData>;
@@ -33,6 +34,24 @@ export default class RanaDB {
 
     async read() {
         return this.db.read();
+    }
+
+    getGameVersions() {
+        return this.data().gameVersions;
+    }
+
+    async setGameVersions(gameVersions: GameVersion[]) {
+        this.data().gameVersions = gameVersions;
+        return await this.write();
+    }
+
+    getCores(version: string) {
+        return this.data().cores[version] || [];
+    }
+
+    async setCores(version: string, cores: Core[]) {
+        this.data().cores[version] = cores;
+        return await this.write();
     }
 }
 

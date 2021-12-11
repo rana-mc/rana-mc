@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { db } from '@rana/db';
 import { apiClient, getForgeVersionUrl, log } from './utils';
 import axios from 'axios';
+import { parseCores } from './utils/parse';
 
 // Minecraft
 const GAME_ID = 432;
@@ -10,20 +11,17 @@ export const getRanaAPIRouter = () => {
   const router = Router();
 
   router.use('/version', async (req, res) => {
-    const data = db.data();
-
-    if (data?.gameVersions?.length) {
-      return res.send(data.gameVersions);
+    if (db.getGameVersions().length) {
+      log(`Response from RanaDB`);
+      return res.send(db.getGameVersions());
     }
 
     try {
       const response = await apiClient.get(`/v1/games/${GAME_ID}/version-types`);
       const versions = response.data;
 
-      data.gameVersions = versions.data;
-      await db.write();
-
-      res.send(data.gameVersions);
+      await db.setGameVersions(versions.data);
+      res.send(versions.data);
     } catch (err) {
       log(err.message);
       res.sendStatus(500);
@@ -31,18 +29,23 @@ export const getRanaAPIRouter = () => {
   });
 
   router.use('/core', async (req, res) => {
-    const { version } = req.query;
+    const { version } = req.query as { version: string };
+
+    if (db.getCores(version).length) {
+      log(`Response from RanaDB`);
+      return res.send(db.getCores(version));
+    }
 
     try {
-      const forgeUrl = getForgeVersionUrl(version as string);
+      const forgeUrl = getForgeVersionUrl(version);
+      log(`Parsing ${forgeUrl}`);
+
       const response = await axios.get(forgeUrl);
+      const cores = parseCores(response.data, version);
+      log(`Found ${cores.length} cores`);
 
-      log(forgeUrl);
-      log(response.data);
-
-      // TODO: parse forge cores
-
-      res.send('Core...');
+      await db.setCores(version, cores);
+      res.send(cores);
     } catch (err) {
       log(err.message);
       res.sendStatus(500);
