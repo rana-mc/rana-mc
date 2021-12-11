@@ -1,6 +1,6 @@
 import express from 'express';
 import { config as makeEnvs } from 'dotenv';
-import { db as RanaDB } from '@rana/db';
+import { db } from '@rana/db';
 import { log } from './utils';
 import { getCurseForgeProxy } from './proxy';
 import { getRanaAPIRouter } from './ranaApi';
@@ -8,8 +8,8 @@ import { getRanaAPIRouter } from './ranaApi';
 const API_PORT = 3000;
 
 const main = async () => {
-  await RanaDB.init();
-  log(`RanaDB: ${JSON.stringify(RanaDB.data())}`);
+  await db.init();
+  log(`RanaDB: ${JSON.stringify(db.data())}`);
 
   // TODO: not secure? debug mode?
   log(`API key is ${process.env.CURSE_API_KEY}`);
