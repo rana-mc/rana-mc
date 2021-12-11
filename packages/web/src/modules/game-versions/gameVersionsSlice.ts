@@ -1,14 +1,16 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { fetchGameVersions } from "./gameVersionsAPI";
 
 export interface GameVersionsState {
-  value: GameVersion[];
+  values: GameVersion[] | null;
+  current: GameVersion | null;
   status: 'idle' | 'loading' | 'failed';
 };
 
 const initialState: GameVersionsState = {
-  value: [],
+  values: null,
+  current: null,
   status: 'idle',
 };
 
@@ -23,7 +25,11 @@ export const fetchGameVersionsAC = createAsyncThunk(
 export const gameVersionSlice = createSlice({
   name: 'gameVersions',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentGameVersion: (state, action: PayloadAction<GameVersion>) => {
+      state.current = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchGameVersionsAC.pending, (state) => {
@@ -31,11 +37,14 @@ export const gameVersionSlice = createSlice({
       })
       .addCase(fetchGameVersionsAC.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value = action.payload;
+        state.values = action.payload;
       });
   },
 });
 
-export const selectGameVersions = (state: RootState) => state.gameVersions.value;
+export const { setCurrentGameVersion } = gameVersionSlice.actions;
+
+export const selectGameVersions = (state: RootState) => state.gameVersions.values;
+export const selectCurrentGameVersion = (state: RootState) => state.gameVersions.current;
 
 export default gameVersionSlice.reducer;

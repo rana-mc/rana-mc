@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { fetchGameVersionsAC, selectGameVersions } from './gameVersionsSlice';
+import {
+  fetchGameVersionsAC,
+  selectGameVersions,
+  setCurrentGameVersion,
+} from './gameVersionsSlice';
 
 import styles from './GameVersions.module.css';
 
 const GameVersions = () => {
-  const gameVersions = useAppSelector(selectGameVersions);
   const dispatch = useAppDispatch();
+  const gameVersions = useAppSelector(selectGameVersions);
+
+  useEffect(() => {
+    if (!gameVersions) dispatch(fetchGameVersionsAC());
+  }, [dispatch, gameVersions]);
 
   return (
     <div>
-      {JSON.stringify(gameVersions)}
+      {gameVersions?.map((gameVersion) => (
+        <div
+          role="presentation"
+          onClick={() => dispatch(setCurrentGameVersion(gameVersion))}>
+          {JSON.stringify(gameVersion)}
+        </div>
+      ))}
       <button
         className={styles.button}
         onClick={() => dispatch(fetchGameVersionsAC())}>

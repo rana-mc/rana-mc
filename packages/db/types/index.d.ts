@@ -1,6 +1,8 @@
 declare type GameVersion = {
+  id: string;
+  gameId: string;
   name: string;
-  gameTypeId: string;
+  slug: string;
 };
 
 declare type Core = {
