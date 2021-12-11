@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // TODO: prod envs?
-const BASE_CURSE_URL = 'http://localhost:3000/';
+const BASE_CURSE_URL = 'http://localhost:3001/';
 
 export const log = (message: string) => {
   console.log(`[API]: ${message}`);

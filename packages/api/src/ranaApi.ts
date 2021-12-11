@@ -10,7 +10,7 @@ const GAME_ID = 432;
 export const getRanaAPIRouter = () => {
   const router = Router();
 
-  router.use('/version', async (req, res) => {
+  router.use('/versions', async (req, res) => {
     const { force } = req.query as { force: string };
     const isForceRefresh = !!force;
 
@@ -31,7 +31,7 @@ export const getRanaAPIRouter = () => {
     }
   });
 
-  router.use('/core', async (req, res) => {
+  router.use('/cores', async (req, res) => {
     const { version, force } = req.query as { version: string, force: string };
     const isForceRefresh = !!force;
 

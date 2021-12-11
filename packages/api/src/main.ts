@@ -1,11 +1,12 @@
 import express from 'express';
 import { config as makeEnvs } from 'dotenv';
+import cors from 'cors';
 import { db } from '@rana/db';
 import { log } from './utils';
 import { getCurseForgeProxy } from './proxy';
 import { getRanaAPIRouter } from './ranaApi';
 
-const API_PORT = 3000;
+const API_PORT = 3001;
 
 const main = async () => {
   await db.init();
@@ -16,6 +17,7 @@ const main = async () => {
 
   const app = express();
 
+  app.use(cors({ origin: '*' }));
   app.use('/api', getRanaAPIRouter());
   app.use('/v1', getCurseForgeProxy());
 

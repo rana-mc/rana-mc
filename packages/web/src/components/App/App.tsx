@@ -1,5 +1,6 @@
 import React from 'react';
 import { Counter } from '../../modules/counter/Counter';
+import GameVersions from '../../modules/game-versions/GameVersions';
 import './App.css';
 import logo from './logo.svg';
 
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <GameVersions />
         <Counter />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
