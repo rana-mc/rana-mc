@@ -11,7 +11,10 @@ export const getRanaAPIRouter = () => {
   const router = Router();
 
   router.use('/version', async (req, res) => {
-    if (db.getGameVersions().length) {
+    const { force } = req.query as { force: string };
+    const isForceRefresh = !!force;
+
+    if (db.getGameVersions().length && !isForceRefresh) {
       log(`Response from RanaDB`);
       return res.send(db.getGameVersions());
     }
@@ -29,9 +32,10 @@ export const getRanaAPIRouter = () => {
   });
 
   router.use('/core', async (req, res) => {
-    const { version } = req.query as { version: string };
+    const { version, force } = req.query as { version: string, force: string };
+    const isForceRefresh = !!force;
 
-    if (db.getCores(version).length) {
+    if (db.getCores(version).length && !isForceRefresh) {
       log(`Response from RanaDB`);
       return res.send(db.getCores(version));
     }
