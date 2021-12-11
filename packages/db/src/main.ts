@@ -2,7 +2,7 @@
 import { JSONFile, Low } from "lowdb";
 
 export default class RanaDB {
-    public static DB_PATH = './storage/db.json';
+    public static DB_PATH = './db.json';
     public static DB_DEFAULT: RanaDBData =
         {
             gameVersions: []
@@ -23,7 +23,17 @@ export default class RanaDB {
         await this.db.write();
     }
 
-    async data() {
+    data(): RanaDBData {
         return this.db.data;
     }
+
+    async write() {
+        return this.db.write();
+    }
+
+    async read() {
+        return this.db.read();
+    }
 }
+
+export const db = new RanaDB();
