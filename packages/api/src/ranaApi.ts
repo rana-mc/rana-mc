@@ -20,7 +20,7 @@ export const getRanaAPIRouter = () => {
     }
 
     try {
-      const response = await apiClient.get(`/v1/games/${GAME_ID}/version-types`);
+      const response = await apiClient.get(`/v1/games/${GAME_ID}/versions`);
       const versions = response.data;
 
       await db.setGameVersions(versions.data);

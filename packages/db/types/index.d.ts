@@ -1,8 +1,6 @@
 declare type GameVersion = {
-  id: string;
-  gameId: string;
-  name: string;
-  slug: string;
+  type: number,
+  versions: string[];
 };
 
 declare type Core = {
