@@ -20,4 +20,10 @@ export const createApiClient = () => {
   return client;
 };
 
+export const getForgeVersionUrl = (version: string) => {
+  const baseUrl = `https://files.minecraftforge.net/net/minecraftforge/forge/`;
+  const htmlForVersion = `index_${version}.html`;
+
+  return `${baseUrl}${htmlForVersion}`;
+}
 export const apiClient = createApiClient();
