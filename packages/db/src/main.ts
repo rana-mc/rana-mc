@@ -6,6 +6,7 @@ export default class RanaDB {
     public static DB_DEFAULT: RanaDBData =
         {
             gameVersions: [],
+            versionTypes: [],
             cores: {}
         };
 
@@ -36,6 +37,16 @@ export default class RanaDB {
         return this.db.read();
     }
 
+    getVersionTypes() {
+        return this.data().versionTypes;
+    }
+
+    async setVersionTypes(versionTypes: VersionType[]) {
+        this.data().versionTypes = versionTypes;
+        return await this.write();
+    }
+
+    // TODO: get by version type?
     getGameVersions() {
         return this.data().gameVersions;
     }

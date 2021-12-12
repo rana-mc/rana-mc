@@ -3,6 +3,13 @@ declare type GameVersion = {
   versions: string[];
 };
 
+declare type VersionType = {
+  id: string;
+  gameId: string;
+  name: string;
+  slug: string;
+}
+
 declare type Core = {
   gameVersion: string;
   coreVersion: string;
@@ -14,6 +21,7 @@ declare type Core = {
 
 declare type RanaDBData = {
   gameVersions: GameVersion[];
+  versionTypes: VersionType[];
   cores: {
     [gameVersion: string]: Core[];
   }
