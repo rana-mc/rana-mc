@@ -2,6 +2,7 @@ import React from 'react';
 import Cores from '../../modules/cores/Cores';
 import { Counter } from '../../modules/counter/Counter';
 import GameVersions from '../../modules/game-versions/GameVersions';
+import VersionTypes from '../../modules/version-types/VersionTypes';
 import './App.css';
 import logo from './logo.svg';
 
@@ -10,6 +11,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <VersionTypes />
+        <hr />
         <GameVersions />
         <Cores />
         <Counter />

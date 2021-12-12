@@ -7,32 +7,34 @@ import {
 } from './gameVersionsSlice';
 
 import styles from './GameVersions.module.css';
+import { selectCurrentVersionType } from '../version-types/versionTypesSlice';
 
 const GameVersions = () => {
   const dispatch = useAppDispatch();
-  const gameVersions = useAppSelector(selectGameVersions);
+  const allGameVersions = useAppSelector(selectGameVersions);
+  const versionType = useAppSelector(selectCurrentVersionType);
+
+  const gameVersion = allGameVersions?.find(
+    (gameVersion) => gameVersion.type.toString() === versionType
+  );
 
   useEffect(() => {
-    if (!gameVersions) dispatch(fetchGameVersionsAC());
-  }, [dispatch, gameVersions]);
+    if (!gameVersion) dispatch(fetchGameVersionsAC());
+  }, [dispatch, gameVersion]);
 
-  if (!gameVersions) {
+  if (!gameVersion) {
     return null;
   }
 
   return (
     <div>
-      {gameVersions?.map((gameVersion) => (
-        <React.Fragment>
-          type: {gameVersion.type}
-          {gameVersion.versions.map((version) => (
-            <div
-              role="presentation"
-              onClick={() => dispatch(setCurrentGameVersion(version))}>
-              {version}
-            </div>
-          ))}
-        </React.Fragment>
+      type: {gameVersion.type}
+      {gameVersion.versions.map((version) => (
+        <div
+          role="presentation"
+          onClick={() => dispatch(setCurrentGameVersion(version))}>
+          {version}
+        </div>
       ))}
       <button
         className={styles.button}
