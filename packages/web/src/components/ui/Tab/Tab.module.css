@@ -16,6 +16,10 @@
   transition: background-color 0.15s;
 }
 
+.tab:hover:after {
+  background-color: #0062ff;
+}
+
 .active:after {
   background-color: #0062ff;
 }
