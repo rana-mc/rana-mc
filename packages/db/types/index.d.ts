@@ -4,8 +4,8 @@ declare type GameVersion = {
 };
 
 declare type VersionType = {
-  id: string;
-  gameId: string;
+  id: number;
+  gameId: number;
   name: string;
   slug: string;
 }

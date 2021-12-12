@@ -4,7 +4,7 @@ import { fetchVersionTypes } from "./versionTypesAPI";
 
 export interface VersionTypesState {
   values: VersionType[] | null;
-  current: string | null;
+  current: number | null;
   status: 'idle' | 'loading' | 'failed';
 };
 
@@ -26,7 +26,7 @@ export const versionTypesSlice = createSlice({
   name: 'versionTypes',
   initialState,
   reducers: {
-    setCurrentVersionType: (state, action: PayloadAction<string>) => {
+    setCurrentVersionType: (state, action: PayloadAction<number>) => {
       state.current = action.payload;
     },
   },

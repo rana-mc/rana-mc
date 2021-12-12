@@ -15,7 +15,7 @@ const GameVersions = () => {
   const versionType = useAppSelector(selectCurrentVersionType);
 
   const gameVersion = allGameVersions?.find(
-    (gameVersion) => gameVersion.type.toString() === versionType
+    (gameVersion) => gameVersion.type === versionType
   );
 
   useEffect(() => {
@@ -23,12 +23,11 @@ const GameVersions = () => {
   }, [dispatch, gameVersion]);
 
   if (!gameVersion) {
-    return null;
+    return <div>not found, {versionType}</div>;
   }
 
   return (
     <div>
-      type: {gameVersion.type}
       {gameVersion.versions.map((version) => (
         <div
           role="presentation"
