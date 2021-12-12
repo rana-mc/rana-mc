@@ -1,8 +1,9 @@
+import SelectCore from '@ui/SelectCore';
+import SelectCoreOption from '@ui/SelectCoreOption';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectCurrentGameVersion } from '../game-versions/gameVersionsSlice';
 
-import styles from './Cores.module.css';
 import { fetchCoresAC, selectCores } from './coresSlice';
 
 const Cores = () => {
@@ -11,18 +12,17 @@ const Cores = () => {
   const cores = useAppSelector(selectCores);
   const currentVersion = useAppSelector(selectCurrentGameVersion);
 
-  const handleClick = () => {
+  const handleChange = () => {
     if (currentVersion) dispatch(fetchCoresAC(currentVersion));
   };
 
   return (
     <div>
-      {JSON.stringify(currentVersion)}
-      <hr />
+      <SelectCore onChange={handleChange}>
+        <SelectCoreOption type="forge" />
+        <SelectCoreOption type="fabric" />
+      </SelectCore>
       {JSON.stringify(cores)}
-      <button className={styles.button} onClick={handleClick}>
-        Fetch Cores
-      </button>
     </div>
   );
 };
