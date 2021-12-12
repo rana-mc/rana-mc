@@ -6,7 +6,6 @@ import {
   setCurrentGameVersion,
 } from './gameVersionsSlice';
 
-import styles from './GameVersions.module.css';
 import { selectCurrentVersionType } from '../version-types/versionTypesSlice';
 import SelectOption from '@ui/SelectOption';
 import Select from '@ui/Select';
@@ -39,11 +38,6 @@ const GameVersions = () => {
           <SelectOption id={version} text={version} />
         ))}
       </Select>
-      <button
-        className={styles.button}
-        onClick={() => dispatch(fetchGameVersionsAC())}>
-        Fetch GameVersions
-      </button>
     </div>
   );
 };
