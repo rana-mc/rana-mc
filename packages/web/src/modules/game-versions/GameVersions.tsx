@@ -8,6 +8,8 @@ import {
 
 import styles from './GameVersions.module.css';
 import { selectCurrentVersionType } from '../version-types/versionTypesSlice';
+import SelectOption from '@ui/SelectOption';
+import Select from '@ui/Select';
 
 const GameVersions = () => {
   const dispatch = useAppDispatch();
@@ -26,15 +28,17 @@ const GameVersions = () => {
     return <div>not found, {versionType}</div>;
   }
 
+  const handleChange = (id: string) => {
+    dispatch(setCurrentGameVersion(id));
+  };
+
   return (
     <div>
-      {gameVersion.versions.map((version) => (
-        <div
-          role="presentation"
-          onClick={() => dispatch(setCurrentGameVersion(version))}>
-          {version}
-        </div>
-      ))}
+      <Select onChange={handleChange}>
+        {gameVersion.versions.map((version) => (
+          <SelectOption id={version} text={version} />
+        ))}
+      </Select>
       <button
         className={styles.button}
         onClick={() => dispatch(fetchGameVersionsAC())}>
