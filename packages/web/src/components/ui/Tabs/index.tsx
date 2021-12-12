@@ -5,14 +5,16 @@ import styles from './Tabs.module.css';
 
 type Props = {
   children: React.ReactElement | React.ReactElement[];
-  defaultId: string;
+  defaultId?: string;
+  onChange?: (tabId: string) => void;
 };
 
-const Tabs = ({ defaultId, children }: Props) => {
-  const [currentId, setCurrentId] = useState<string>(defaultId);
+const Tabs = ({ defaultId, children, onChange }: Props) => {
+  const [currentId, setCurrentId] = useState<string>(defaultId || '');
 
   const handleClick = (tabId: string) => {
     setCurrentId(tabId);
+    onChange && onChange(tabId);
   };
 
   return (

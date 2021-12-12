@@ -5,8 +5,10 @@ import {
   selectVersionTypes,
   setCurrentVersionType,
 } from './versionTypesSlice';
-
+import Tabs from '@ui/Tabs';
+import Tab from '@ui/Tab';
 import styles from './VersionTypes.module.css';
+import { formatName, formatTypes } from './utils';
 
 const VersionTypes = () => {
   const dispatch = useAppDispatch();
@@ -20,15 +22,21 @@ const VersionTypes = () => {
     return null;
   }
 
+  const handleChange = (id: string) => {
+    dispatch(setCurrentVersionType(parseInt(id)));
+  };
+
   return (
     <div>
-      {versionTypes?.map((versionType) => (
-        <div
-          role="presentation"
-          onClick={() => dispatch(setCurrentVersionType(versionType.id))}>
-          {versionType.name}
-        </div>
-      ))}
+      <Tabs onChange={handleChange}>
+        {formatTypes(versionTypes)?.map((versionType) => (
+          <Tab
+            key={versionType.id.toString()}
+            id={versionType.id.toString()}
+            text={formatName(versionType.name)}
+          />
+        ))}
+      </Tabs>
       <button
         className={styles.button}
         onClick={() => dispatch(fetchVersionTypesAC())}>
