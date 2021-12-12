@@ -6,4 +6,12 @@
   background: #000;
   border-radius: 8px;
   box-sizing: border-box;
+  font-size: 0;
+}
+
+.sizeL {
+  width: 86px;
+  height: 86px;
+  align-items: center;
+  justify-content: center;
 }

@@ -6,6 +6,7 @@ import Icon, { IconName } from '@ui/Icon';
 
 type Props = {
   name: IconName;
+  size?: 's' | 'l';
 };
 
 const ICON_COLORS = {
@@ -14,10 +15,10 @@ const ICON_COLORS = {
   fabric: '#BADCBA',
 };
 
-const SelectIcon = ({ name }: Props) => {
+const SelectIcon = ({ name, size }: Props) => {
   return (
     <div
-      className={cn(styles.selectIcon)}
+      className={cn(styles.selectIcon, { [styles.sizeL]: size === 'l' })}
       style={{ background: ICON_COLORS[name] || 'transparent' }}>
       <Icon name={name} />
     </div>
