@@ -11,12 +11,8 @@
   transition: all 0.15s;
 }
 
-.icon {
-  display: block;
-  width: 56px;
-  height: 56px;
-  background: #000;
-  margin-right: 10px;
+.text {
+  margin-left: 10px;
 }
 
 .selectOption:hover {

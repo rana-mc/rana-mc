@@ -22,7 +22,7 @@ const SelectOption = ({ icon, id, text, onClick, active }: Props) => {
       className={cn(styles.selectOption, { [styles.active]: active })}
       onClick={handleClick}>
       {icon && <SelectIcon name={icon} />}
-      {text}
+      <span className={cn(styles.text)}>{text}</span>
     </div>
   );
 };

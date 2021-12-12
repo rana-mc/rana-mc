@@ -35,7 +35,7 @@ const GameVersions = () => {
     <div>
       <Select onChange={handleChange}>
         {gameVersion.versions.map((version) => (
-          <SelectOption id={version} text={version} />
+          <SelectOption id={version} icon="minecraft" text={version} />
         ))}
       </Select>
     </div>
