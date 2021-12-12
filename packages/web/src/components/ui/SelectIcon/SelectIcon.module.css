@@ -1,0 +1,9 @@
+.selectIcon {
+  display: flex;
+  width: 56px;
+  height: 56px;
+  padding: 12px;
+  background: #000;
+  border-radius: 8px;
+  box-sizing: border-box;
+}

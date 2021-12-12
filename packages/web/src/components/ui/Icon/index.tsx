@@ -1,8 +1,10 @@
 import React from 'react';
 import { ReactSVG } from 'react-svg';
 
+export type IconName = 'minecraft' | 'forge' | 'fabric';
+
 type Props = {
-  name: string;
+  name: IconName;
 };
 
 const Icon = ({ name }: Props) => {

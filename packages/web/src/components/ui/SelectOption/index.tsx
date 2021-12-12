@@ -2,15 +2,18 @@ import React from 'react';
 import cn from 'classnames';
 
 import styles from './SelectOption.module.css';
+import { IconName } from '@ui/Icon';
+import SelectIcon from '@ui/SelectIcon';
 
 type Props = {
+  icon?: IconName;
   id: string;
-  text: string;
+  text?: string;
   onClick?: (selectId: string) => void;
   active?: boolean;
 };
 
-const SelectOption = ({ id, text, onClick, active }: Props) => {
+const SelectOption = ({ icon, id, text, onClick, active }: Props) => {
   const handleClick = () => onClick && onClick(id);
 
   return (
@@ -18,7 +21,7 @@ const SelectOption = ({ id, text, onClick, active }: Props) => {
       role="presentation"
       className={cn(styles.selectOption, { [styles.active]: active })}
       onClick={handleClick}>
-      <div className={cn(styles.icon)}></div>
+      {icon && <SelectIcon name={icon} />}
       {text}
     </div>
   );
