@@ -1,0 +1,21 @@
+.tab {
+  position: relative;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.tab:after {
+  content: '';
+  width: 100%;
+  left: 0;
+  height: 2px;
+  display: block;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  transition: background-color 0.15s;
+}
+
+.active:after {
+  background-color: #0062ff;
+}
