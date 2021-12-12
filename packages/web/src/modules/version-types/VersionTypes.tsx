@@ -7,7 +7,6 @@ import {
 } from './versionTypesSlice';
 import Tabs from '@ui/Tabs';
 import Tab from '@ui/Tab';
-import styles from './VersionTypes.module.css';
 import { formatName, formatTypes } from './utils';
 
 const VersionTypes = () => {
@@ -37,11 +36,6 @@ const VersionTypes = () => {
           />
         ))}
       </Tabs>
-      <button
-        className={styles.button}
-        onClick={() => dispatch(fetchVersionTypesAC())}>
-        Fetch GameVersions
-      </button>
     </div>
   );
 };
