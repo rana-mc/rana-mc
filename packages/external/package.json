@@ -1,0 +1,16 @@
+{
+  "name": "@rana/external",
+  "version": "1.0.0",
+  "main": "./build/main.js",
+  "types": "./build/main.d.ts",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "prestart": "tsc",
+    "start": "echo hello from @rana/external"
+  },
+  "dependencies": {
+    "typescript": "^4.5.2"
+  }
+}
