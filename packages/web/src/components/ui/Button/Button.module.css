@@ -1,0 +1,37 @@
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 98px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  color: #fff;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.type-primary {
+  background-color: #317cf4;
+}
+
+.type-primary:hover {
+  background-color: #8eb7f9;
+}
+
+.type-secondary {
+  background-color: transparent;
+  border: 1px solid #317cf4;
+  color: #317cf4;
+  font-weight: normal;
+}
+
+.type-secondary:hover {
+  border: 1px solid #8eb7f9;
+  color: #8eb7f9;
+}
