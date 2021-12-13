@@ -11,9 +11,12 @@
   font-size: 0;
 }
 
-.sizeL {
+.size-l {
   width: 86px;
   height: 86px;
-  align-items: center;
-  justify-content: center;
+}
+
+.size-xs {
+  width: 48px;
+  height: 48px;
 }

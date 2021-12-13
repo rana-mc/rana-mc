@@ -8,20 +8,30 @@ import SelectIcon from '@ui/SelectIcon';
 type Props = {
   icon?: IconName;
   id: string;
+  size?: 's' | 'm';
   text?: string;
   onClick?: (selectId: string) => void;
   active?: boolean;
 };
 
-const SelectOption = ({ icon, id, text, onClick, active }: Props) => {
+const SelectOption = ({
+  icon,
+  id,
+  size = 'm',
+  text,
+  onClick,
+  active,
+}: Props) => {
   const handleClick = () => onClick && onClick(id);
 
   return (
     <div
       role="presentation"
-      className={cn(styles.selectOption, { [styles.active]: active })}
+      className={cn(styles.selectOption, styles[`size-${size}`], {
+        [styles.active]: active,
+      })}
       onClick={handleClick}>
-      {icon && <SelectIcon size="s" name={icon} />}
+      {icon && <SelectIcon size={size === 'm' ? 's' : 'xs'} name={icon} />}
       <span className={cn(styles.text)}>{text}</span>
     </div>
   );
