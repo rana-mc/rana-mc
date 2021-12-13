@@ -11,6 +11,7 @@ import {
   setCoreType,
   selectCores,
   selectCoreType,
+  setCurrentCore,
 } from './coresSlice';
 import CoreSelect from './CoreSelect';
 
@@ -34,13 +35,23 @@ const Cores = () => {
     dispatch(setCoreType(id as CoreType));
   };
 
+  const handleSelect = (core: ForgeCore | FabricCore) => {
+    dispatch(setCurrentCore(core));
+  };
+
   return (
     <div>
       <SelectCore onChange={handleChange}>
         <SelectCoreOption type="forge" />
         <SelectCoreOption type="fabric" />
       </SelectCore>
-      {currentCoreType && <CoreSelect type={currentCoreType} cores={cores} />}
+      {currentCoreType && (
+        <CoreSelect
+          type={currentCoreType}
+          cores={cores}
+          onSelect={handleSelect}
+        />
+      )}
     </div>
   );
 };

@@ -3,15 +3,19 @@ import { CoreType } from "@utils";
 import { RootState } from "../../app/store";
 import { fetchForgeCores, fetchFabricCores } from "./coresAPI";
 
+type Core = ForgeCore | FabricCore;
+
 export interface CoresState {
-  value: ForgeCore[] | FabricCore[] | null;
+  value: Core[] | null;
   type: CoreType.Forge | CoreType.Fabric | null;
+  current: Core | null;
   status: 'idle' | 'loading' | 'failed';
 };
 
 const initialState: CoresState = {
   value: null,
   type: null,
+  current: null,
   status: 'idle',
 };
 
@@ -39,6 +43,9 @@ export const coresSlice = createSlice({
     setCoreType: (state, action: PayloadAction<CoreType>) => {
       state.type = action.payload;
     },
+    setCurrentCore: (state, action: PayloadAction<Core>) => {
+      state.current = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,9 +66,10 @@ export const coresSlice = createSlice({
   },
 });
 
-export const { setCoreType } = coresSlice.actions;
+export const { setCoreType, setCurrentCore } = coresSlice.actions;
 
 export const selectCores = (state: RootState) => state.cores.value;
 export const selectCoreType = (state: RootState) => state.cores.type;
+export const selecCurrentCore = (state: RootState) => state.cores.current;
 
 export default coresSlice.reducer;

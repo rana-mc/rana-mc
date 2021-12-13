@@ -7,9 +7,10 @@ import { CoreType } from '@utils';
 type Props = {
   type: CoreType;
   cores: ForgeCore[] | FabricCore[] | null;
+  onSelect?: (core: ForgeCore | FabricCore) => void;
 };
 
-const CoreSelect = ({ type, cores }: Props) => {
+const CoreSelect = ({ type, cores, onSelect }: Props) => {
   const hasCores = cores && cores.length > 0;
 
   if (!hasCores) {
@@ -18,7 +19,7 @@ const CoreSelect = ({ type, cores }: Props) => {
 
   const handleChange = (coreVersion: string) => {
     const selectedCore = cores.find((core) => core.coreVersion === coreVersion);
-    console.log(selectedCore);
+    if (selectedCore) onSelect && onSelect(selectedCore);
   };
 
   return (
