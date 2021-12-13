@@ -27,7 +27,11 @@ const Empty = ({
         className={cn(styles.empty, styles[`size-${size}`], {
           [styles.textOnly]: textOnly,
         })}>
-        {text && <span className={cn(styles.title)}>{text} 😓</span>}
+        {text && (
+          <span className={cn(styles.title)}>
+            {text} {select ? '😏' : '😓'}
+          </span>
+        )}
       </div>
     );
   }
