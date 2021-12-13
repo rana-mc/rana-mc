@@ -10,6 +10,7 @@ import { selectCurrentVersionType } from '../version-types/versionTypesSlice';
 import SelectOption from '@ui/SelectOption';
 import Select from '@ui/Select';
 import Empty from '@ui/Empty';
+import { formatVersions } from './utils';
 
 const GameVersions = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +26,9 @@ const GameVersions = () => {
   }, [dispatch, gameVersion]);
 
   if (!gameVersion) {
-    return <Empty textOnly select size="s" text="Please, select game version" />;
+    return (
+      <Empty textOnly select size="s" text="Please, select game version" />
+    );
   }
 
   if (gameVersion?.versions?.length === 0) {
@@ -39,7 +42,7 @@ const GameVersions = () => {
   return (
     <div>
       <Select onChange={handleChange}>
-        {gameVersion.versions.map((version) => (
+        {formatVersions(gameVersion.versions).map((version) => (
           <SelectOption
             key={version}
             id={version}
