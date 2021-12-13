@@ -7,7 +7,8 @@ export default class RanaDB {
         {
             gameVersions: [],
             versionTypes: [],
-            cores: {}
+            cores: {},
+            servers: []
         };
 
     private db: Low<RanaDBData>;
@@ -83,6 +84,15 @@ export default class RanaDB {
             ...this.data().cores[version],
             fabric: cores
         };
+        return await this.write();
+    }
+
+    getServers() {
+        return this.data().servers || [];
+    }
+
+    async addServer(server: Server) {
+        this.data().servers.push(server);
         return await this.write();
     }
 }

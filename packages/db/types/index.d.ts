@@ -24,6 +24,18 @@ declare type FabricCore = {
   installerUrl: string | null;
 };
 
+declare type Server = {
+  id: string;
+  name: string;
+  gameVersion: string;
+  coreVersion: string;
+  installerUrl: string | null;
+  mods: ServerMod[];
+};
+
+// TODO: what is it? links? file/names? mb
+declare type ServerMod = string;
+
 declare type RanaDBData = {
   gameVersions: GameVersion[];
   versionTypes: VersionType[];
@@ -32,5 +44,6 @@ declare type RanaDBData = {
       forge: ForgeCore[];
       fabric: FabricCore[];
     }
-  }
+  },
+  servers: Server[];
 };
