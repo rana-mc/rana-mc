@@ -1,0 +1,14 @@
+.createServer {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+.section {
+  display: flex;
+}
+
+.section + .section {
+  margin-top: 32px;
+}
