@@ -4,6 +4,9 @@
   "main": "index.js",
   "private": true,
   "author": "Evgeny Bykovskikh <redzumi.tao@gmail.com>",
+  "scripts": {
+    "start": "lerna run --parallel start"
+  },
   "workspaces": [
     "packages/*"
   ],
