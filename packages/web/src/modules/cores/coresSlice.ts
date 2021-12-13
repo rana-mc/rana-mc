@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CoreType } from "@utils";
 import { RootState } from "../../app/store";
 import { fetchForgeCores, fetchFabricCores } from "./coresAPI";
@@ -35,7 +35,11 @@ export const fetchFabricCoresAC = createAsyncThunk(
 export const coresSlice = createSlice({
   name: 'cores',
   initialState,
-  reducers: {},
+  reducers: {
+    setCoreType: (state, action: PayloadAction<CoreType>) => {
+      state.type = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchForgeCoresAC.pending, (state) => {
@@ -54,6 +58,8 @@ export const coresSlice = createSlice({
       });
   },
 });
+
+export const { setCoreType } = coresSlice.actions;
 
 export const selectCores = (state: RootState) => state.cores.value;
 export const selectCoreType = (state: RootState) => state.cores.type;

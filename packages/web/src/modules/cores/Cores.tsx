@@ -8,6 +8,7 @@ import { selectCurrentGameVersion } from '../game-versions/gameVersionsSlice';
 import {
   fetchForgeCoresAC,
   fetchFabricCoresAC,
+  setCoreType,
   selectCores,
   selectCoreType,
 } from './coresSlice';
@@ -16,25 +17,31 @@ const Cores = () => {
   const dispatch = useAppDispatch();
 
   const cores = useAppSelector(selectCores);
-  const coreType = useAppSelector(selectCoreType);
+  const currentCoreType = useAppSelector(selectCoreType);
   const currentVersion = useAppSelector(selectCurrentGameVersion);
 
-  const handleChange = () => {
+  const handleClick = () => {
     if (currentVersion) {
-      if (coreType === CoreType.Forge)
+      if (currentCoreType === CoreType.Forge)
         dispatch(fetchForgeCoresAC(currentVersion));
-      if (coreType === CoreType.Fabric)
+      if (currentCoreType === CoreType.Fabric)
         dispatch(fetchFabricCoresAC(currentVersion));
     }
   };
 
+  const handleChange = (id: string) => {
+    dispatch(setCoreType(id as CoreType));
+  };
+
   return (
     <div>
+      {currentCoreType}
       <SelectCore onChange={handleChange}>
         <SelectCoreOption type="forge" />
         <SelectCoreOption type="fabric" />
       </SelectCore>
       {JSON.stringify(cores)}
+      <button onClick={handleClick}>Fetch</button>
     </div>
   );
 };
