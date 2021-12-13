@@ -9,6 +9,7 @@ import {
 import { selectCurrentVersionType } from '../version-types/versionTypesSlice';
 import SelectOption from '@ui/SelectOption';
 import Select from '@ui/Select';
+import Empty from '@ui/Empty';
 
 const GameVersions = () => {
   const dispatch = useAppDispatch();
@@ -24,7 +25,11 @@ const GameVersions = () => {
   }, [dispatch, gameVersion]);
 
   if (!gameVersion) {
-    return <div>not found, {versionType}</div>;
+    return <Empty textOnly select size="s" text="Please, select game version" />;
+  }
+
+  if (gameVersion?.versions?.length === 0) {
+    return <Empty size="s" text="Has no available game versions" />;
   }
 
   const handleChange = (id: string) => {
@@ -35,7 +40,12 @@ const GameVersions = () => {
     <div>
       <Select onChange={handleChange}>
         {gameVersion.versions.map((version) => (
-          <SelectOption id={version} icon="minecraft" text={version} />
+          <SelectOption
+            key={version}
+            id={version}
+            icon="minecraft"
+            text={version}
+          />
         ))}
       </Select>
     </div>

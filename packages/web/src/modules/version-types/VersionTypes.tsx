@@ -8,6 +8,7 @@ import {
 import Tabs from '@ui/Tabs';
 import Tab from '@ui/Tab';
 import { formatName, formatTypes } from './utils';
+import Empty from '@ui/Empty';
 
 const VersionTypes = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,11 @@ const VersionTypes = () => {
   }, [dispatch, versionTypes]);
 
   if (!versionTypes) {
-    return null;
+    return <Empty textOnly size="s" text="Has no available game versions" />;
+  }
+
+  if (versionTypes?.length === 0) {
+    return <Empty size="s" text="Has no available game versions" />;
   }
 
   const handleChange = (id: string) => {

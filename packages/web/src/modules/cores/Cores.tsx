@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SelectCore from '@ui/SelectCore';
 import SelectCoreOption from '@ui/SelectCoreOption';
 import { CoreType } from '@utils';
@@ -12,6 +12,7 @@ import {
   selectCores,
   selectCoreType,
 } from './coresSlice';
+import CoreSelect from './CoreSelect';
 
 const Cores = () => {
   const dispatch = useAppDispatch();
@@ -20,14 +21,14 @@ const Cores = () => {
   const currentCoreType = useAppSelector(selectCoreType);
   const currentVersion = useAppSelector(selectCurrentGameVersion);
 
-  const handleClick = () => {
+  useEffect(() => {
     if (currentVersion) {
       if (currentCoreType === CoreType.Forge)
         dispatch(fetchForgeCoresAC(currentVersion));
       if (currentCoreType === CoreType.Fabric)
         dispatch(fetchFabricCoresAC(currentVersion));
     }
-  };
+  }, [dispatch, currentVersion, currentCoreType]);
 
   const handleChange = (id: string) => {
     dispatch(setCoreType(id as CoreType));
@@ -35,13 +36,11 @@ const Cores = () => {
 
   return (
     <div>
-      {currentCoreType}
-      <SelectCore defaultId="forge" onChange={handleChange}>
+      <SelectCore onChange={handleChange}>
         <SelectCoreOption type="forge" />
         <SelectCoreOption type="fabric" />
       </SelectCore>
-      {JSON.stringify(cores)}
-      <button onClick={handleClick}>Fetch</button>
+      {currentCoreType && <CoreSelect type={currentCoreType} cores={cores} />}
     </div>
   );
 };

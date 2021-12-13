@@ -5,13 +5,13 @@ import { fetchForgeCores, fetchFabricCores } from "./coresAPI";
 
 export interface CoresState {
   value: ForgeCore[] | FabricCore[] | null;
-  type: CoreType.Forge | CoreType.Fabric;
+  type: CoreType.Forge | CoreType.Fabric | null;
   status: 'idle' | 'loading' | 'failed';
 };
 
 const initialState: CoresState = {
   value: null,
-  type: CoreType.Forge,
+  type: null,
   status: 'idle',
 };
 
