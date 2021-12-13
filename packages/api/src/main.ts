@@ -1,6 +1,7 @@
 import express from 'express';
 import { config as makeEnvs } from 'dotenv';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 import { db } from '@rana/db';
 import { log } from './utils';
 import { getCurseForgeProxy } from './proxy';
@@ -18,6 +19,8 @@ const main = async () => {
   const app = express();
 
   app.use(cors({ origin: '*' }));
+  app.use(bodyParser.json());
+
   app.use('/api', getRanaAPIRouter());
   app.use('/v1', getCurseForgeProxy());
 
