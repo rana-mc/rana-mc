@@ -56,12 +56,33 @@ export default class RanaDB {
         return await this.write();
     }
 
-    getCores(version: string) {
-        return this.data().cores[version] || [];
+    getForgeCores(version: string) {
+        if (this.data().cores[version]) {
+            return this.data().cores[version].forge || [];
+        }
+        return [];
     }
 
-    async setCores(version: string, cores: Core[]) {
-        this.data().cores[version] = cores;
+    async setForgeCores(version: string, cores: ForgeCore[]) {
+        this.data().cores[version] = {
+            ...this.data().cores[version],
+            forge: cores
+        };
+        return await this.write();
+    }
+
+    getFabricCores(version: string) {
+        if (this.data().cores[version]) {
+            return this.data().cores[version].forge || [];
+        }
+        return [];
+    }
+
+    async setFabricCores(version: string, cores: FabricCore[]) {
+        this.data().cores[version] = {
+            ...this.data().cores[version],
+            fabric: cores
+        };
         return await this.write();
     }
 }

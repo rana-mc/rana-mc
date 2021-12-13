@@ -27,11 +27,11 @@ const extractUrls = (urls: Url[]): {
   mdkUrl: null,
 });
 
-export const parseCores = (html: string, version: string): Core[] => {
+export const parseCores = (html: string, version: string): ForgeCore[] => {
   const page = parse(html);
 
   const downloads = [...page.querySelectorAll('.download-list tbody tr')];
-  log(`Found ${downloads.length} core files...`);
+  log(`Found ${downloads.length} forge core files...`);
 
   const cores = downloads.map(el => {
     const coreVersion = el.querySelector('.download-version').innerText.trim();

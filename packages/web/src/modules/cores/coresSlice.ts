@@ -1,22 +1,33 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { CoreType } from "@utils";
 import { RootState } from "../../app/store";
-import { fetchCores } from "./coresAPI";
+import { fetchForgeCores, fetchFabricCores } from "./coresAPI";
 
 export interface CoresState {
-  value: Core[] | null;
+  value: ForgeCore[] | FabricCore[] | null;
+  type: CoreType.Forge | CoreType.Fabric;
   status: 'idle' | 'loading' | 'failed';
 };
 
 const initialState: CoresState = {
   value: null,
+  type: CoreType.Forge,
   status: 'idle',
 };
 
 // TODO: save cores for all versions, like { [version]: core }
-export const fetchCoresAC = createAsyncThunk(
-  'cores/fetch',
+export const fetchForgeCoresAC = createAsyncThunk(
+  'cores/fetch-forge',
   async (gameVersion: string) => {
-    const response = await fetchCores(gameVersion);
+    const response = await fetchForgeCores(gameVersion);
+    return response.data;
+  }
+);
+
+export const fetchFabricCoresAC = createAsyncThunk(
+  'cores/fetch-fabric',
+  async (gameVersion: string) => {
+    const response = await fetchFabricCores(gameVersion);
     return response.data;
   }
 );
@@ -27,10 +38,17 @@ export const coresSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCoresAC.pending, (state) => {
+      .addCase(fetchForgeCoresAC.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchCoresAC.fulfilled, (state, action) => {
+      .addCase(fetchForgeCoresAC.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.value = action.payload;
+      })
+      .addCase(fetchFabricCoresAC.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchFabricCoresAC.fulfilled, (state, action) => {
         state.status = 'idle';
         state.value = action.payload;
       });
@@ -38,5 +56,6 @@ export const coresSlice = createSlice({
 });
 
 export const selectCores = (state: RootState) => state.cores.value;
+export const selectCoreType = (state: RootState) => state.cores.type;
 
 export default coresSlice.reducer;

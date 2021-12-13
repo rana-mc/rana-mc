@@ -10,7 +10,7 @@ declare type VersionType = {
   slug: string;
 }
 
-declare type Core = {
+declare type ForgeCore = {
   gameVersion: string;
   coreVersion: string;
   uploadTime: string;
@@ -19,10 +19,15 @@ declare type Core = {
   mdkUrl: string | null;
 };
 
+declare type FabricCore = {};
+
 declare type RanaDBData = {
   gameVersions: GameVersion[];
   versionTypes: VersionType[];
   cores: {
-    [gameVersion: string]: Core[];
+    [gameVersion: string]: {
+      forge: ForgeCore[];
+      fabric: FabricCore[];
+    }
   }
 };

@@ -11,6 +11,7 @@ type Props = {
   active?: boolean;
 };
 
+// TODO: remove as hardcoded
 const SelectCoreOption = ({ type, onClick, active }: Props) => {
   const handleClick = () => onClick && onClick(type);
 

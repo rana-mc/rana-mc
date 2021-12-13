@@ -21,3 +21,9 @@ export const createApiClient = () => {
 };
 
 export const apiClient = createApiClient();
+
+// TODO: fix import from @rana/db with isolatedModules?
+export const enum CoreType {
+  Forge = 'forge',
+  Fabric = 'fabric',
+}

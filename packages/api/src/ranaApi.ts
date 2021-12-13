@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { db } from '@rana/db';
 import { apiClient, getForgeVersionUrl, log } from './utils';
 import axios from 'axios';
-import { parseCores } from './utils/parse';
+import { parseCores } from './utils/parseForgeCore';
 
 // Minecraft
 const GAME_ID = 432;
@@ -52,13 +52,14 @@ export const getRanaAPIRouter = () => {
     }
   });
 
-  router.use('/cores', async (req, res) => {
+  // TODO: make it by 'type' in query
+  router.use('/forge-cores', async (req, res) => {
     const { version, force } = req.query as { version: string, force: string };
     const isForceRefresh = !!force;
 
-    if (db.getCores(version).length && !isForceRefresh) {
+    if (db.getForgeCores(version).length && !isForceRefresh) {
       log(`Response from RanaDB`);
-      return res.send(db.getCores(version));
+      return res.send(db.getForgeCores(version));
     }
 
     try {
@@ -69,12 +70,17 @@ export const getRanaAPIRouter = () => {
       const cores = parseCores(response.data, version);
       log(`Found ${cores.length} cores`);
 
-      await db.setCores(version, cores);
+      await db.setForgeCores(version, cores);
       res.send(cores);
     } catch (err) {
       log(err.message);
       res.sendStatus(500);
     }
+  });
+
+  // TODO: parse fabric cores?
+  router.use('/fabric-cores', async (req, res) => {
+    res.send([]);
   });
 
   return router;
