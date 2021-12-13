@@ -1,25 +1,16 @@
 .tab {
   position: relative;
-  padding: 8px;
   cursor: pointer;
+  padding: 8px 0;
+  border-bottom: 2px solid #f8f8f8;
+  transition: border 0.15s;
 }
 
-.tab:after {
-  content: '';
-  width: 100%;
-  left: 0;
-  height: 2px;
-  display: block;
-  bottom: 0;
-  right: 0;
-  background-color: transparent;
-  transition: background-color 0.15s;
+.text {
+  padding: 16px;
+  font-size: 16px;
 }
 
-.tab:hover:after {
-  background-color: #0062ff;
-}
-
-.active:after {
-  background-color: #0062ff;
+.tab:hover {
+  border-bottom: 2px solid #0062ff;
 }

@@ -17,7 +17,7 @@ const Tab = ({ id, text, active, onClick }: Props) => {
     <div
       className={cn(styles.tab, { [styles.active]: active })}
       onClick={handleClick}>
-      {text}
+      <span className={cn(styles.text)}>{text}</span>
     </div>
   );
 };
