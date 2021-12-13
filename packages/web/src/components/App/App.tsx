@@ -2,13 +2,13 @@ import React from 'react';
 import CreateServer from '@modules/servers/CreateServer';
 
 import './App.css';
-import logo from './logo.svg';
+import RanaLogo from './Rana-logo.svg';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={RanaLogo} className="App-logo" alt="rana logo" />
         <CreateServer />
         <section className="HowToUse">
           <span>Learn </span>
