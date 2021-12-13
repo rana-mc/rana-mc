@@ -21,7 +21,7 @@ const SelectOption = ({ icon, id, text, onClick, active }: Props) => {
       role="presentation"
       className={cn(styles.selectOption, { [styles.active]: active })}
       onClick={handleClick}>
-      {icon && <SelectIcon name={icon} />}
+      {icon && <SelectIcon size="s" name={icon} />}
       <span className={cn(styles.text)}>{text}</span>
     </div>
   );

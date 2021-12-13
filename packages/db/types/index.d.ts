@@ -19,7 +19,10 @@ declare type ForgeCore = {
   mdkUrl: string | null;
 };
 
-declare type FabricCore = {};
+declare type FabricCore = {
+  coreVersion: string;
+  installerUrl: string | null;
+};
 
 declare type RanaDBData = {
   gameVersions: GameVersion[];

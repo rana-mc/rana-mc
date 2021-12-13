@@ -6,7 +6,7 @@ import styles from './Empty.module.css';
 
 type Props = {
   select?: boolean;
-  size: 's' | 'm' | 'l';
+  size?: 's' | 'm' | 'l';
   text?: string;
   textOnly?: boolean;
 };
