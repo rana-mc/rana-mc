@@ -22,7 +22,11 @@
   font-size: calc(10px + 2vmin);
 }
 
-.App-link {
+.HowToUse {
+  margin-top: 64px;
+}
+
+.HowToUse-link {
   color: rgb(112, 76, 182);
 }
 
