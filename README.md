@@ -1,3 +1,5 @@
+Hello, at now all work in progress.
+
 #### TODOs:
  - [ ] Single .env?
  - [ ] Single class for CurseForge (with api methods?)
