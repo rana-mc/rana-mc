@@ -43,5 +43,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@ui(.*)$": "<rootDir>/src/components/ui$1",
+      "^@modules(.*)$": "<rootDir>/src/modules$1",
+      "^@utils(.*)$": "<rootDir>/src/utils$1"
+    } 
   }
 }
