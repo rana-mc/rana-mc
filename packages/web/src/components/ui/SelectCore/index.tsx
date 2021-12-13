@@ -21,7 +21,7 @@ const SelectCore = ({ defaultId, children, onChange }: Props) => {
     <div className={cn(styles.selectCore)}>
       {Children.map(children, (selectCoreOption) => {
         return React.cloneElement(selectCoreOption, {
-          active: currentId === selectCoreOption.props.id,
+          active: currentId === selectCoreOption.props.type,
           onClick: handleClick,
         });
       })}

@@ -36,7 +36,7 @@ const Cores = () => {
   return (
     <div>
       {currentCoreType}
-      <SelectCore onChange={handleChange}>
+      <SelectCore defaultId="forge" onChange={handleChange}>
         <SelectCoreOption type="forge" />
         <SelectCoreOption type="fabric" />
       </SelectCore>
