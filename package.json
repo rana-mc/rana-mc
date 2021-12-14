@@ -4,7 +4,8 @@
   "main": "index.js",
   "author": "Evgeny Bykovskikh <redzumi.tao@gmail.com>",
   "scripts": {
-    "start": "lerna run --parallel start"
+    "start": "lerna run --parallel start",
+    "release": "lerna version && lerna publish from-package"
   },
   "repository": {
     "type": "git",
