@@ -27,6 +27,7 @@
     "typescript": "^4.5.2"
   },
   "scripts": {
+    "postinstall": "craco build",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",

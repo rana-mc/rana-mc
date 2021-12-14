@@ -9,6 +9,7 @@
     "access": "public"
   },
   "scripts": {
+    "postinstall": "tsc",
     "build": "tsc",
     "prestart": "tsc",
     "start": "echo hello from @rana-mc/db"

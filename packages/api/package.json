@@ -8,6 +8,7 @@
     "access": "public"
   },
   "scripts": {
+    "postinstall": "tsc",
     "prepare": "ts-patch install -s",
     "prebuild": "rm -rf build",
     "build": "tsc",

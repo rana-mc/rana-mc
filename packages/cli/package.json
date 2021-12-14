@@ -9,6 +9,7 @@
     "access": "public"
   },
   "scripts": {
+    "postinstall": "tsc",
     "build": "tsc",
     "prestart": "tsc",
     "start": "node build/main.js"
