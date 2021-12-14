@@ -10,7 +10,7 @@
   "scripts": {
     "prepare": "ts-patch install -s",
     "prebuild": "rm -rf build",
-    "build": "tsc && cp -r build build",
+    "build": "tsc",
     "prestart": "tsc",
     "start": "node build/main.js"
   },
