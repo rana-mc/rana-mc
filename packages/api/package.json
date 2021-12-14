@@ -1,7 +1,7 @@
 {
   "name": "@rana-mc/api",
   "version": "0.0.1-alpha.0",
-  "main": "./dist/main.js",
+  "main": "./dist/server.js",
   "type": "module",
   "license": "MIT",
   "publishConfig": {
@@ -9,9 +9,10 @@
   },
   "scripts": {
     "prepare": "ts-patch install -s",
-    "build": "tsc",
+    "prebuild": "rm -rf dist",
+    "build": "tsc && cp -r build dist",
     "prestart": "tsc",
-    "start": "node dist/main.js"
+    "start": "node build/main.js"
   },
   "dependencies": {
     "@rana-mc/db": "^0.0.1-alpha.0",

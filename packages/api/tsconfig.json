@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "build",
     "target": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
