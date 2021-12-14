@@ -37,7 +37,7 @@ declare type Server = {
 declare type ServerMod = string;
 
 declare type Settings = {
-  curseApiKey: string;
+  curseApiKey?: string;
 };
 
 declare type RanaDBData = {

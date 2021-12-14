@@ -8,7 +8,8 @@ export default class RanaDB {
             gameVersions: [],
             versionTypes: [],
             cores: {},
-            servers: []
+            servers: [],
+            settings: {}
         };
 
     private db: Low<RanaDBData>;
