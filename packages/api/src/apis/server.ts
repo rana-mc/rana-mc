@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { db } from '@rana/db';
+import { db } from '@rana-mc/db';
 import { log } from '../utils';
 
 export const getServersAPI = () => {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { db } from '@rana/db';
+import { db } from '@rana-mc/db';
 import { getForgeVersionUrl, log } from '../utils';
 import axios from 'axios';
 import { parseCores } from '../utils/parseForgeCore';

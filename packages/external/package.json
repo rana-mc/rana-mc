@@ -1,5 +1,5 @@
 {
-  "name": "@rana/external",
+  "name": "@rana-mc/external",
   "version": "1.0.0",
   "main": "./build/main.js",
   "types": "./build/main.d.ts",

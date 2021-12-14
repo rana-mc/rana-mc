@@ -1,5 +1,5 @@
 {
-  "name": "@rana/db",
+  "name": "@rana-mc/db",
   "version": "1.0.0",
   "main": "./build/main.js",
   "types": "./build/main.d.ts",
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "prestart": "tsc",
-    "start": "echo hello from @rana/db"
+    "start": "echo hello from @rana-mc/db"
   },
   "dependencies": {
     "@types/lowdb": "^1.0.11",

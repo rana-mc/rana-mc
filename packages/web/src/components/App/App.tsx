@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={RanaLogo} className="App-logo" alt="rana logo" />
+        <img src={RanaLogo} className="App-logo" alt="rana mc logo" />
         <ServersList />
         <CreateServer />
         <section className="HowToUse">
@@ -19,7 +19,7 @@ function App() {
             href="/docs"
             target="_blank"
             rel="noopener noreferrer">
-            How To Use Rana
+            How To Use Rana MC
           </a>
         </section>
       </header>

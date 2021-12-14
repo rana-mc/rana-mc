@@ -1,10 +1,10 @@
 {
-  "name": "@rana/web",
+  "name": "@rana-mc/web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.3",
-    "@rana/db": "^1.0.0",
+    "@rana-mc/db": "^1.0.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",

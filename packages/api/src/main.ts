@@ -2,7 +2,7 @@ import express from 'express';
 import { config as makeEnvs } from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { db } from '@rana/db';
+import { db } from '@rana-mc/db';
 import { log } from './utils';
 import { getCurseForgeProxy } from './proxy';
 import { getRanaAPIRouter } from './ranaApi';
