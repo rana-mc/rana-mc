@@ -1,0 +1,15 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+  max-width: 400px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section + .section {
+  margin-top: 32px;
+}
