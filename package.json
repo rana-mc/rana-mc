@@ -11,6 +11,9 @@
     "url": "https://github.com/rana-mc/rana-mc.git"
   },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "lerna": "^4.0.0"
   }

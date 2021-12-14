@@ -5,6 +5,9 @@
   "types": "./build/main.d.ts",
   "type": "module",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
     "prestart": "tsc",

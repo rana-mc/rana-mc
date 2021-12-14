@@ -4,6 +4,9 @@
   "main": "./build/main.js",
   "type": "module",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prepare": "ts-patch install -s",
     "build": "tsc",
