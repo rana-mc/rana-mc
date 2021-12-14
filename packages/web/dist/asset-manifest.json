@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e383a051.chunk.css",
+    "main.js": "/static/js/main.fb0f547c.chunk.js",
+    "main.js.map": "/static/js/main.fb0f547c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.576d9115.js",
+    "runtime-main.js.map": "/static/js/runtime-main.576d9115.js.map",
+    "static/js/2.d1cf99a6.chunk.js": "/static/js/2.d1cf99a6.chunk.js",
+    "static/js/2.d1cf99a6.chunk.js.map": "/static/js/2.d1cf99a6.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.e383a051.chunk.css.map": "/static/css/main.e383a051.chunk.css.map",
+    "static/js/2.d1cf99a6.chunk.js.LICENSE.txt": "/static/js/2.d1cf99a6.chunk.js.LICENSE.txt",
+    "static/media/Rana-logo.872c4962.svg": "/static/media/Rana-logo.872c4962.svg",
+    "static/media/fabric.svg": "/static/media/fabric.56e2de4a.svg",
+    "static/media/forge.svg": "/static/media/forge.07e53dac.svg",
+    "static/media/minecraft.svg": "/static/media/minecraft.5155d004.svg",
+    "static/media/undraw_empty_re_opql.svg": "/static/media/undraw_empty_re_opql.065a942a.svg",
+    "static/media/undraw_selecting_re_5ff6.svg": "/static/media/undraw_selecting_re_5ff6.1aa4d00f.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.576d9115.js",
+    "static/js/2.d1cf99a6.chunk.js",
+    "static/css/main.e383a051.chunk.css",
+    "static/js/main.fb0f547c.chunk.js"
+  ]
+}
