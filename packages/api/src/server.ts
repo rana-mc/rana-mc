@@ -15,9 +15,6 @@ export const startApiServer = async () => {
   await db.init();
   log(`RanaDB: ${JSON.stringify(db.data())}`);
 
-  // TODO: not secure? debug mode?
-  log(`API key is ${process.env.CURSE_API_KEY}`);
-
   const app = express();
 
   app.use(cors({ origin: '*' }));
