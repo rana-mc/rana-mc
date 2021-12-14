@@ -15,7 +15,9 @@ export const getServersAPI = () => {
 
     try {
       await db.addServer(body);
-      res.send({ success: true });
+      const servers = await db.getServers();
+
+      res.send(servers);
     } catch (err) {
       log(err.message);
       res.sendStatus(500);

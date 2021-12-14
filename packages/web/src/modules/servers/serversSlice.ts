@@ -52,8 +52,6 @@ export const serversSlice = createSlice({
       })
       .addCase(createServerAC.fulfilled, (state, action) => {
         state.status = 'idle';
-        // TODO: maybe got troubles with response, cuz it { success: true }
-        // TODO: update api endpoint
         state.values = action.payload;
       });
   },

@@ -15,7 +15,9 @@ export const getSettingsAPI = () => {
 
     try {
       await db.setSettings(body);
-      res.send({ success: true });
+      const settings = await db.getSettings();
+
+      res.send(settings);
     } catch (err) {
       log(err.message);
       res.sendStatus(500);
