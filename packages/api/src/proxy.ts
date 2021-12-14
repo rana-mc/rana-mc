@@ -20,10 +20,7 @@ export const getCurseForgeProxy = () => {
       const response = responseBuffer.toString('utf8');
       handleResponse(response);
       return responseBuffer;
-    }),
-    onProxyReq(proxyReq, req, res) {
-      proxyReq.setHeader('x-api-key', process.env.CURSE_API_KEY);
-    }
+    })
   }));
 
   return router;
