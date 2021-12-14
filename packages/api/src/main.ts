@@ -9,7 +9,7 @@ import { getRanaAPIRouter } from './ranaApi';
 
 const API_PORT = 3001;
 
-const main = async () => {
+export const startApiServer = async () => {
   await db.init();
   log(`RanaDB: ${JSON.stringify(db.data())}`);
 
@@ -29,6 +29,9 @@ const main = async () => {
   });
 };
 
+const main = async () => {
+  startApiServer();
+}
 
 makeEnvs();
 main();
