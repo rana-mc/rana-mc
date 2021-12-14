@@ -9,7 +9,7 @@ export const getCurseForgeProxy = () => {
 
   const handleResponse = (response) => {
     // TODO: cache? something more?
-    log(`(ProxyResponse): ${response}`);
+    if (response) log(`(ProxyResponse): ${response}`);
   };
 
   router.use('/', createProxyMiddleware({

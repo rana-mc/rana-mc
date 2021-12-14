@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { db } from '@rana-mc/db';
-import { apiClient, log } from '../utils';
+import { curseApiClient, log } from '../utils';
 
 // Minecraft
 const GAME_ID = 432;
@@ -18,7 +18,7 @@ export const getVersionsAPI = () => {
     }
 
     try {
-      const response = await apiClient.get(`/v1/games/${GAME_ID}/version-types`);
+      const response = await curseApiClient.get(`/v1/games/${GAME_ID}/version-types`);
       const types = response.data;
 
       await db.setVersionTypes(types.data);
@@ -39,7 +39,7 @@ export const getVersionsAPI = () => {
     }
 
     try {
-      const response = await apiClient.get(`/v1/games/${GAME_ID}/versions`);
+      const response = await curseApiClient.get(`/v1/games/${GAME_ID}/versions`);
       const versions = response.data;
 
       await db.setGameVersions(versions.data);
