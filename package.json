@@ -2,14 +2,10 @@
   "name": "rana",
   "version": "1.0.0",
   "main": "index.js",
-  "private": true,
   "author": "Evgeny Bykovskikh <redzumi.tao@gmail.com>",
   "scripts": {
     "start": "lerna run --parallel start"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/redzumi/rana.git"
