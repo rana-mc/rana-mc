@@ -5,6 +5,7 @@
   "author": "Evgeny Bykovskikh <redzumi.tao@gmail.com>",
   "scripts": {
     "start": "lerna run --parallel start",
+    "bootstrap": "lerna bootstrap",
     "release": "lerna version && lerna publish from-package"
   },
   "repository": {
