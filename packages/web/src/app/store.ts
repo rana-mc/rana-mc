@@ -4,6 +4,7 @@ import versionTypesReducer from '../modules/version-types/versionTypesSlice';
 import gameVersionsReducer from '../modules/game-versions/gameVersionsSlice';
 import coresReducer from '../modules/cores/coresSlice';
 import serversReducer from '../modules/servers/serversSlice';
+import settingsReducer from '../modules/settings/settingsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     versionTypes: versionTypesReducer,
     gameVersions: gameVersionsReducer,
     cores: coresReducer,
-    servers: serversReducer
+    servers: serversReducer,
+    settings: settingsReducer
   },
 });
 

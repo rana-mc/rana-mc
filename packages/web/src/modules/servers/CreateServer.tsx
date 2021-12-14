@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { createServerAC } from './serversSlice';
 import { selectCurrentGameVersion } from '@modules/game-versions/gameVersionsSlice';
 import { selecCurrentCore } from '@modules/cores/coresSlice';
-import Input from '@ui/Input';
 
 const CreateServer = () => {
   const dispatch = useAppDispatch();
@@ -33,13 +32,8 @@ const CreateServer = () => {
     }
   };
 
-  const handleChange = (value: string) => {
-    console.log(value);
-  };
-
   return (
     <div className={cn(styles.createServer)}>
-      <Input onChange={handleChange} />
       <section className={cn(styles.section)}>
         <VersionTypes />
       </section>

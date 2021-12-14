@@ -8,18 +8,34 @@ export const enum ButtonType {
   Secondary = 'secondary',
 }
 
+export const enum ButtonSize {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
+}
+
 type Props = {
   type?: ButtonType;
+  size?: ButtonSize;
   onClick?: () => void;
   text?: string;
 };
 
-const Button = ({ type = ButtonType.Primary, onClick, text = '' }: Props) => {
+const Button = ({
+  type = ButtonType.Primary,
+  size = ButtonSize.Medium,
+  onClick,
+  text = '',
+}: Props) => {
   const handleClick = () => onClick && onClick();
 
   return (
     <button
-      className={cn(styles.button, styles[`type-${type}`])}
+      className={cn(
+        styles.button,
+        styles[`type-${type}`],
+        styles[`size-${size}`]
+      )}
       onClick={handleClick}>
       {text}
     </button>

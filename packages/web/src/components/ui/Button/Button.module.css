@@ -35,3 +35,7 @@
   border: 1px solid #8eb7f9;
   color: #8eb7f9;
 }
+
+.size-small {
+  padding: 8px 46px;
+}
