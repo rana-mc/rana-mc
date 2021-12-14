@@ -1,13 +1,13 @@
 {
   "name": "@rana-mc/web",
-  "version": "0.1.0",
+  "version": "0.0.1-alpha.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "@craco/craco": "^6.4.3",
-    "@rana-mc/db": "^1.0.0",
+    "@rana-mc/db": "^0.0.1-alpha.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -52,6 +52,6 @@
       "^@ui(.*)$": "<rootDir>/src/components/ui$1",
       "^@modules(.*)$": "<rootDir>/src/modules$1",
       "^@utils(.*)$": "<rootDir>/src/utils$1"
-    } 
+    }
   }
 }

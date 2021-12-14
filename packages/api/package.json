@@ -1,6 +1,6 @@
 {
   "name": "@rana-mc/api",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha.0",
   "main": "./build/main.js",
   "type": "module",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "start": "node build/main.js"
   },
   "dependencies": {
-    "@rana-mc/db": "^1.0.0",
+    "@rana-mc/db": "^0.0.1-alpha.0",
     "@types/express": "^4.17.13",
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
