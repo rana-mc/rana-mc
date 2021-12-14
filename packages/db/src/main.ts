@@ -95,6 +95,18 @@ export default class RanaDB {
         this.data().servers.push(server);
         return await this.write();
     }
+
+    getSettings() {
+        return this.data().settings || {};
+    }
+
+    async setSettings(settings: Partial<Settings>) {
+        this.data().settings = {
+            ...this.data().settings,
+            ...settings
+        };
+        return await this.write();
+    }
 }
 
 export const db = new RanaDB();

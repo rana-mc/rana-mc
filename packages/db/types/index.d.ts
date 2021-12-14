@@ -36,6 +36,10 @@ declare type Server = {
 // TODO: what is it? links? file/names? mb
 declare type ServerMod = string;
 
+declare type Settings = {
+  curseApiKey: string;
+};
+
 declare type RanaDBData = {
   gameVersions: GameVersion[];
   versionTypes: VersionType[];
@@ -46,4 +50,5 @@ declare type RanaDBData = {
     }
   },
   servers: Server[];
+  settings: Settings;
 };
