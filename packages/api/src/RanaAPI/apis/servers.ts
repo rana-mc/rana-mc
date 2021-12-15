@@ -34,9 +34,9 @@ export default class ServersAPI extends APIRoute {
       res.send(servers);
     });
 
-    this.router.delete('/servers', async (req, res) => {
-      const server: Server = req.body;
-      await this.ranaDB.removeServer(server);
+    this.router.delete('/servers/:id', async (req, res) => {
+      const serverId = req.params.id;
+      await this.ranaDB.removeServer(serverId);
 
       const servers = await this.ranaDB.getServers();
       res.send(servers);
