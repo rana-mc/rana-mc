@@ -3,10 +3,5 @@
   "packages": [
     "packages/*"
   ],
-  "bootstrap": {
-    "npmClientArgs": [
-      "--no-package-lock"
-    ]
-  },
   "version": "0.0.2-alpha.0"
 }
