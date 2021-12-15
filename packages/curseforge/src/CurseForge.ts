@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import APIUrls from "./ApiUrls";
+import APIUrls from "./APIUrls";
 import { Logger } from "./Logger";
 
 export default class CurseForge {
