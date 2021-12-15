@@ -9,8 +9,6 @@ export class ForgeCores {
   logger: Logger = new Logger(ForgeCores.TAG);
   baseUrl: string = `https://files.minecraftforge.net/net/minecraftforge/forge/`;;
 
-  constructor() { }
-
   getVersionCoresUrl(version: string) {
     const htmlForVersion = `index_${version}.html`;
 
@@ -19,18 +17,29 @@ export class ForgeCores {
 
   async fetchCores(version: string) {
     const forgeCoresUrl = this.getVersionCoresUrl(version);
-    const response = await axios.get(forgeCoresUrl);
-    const html = await response.data;
-    const coresFromHTML = await this.parseCoresFromHTML(html, version);
 
-    return coresFromHTML;
+    if (!version) {
+      return null;
+    }
+
+    try {
+      const response = await axios.get(forgeCoresUrl);
+      const html = await response.data;
+      const coresFromHTML = await this.parseCoresFromHTML(html, version);
+
+      return coresFromHTML;
+    } catch (err) {
+      this.logger.log(`(${version}) Got error after fetchCores – ${err.message}`);
+    }
+
+    return null;
   }
 
   async parseCoresFromHTML(html: string, version: string): Promise<Partial<ForgeCore>[]> {
     const page = parse(html);
 
     const downloads = [...page.querySelectorAll('.download-list tbody tr')];
-    this.logger.log(`Found ${downloads.length} forge core files...`);
+    this.logger.log(`(${version}) Found ${downloads.length} forge core files...`);
 
     const cores = downloads.map(el => {
       const coreVersion = el.querySelector('.download-version').innerText.trim();
