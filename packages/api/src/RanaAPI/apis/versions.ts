@@ -14,7 +14,7 @@ export default class VersionsAPI extends APIRoute {
     this.curseForge = new CurseForge();
   }
 
-  init() {
+  async init() {
     this.useVersions();
     this.useVersionTypes();
   }

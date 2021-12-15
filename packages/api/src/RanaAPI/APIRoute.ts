@@ -18,7 +18,7 @@ export default class APIRoute {
     return "RanaAPIRoute";
   }
 
-  init() { }
+  async init() { }
 
   log(message: string) {
     this.logger.log(message);

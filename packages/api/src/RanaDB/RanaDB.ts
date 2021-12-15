@@ -54,4 +54,5 @@ export default class RanaDB {
     }
 }
 
-export const db = new RanaDB();
+export const ranaDB = new RanaDB();
+await ranaDB.init();

@@ -14,7 +14,7 @@ export default class CoresAPI extends APIRoute {
     this.forgeCores = new ForgeCores();
   }
 
-  init() {
+  async init() {
     // TODO: make it by 'type' in query
     this.useForgeCores();
     this.useFabricCores();

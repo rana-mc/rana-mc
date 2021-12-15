@@ -1,33 +1,35 @@
+import RanaDB, { ranaDB } from '../../RanaDB/RanaDB';
 import APIRoute from '../APIRoute';
 
 export default class ServersAPI extends APIRoute {
+
+  ranaDB: RanaDB;
 
   get TAG() {
     return "RanaAPI-servers";
   }
 
-  // export const getServersAPI = () => {
-  //   const router = Router();
+  constructor() {
+    super();
+    this.ranaDB = ranaDB;
+  }
 
-  //   router.get('/servers', async (req, res) => {
-  //     const servers = await db.getServers();
-  //     res.send(servers);
-  //   });
+  async init() {
+    this.useServers();
+  }
 
-  //   router.post('/servers', async (req, res) => {
-  //     const body: Server = req.body;
+  useServers() {
+    this.router.get('/servers', async (req, res) => {
+      const servers = await this.ranaDB.getServers();
+      res.send(servers);
+    });
 
-  //     try {
-  //       await db.addServer(body);
-  //       const servers = await db.getServers();
+    this.router.post('/servers', async (req, res) => {
+      const body: Server = req.body;
+      await this.ranaDB.addServer(body);
 
-  //       res.send(servers);
-  //     } catch (err) {
-  //       log(err.message);
-  //       res.sendStatus(500);
-  //     }
-  //   });
-
-  //   return router;
-  // };
+      const servers = await this.ranaDB.getServers();
+      res.send(servers);
+    });
+  }
 }

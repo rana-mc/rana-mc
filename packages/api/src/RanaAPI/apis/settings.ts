@@ -1,33 +1,35 @@
+import RanaDB, { ranaDB } from '../../RanaDB/RanaDB';
 import APIRoute from '../APIRoute';
 
 export default class SettingsAPI extends APIRoute {
+
+  ranaDB: RanaDB;
 
   get TAG() {
     return "RanaAPI-settings";
   }
 
-  // export const getSettingsAPI = () => {
-  //   const router = Router();
+  constructor() {
+    super();
+    this.ranaDB = ranaDB;
+  }
 
-  //   router.get('/settings', async (req, res) => {
-  //     const settings = await db.getSettings();
-  //     res.send(settings);
-  //   });
+  async init() {
+    this.useSettings();
+  }
 
-  //   router.post('/settings', async (req, res) => {
-  //     const body: Partial<Settings> = req.body;
+  useSettings() {
+    this.router.get('/settings', async (req, res) => {
+      const settings = await this.ranaDB.getSettings();
+      res.send(settings);
+    });
 
-  //     try {
-  //       await db.setSettings(body);
-  //       const settings = await db.getSettings();
+    this.router.post('/settings', async (req, res) => {
+      const body: Partial<Settings> = req.body;
+      await this.ranaDB.setSettings(body);
 
-  //       res.send(settings);
-  //     } catch (err) {
-  //       log(err.message);
-  //       res.sendStatus(500);
-  //     }
-  //   });
-
-  //   return router;
-  // };
+      const settings = await this.ranaDB.getSettings();
+      res.send(settings);
+    });
+  }
 }
