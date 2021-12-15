@@ -29,12 +29,12 @@ export class CurseForge {
 
     try {
       const response = await this.apiClient.get(APIUrls.VersionTypesUrl);
-      const types = response.data;
+      const { data: versionTypes } = response.data;
 
-      this.logger.log(`getVersionTypes: ${types}`);
+      this.logger.log(`getVersionTypes: ${JSON.stringify(versionTypes)}`);
 
-      curseForgeLocalDB.setVersionTypes(versionTypesFromDB);
-      return types;
+      curseForgeLocalDB.setVersionTypes(versionTypes);
+      return versionTypes;
     } catch (err) {
       this.logger.log(`Got error after getVersionTypes – ${err.message}`);
     }
@@ -50,9 +50,9 @@ export class CurseForge {
 
     try {
       const response = await this.apiClient.get(APIUrls.GameVersionsUrl);
-      const gameVersions = response.data;
+      const { data: gameVersions } = response.data;
 
-      this.logger.log(`getVersions: ${gameVersions}`);
+      this.logger.log(`getVersions: ${JSON.stringify(gameVersions)}`);
 
       curseForgeLocalDB.setGameVersions(gameVersions);
       return gameVersions;
