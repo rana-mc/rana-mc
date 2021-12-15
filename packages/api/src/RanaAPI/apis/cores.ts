@@ -18,12 +18,18 @@ export default class CoresAPI extends APIRoute {
     // TODO: make it by 'type' in query
     this.useForgeCores();
     this.useFabricCores();
+
+    this.router.use((error) => {
+      console.log(error);
+    })
   }
 
   useForgeCores() {
     this.router.use('/forge-cores', async (req, res) => {
       const { version, force } = req.query as { version: string, force: string };
       const cores = await this.forgeCores.fetchCores(version);
+
+      if (!cores) return res.sendStatus(500);
 
       res.send(cores);
     });
