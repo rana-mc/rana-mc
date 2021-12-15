@@ -20,7 +20,7 @@ const ServersList = () => {
   }, [dispatch, servers]);
 
   if (!servers) {
-    return <Empty size="s" text="Please, wait..." />;
+    return <Empty select size="s" text="Please, wait..." />;
   }
 
   if (servers.length === 0) {

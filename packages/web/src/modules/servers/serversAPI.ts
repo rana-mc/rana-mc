@@ -8,12 +8,10 @@ export const createServer = (server: Server) => {
   return apiClient.post('/api/servers', { ...server });
 };
 
-export const installServer = (server: Server) => {
-  // TODO: maybe only id?
-  return apiClient.post('/api/install', { ...server });
+export const removeServer = (server: Server) => {
+  return apiClient.delete(`/api/servers/${server.id}`);
 };
 
-export const removeServer = (server: Server) => {
-  // TODO: maybe only id?
-  return apiClient.post('/api/remove', { ...server });
+export const installServer = (server: Server) => {
+  return apiClient.delete(`/api/install/${server.id}`);
 };
