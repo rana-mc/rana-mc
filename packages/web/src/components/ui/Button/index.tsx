@@ -14,16 +14,25 @@ export const enum ButtonSize {
   Large = 'large',
 }
 
+export const enum ButtonView {
+  Default = 'default',
+  Danger = 'danger',
+}
+
 type Props = {
+  className?: string;
   type?: ButtonType;
   size?: ButtonSize;
+  view?: ButtonView;
   onClick?: () => void;
   text?: string;
 };
 
 const Button = ({
+  className,
   type = ButtonType.Primary,
   size = ButtonSize.Medium,
+  view = ButtonView.Default,
   onClick,
   text = '',
 }: Props) => {
@@ -32,9 +41,11 @@ const Button = ({
   return (
     <button
       className={cn(
+        className,
         styles.button,
         styles[`type-${type}`],
-        styles[`size-${size}`]
+        styles[`size-${size}`],
+        styles[`view-${view}`]
       )}
       onClick={handleClick}>
       {text}

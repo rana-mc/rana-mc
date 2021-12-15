@@ -39,3 +39,13 @@
 .size-small {
   padding: 8px 46px;
 }
+
+.view-danger {
+  border: 1px solid #ca0b00;
+  color: #ca0b00;
+}
+
+.view-danger:hover {
+  border: 1px dashed #f32013;
+  color: #f32013;
+}
