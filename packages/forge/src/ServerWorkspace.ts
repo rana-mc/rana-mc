@@ -1,7 +1,8 @@
 import os from 'os';
 import download from 'download';
-import { extractDownloadUrl } from './utils/links';
+import { extractCoreFilename, extractDownloadUrl } from './utils/links';
 import { Logger } from './Logger';
+import shell from 'shelljs';
 
 const getRanaMC = () => `${os.homedir()}/.rana-mc/servers`;
 
@@ -28,5 +29,34 @@ export default class ServerWorkspace {
 
     await download(downloadUrl, this.path);
     this.logger.log('Download done');
+  }
+
+  async installCore(core: Core) {
+    const coreFilename = extractCoreFilename(core.installerUrl);
+    this.logger.log(`Installing: ${coreFilename}`);
+
+    const installCommand = `cd ${this.path} && java -jar ${coreFilename} --installServer`;
+    this.logger.log(`Install with: ${installCommand}`);
+
+    const installer = shell.exec(installCommand, { async: true });
+
+    installer.stdout.on(installCommand, (data) => {
+      this.logger.log(data);
+    });
+
+    installer.on('exit', () => {
+      this.logger.log('Install done');
+      this.clearInstaller(core);
+    });
+  }
+
+  async clearInstaller(core: Core) {
+    const coreFilename = extractCoreFilename(core.installerUrl);
+
+    const clearInstallerCommand = `cd ${this.path} && rm ${coreFilename}`;
+    const clearInstallerLogCommand = `cd ${this.path} && rm ${coreFilename}.log`;
+
+    shell.exec(clearInstallerCommand, { async: true });
+    shell.exec(clearInstallerLogCommand, { async: true });
   }
 }

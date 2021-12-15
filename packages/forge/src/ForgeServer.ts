@@ -2,7 +2,7 @@ import { Logger } from "./Logger";
 import ServerWorkspace from "./ServerWorkspace";
 
 export class ForgeServer {
-  
+
   public static TAG = "ForgeServer";
 
   logger: Logger = new Logger(ForgeServer.TAG);
@@ -14,8 +14,9 @@ export class ForgeServer {
     this.workspace = new ServerWorkspace(server);
   }
 
-  installCore() {
+  async installCore() {
     this.logger.log(`call installCore of ForgeServer, ${JSON.stringify(this.server)}`);
-    this.workspace.downloadCore(this.server.core);
+    await this.workspace.downloadCore(this.server.core);
+    await this.workspace.installCore(this.server.core);
   }
 }

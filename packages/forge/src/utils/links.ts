@@ -20,3 +20,4 @@ export const convertExternalUrls = (urls: ExternalForgeCoreUrl[]): {
 });
 
 export const extractDownloadUrl = (url: string): string => url.match(/&url=(.+)/)[1];
+export const extractCoreFilename = (url: string): string => url.match(/\/(forge-.+)/)[1]
