@@ -2,7 +2,8 @@ import axios, { AxiosInstance } from "axios";
 import APIUrls from "./APIUrls";
 import { Logger } from "./Logger";
 
-export default class CurseForge {
+// TODO: handle no apiKey case
+export class CurseForge {
 
   public static TAG: string = "CurseForge";
 
@@ -20,21 +21,33 @@ export default class CurseForge {
   }
 
   async getVersionTypes(refresh?: boolean) {
-    const response = await this.apiClient.get(APIUrls.VersionTypesUrl);
-    const types = response.data;
+    try {
+      const response = await this.apiClient.get(APIUrls.VersionTypesUrl);
+      const types = response.data;
 
-    this.logger.log(`getVersionTypes: ${types}`);
+      this.logger.log(`getVersionTypes: ${types}`);
 
-    return types;
+      return types;
+    } catch (err) {
+      this.logger.log(`Got error after getVersionTypes – ${err.message}`);
+    }
+
+    return null;
   }
 
   async getVersions(refresh?: boolean) {
-    const response = await this.apiClient.get(APIUrls.VersionsUrl);
-    const versions = response.data;
+    try {
+      const response = await this.apiClient.get(APIUrls.VersionsUrl);
+      const versions = response.data;
 
-    this.logger.log(`getVersions: ${versions}`);
+      this.logger.log(`getVersions: ${versions}`);
 
-    return versions;
+      return versions;
+    } catch (err) {
+      this.logger.log(`Got error after getVersions – ${err.message}`);
+    }
+
+    return null;
   }
 
   updateApiKey(apiKey: string) {

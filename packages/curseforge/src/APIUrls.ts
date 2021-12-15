@@ -5,7 +5,7 @@ export default class APIUrls {
   public static ENDPOINT: string = '/v1';
 
   static get getBaseUrl() {
-    return `${APIUrls.HOST}${APIUrls.ENDPOINT}/`;
+    return `${APIUrls.HOST}${APIUrls.ENDPOINT}`;
   }
 
   static get VersionsUrl() {
