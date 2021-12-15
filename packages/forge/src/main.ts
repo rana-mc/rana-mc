@@ -1,4 +1,4 @@
-/// <reference path="../types/index.d.ts" />
+/// <reference types="@rana-mc/types" />
 
 const main = async () => {
   console.log('hello from @rana-mc/forge');

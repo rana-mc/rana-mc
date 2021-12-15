@@ -1,2 +1,2 @@
 /// <reference types="react-scripts" />
-/// <reference types="@rana-mc/db" />
+/// <reference types="@rana-mc/types" />

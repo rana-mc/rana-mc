@@ -1,4 +1,4 @@
-export const convertExternalUrls = (urls: ExternalCoreUrl[]): {
+export const convertExternalUrls = (urls: ExternalForgeCoreUrl[]): {
   installerUrl: string;
   changelogUrl: string;
   mdkUrl: string;

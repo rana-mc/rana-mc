@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import SelectCore from '@ui/SelectCore';
 import SelectCoreOption from '@ui/SelectCoreOption';
-import { CoreType } from '@utils';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectCurrentGameVersion } from '../game-versions/gameVersionsSlice';
 

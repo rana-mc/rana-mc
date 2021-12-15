@@ -2,7 +2,6 @@ import React from 'react';
 import Empty from '@ui/Empty';
 import SelectOption from '@ui/SelectOption';
 import Select from '@ui/Select';
-import { CoreType } from '@utils';
 
 type Props = {
   type: CoreType;

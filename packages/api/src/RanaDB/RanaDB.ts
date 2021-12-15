@@ -1,4 +1,3 @@
-/// <reference path="./types/index.d.ts" />
 import { JSONFile, Low } from "lowdb";
 
 export default class RanaDB {

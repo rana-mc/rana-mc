@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CoreType } from "@utils";
 import { RootState } from "../../app/store";
 import { fetchForgeCores, fetchFabricCores } from "./coresAPI";
 

@@ -1,0 +1,5 @@
+{
+  "name": "@rana-mc/types",
+  "version": "0.0.2-alpha.0",
+  "typings": "./index.d.ts"
+}
