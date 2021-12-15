@@ -24,11 +24,6 @@ declare type ExternalForgeCoreUrl = {
   name: string;
 };
 
-declare enum CoreType {
-  Forge = 'forge',
-  Fabric = 'fabric',
-}
-
 declare type FabricCore = {
   coreVersion: string;
   installerUrl: string | null;
@@ -54,3 +49,7 @@ declare type RanaDBData = {
   servers: Server[];
   settings: Settings;
 };
+
+declare type CoreTypeForge = 'forge';
+declare type CoreTypeFabric = 'fabric';
+declare type CoreType = CoreTypeForge | CoreTypeFabric;

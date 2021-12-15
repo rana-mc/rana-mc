@@ -13,6 +13,7 @@ import {
   setCurrentCore,
 } from './coresSlice';
 import CoreSelect from './CoreSelect';
+import { CoreType } from './utils';
 
 const Cores = () => {
   const dispatch = useAppDispatch();
