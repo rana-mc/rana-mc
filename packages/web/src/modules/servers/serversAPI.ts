@@ -12,3 +12,8 @@ export const installServer = (server: Server) => {
   // TODO: maybe only id?
   return apiClient.post('/api/install', { ...server });
 };
+
+export const removeServer = (server: Server) => {
+  // TODO: maybe only id?
+  return apiClient.post('/api/remove', { ...server });
+};

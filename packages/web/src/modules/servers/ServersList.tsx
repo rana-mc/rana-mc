@@ -1,10 +1,15 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import React, { useEffect } from 'react';
 import cn from 'classnames';
-import { fetchServersAC, selectServers } from './serversSlice';
+import {
+  fetchServersAC,
+  installServerAC,
+  removeServerAC,
+  selectServers,
+} from './serversSlice';
 import styles from './ServersList.module.css';
 import Empty from '@ui/Empty';
-import Button, { ButtonSize, ButtonType } from '@ui/Button';
+import Button, { ButtonSize, ButtonType, ButtonView } from '@ui/Button';
 
 const ServersList = () => {
   const dispatch = useAppDispatch();
@@ -23,13 +28,17 @@ const ServersList = () => {
   }
 
   const handleInstall = (server: Server) => () => {
-    console.log(server);
+    dispatch(installServerAC(server));
+  };
+
+  const handleRemove = (server: Server) => () => {
+    dispatch(removeServerAC(server));
   };
 
   return (
     <div className={cn(styles.serversList)}>
       {servers.map((server) => (
-        <div className={cn(styles.server)}>
+        <div key={server.id} className={cn(styles.server)}>
           <div className={cn(styles.values)}>
             <span className={cn(styles.value)}>id: {server.id}</span>
             <span className={cn(styles.value)}>name: {server.name}</span>
@@ -37,12 +46,23 @@ const ServersList = () => {
               status: {server.status || 'unknown'}
             </span>
           </div>
-          <Button
-            size={ButtonSize.Small}
-            type={ButtonType.Secondary}
-            text="Install Server"
-            onClick={handleInstall(server)}
-          />
+          <div className={cn(styles.buttons)}>
+            <Button
+              className={cn(styles.button)}
+              size={ButtonSize.Small}
+              type={ButtonType.Secondary}
+              text="Install Server"
+              onClick={handleInstall(server)}
+            />
+            <Button
+              className={cn(styles.button)}
+              size={ButtonSize.Small}
+              type={ButtonType.Secondary}
+              view={ButtonView.Danger}
+              text="Remove"
+              onClick={handleRemove(server)}
+            />
+          </div>
         </div>
       ))}
     </div>

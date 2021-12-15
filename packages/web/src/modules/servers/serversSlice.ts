@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { fetchServers, createServer, installServer } from "./serversAPI";
+import { fetchServers, createServer, installServer, removeServer } from "./serversAPI";
 
 export interface ServersState {
   values: Server[] | null;
@@ -38,6 +38,14 @@ export const installServerAC = createAsyncThunk(
   }
 );
 
+export const removeServerAC = createAsyncThunk(
+  'servers/remove',
+  async (server: Server) => {
+    const response = await removeServer(server);
+    return response.data;
+  }
+);
+
 export const serversSlice = createSlice({
   name: 'servers',
   initialState,
@@ -66,6 +74,13 @@ export const serversSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(installServerAC.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.values = action.payload;
+      })
+      .addCase(removeServerAC.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(removeServerAC.fulfilled, (state, action) => {
         state.status = 'idle';
         state.values = action.payload;
       });

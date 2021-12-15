@@ -27,9 +27,8 @@ const CreateServer = () => {
       const server: Server = {
         id,
         name,
-        gameVersion: currentGameVersion,
-        coreVersion: currentCore?.coreVersion,
-        installerUrl: currentCore?.installerUrl,
+        status: 'created',
+        core: currentCore,
         mods: [],
       };
 
