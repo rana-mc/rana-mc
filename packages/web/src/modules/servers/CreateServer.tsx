@@ -16,6 +16,7 @@ import {
 } from '@modules/cores/coresSlice';
 import Label from '@ui/Label';
 import Input from '@ui/Input';
+import { CoreType } from '@modules/cores/utils';
 
 const CreateServer = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +39,11 @@ const CreateServer = () => {
         },
         mods: [],
       };
+
+      // FYI: Support link of Forge
+      if (currentCoreType === CoreType.Forge && currentCore?.installerUrl) {
+        window.open(currentCore?.installerUrl, '_blank', 'noopener,noreferrer');
+      }
 
       dispatch(createServerAC(server));
     }
