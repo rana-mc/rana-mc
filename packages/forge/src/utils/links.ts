@@ -18,3 +18,5 @@ export const convertExternalUrls = (urls: ExternalForgeCoreUrl[]): {
   changelogUrl: null,
   mdkUrl: null,
 });
+
+export const extractDownloadUrl = (url: string): string => url.match(/&url=(.+)/)[1];
