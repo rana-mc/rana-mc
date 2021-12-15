@@ -35,7 +35,7 @@ const Cores = () => {
     dispatch(setCoreType(id as CoreType));
   };
 
-  const handleSelect = (core: ForgeCore | FabricCore) => {
+  const handleSelect = (core: Core) => {
     dispatch(setCurrentCore(core));
   };
 

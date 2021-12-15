@@ -3,8 +3,6 @@ import { RootState } from "../../app/store";
 import { fetchForgeCores, fetchFabricCores } from "./coresAPI";
 import { CoreType } from './utils';
 
-type Core = ForgeCore | FabricCore;
-
 export interface CoresState {
   value: Core[] | null;
   type: CoreType.Forge | CoreType.Fabric | null;

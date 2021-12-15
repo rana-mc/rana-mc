@@ -6,8 +6,8 @@ import { CoreType } from './utils';
 
 type Props = {
   type: CoreType;
-  cores: ForgeCore[] | FabricCore[] | null;
-  onSelect?: (core: ForgeCore | FabricCore) => void;
+  cores: Core[] | null;
+  onSelect?: (core: Core) => void;
 };
 
 const CoreSelect = ({ type, cores, onSelect }: Props) => {
