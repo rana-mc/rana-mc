@@ -1,7 +1,10 @@
 import { ForgeServer } from '@rana-mc/forge';
+import RanaDB, { ranaDB } from '../../RanaDB/RanaDB';
 import APIRoute from '../APIRoute';
 
 export default class InstallAPI extends APIRoute {
+
+  ranaDB: RanaDB;
 
   get TAG() {
     return "RanaAPI-install";
@@ -10,24 +13,21 @@ export default class InstallAPI extends APIRoute {
   constructor() {
     super();
 
+    this.ranaDB = ranaDB;
     this.init();
   }
 
   init = async () => {
-    // TODO: make it by 'type' in query
-    this.useForgeInstall();
-    this.useFabricInstall();
+    this.useInstall();
   }
 
-  useForgeInstall() {
-    this.router.post('/forge-install', async (req, res) => {
-      res.sendStatus(200);
-    });
-  }
+  useInstall() {
+    this.router.post('/install/:id', async (req, res) => {
+      const serverId = req.params.id;
+      this.log(`Installing with id = ${serverId}`);
 
-  useFabricInstall() {
-    this.router.post('/fabric-install', async (req, res) => {
-      res.sendStatus(200);
+      const servers = await this.ranaDB.getServers();
+      res.send(servers);
     });
   }
 }

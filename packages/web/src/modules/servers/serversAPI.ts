@@ -13,5 +13,5 @@ export const removeServer = (server: Server) => {
 };
 
 export const installServer = (server: Server) => {
-  return apiClient.delete(`/api/install/${server.id}`);
+  return apiClient.post(`/api/install/${server.id}`);
 };
