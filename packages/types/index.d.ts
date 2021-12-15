@@ -29,14 +29,15 @@ declare type FabricCore = {
   installerUrl: string | null;
 };
 
+declare type Core = { type: CoreType } & ForgeCore | FabricCore;
+
 declare type Server = {
   id: string;
   name: string;
   status: string; // TODO: create, installing, idle, working, stopped, crashed
-  gameVersion: string;
-  coreVersion: string;
-  installerUrl: string | null;
+  core: Core;
   mods: ServerMod[];
+  path
 };
 
 // TODO: what is it? links? file/names? mb

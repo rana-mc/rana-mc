@@ -1,6 +1,6 @@
 import { Logger } from "./Logger";
 
-export default class ForgeServer {
+export class ForgeServer {
   public static TAG = "ForgeServer";
 
   logger: Logger = new Logger(ForgeServer.TAG);
