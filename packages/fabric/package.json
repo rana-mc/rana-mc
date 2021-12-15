@@ -12,7 +12,7 @@
     "postinstall": "tsc",
     "build": "tsc",
     "prestart": "tsc",
-    "start": "node build/main.js"
+    "start": "node --es-module-specifier-resolution=node build/main.js"
   },
   "dependencies": {
     "typescript": "^4.5.2"

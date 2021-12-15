@@ -2,14 +2,12 @@
   "compilerOptions": {
     "outDir": "build",
     "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "lib": ["DOM", "ES2015"],
-    "typeRoots": ["./node_modules/@types"],
-    "plugins": [
-      { "transform": "typescript-transform-paths" },
-    ]
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": ["src"]
 }
