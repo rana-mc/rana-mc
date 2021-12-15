@@ -29,7 +29,7 @@ declare type FabricCore = {
   installerUrl: string | null;
 };
 
-declare type Core = { type: CoreType } & ForgeCore | FabricCore;
+declare type Core = { type: CoreType } & ForgeCore | { type: CoreType } & FabricCore;
 
 declare type Server = {
   id: string;
