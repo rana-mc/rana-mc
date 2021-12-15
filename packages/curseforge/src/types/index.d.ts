@@ -1,0 +1,3 @@
+type CurseForgeConfig = {
+  apiKey: string;
+}
