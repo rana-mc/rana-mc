@@ -5,5 +5,10 @@ export const fetchServers = () => {
 };
 
 export const createServer = (server: Server) => {
-  return apiClient.post('/api/servers', { body: server });
+  return apiClient.post('/api/servers', { ...server });
+};
+
+export const installServer = (server: Server) => {
+  // TODO: maybe only id?
+  return apiClient.post('/api/install', { ...server });
 };

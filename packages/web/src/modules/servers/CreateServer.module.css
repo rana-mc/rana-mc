@@ -1,12 +1,13 @@
 .createServer {
   display: flex;
   flex-direction: column;
-  max-width: 60%;
+  max-width: 40%;
   margin: 0 auto;
 }
 
 .section {
   display: flex;
+  flex-direction: column;
 }
 
 .section + .section {

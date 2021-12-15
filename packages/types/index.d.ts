@@ -32,6 +32,7 @@ declare type FabricCore = {
 declare type Server = {
   id: string;
   name: string;
+  status: string; // TODO: create, installing, idle, working, stopped, crashed
   gameVersion: string;
   coreVersion: string;
   installerUrl: string | null;

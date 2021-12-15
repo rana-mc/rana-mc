@@ -1,0 +1,30 @@
+.serversList {
+  display: flex;
+}
+
+.server {
+  display: flex;
+  flex-direction: column;
+  background: #f8f8f8;
+  padding: 24px 98px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.server:hover {
+  filter: drop-shadow(0px 8px 55px rgba(0, 0, 0, 0.15));
+  background: #fff;
+  border-radius: 8px;
+}
+
+.values {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.value {
+  padding-bottom: 12px;
+  font-size: 16px;
+  text-align: left;
+}
