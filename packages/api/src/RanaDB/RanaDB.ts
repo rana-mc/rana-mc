@@ -65,6 +65,10 @@ export default class RanaDB {
         return await this.write();
     }
 
+    async findServer(serverId: string) {
+        return this.data().servers.find(server => server.id === serverId);
+    }
+
     setSettingsHandler(handler: SettingsHandler) {
         this.settingsHandler = handler;
     };

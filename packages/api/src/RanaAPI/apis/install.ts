@@ -24,7 +24,10 @@ export default class InstallAPI extends APIRoute {
   useInstall() {
     this.router.post('/install/:id', async (req, res) => {
       const serverId = req.params.id;
-      this.log(`Installing with id = ${serverId}`);
+      const server = await ranaDB.findServer(serverId);
+
+      this.log(`Installing server with id = ${serverId}`);
+      new ForgeServer(server).installCore();
 
       const servers = await this.ranaDB.getServers();
       res.send(servers);
