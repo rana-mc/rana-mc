@@ -1,6 +1,6 @@
 {
   "name": "@rana-mc/forge",
-  "version": "0.0.3-alpha.0",
+  "version": "0.0.3",
   "main": "./build/main.js",
   "types": "./build/main.d.ts",
   "type": "module",
@@ -15,7 +15,7 @@
     "start": "node --es-module-specifier-resolution=node build/main.js"
   },
   "dependencies": {
-    "@rana-mc/types": "^0.0.3-alpha.0",
+    "@rana-mc/types": "^0.0.3",
     "axios": "^0.24.0",
     "lowdb": "^3.0.0",
     "node-html-parser": "^5.1.0",
