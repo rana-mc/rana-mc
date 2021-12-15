@@ -58,6 +58,13 @@ export default class RanaDB {
         return await this.write();
     }
 
+    async removeServer(serverToRemove: Server) {
+        this.data().servers =
+            this.data().servers.filter(server => server.id !== serverToRemove.id);
+
+        return await this.write();
+    }
+
     setSettingsHandler(handler: SettingsHandler) {
         this.settingsHandler = handler;
     };

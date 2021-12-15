@@ -27,11 +27,20 @@ export default class ServersAPI extends APIRoute {
     });
 
     this.router.post('/servers', async (req, res) => {
-      const body: Server = req.body;
-      await this.ranaDB.addServer(body);
+      const server: Server = req.body;
+      await this.ranaDB.addServer(server);
 
       const servers = await this.ranaDB.getServers();
       res.send(servers);
     });
+
+    this.router.delete('/servers', async (req, res) => {
+      const server: Server = req.body;
+      await this.ranaDB.removeServer(server);
+
+      const servers = await this.ranaDB.getServers();
+      res.send(servers);
+    });
+
   }
 }

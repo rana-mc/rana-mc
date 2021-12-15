@@ -8,6 +8,7 @@ import CoresAPI from './apis/cores';
 import SettingsAPI from './apis/settings';
 import VersionsAPI from './apis/versions';
 import ServersAPI from './apis/servers';
+import InstallAPI from './apis/install';
 
 export default class RanaAPI {
 
@@ -33,6 +34,7 @@ export default class RanaAPI {
     this.app.use(RanaAPI.ENDPOINT, new ServersAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new SettingsAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new VersionsAPI().router);
+    this.app.use(RanaAPI.ENDPOINT, new InstallAPI().router);
   }
 
   applyUtilityMiddlewares() {
