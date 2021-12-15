@@ -1,6 +1,6 @@
 {
   "name": "@rana-mc/api",
-  "version": "0.0.5-alpha.0",
+  "version": "0.0.5",
   "main": "./build/server.js",
   "type": "module",
   "license": "MIT",
@@ -17,7 +17,7 @@
   "dependencies": {
     "@rana-mc/curseforge": "^0.0.5-alpha.0",
     "@rana-mc/fabric": "^0.0.5-alpha.0",
-    "@rana-mc/forge": "^0.0.5-alpha.0",
+    "@rana-mc/forge": "^0.0.5",
     "@rana-mc/types": "^0.0.5-alpha.0",
     "@types/express": "^4.17.13",
     "axios": "^0.24.0",

@@ -1,6 +1,6 @@
 {
   "name": "@rana-mc/forge",
-  "version": "0.0.5-alpha.0",
+  "version": "0.0.5",
   "main": "./build/main.js",
   "types": "./build/main.d.ts",
   "type": "module",
