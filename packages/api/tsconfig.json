@@ -8,10 +8,7 @@
     "lib": ["DOM", "ES2015"],
     "typeRoots": ["./node_modules/@types"],
     "plugins": [
-      {
-        "transform": "typescript-transform-extensions",
-        "extensions": { ".ts": ".js" }
-      }
+      { "transform": "typescript-transform-paths" },
     ]
   },
   "include": ["src"]

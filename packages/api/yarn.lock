@@ -878,10 +878,12 @@ type-is@~1.6.17, type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typescript-transform-extensions@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typescript-transform-extensions/-/typescript-transform-extensions-1.0.1.tgz#05d86bccfc7b6e38156c3b65193a94cbe58bdc56"
-  integrity sha512-kV+h7R2Uenc6Jb/JDkKh8owJuW/LcaUg0cJQMTeJzvFdSiPOpfJhFkjEKAnTcRKYnHWSW+QOUcu5RnBFR8W5lQ==
+typescript-transform-paths@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/typescript-transform-paths/-/typescript-transform-paths-3.3.1.tgz#74526bc1b6dc575ffe269cc81833db7bd81763e1"
+  integrity sha512-c+8Cqd2rsRtTU68rJI0NX/OtqgBDddNs1fIxm1nCNyhn0WpoyqtpUxc1w9Ke5c5kgE4/OT5xYbKf2cf694RYEg==
+  dependencies:
+    minimatch "^3.0.4"
 
 typescript@^4.5.2:
   version "4.5.4"

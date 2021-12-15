@@ -20,6 +20,6 @@
     "node-html-parser": "^5.1.0",
     "ts-patch": "^2.0.1",
     "typescript": "^4.5.2",
-    "typescript-transform-extensions": "^1.0.1"
+    "typescript-transform-paths": "^3.3.1"
   }
 }
