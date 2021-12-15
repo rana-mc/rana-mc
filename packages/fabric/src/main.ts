@@ -3,3 +3,5 @@ const main = async () => {
 };
 
 main();
+
+export * from './FabricCores';
