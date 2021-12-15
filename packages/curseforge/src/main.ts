@@ -5,3 +5,5 @@ const main = async () => {
 };
 
 main();
+
+export * from './CurseForge';
