@@ -34,3 +34,4 @@ export default class ForgeLocalDB {
 }
 
 export const forgeLocalDB = new ForgeLocalDB();
+forgeLocalDB.init();

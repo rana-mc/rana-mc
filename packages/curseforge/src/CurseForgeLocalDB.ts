@@ -42,3 +42,4 @@ export default class CurseForgeLocalDB {
 }
 
 export const curseForgeLocalDB = new CurseForgeLocalDB();
+curseForgeLocalDB.init();

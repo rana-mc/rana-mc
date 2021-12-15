@@ -1,8 +1,10 @@
-import APIRoute from '../APIRoute';
 import { CurseForge } from '@rana-mc/curseforge';
+import RanaDB, { ranaDB } from '../../RanaDB/RanaDB';
+import APIRoute from '../APIRoute';
 
 export default class VersionsAPI extends APIRoute {
 
+  ranaDB: RanaDB;
   curseForge: CurseForge;
 
   get TAG() {
@@ -12,11 +14,28 @@ export default class VersionsAPI extends APIRoute {
   constructor() {
     super();
     this.curseForge = new CurseForge();
+    this.ranaDB = ranaDB;
   }
 
   async init() {
     this.useVersions();
     this.useVersionTypes();
+    this.applySettingsHandler();
+  }
+
+  applySettings() {
+    const settings = this.ranaDB.getSettings();
+    this.curseForge.updateApiKey(settings.curseApiKey);
+  }
+
+  applySettingsHandler() {
+    this.applySettings();
+    this.log('Settings applied');
+
+    this.ranaDB.setSettingsHandler((settings) => {
+      this.log('Settings changed');
+      this.curseForge.updateApiKey(settings.curseApiKey);
+    });
   }
 
   useVersions() {

@@ -1,10 +1,13 @@
 import { JSONFile, Low } from "lowdb";
 
+type SettingsHandler = (settings: Settings) => void
+
 export default class RanaDB {
     public static DB_PATH = './db.json';
     public static DB_DEFAULT: RanaDBData = { servers: [], settings: {} };
 
     private db: Low<RanaDBData>;
+    private settingsHandler: SettingsHandler;
 
     constructor() { }
 
@@ -49,8 +52,15 @@ export default class RanaDB {
             ...this.data().settings,
             ...settings
         };
+
+        this.settingsHandler && this.settingsHandler(settings);
+
         return await this.write();
     }
+
+    setSettingsHandler(handler: SettingsHandler) {
+        this.settingsHandler = handler;
+    };
 }
 
 export const ranaDB = new RanaDB();
