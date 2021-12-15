@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import APIUrls from "./APIUrls";
+import { curseForgeLocalDB } from "./CurseForgeLocalDB";
 import { Logger } from "./Logger";
 
 // TODO: handle no apiKey case
@@ -21,12 +22,18 @@ export class CurseForge {
   }
 
   async getVersionTypes(refresh?: boolean) {
+    const versionTypesFromDB = curseForgeLocalDB.getVersionTypes();
+
+    if (!refresh && versionTypesFromDB.length)
+      return versionTypesFromDB;
+
     try {
       const response = await this.apiClient.get(APIUrls.VersionTypesUrl);
       const types = response.data;
 
       this.logger.log(`getVersionTypes: ${types}`);
 
+      curseForgeLocalDB.setVersionTypes(versionTypesFromDB);
       return types;
     } catch (err) {
       this.logger.log(`Got error after getVersionTypes – ${err.message}`);
@@ -35,14 +42,20 @@ export class CurseForge {
     return null;
   }
 
-  async getVersions(refresh?: boolean) {
+  async getGameVersions(refresh?: boolean) {
+    const gameVersionsFromDB = curseForgeLocalDB.getGameVersions();
+
+    if (!refresh && gameVersionsFromDB.length)
+      return gameVersionsFromDB;
+
     try {
-      const response = await this.apiClient.get(APIUrls.VersionsUrl);
-      const versions = response.data;
+      const response = await this.apiClient.get(APIUrls.GameVersionsUrl);
+      const gameVersions = response.data;
 
-      this.logger.log(`getVersions: ${versions}`);
+      this.logger.log(`getVersions: ${gameVersions}`);
 
-      return versions;
+      curseForgeLocalDB.setGameVersions(gameVersions);
+      return gameVersions;
     } catch (err) {
       this.logger.log(`Got error after getVersions – ${err.message}`);
     }

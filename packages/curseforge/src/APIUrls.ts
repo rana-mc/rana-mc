@@ -8,7 +8,7 @@ export default class APIUrls {
     return `${APIUrls.HOST}${APIUrls.ENDPOINT}`;
   }
 
-  static get VersionsUrl() {
+  static get GameVersionsUrl() {
     return `${APIUrls.getBaseUrl}/games/${APIUrls.GAME_ID}/versions`;
   }
 
