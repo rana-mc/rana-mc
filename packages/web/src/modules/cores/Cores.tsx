@@ -9,7 +9,7 @@ import {
   fetchFabricCoresAC,
   setCoreType,
   selectCores,
-  selectCoreType,
+  selectCurrentCoreType,
   setCurrentCore,
 } from './coresSlice';
 import CoreSelect from './CoreSelect';
@@ -19,7 +19,7 @@ const Cores = () => {
   const dispatch = useAppDispatch();
 
   const cores = useAppSelector(selectCores);
-  const currentCoreType = useAppSelector(selectCoreType);
+  const currentCoreType = useAppSelector(selectCurrentCoreType);
   const currentVersion = useAppSelector(selectCurrentGameVersion);
 
   useEffect(() => {

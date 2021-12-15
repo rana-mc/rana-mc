@@ -67,7 +67,7 @@ export const coresSlice = createSlice({
 export const { setCoreType, setCurrentCore } = coresSlice.actions;
 
 export const selectCores = (state: RootState) => state.cores.value;
-export const selectCoreType = (state: RootState) => state.cores.type;
 export const selecCurrentCore = (state: RootState) => state.cores.current;
+export const selectCurrentCoreType = (state: RootState) => state.cores.type;
 
 export default coresSlice.reducer;

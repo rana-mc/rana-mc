@@ -10,7 +10,10 @@ import styles from './CreateServer.module.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { createServerAC } from './serversSlice';
 import { selectCurrentGameVersion } from '@modules/game-versions/gameVersionsSlice';
-import { selecCurrentCore } from '@modules/cores/coresSlice';
+import {
+  selecCurrentCore,
+  selectCurrentCoreType,
+} from '@modules/cores/coresSlice';
 import Label from '@ui/Label';
 import Input from '@ui/Input';
 
@@ -18,17 +21,21 @@ const CreateServer = () => {
   const dispatch = useAppDispatch();
   const currentGameVersion = useAppSelector(selectCurrentGameVersion);
   const currentCore = useAppSelector(selecCurrentCore);
+  const currentCoreType = useAppSelector(selectCurrentCoreType);
 
   const [id, setId] = useState('');
   const [name, setName] = useState('');
 
   const handleCreate = () => {
-    if (currentGameVersion && currentCore) {
+    if (currentGameVersion && currentCoreType && currentCore) {
       const server: Server = {
         id,
         name,
         status: 'created',
-        core: currentCore,
+        core: {
+          ...currentCore,
+          type: currentCoreType,
+        },
         mods: [],
       };
 
