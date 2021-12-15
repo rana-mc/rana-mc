@@ -1,3 +1,0 @@
-type CurseForgeConfig = {
-  apiKey: string;
-}
