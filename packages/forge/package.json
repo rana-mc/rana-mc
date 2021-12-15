@@ -9,7 +9,8 @@
     "access": "public"
   },
   "scripts": {
-    "postinstall": "tsc",
+    "postinstall": "ts-patch install -s && tsc",
+    "prepare": "ts-patch install -s",
     "build": "tsc",
     "prestart": "tsc",
     "start": "node build/main.js"
@@ -17,6 +18,8 @@
   "dependencies": {
     "axios": "^0.24.0",
     "node-html-parser": "^5.1.0",
-    "typescript": "^4.5.2"
+    "ts-patch": "^2.0.1",
+    "typescript": "^4.5.2",
+    "typescript-transform-extensions": "^1.0.1"
   }
 }
