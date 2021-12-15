@@ -11,10 +11,12 @@ export default class SettingsAPI extends APIRoute {
 
   constructor() {
     super();
+
     this.ranaDB = ranaDB;
+    this.init();
   }
 
-  async init() {
+  init = async () => {
     this.useSettings();
   }
 

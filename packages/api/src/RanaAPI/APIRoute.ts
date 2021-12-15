@@ -11,14 +11,11 @@ export default class APIRoute {
     this.router = Router();
 
     this.log('Enabled.');
-    this.init();
   }
 
   get TAG() {
     return "RanaAPIRoute";
   }
-
-  async init() { }
 
   log(message: string) {
     this.logger.log(message);

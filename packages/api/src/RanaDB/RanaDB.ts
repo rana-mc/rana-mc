@@ -44,7 +44,7 @@ export default class RanaDB {
     }
 
     getSettings() {
-        return this.data().settings || {};
+        return this.data().settings;
     }
 
     async setSettings(settings: Partial<Settings>) {

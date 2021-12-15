@@ -13,11 +13,13 @@ export default class VersionsAPI extends APIRoute {
 
   constructor() {
     super();
+
     this.curseForge = new CurseForge();
     this.ranaDB = ranaDB;
+    this.init();
   }
 
-  async init() {
+  init = async () => {
     this.useVersions();
     this.useVersionTypes();
     this.applySettingsHandler();
