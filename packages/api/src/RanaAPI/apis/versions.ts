@@ -40,7 +40,7 @@ export default class VersionsAPI extends APIRoute {
 
   useVersions() {
     this.router.use('/versions', async (req, res) => {
-      const versions = await this.curseForge.getVersions();
+      const versions = await this.curseForge.getGameVersions();
 
       if (!versions) return res.sendStatus(500);
       res.send(versions);
