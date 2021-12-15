@@ -54,3 +54,7 @@ declare type RanaDBData = {
   servers: Server[];
   settings: Settings;
 };
+
+declare type CurseForgeConfig = {
+  apiKey: string;
+}
