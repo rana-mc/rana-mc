@@ -11,11 +11,11 @@ export class CurseForge {
   private apiKey: string;
   private apiClient: AxiosInstance;
 
-  constructor(config?: CurseForgeConfig) {
+  constructor(apiKey?: string) {
     this.apiClient = axios.create();
 
-    if (config?.apiKey) {
-      this.apiKey = config.apiKey;
+    if (apiKey) {
+      this.apiKey = apiKey;
       this.updateApiKey(this.apiKey);
     }
   }
