@@ -17,6 +17,7 @@
   "dependencies": {
     "@rana-mc/curseforge": "^0.0.3",
     "@rana-mc/forge": "^0.0.3",
+    "@rana-mc/fabric": "0.0.4-alpha.0",
     "@rana-mc/types": "^0.0.3",
     "@types/express": "^4.17.13",
     "axios": "^0.24.0",
