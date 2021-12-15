@@ -15,7 +15,7 @@ export class ForgeCores {
     return `${this.baseUrl}${htmlForVersion}`;
   }
 
-  async fetchCores(version: string) {
+  async getCores(version: string) {
     const forgeCoresUrl = this.getVersionCoresUrl(version);
 
     if (!version) {
@@ -29,7 +29,7 @@ export class ForgeCores {
 
       return coresFromHTML;
     } catch (err) {
-      this.logger.log(`(${version}) Got error after fetchCores – ${err.message}`);
+      this.logger.log(`(${version}) Got error after getCores – ${err.message}`);
     }
 
     return null;
