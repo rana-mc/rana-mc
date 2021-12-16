@@ -11,10 +11,18 @@ export class FabricServer {
   }
 
   installCore() {
-    this.logger.log(`call installCore of FabricServer, ${JSON.stringify(this.server)}`);
+    this.logger.log(`call installCore() of FabricServer, ${JSON.stringify(this.server)}`);
   }
 
   startCore() {
-    this.logger.log(`call startCore of FabricServer, ${JSON.stringify(this.server)}`);
+    this.logger.log(`call startCore() of FabricServer, ${JSON.stringify(this.server)}`);
+  }
+
+  stopCore() {
+    this.logger.log(`call stopCore() of FabricServer, ${JSON.stringify(this.server)}`);
+  }
+
+  clear() {
+    this.logger.log(`call clear() of FabricServer, ${JSON.stringify(this.server)}`);
   }
 }

@@ -31,6 +31,7 @@ export default class CoreAPI extends APIRoute {
   init = async () => {
     this.useInstall();
     this.useStart();
+    this.useStop();
   }
 
   useInstall() {
@@ -73,7 +74,27 @@ export default class CoreAPI extends APIRoute {
     });
   }
 
-  handleLog = (message: string) => {
+  useStop() {
+    this.router.post('/core/stop/:id', async (req, res) => {
+      const serverId = req.params.id;
+      const server = await ranaDB.findServer(serverId);
+
+      this.log(`Stopping server with id = ${serverId}`);
+
+      if (server.core.type === ServerCoreType.Forge) {
+        new ForgeServer(server, this.handleLog).stopCore();
+      }
+
+      if (server.core.type === ServerCoreType.Fabric) {
+        new FabricServer(server, this.handleLog).stopCore();
+      }
+
+      const servers = await this.ranaDB.getServers();
+      res.send(servers);
+    });
+  }
+
+  private handleLog = (message: string) => {
     this.log(message);
     this.ranaSocket.log(message);
   }
