@@ -24,7 +24,7 @@ export class ForgeServer {
   }
 
   async startCore() {
-    await this.workspace.startCore(this.server.core);
+    this.serverProcess = await this.workspace.startCore(this.server.core);
   }
 
   async stopCore() {

@@ -43,6 +43,8 @@ export default class ServerWorkspace {
     starter.on('exit', () => {
       this.logger.log('Server stoped');
     });
+
+    return starter;
   }
 
   async downloadCore(core: Core) {
@@ -70,8 +72,6 @@ export default class ServerWorkspace {
       this.logger.log('Install done');
       this.clearInstaller(core);
     });
-
-    return installer;
   }
 
   private async clearInstaller(core: Core) {
