@@ -10,13 +10,13 @@ enum ServerCoreType {
   Fabric = 'fabric',
 }
 
-export default class InstallAPI extends APIRoute {
+export default class CoreAPI extends APIRoute {
 
   ranaSocket: RanaSocket
   ranaDB: RanaDB;
 
   get TAG() {
-    return "RanaAPI-install";
+    return "RanaAPI-core";
   }
 
   constructor(ranaSocket: RanaSocket) {
@@ -30,10 +30,11 @@ export default class InstallAPI extends APIRoute {
 
   init = async () => {
     this.useInstall();
+    this.useStart();
   }
 
   useInstall() {
-    this.router.post('/install/:id', async (req, res) => {
+    this.router.post('/core/install/:id', async (req, res) => {
       const serverId = req.params.id;
       const server = await ranaDB.findServer(serverId);
 
@@ -45,6 +46,26 @@ export default class InstallAPI extends APIRoute {
 
       if (server.core.type === ServerCoreType.Fabric) {
         new FabricServer(server, this.handleLog).installCore();
+      }
+
+      const servers = await this.ranaDB.getServers();
+      res.send(servers);
+    });
+  }
+
+  useStart() {
+    this.router.post('/core/start/:id', async (req, res) => {
+      const serverId = req.params.id;
+      const server = await ranaDB.findServer(serverId);
+
+      this.log(`Starting server with id = ${serverId}`);
+
+      if (server.core.type === ServerCoreType.Forge) {
+        new ForgeServer(server, this.handleLog).startCore();
+      }
+
+      if (server.core.type === ServerCoreType.Fabric) {
+        new FabricServer(server, this.handleLog).startCore();
       }
 
       const servers = await this.ranaDB.getServers();
