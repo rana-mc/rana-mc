@@ -11,6 +11,7 @@ enum ServerCoreType {
   Fabric = 'fabric',
 }
 
+// TODO: IMPORTANT – move on socket side
 export default class CoreAPI extends APIRoute {
 
   ranaSocket: RanaSocket
