@@ -7,6 +7,7 @@ import {
   startServerAC,
   removeServerAC,
   selectServers,
+  stopServerAC,
 } from './serversSlice';
 import styles from './ServersList.module.css';
 import Empty from '@ui/Empty';
@@ -35,6 +36,10 @@ const ServersList = () => {
 
   const handleStart = (server: Server) => () => {
     dispatch(startServerAC(server));
+  };
+
+  const handleStop = (server: Server) => () => {
+    dispatch(stopServerAC(server));
   };
 
   const handleRemove = (server: Server) => () => {
@@ -79,6 +84,13 @@ const ServersList = () => {
               type={ButtonType.Secondary}
               text="Start"
               onClick={handleStart(server)}
+            />
+            <Button
+              className={cn(styles.button)}
+              size={ButtonSize.Small}
+              type={ButtonType.Secondary}
+              text="Stop"
+              onClick={handleStop(server)}
             />
             <Button
               className={cn(styles.button)}
