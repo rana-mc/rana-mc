@@ -12,17 +12,17 @@ enum ServerCoreType {
 
 export default class InstallAPI extends APIRoute {
 
-  socket: RanaSocket
+  ranaSocket: RanaSocket
   ranaDB: RanaDB;
 
   get TAG() {
     return "RanaAPI-install";
   }
 
-  constructor(socket: RanaSocket) {
+  constructor(ranaSocket: RanaSocket) {
     super();
 
-    this.socket = socket;
+    this.ranaSocket = ranaSocket;
     this.ranaDB = ranaDB;
 
     this.init();
@@ -52,7 +52,8 @@ export default class InstallAPI extends APIRoute {
     });
   }
 
-  handleLog(message: string) {
+  handleLog = (message: string) => {
     this.log(message);
+    this.ranaSocket.log(message);
   }
 }

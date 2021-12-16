@@ -20,13 +20,13 @@ export default class RanaAPI {
   private logger: Logger;
   private server: HTTPServer;
   private app: Express;
-  private socket: RanaSocket;
+  private ranaSocket: RanaSocket;
 
   constructor() {
     this.logger = new Logger(RanaAPI.TAG);
     this.app = express();
     this.server = createHTTPServer(this.app);
-    this.socket = new RanaSocket(this.server);
+    this.ranaSocket = new RanaSocket(this.server);
   }
 
   async init() {
@@ -39,7 +39,7 @@ export default class RanaAPI {
     this.app.use(RanaAPI.ENDPOINT, new ServersAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new SettingsAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new VersionsAPI().router);
-    this.app.use(RanaAPI.ENDPOINT, new InstallAPI(this.socket).router);
+    this.app.use(RanaAPI.ENDPOINT, new InstallAPI(this.ranaSocket).router);
   }
 
   applyUtilityMiddlewares() {

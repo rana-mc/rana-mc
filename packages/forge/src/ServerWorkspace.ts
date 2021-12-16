@@ -38,10 +38,9 @@ export default class ServerWorkspace {
     const installCommand = `cd ${this.path} && java -jar ${coreFilename} --installServer`;
     this.logger.log(`Install with: ${installCommand}`);
 
-    const installer = shell.exec(installCommand, { async: true });
+    const installer = shell.exec(installCommand, { silent: true, async: true });
 
-    installer.stdout.on(installCommand, (data) => {
-      this.logger.log(data);
+    installer.stdout.on('data', (data) => {
       this.outputHandler && this.outputHandler(data);
     });
 

@@ -19,9 +19,15 @@ export default class RanaSocket {
 
   init() {
     this.socket.on('connection', client => {
+      this.logger.log('Client connected');
+
       client.on('disconnect', () => {
         this.logger.log('Client disconnected');
       });
     });
+  }
+
+  log(message: string) {
+    this.socket.emit('log', message);
   }
 }
