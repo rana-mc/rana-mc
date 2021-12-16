@@ -28,7 +28,11 @@ const NODES = [
   {
     name: 'command',
     regex: /(().+:)/gm,
-  }
+  },
+  {
+    name: 'path',
+    regex: /(\/.+)( |)/gm
+  },
 ];
 
 export const prepareLines = (logs: string[]) => {
@@ -62,7 +66,7 @@ export const parseLine = (line: string) => {
         value: split[1]
       });
 
-      acc.raw.replace(node[0], '');
+      acc.raw = acc.raw.replace(node[0], '');
     }
 
     return acc;

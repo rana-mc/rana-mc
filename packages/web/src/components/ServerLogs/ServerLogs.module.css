@@ -1,13 +1,15 @@
 .serverLogs {
   display: flex;
   flex-direction: column;
-  background-color: #2e2e2e;
   font-size: 16px;
   text-align: left;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: #2e2e2e;
 }
 
 .log {
-  background-color: #f8f8f8;
+  display: block;
 }
 
 .line {
