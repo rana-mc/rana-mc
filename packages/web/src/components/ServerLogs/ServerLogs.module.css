@@ -1,0 +1,8 @@
+.serverLogs {
+  display: flex;
+  flex-direction: column;
+}
+
+.log {
+  background-color: #f8f8f8;
+}

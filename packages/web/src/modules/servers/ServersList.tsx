@@ -10,6 +10,7 @@ import {
 import styles from './ServersList.module.css';
 import Empty from '@ui/Empty';
 import Button, { ButtonSize, ButtonType, ButtonView } from '@ui/Button';
+import ServerLogs from '../../components/ServerLogs';
 
 const ServersList = () => {
   const dispatch = useAppDispatch();
@@ -65,6 +66,7 @@ const ServersList = () => {
           </div>
         </div>
       ))}
+      <ServerLogs />
     </div>
   );
 };
