@@ -11,22 +11,17 @@ export default class RanaSocket {
 
   constructor(server: HTTPServer) {
     this.socket = new SocketIOServer(server, {
-      cors: {
-        origin: "*"
-      }
+      cors: { origin: "*" }
     });
+
     this.init();
   }
 
   init() {
     this.socket.on('connection', client => {
       client.on('disconnect', () => {
-        this.logger.log('disconnect');
+        this.logger.log('Client disconnected');
       });
-
-      client.on('hello', (message: string) => {
-        this.logger.log(message);
-      })
     });
   }
 }

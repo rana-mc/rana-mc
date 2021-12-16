@@ -39,7 +39,7 @@ export default class RanaAPI {
     this.app.use(RanaAPI.ENDPOINT, new ServersAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new SettingsAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new VersionsAPI().router);
-    this.app.use(RanaAPI.ENDPOINT, new InstallAPI().router);
+    this.app.use(RanaAPI.ENDPOINT, new InstallAPI(this.socket).router);
   }
 
   applyUtilityMiddlewares() {
