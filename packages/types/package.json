@@ -1,6 +1,6 @@
 {
   "name": "@rana-mc/types",
-  "version": "0.0.5-alpha.0",
+  "version": "0.0.6",
   "typings": "./index.d.ts",
   "license": "MIT",
   "publishConfig": {
