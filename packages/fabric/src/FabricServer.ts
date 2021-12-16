@@ -13,4 +13,8 @@ export class FabricServer {
   installCore() {
     this.logger.log(`call installCore of FabricServer, ${JSON.stringify(this.server)}`);
   }
+
+  startCore() {
+    this.logger.log(`call startCore of FabricServer, ${JSON.stringify(this.server)}`);
+  }
 }
