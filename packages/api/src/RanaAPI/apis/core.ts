@@ -1,4 +1,5 @@
 import { ForgeServer } from '@rana-mc/forge';
+import { ChildProcess } from 'child_process';
 import { FabricServer } from '@rana-mc/fabric';
 
 import APIRoute from '../APIRoute';
@@ -14,6 +15,7 @@ export default class CoreAPI extends APIRoute {
 
   ranaSocket: RanaSocket
   ranaDB: RanaDB;
+  ranaProcesses: { [pid: string]: ChildProcess };
 
   get TAG() {
     return "RanaAPI-core";
@@ -24,6 +26,7 @@ export default class CoreAPI extends APIRoute {
 
     this.ranaSocket = ranaSocket;
     this.ranaDB = ranaDB;
+    this.ranaProcesses = {};
 
     this.init();
   }
@@ -62,11 +65,17 @@ export default class CoreAPI extends APIRoute {
       this.log(`Starting server with id = ${serverId}`);
 
       if (server.core.type === ServerCoreType.Forge) {
-        new ForgeServer(server, this.handleLog).startCore();
+        const process = await new ForgeServer(server, this.handleLog).startCore();
+
+        this.ranaProcesses[process.pid] = process;
+        ranaDB.updateServer({ ...server, processId: process.pid });
       }
 
       if (server.core.type === ServerCoreType.Fabric) {
-        new FabricServer(server, this.handleLog).startCore();
+        const process = await new FabricServer(server, this.handleLog).startCore();
+
+        this.ranaProcesses[process.pid] = process;
+        ranaDB.updateServer({ ...server, processId: process.pid });
       }
 
       const servers = await this.ranaDB.getServers();
@@ -81,13 +90,9 @@ export default class CoreAPI extends APIRoute {
 
       this.log(`Stopping server with id = ${serverId}`);
 
-      if (server.core.type === ServerCoreType.Forge) {
-        new ForgeServer(server, this.handleLog).stopCore();
-      }
-
-      if (server.core.type === ServerCoreType.Fabric) {
-        new FabricServer(server, this.handleLog).stopCore();
-      }
+      this.ranaProcesses[server.processId].stdin.write('stop\n');
+      this.ranaProcesses[server.processId].stdout.pipe(process.stdout);
+      ranaDB.updateServer({ ...server, processId: null });
 
       const servers = await this.ranaDB.getServers();
       res.send(servers);

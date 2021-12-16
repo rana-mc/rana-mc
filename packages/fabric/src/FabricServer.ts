@@ -1,3 +1,4 @@
+import { ChildProcess } from 'child_process';
 import { Logger } from "./Logger";
 
 export class FabricServer {
@@ -14,8 +15,9 @@ export class FabricServer {
     this.logger.log(`call installCore() of FabricServer, ${JSON.stringify(this.server)}`);
   }
 
-  async startCore() {
+  async startCore(): Promise<ChildProcess> {
     this.logger.log(`call startCore() of FabricServer, ${JSON.stringify(this.server)}`);
+    return { pid: 0 } as ChildProcess;
   }
 
   async stopCore() {

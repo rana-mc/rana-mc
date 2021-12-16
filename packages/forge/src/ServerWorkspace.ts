@@ -1,5 +1,6 @@
 import os from 'os';
 import download from 'download';
+import { ChildProcess } from 'child_process';
 import { extractInstallerFilename, extractCoreFilename, extractDownloadUrl } from './utils/links';
 import { Logger } from './Logger';
 import shell from 'shelljs';
@@ -23,14 +24,14 @@ export default class ServerWorkspace {
     this.path = `${this.ranaMcDir}/${server.id}`
   }
 
-  async startCore(core: Core): Promise<number> {
+  async startCore(core: Core): Promise<ChildProcess> {
     const coreFilename = extractCoreFilename(core.installerUrl);
     this.logger.log(`Starting...: ${coreFilename}`);
 
     // TODO: how it makes beeter
     let startCommand = `cd ${this.path} && java -jar ${coreFilename} nogui`;
     if (parseInt(core.coreVersion) >= 37) {
-      startCommand = `cd ${this.path} && ./run.sh`;
+      startCommand = `cd ${this.path} && ./run.sh nogui`;
     }
 
     this.logger.log(`Start with: ${startCommand}`);
@@ -44,7 +45,7 @@ export default class ServerWorkspace {
       this.logger.log('Server stoped');
     });
 
-    return starter.pid;
+    return starter;
   }
 
   async downloadCore(core: Core) {
@@ -75,7 +76,7 @@ export default class ServerWorkspace {
   }
 
   private async clearInstaller(core: Core) {
-    const coreFilename = extractCoreFilename(core.installerUrl);
+    const coreFilename = extractInstallerFilename(core.installerUrl);
     const clearInstallerCommand = `cd ${this.path} && rm ${coreFilename}`;
     const clearInstallerLogCommand = `cd ${this.path} && rm ${coreFilename}.log`;
 

@@ -22,12 +22,8 @@ export class ForgeServer {
     await this.workspace.installCore(this.server.core);
   }
 
-  async startCore() {
-    await this.workspace.startCore(this.server.core);
-  }
-
-  async stopCore() {
-    // TODO: kill by pid
+  async startCore(): Promise<ChildProcess> {
+    return await this.workspace.startCore(this.server.core);
   }
 
   async clear() {
