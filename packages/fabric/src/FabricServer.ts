@@ -6,8 +6,8 @@ export class FabricServer {
   logger: Logger = new Logger(FabricServer.TAG);
   server: Server;
 
-  constructor(server: Server) {
-    this.server = server;;
+  constructor(server: Server, outputHandler?: OutputHandler) {
+    this.server = server;
   }
 
   installCore() {
