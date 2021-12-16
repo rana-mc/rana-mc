@@ -4,6 +4,7 @@ import cn from 'classnames';
 import {
   fetchServersAC,
   installServerAC,
+  startServerAC,
   removeServerAC,
   selectServers,
 } from './serversSlice';
@@ -32,6 +33,10 @@ const ServersList = () => {
     dispatch(installServerAC(server));
   };
 
+  const handleStart = (server: Server) => () => {
+    dispatch(startServerAC(server));
+  };
+
   const handleRemove = (server: Server) => () => {
     dispatch(removeServerAC(server));
   };
@@ -43,11 +48,19 @@ const ServersList = () => {
           <div className={cn(styles.values)}>
             <span className={cn(styles.value)}>id: {server.id}</span>
             <span className={cn(styles.value)}>name: {server.name}</span>
-            <span className={cn(styles.value)}>gameVersion: {server.gameVersion}</span>
-            <span className={cn(styles.value)}>gameVersionTypeId: {server.gameVersionTypeId}</span>
+            <span className={cn(styles.value)}>
+              gameVersion: {server.gameVersion}
+            </span>
+            <span className={cn(styles.value)}>
+              gameVersionTypeId: {server.gameVersionTypeId}
+            </span>
             <span className={cn(styles.value)}>core: {server.core.type}</span>
-            <span className={cn(styles.value)}>coreVersion: {server.core.coreVersion}</span>
-            <span className={cn(styles.value)}>installerUrl: {server.core.installerUrl}</span>
+            <span className={cn(styles.value)}>
+              coreVersion: {server.core.coreVersion}
+            </span>
+            <span className={cn(styles.value)}>
+              installerUrl: {server.core.installerUrl}
+            </span>
             <span className={cn(styles.value)}>
               status: {server.status || 'unknown'}
             </span>
@@ -57,8 +70,15 @@ const ServersList = () => {
               className={cn(styles.button)}
               size={ButtonSize.Small}
               type={ButtonType.Secondary}
-              text="Install Server"
+              text="Install"
               onClick={handleInstall(server)}
+            />
+            <Button
+              className={cn(styles.button)}
+              size={ButtonSize.Small}
+              type={ButtonType.Secondary}
+              text="Start"
+              onClick={handleStart(server)}
             />
             <Button
               className={cn(styles.button)}

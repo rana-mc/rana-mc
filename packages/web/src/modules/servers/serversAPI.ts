@@ -13,5 +13,9 @@ export const removeServer = (server: Server) => {
 };
 
 export const installServer = (server: Server) => {
-  return apiClient.post(`/api/install/${server.id}`);
+  return apiClient.post(`/api/core/install/${server.id}`);
+};
+
+export const startServer = (server: Server) => {
+  return apiClient.post(`/api/core/start/${server.id}`);
 };
