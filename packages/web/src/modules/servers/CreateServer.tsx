@@ -17,10 +17,12 @@ import {
 import Label from '@ui/Label';
 import Input from '@ui/Input';
 import { CoreType } from '@modules/cores/utils';
+import { selectCurrentVersionType } from '@modules/version-types/versionTypesSlice';
 
 const CreateServer = () => {
   const dispatch = useAppDispatch();
   const currentGameVersion = useAppSelector(selectCurrentGameVersion);
+  const currentVersionType = useAppSelector(selectCurrentVersionType);
   const currentCore = useAppSelector(selecCurrentCore);
   const currentCoreType = useAppSelector(selectCurrentCoreType);
 
@@ -28,10 +30,17 @@ const CreateServer = () => {
   const [name, setName] = useState('');
 
   const handleCreate = () => {
-    if (currentGameVersion && currentCoreType && currentCore) {
+    if (
+      currentGameVersion &&
+      currentCoreType &&
+      currentVersionType &&
+      currentCore
+    ) {
       const server: Server = {
         id,
         name,
+        gameVersion: currentGameVersion,
+        gameVersionTypeId: currentVersionType,
         status: 'created',
         core: {
           ...currentCore,

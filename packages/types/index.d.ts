@@ -37,6 +37,8 @@ declare type Server = {
   status: string; // TODO: create, installing, idle, working, stopped, crashed
   core: Core;
   mods: ServerMod[];
+  gameVersion: string;
+  gameVersionTypeId: number;
 };
 
 // TODO: what is it? links? file/names? mb

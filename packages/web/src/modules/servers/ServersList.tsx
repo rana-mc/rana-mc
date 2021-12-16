@@ -43,6 +43,8 @@ const ServersList = () => {
           <div className={cn(styles.values)}>
             <span className={cn(styles.value)}>id: {server.id}</span>
             <span className={cn(styles.value)}>name: {server.name}</span>
+            <span className={cn(styles.value)}>gameVersion: {server.gameVersion}</span>
+            <span className={cn(styles.value)}>gameVersionTypeId: {server.gameVersionTypeId}</span>
             <span className={cn(styles.value)}>core: {server.core.type}</span>
             <span className={cn(styles.value)}>coreVersion: {server.core.coreVersion}</span>
             <span className={cn(styles.value)}>installerUrl: {server.core.installerUrl}</span>
