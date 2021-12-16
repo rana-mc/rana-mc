@@ -23,7 +23,7 @@ export default class ServerWorkspace {
     this.path = `${this.ranaMcDir}/${server.id}`
   }
 
-  async startCore(core: Core) {
+  async startCore(core: Core): Promise<number> {
     const coreFilename = extractCoreFilename(core.installerUrl);
     this.logger.log(`Starting...: ${coreFilename}`);
 
@@ -44,7 +44,7 @@ export default class ServerWorkspace {
       this.logger.log('Server stoped');
     });
 
-    return starter;
+    return starter.pid;
   }
 
   async downloadCore(core: Core) {

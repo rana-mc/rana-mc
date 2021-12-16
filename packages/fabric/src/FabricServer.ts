@@ -10,19 +10,19 @@ export class FabricServer {
     this.server = server;
   }
 
-  installCore() {
+  async installCore() {
     this.logger.log(`call installCore() of FabricServer, ${JSON.stringify(this.server)}`);
   }
 
-  startCore() {
+  async startCore() {
     this.logger.log(`call startCore() of FabricServer, ${JSON.stringify(this.server)}`);
   }
 
-  stopCore() {
+  async stopCore() {
     this.logger.log(`call stopCore() of FabricServer, ${JSON.stringify(this.server)}`);
   }
 
-  clear() {
+  async clear() {
     this.logger.log(`call clear() of FabricServer, ${JSON.stringify(this.server)}`);
   }
 }

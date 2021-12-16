@@ -8,7 +8,6 @@ export class ForgeServer {
 
   logger: Logger = new Logger(ForgeServer.TAG);
   server: Server;
-  serverProcess: ChildProcess;
   workspace: ServerWorkspace;
 
   constructor(server: Server, outputHandler?: OutputHandler) {
@@ -24,11 +23,11 @@ export class ForgeServer {
   }
 
   async startCore() {
-    this.serverProcess = await this.workspace.startCore(this.server.core);
+    await this.workspace.startCore(this.server.core);
   }
 
   async stopCore() {
-    this.serverProcess.kill();
+    // TODO: kill by pid
   }
 
   async clear() {

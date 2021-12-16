@@ -22,51 +22,39 @@ export default class RanaDB {
         await this.db.write();
     }
 
-    data(): RanaDBData {
-        return this.db.data;
-    }
-
-    async write() {
-        return this.db.write();
-    }
-
-    async read() {
-        return this.db.read();
-    }
-
     getServers() {
-        return this.data().servers || [];
+        return this.db.data.servers || [];
     }
 
     async addServer(server: Server) {
-        this.data().servers.push(server);
-        return await this.write();
+        this.db.data.servers.push(server);
+        return await this.db.write();
     }
 
     getSettings() {
-        return this.data().settings;
+        return this.db.data.settings;
     }
 
     async setSettings(settings: Partial<Settings>) {
-        this.data().settings = {
-            ...this.data().settings,
+        this.db.data.settings = {
+            ...this.db.data.settings,
             ...settings
         };
 
         this.settingsHandler && this.settingsHandler(settings);
 
-        return await this.write();
+        return await this.db.write();
     }
 
     async removeServer(serverId: string) {
-        this.data().servers =
-            this.data().servers.filter(server => server.id !== serverId);
+        this.db.data.servers =
+            this.db.data.servers.filter(server => server.id !== serverId);
 
-        return await this.write();
+        return await this.db.write();
     }
 
     async findServer(serverId: string) {
-        return this.data().servers.find(server => server.id === serverId);
+        return this.db.data.servers.find(server => server.id === serverId);
     }
 
     setSettingsHandler(handler: SettingsHandler) {
