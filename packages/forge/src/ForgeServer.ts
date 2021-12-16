@@ -20,4 +20,8 @@ export class ForgeServer {
     await this.workspace.downloadCore(this.server.core);
     await this.workspace.installCore(this.server.core);
   }
+
+  async startCore() {
+    await this.workspace.startCore(this.server.core);
+  }
 }

@@ -1,6 +1,6 @@
 import os from 'os';
 import download from 'download';
-import { extractCoreFilename, extractDownloadUrl } from './utils/links';
+import { extractInstallerFilename, extractCoreFilename, extractDownloadUrl } from './utils/links';
 import { Logger } from './Logger';
 import shell from 'shelljs';
 
@@ -23,6 +23,28 @@ export default class ServerWorkspace {
     this.path = `${this.ranaMcDir}/${server.id}`
   }
 
+  async startCore(core: Core) {
+    const coreFilename = extractCoreFilename(core.installerUrl);
+    this.logger.log(`Starting...: ${coreFilename}`);
+
+    // TODO: how it makes beeter
+    let startCommand = `cd ${this.path} && java -jar ${coreFilename} nogui`;
+    if (parseInt(core.coreVersion) >= 37) {
+      startCommand = `cd ${this.path} && ./run.sh`;
+    }
+
+    this.logger.log(`Start with: ${startCommand}`);
+    const starter = shell.exec(startCommand, { silent: true, async: true });
+
+    starter.stdout.on('data', (data) => {
+      this.outputHandler && this.outputHandler(data);
+    });
+
+    starter.on('exit', () => {
+      this.logger.log('Server stoped');
+    });
+  }
+
   async downloadCore(core: Core) {
     const downloadUrl = extractDownloadUrl(core.installerUrl);
     this.logger.log(`Downloading: ${downloadUrl}`);
@@ -32,10 +54,10 @@ export default class ServerWorkspace {
   }
 
   async installCore(core: Core) {
-    const coreFilename = extractCoreFilename(core.installerUrl);
-    this.logger.log(`Installing: ${coreFilename}`);
+    const installerFilename = extractInstallerFilename(core.installerUrl);
+    this.logger.log(`Installing: ${installerFilename}`);
 
-    const installCommand = `cd ${this.path} && java -jar ${coreFilename} --installServer`;
+    const installCommand = `cd ${this.path} && java -jar ${installerFilename} --installServer`;
     this.logger.log(`Install with: ${installCommand}`);
 
     const installer = shell.exec(installCommand, { silent: true, async: true });
