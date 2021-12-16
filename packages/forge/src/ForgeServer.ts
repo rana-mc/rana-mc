@@ -9,13 +9,14 @@ export class ForgeServer {
   server: Server;
   workspace: ServerWorkspace;
 
-  constructor(server: Server) {
+  constructor(server: Server, outputHandler?: OutputHandler) {
     this.server = server;
-    this.workspace = new ServerWorkspace(server);
+    this.workspace = new ServerWorkspace(server, outputHandler);
   }
 
   async installCore() {
     this.logger.log(`call installCore of ForgeServer, ${JSON.stringify(this.server)}`);
+
     await this.workspace.downloadCore(this.server.core);
     await this.workspace.installCore(this.server.core);
   }

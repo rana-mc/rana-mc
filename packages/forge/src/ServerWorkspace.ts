@@ -6,23 +6,23 @@ import shell from 'shelljs';
 
 const getRanaMC = () => `${os.homedir()}/.rana-mc/servers`;
 
+// TODO: maybe only ForgeCore?
+// TODO: or move workspace as @rana-mc/workspace
 export default class ServerWorkspace {
 
   public static TAG = "ServerWorkspace";
   public path: string;
 
+  private outputHandler: OutputHandler;
   private logger: Logger = new Logger(ServerWorkspace.TAG);
   private ranaMcDir: string;
 
-  constructor(server: Server) {
+  constructor(server: Server, outputHandler?: OutputHandler) {
+    this.outputHandler = outputHandler;
     this.ranaMcDir = getRanaMC();
     this.path = `${this.ranaMcDir}/${server.id}`
-
-    console.log(this.path);
   }
 
-  // TODO: maybe only ForgeCore?
-  // TODO: or move workspace as @rana-mc/workspace
   async downloadCore(core: Core) {
     const downloadUrl = extractDownloadUrl(core.installerUrl);
     this.logger.log(`Downloading: ${downloadUrl}`);
@@ -42,6 +42,7 @@ export default class ServerWorkspace {
 
     installer.stdout.on(installCommand, (data) => {
       this.logger.log(data);
+      this.outputHandler && this.outputHandler(data);
     });
 
     installer.on('exit', () => {
@@ -52,7 +53,6 @@ export default class ServerWorkspace {
 
   async clearInstaller(core: Core) {
     const coreFilename = extractCoreFilename(core.installerUrl);
-
     const clearInstallerCommand = `cd ${this.path} && rm ${coreFilename}`;
     const clearInstallerLogCommand = `cd ${this.path} && rm ${coreFilename}.log`;
 
