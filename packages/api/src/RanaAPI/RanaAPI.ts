@@ -1,14 +1,15 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import { createServer as createHTTPServer, Server as HTTPServer } from 'http'
 
 import { Logger } from './Logger';
-
 import CoresAPI from './apis/cores';
 import SettingsAPI from './apis/settings';
 import VersionsAPI from './apis/versions';
 import ServersAPI from './apis/servers';
 import InstallAPI from './apis/install';
+import RanaSocket from './socket/RanaSocket';
 
 export default class RanaAPI {
 
@@ -17,11 +18,15 @@ export default class RanaAPI {
   public static PORT: number = 3001;
 
   private logger: Logger;
+  private server: HTTPServer;
   private app: Express;
+  private socket: RanaSocket;
 
   constructor() {
     this.logger = new Logger(RanaAPI.TAG);
     this.app = express();
+    this.server = createHTTPServer(this.app);
+    this.socket = new RanaSocket(this.server);
   }
 
   async init() {
@@ -43,7 +48,7 @@ export default class RanaAPI {
   }
 
   listen() {
-    this.app.listen(RanaAPI.PORT, () => {
+    this.server.listen(RanaAPI.PORT, () => {
       this.logger.log(`Working on ${RanaAPI.PORT} port...`);
     });
   }
