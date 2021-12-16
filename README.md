@@ -1,4 +1,4 @@
-# RanaMC
+# Rana-MC
 
 Hello, at now all work in progress.
 
