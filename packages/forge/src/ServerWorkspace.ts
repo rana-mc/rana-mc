@@ -70,14 +70,21 @@ export default class ServerWorkspace {
       this.logger.log('Install done');
       this.clearInstaller(core);
     });
+
+    return installer;
   }
 
-  async clearInstaller(core: Core) {
+  private async clearInstaller(core: Core) {
     const coreFilename = extractCoreFilename(core.installerUrl);
     const clearInstallerCommand = `cd ${this.path} && rm ${coreFilename}`;
     const clearInstallerLogCommand = `cd ${this.path} && rm ${coreFilename}.log`;
 
     shell.exec(clearInstallerCommand, { async: true });
     shell.exec(clearInstallerLogCommand, { async: true });
+  }
+
+  async clear() {
+    const clearCommand = `rm -rf ${this.path}`;
+    shell.exec(clearCommand, { async: true });
   }
 }

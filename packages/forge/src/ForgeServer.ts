@@ -1,3 +1,4 @@
+import { ChildProcess } from "child_process";
 import { Logger } from "./Logger";
 import ServerWorkspace from "./ServerWorkspace";
 
@@ -7,6 +8,7 @@ export class ForgeServer {
 
   logger: Logger = new Logger(ForgeServer.TAG);
   server: Server;
+  serverProcess: ChildProcess;
   workspace: ServerWorkspace;
 
   constructor(server: Server, outputHandler?: OutputHandler) {
@@ -23,5 +25,13 @@ export class ForgeServer {
 
   async startCore() {
     await this.workspace.startCore(this.server.core);
+  }
+
+  async stopCore() {
+    this.serverProcess.kill();
+  }
+
+  async clear() {
+    this.workspace.clear();
   }
 }
