@@ -1,8 +1,35 @@
 .serverLogs {
   display: flex;
   flex-direction: column;
+  background-color: #2e2e2e;
+  font-size: 16px;
+  text-align: left;
 }
 
 .log {
   background-color: #f8f8f8;
+}
+
+.line {
+  color: #797979;
+}
+
+.tag {
+  color: #e87d3e;
+}
+
+.classname {
+  color: #e5b567;
+}
+
+.org {
+  color: #9e86c8;
+}
+
+.url {
+  color: #6c99bb;
+}
+
+.command {
+  color: #d6d6d6;
 }
