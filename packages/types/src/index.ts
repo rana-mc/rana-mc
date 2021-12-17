@@ -1,3 +1,8 @@
 /// <reference path="../types/index.d.ts" />
 
-export const TestVal = 123;
+export enum ServerActions {
+  Install = "install",
+  Start = "start",
+  Stop = "stop",
+  Command = "command"
+}
