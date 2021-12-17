@@ -6,3 +6,8 @@ export enum ServerActions {
   Stop = "stop",
   Command = "command"
 }
+
+export enum ServerCoreType {
+  Forge = "forge",
+  Fabric = "fabric"
+}

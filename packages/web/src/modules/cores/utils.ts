@@ -1,4 +1,1 @@
-export enum CoreType {
-  Forge = 'forge',
-  Fabric = 'fabric',
-}
+export { ServerCoreType as CoreType } from '@rana-mc/types';

@@ -5,11 +5,7 @@ import { FabricServer } from '@rana-mc/fabric';
 import APIRoute from '../APIRoute';
 import RanaSocket from '../socket/RanaSocket';
 import RanaDB, { ranaDB } from '../../RanaDB/RanaDB';
-
-enum ServerCoreType {
-  Forge = 'forge',
-  Fabric = 'fabric',
-}
+import { ServerCoreType } from '@rana-mc/types';
 
 // TODO: IMPORTANT – move on socket side
 export default class CoreAPI extends APIRoute {
