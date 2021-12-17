@@ -16,7 +16,7 @@ import {
 } from '@modules/cores/coresSlice';
 import Label from '@ui/Label';
 import Input from '@ui/Input';
-import { CoreType } from '@modules/cores/utils';
+import { ServerCoreType as CoreType } from '@rana-mc/types';
 import { selectCurrentVersionType } from '@modules/version-types/versionTypesSlice';
 
 const CreateServer = () => {

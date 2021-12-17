@@ -58,4 +58,5 @@ declare type OutputHandler = (message: string) => void;
 
 declare type CoreTypeForge = 'forge';
 declare type CoreTypeFabric = 'fabric';
+
 declare type CoreType = CoreTypeForge | CoreTypeFabric;

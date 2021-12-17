@@ -13,7 +13,7 @@ import {
   setCurrentCore,
 } from './coresSlice';
 import CoreSelect from './CoreSelect';
-import { CoreType } from './utils';
+import { ServerCoreType as CoreType } from '@rana-mc/types';
 
 const Cores = () => {
   const dispatch = useAppDispatch();

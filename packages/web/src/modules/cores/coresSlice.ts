@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { fetchForgeCores, fetchFabricCores } from "./coresAPI";
-import { CoreType } from './utils';
+import { ServerCoreType as CoreType } from '@rana-mc/types';
 
 export interface CoresState {
   value: Core[] | null;

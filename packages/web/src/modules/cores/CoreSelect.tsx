@@ -2,7 +2,7 @@ import React from 'react';
 import Empty from '@ui/Empty';
 import SelectOption from '@ui/SelectOption';
 import Select from '@ui/Select';
-import { CoreType } from './utils';
+import { ServerCoreType as CoreType } from '@rana-mc/types';
 
 type Props = {
   type: CoreType;
