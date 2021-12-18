@@ -35,6 +35,7 @@ export default class RanaSocket {
       client.on(ServerActions.Stop, this.stopServer.bind(this));
       client.on(ServerActions.RemoveCore, this.removeCore.bind(this));
       client.on(ServerActions.Clear, this.clearServer.bind(this));
+      client.on(ServerActions.Eula, this.acceptEULA.bind(this));
 
       client.on('disconnect', () => {
         this.logger.log('Client disconnected');
@@ -103,6 +104,13 @@ export default class RanaSocket {
    */
   public clearServer(server: Server) {
     this.getServer(server).clear();
+  }
+
+  /**
+   * Accepting EULA of Mojang.
+   */
+  public acceptEULA(server: Server, accept: boolean) {
+    this.getServer(server).acceptEULA(accept);
   }
 
   /**

@@ -8,8 +8,11 @@ import {
   installServerAC,
   startServerAC,
   stopServerAC,
+  acceptEULAServerAC,
 } from '@modules/server/serverSlice';
 import { removeServerAC } from '@modules/servers/serversSlice';
+import Switch from '@ui/Switch';
+import Label from '@ui/Label';
 
 type Props = {
   server: Server;
@@ -32,6 +35,10 @@ const Server = ({ server }: Props) => {
 
   const handleRemove = (server: Server) => () => {
     dispatch(removeServerAC(server));
+  };
+
+  const handleEULAChange = (eulaAccept: boolean) => {
+    dispatch(acceptEULAServerAC({ server, accept: eulaAccept }));
   };
 
   return (
@@ -86,6 +93,10 @@ const Server = ({ server }: Props) => {
           text="Remove"
           onClick={handleRemove(server)}
         />
+        <div>
+          <Label text="EULA?" />
+          <Switch value={true} size="s" onChange={handleEULAChange} />
+        </div>
       </div>
     </div>
   );

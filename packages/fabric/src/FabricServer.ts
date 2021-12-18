@@ -43,4 +43,8 @@ export class FabricServer extends EventEmitter {
 
   }
 
+  acceptEULA(accept: boolean) {
+
+  }
+
 }

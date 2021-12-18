@@ -41,6 +41,13 @@ export const stopServerAC = createAsyncThunk(
   }
 );
 
+export const acceptEULAServerAC = createAsyncThunk(
+  'server/eula',
+  async ({ server, accept }: { server: Server, accept: boolean }) => {
+    ranaSocket.emit(ServerActions.Eula, server, accept);
+  }
+);
+
 export const serverSlice = createSlice({
   name: 'server',
   initialState,
@@ -65,6 +72,12 @@ export const serverSlice = createSlice({
       .addCase(stopServerAC.fulfilled, (state, action) => {
         state.status = 'idle';
       })
+      .addCase(acceptEULAServerAC.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(acceptEULAServerAC.fulfilled, (state, action) => {
+        state.status = 'idle';
+      });
   },
 });
 

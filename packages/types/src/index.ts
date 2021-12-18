@@ -20,6 +20,7 @@ export enum ServerActions {
   ExecCommand = "execCommand",
   RemoveCore = "removeCore",
   Clear = "clear",
+  Eula = "eula"
 }
 
 export enum ServerStatus {
