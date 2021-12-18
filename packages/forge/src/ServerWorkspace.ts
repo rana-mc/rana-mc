@@ -90,7 +90,7 @@ export default class ServerWorkspace {
     const value = accept ? `eula=false/eula=true` : `eula=true/eula=false`;
 
     // TODO: Find better way to do this?
-    const command = `find ./ -type f -exec sed -i '' -e "s/${value}/" ${filename} \;`
+    const command = `cd ${this.path} && find ./ -type f -exec sed -i '' -e "s/${value}/" ${filename} \;`
 
     const exec = (): Promise<void> => {
       return new Promise((resolve) => {
