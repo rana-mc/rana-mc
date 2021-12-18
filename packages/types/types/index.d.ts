@@ -29,12 +29,13 @@ declare type FabricCore = {
   installerUrl: string | null;
 };
 
+declare type CoreType = 'forge' | 'fabric';
 declare type Core = { type: CoreType } & ForgeCore | { type: CoreType } & FabricCore;
 
 declare type Server = {
   id: string;
   name: string;
-  status: string; // TODO: create, installing, idle, working, stopped, crashed
+  status: string;
   core: Core;
   mods: ServerMod[];
   gameVersion: string;
@@ -55,8 +56,3 @@ declare type RanaDBData = {
 };
 
 declare type OutputHandler = (message: string) => void;
-
-declare type CoreTypeForge = 'forge';
-declare type CoreTypeFabric = 'fabric';
-
-declare type CoreType = CoreTypeForge | CoreTypeFabric;
