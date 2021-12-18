@@ -83,6 +83,31 @@ export default class ServerWorkspace {
   }
 
   /**
+   * Accepting or not of Mojang EULA.
+   */
+  acceptEULA(accept: boolean): Promise<void> {
+    const filename = 'eula.txt';
+    const value = accept ? `eula=false/eula=true` : `eula=true/eula=false`;
+
+    // TODO: Find better way to do this?
+    const command = `find ./ -type f -exec sed -i '' -e "s/${value}/" ${filename} \;`
+
+    const exec = (): Promise<void> => {
+      return new Promise((resolve) => {
+        const process = shell.exec(command, { silent: true, async: true });
+
+        process.on('exit', () => {
+          resolve()
+        });
+      });
+    };
+
+    const eula = { filename, command, exec, };
+
+    return eula.exec();
+  }
+
+  /**
    * Clear folder with server.
    */
   clear(): Promise<void> {

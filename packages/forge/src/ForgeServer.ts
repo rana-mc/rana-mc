@@ -114,6 +114,15 @@ export class ForgeServer extends EventEmitter {
   }
 
   /**
+   * Accepting or not of Mojang EULA.
+   * Just replacing eula=accept_value in eula.txt.
+   */
+  public async acceptEULA(accept: boolean) {
+    this.logger.log(`Accepting EULA...: ${accept}`);
+    return await this.workspace.acceptEULA(accept);
+  }
+
+  /**
    * Return all of ServerEvents values.
    */
   public eventNames(): (string | symbol)[] {
