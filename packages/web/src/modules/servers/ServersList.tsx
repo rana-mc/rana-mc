@@ -1,18 +1,11 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import React, { useEffect } from 'react';
 import cn from 'classnames';
-import {
-  fetchServersAC,
-  installServerAC,
-  startServerAC,
-  removeServerAC,
-  selectServers,
-  stopServerAC,
-} from './serversSlice';
+import { fetchServersAC, selectServers } from './serversSlice';
 import styles from './ServersList.module.css';
 import Empty from '@ui/Empty';
-import Button, { ButtonSize, ButtonType, ButtonView } from '@ui/Button';
 import ServerLogs from '../../components/ServerLogs';
+import Server from '@modules/server/Server';
 
 const ServersList = () => {
   const dispatch = useAppDispatch();
@@ -30,78 +23,10 @@ const ServersList = () => {
     return <Empty size="s" />;
   }
 
-  const handleInstall = (server: Server) => () => {
-    dispatch(installServerAC(server));
-  };
-
-  const handleStart = (server: Server) => () => {
-    dispatch(startServerAC(server));
-  };
-
-  const handleStop = (server: Server) => () => {
-    dispatch(stopServerAC(server));
-  };
-
-  const handleRemove = (server: Server) => () => {
-    dispatch(removeServerAC(server));
-  };
-
   return (
     <div className={cn(styles.serversList)}>
       {servers.map((server) => (
-        <div key={server.id} className={cn(styles.server)}>
-          <div className={cn(styles.values)}>
-            <span className={cn(styles.value)}>id: {server.id}</span>
-            <span className={cn(styles.value)}>name: {server.name}</span>
-            <span className={cn(styles.value)}>
-              gameVersion: {server.gameVersion}
-            </span>
-            <span className={cn(styles.value)}>
-              gameVersionTypeId: {server.gameVersionTypeId}
-            </span>
-            <span className={cn(styles.value)}>core: {server.core.type}</span>
-            <span className={cn(styles.value)}>
-              coreVersion: {server.core.coreVersion}
-            </span>
-            <span className={cn(styles.value)}>
-              installerUrl: {server.core.installerUrl}
-            </span>
-            <span className={cn(styles.value)}>
-              status: {server.status || 'unknown'}
-            </span>
-          </div>
-          <div className={cn(styles.buttons)}>
-            <Button
-              className={cn(styles.button)}
-              size={ButtonSize.Small}
-              type={ButtonType.Secondary}
-              text="Install"
-              onClick={handleInstall(server)}
-            />
-            <Button
-              className={cn(styles.button)}
-              size={ButtonSize.Small}
-              type={ButtonType.Secondary}
-              text="Start"
-              onClick={handleStart(server)}
-            />
-            <Button
-              className={cn(styles.button)}
-              size={ButtonSize.Small}
-              type={ButtonType.Secondary}
-              text="Stop"
-              onClick={handleStop(server)}
-            />
-            <Button
-              className={cn(styles.button)}
-              size={ButtonSize.Small}
-              type={ButtonType.Secondary}
-              view={ButtonView.Danger}
-              text="Remove"
-              onClick={handleRemove(server)}
-            />
-          </div>
-        </div>
+        <Server server={server} />
       ))}
       <ServerLogs />
     </div>

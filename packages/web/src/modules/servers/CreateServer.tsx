@@ -16,7 +16,7 @@ import {
 } from '@modules/cores/coresSlice';
 import Label from '@ui/Label';
 import Input from '@ui/Input';
-import { ServerCoreType as CoreType } from '@rana-mc/types';
+import { ServerCoreType as CoreType, ServerStatus } from '@rana-mc/types';
 import { selectCurrentVersionType } from '@modules/version-types/versionTypesSlice';
 
 const CreateServer = () => {
@@ -41,7 +41,7 @@ const CreateServer = () => {
         name,
         gameVersion: currentGameVersion,
         gameVersionTypeId: currentVersionType,
-        status: 'created',
+        status: ServerStatus.Created,
         core: {
           ...currentCore,
           type: currentCoreType,

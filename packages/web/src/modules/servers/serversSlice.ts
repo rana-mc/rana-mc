@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { fetchServers, createServer, installServer, removeServer, startServer, stopServer } from "./serversAPI";
+import { fetchServers, createServer, removeServer } from "./serversAPI";
 
 export interface ServersState {
   values: Server[] | null;
@@ -30,34 +30,10 @@ export const createServerAC = createAsyncThunk(
   }
 );
 
-export const installServerAC = createAsyncThunk(
-  'servers/install',
-  async (server: Server) => {
-    const response = await installServer(server);
-    return response.data;
-  }
-);
-
 export const removeServerAC = createAsyncThunk(
   'servers/remove',
   async (server: Server) => {
     const response = await removeServer(server);
-    return response.data;
-  }
-);
-
-export const startServerAC = createAsyncThunk(
-  'servers/start',
-  async (server: Server) => {
-    const response = await startServer(server);
-    return response.data;
-  }
-);
-
-export const stopServerAC = createAsyncThunk(
-  'servers/stop',
-  async (server: Server) => {
-    const response = await stopServer(server);
     return response.data;
   }
 );
@@ -86,13 +62,6 @@ export const serversSlice = createSlice({
         state.status = 'idle';
         state.values = action.payload;
       })
-      .addCase(installServerAC.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(installServerAC.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.values = action.payload;
-      })
       .addCase(removeServerAC.pending, (state) => {
         state.status = 'loading';
       })
@@ -100,20 +69,6 @@ export const serversSlice = createSlice({
         state.status = 'idle';
         state.values = action.payload;
       })
-      .addCase(startServerAC.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(startServerAC.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.values = action.payload;
-      })
-      .addCase(stopServerAC.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(stopServerAC.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.values = action.payload;
-      });
   },
 });
 

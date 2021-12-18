@@ -11,15 +11,3 @@ export const createServer = (server: Server) => {
 export const removeServer = (server: Server) => {
   return apiClient.delete(`/api/servers/${server.id}`);
 };
-
-export const installServer = (server: Server) => {
-  return apiClient.post(`/api/core/install/${server.id}`);
-};
-
-export const startServer = (server: Server) => {
-  return apiClient.post(`/api/core/start/${server.id}`);
-};
-
-export const stopServer = (server: Server) => {
-  return apiClient.post(`/api/core/stop/${server.id}`);
-};
