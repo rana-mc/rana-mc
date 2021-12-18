@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import debounce from 'lodash.debounce';
 import cn from 'classnames';
+import { ServerEvents } from '@rana-mc/types';
 
 import { ranaSocket } from '../../vendors/ranaSocketIo';
 import styles from './ServerLogs.module.css';
@@ -21,7 +22,7 @@ const ServerLogs = () => {
     []
   );
 
-  ranaSocket.on('log', (message: string) => {
+  ranaSocket.on(ServerEvents.Logs, (message: string) => {
     fullServerLogs.push(message);
     handleLogAppend(fullServerLogs);
   });

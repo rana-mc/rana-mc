@@ -59,15 +59,14 @@ export default class RanaSocket {
 
         // FYI: Strange case, cuz we always got correct server core type, right?
         return null;
-      })
-      .map((server: RanaServer) => this.appendListeners(server));
+      });
+    this.servers.forEach(this.appendListeners.bind(this))
   }
 
   /**
    * At first, we should to install server core.
    */
   public installServerCore(server: Server) {
-    this.logger.log('Call installServerCore()');
     this.getServer(server).installCore();
   }
 
@@ -75,7 +74,6 @@ export default class RanaSocket {
    * Well, now – good moment for try to start server.
    */
   public startServer(server: Server) {
-    this.logger.log('Call startServer()');
     this.getServer(server).start();
   }
 
@@ -83,7 +81,6 @@ export default class RanaSocket {
    * Ho-ho, wanna be admin?
    */
   public execServerCommand(server: Server, command: string) {
-    this.logger.log('Call execServerCommand()');
     this.getServer(server).exec(command);
   }
 
@@ -91,7 +88,6 @@ export default class RanaSocket {
    * Good time ends. Bad too.
    */
   public stopServer(server: Server) {
-    this.logger.log('Call stopServer()');
     this.getServer(server).stop();
   }
 
@@ -99,7 +95,6 @@ export default class RanaSocket {
    * Bye-bye old core. At now we can replace by new?
    */
   public removeCore(server: Server) {
-    this.logger.log('Call removeCore()');
     this.getServer(server).removeCore();
   }
 
@@ -107,24 +102,27 @@ export default class RanaSocket {
    * Just remove server.
    */
   public clearServer(server: Server) {
-    this.logger.log('Call clearServer()');
     this.getServer(server).clear();
   }
 
+  /**
+   * Get RanaServer by .id of Server.
+   */
   private getServer(server: Server): RanaServer {
     return this.servers.find((_server: RanaServer) => {
       return _server.id === server.id;
     });
   }
 
+  /**
+   * Append listeners to RanaServer.
+   * Events by ServerEvents.
+   */
   private appendListeners(server: RanaServer) {
-    this.logger.log('Call appendListeners()');
-
-    server.eventNames().forEach((eventName) => {
-      // TODO: In future, maybe we should send event data too?
-      this.socket.emit(eventName.toString());
+    server.eventNames().forEach((event) => {
+      server.on(event, (message) => {
+        this.socket.emit(event.toString(), message);
+      });
     });
-
-    return server;
   }
 }

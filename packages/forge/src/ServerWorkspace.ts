@@ -2,90 +2,110 @@ import os from 'os';
 import download from 'download';
 import { ChildProcess } from 'child_process';
 import { extractInstallerFilename, extractCoreFilename, extractDownloadUrl } from './utils/links';
-import { Logger } from './Logger';
 import shell from 'shelljs';
 
-const getRanaMC = () => `${os.homedir()}/.rana-mc/servers`;
+type Executable = {
+  filename: string;
+  command: string;
+  exec: () => ChildProcess;
+  download?: () => Promise<void>;
+  clear?: () => void;
+}
 
-// TODO: maybe only ForgeCore?
-// TODO: or move workspace as @rana-mc/workspace
 export default class ServerWorkspace {
 
   public static TAG = "ServerWorkspace";
-  public path: string;
+  private server: Server;
 
-  private outputHandler: OutputHandler;
-  private logger: Logger = new Logger(ServerWorkspace.TAG);
-  private ranaMcDir: string;
-
-  constructor(server: Server, outputHandler?: OutputHandler) {
-    this.outputHandler = outputHandler;
-    this.ranaMcDir = getRanaMC();
-    this.path = `${this.ranaMcDir}/${server.id}`
+  constructor(server: Server) {
+    this.server = server;
   }
 
-  async startCore(core: Core): Promise<ChildProcess> {
-    const coreFilename = extractCoreFilename(core.installerUrl);
-    this.logger.log(`Starting...: ${coreFilename}`);
+  /**
+   * Get installer for ForgeServer.
+   */
+  public getInstaller(): Executable {
+    const filename = extractInstallerFilename(this.server.core.installerUrl);
+    const command = `cd ${this.path} && java -jar ${filename} --installServer`;
 
-    // TODO: how it makes beeter
-    let startCommand = `cd ${this.path} && java -jar ${coreFilename} nogui`;
-    if (parseInt(core.coreVersion) >= 37) {
-      startCommand = `cd ${this.path} && ./run.sh nogui`;
+    const exec = () => {
+      return shell.exec(command, { silent: true, async: true });
     }
 
-    this.logger.log(`Start with: ${startCommand}`);
-    const starter = shell.exec(startCommand, { silent: true, async: true });
+    const clear = () => {
+      const clearInstallerCommand = `cd ${this.path} && rm ${filename}`;
+      const clearInstallerLogCommand = `cd ${this.path} && rm ${filename}.log`;
 
-    starter.stdout.on('data', (data) => {
-      this.outputHandler && this.outputHandler(data);
-    });
+      shell.exec(clearInstallerCommand, { async: true });
+      shell.exec(clearInstallerLogCommand, { async: true });
+    }
 
-    starter.on('exit', () => {
-      this.logger.log('Server stoped');
-    });
+    const downloadInstaler = async () => {
+      const downloadUrl = extractDownloadUrl(this.server.core.installerUrl);
+      await download(downloadUrl, this.path);
+    }
 
-    return starter;
+    return {
+      filename,
+      command,
+      exec,
+      clear,
+      download: downloadInstaler
+    }
   }
 
-  async downloadCore(core: Core) {
-    const downloadUrl = extractDownloadUrl(core.installerUrl);
-    this.logger.log(`Downloading: ${downloadUrl}`);
+  /**
+   * Get core for ForgeServer.
+   */
+  public getCore(): Executable {
+    const filename = extractCoreFilename(this.server.core.installerUrl);
+    const coreVersionInt = parseInt(this.server.core.coreVersion);
 
-    await download(downloadUrl, this.path);
-    this.logger.log('Download done');
+    const commandBefore37Version = `cd ${this.path} && java -jar ${filename} nogui`;
+    const commandAfter37Version = `cd ${this.path} && ./run.sh nogui`;
+    const command = coreVersionInt >= 37 ? commandAfter37Version : commandBefore37Version;
+
+    const exec = () => {
+      return shell.exec(command, { silent: true, async: true });
+    }
+
+    const clear = () => {
+      const clearCoreCommand = `cd ${this.path} && rm ${filename}`;
+      shell.exec(clearCoreCommand, { async: true });
+    }
+
+    return {
+      filename,
+      command,
+      exec,
+      clear
+    };
   }
 
-  async installCore(core: Core) {
-    const installerFilename = extractInstallerFilename(core.installerUrl);
-    this.logger.log(`Installing: ${installerFilename}`);
+  /**
+   * Clear folder with server.
+   */
+  clear(): Promise<void> {
+    return new Promise((resolve) => {
+      const command = `rm -rf ${this.path}`;
+      const process = shell.exec(command, { async: true });
 
-    const installCommand = `cd ${this.path} && java -jar ${installerFilename} --installServer`;
-    this.logger.log(`Install with: ${installCommand}`);
-
-    const installer = shell.exec(installCommand, { silent: true, async: true });
-
-    installer.stdout.on('data', (data) => {
-      this.outputHandler && this.outputHandler(data);
+      process.on('exit', () => resolve());
     });
-
-    installer.on('exit', () => {
-      this.logger.log('Install done');
-      this.clearInstaller(core);
-    });
   }
 
-  private async clearInstaller(core: Core) {
-    const coreFilename = extractInstallerFilename(core.installerUrl);
-    const clearInstallerCommand = `cd ${this.path} && rm ${coreFilename}`;
-    const clearInstallerLogCommand = `cd ${this.path} && rm ${coreFilename}.log`;
-
-    shell.exec(clearInstallerCommand, { async: true });
-    shell.exec(clearInstallerLogCommand, { async: true });
+  /**
+   * Get server path.
+   */
+  public get path() {
+    return `${this.ranaHome}/${this.server.id}`;
   }
 
-  async clear() {
-    const clearCommand = `rm -rf ${this.path}`;
-    shell.exec(clearCommand, { async: true });
+  /**
+   * RanaMC home folder.
+   * Usualy is .rana-mc at user home dir.
+   */
+  private get ranaHome() {
+    return `${os.homedir()}/.rana-mc/servers`;
   }
 }
