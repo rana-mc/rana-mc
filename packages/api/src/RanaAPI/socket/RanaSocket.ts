@@ -14,9 +14,10 @@ export default class RanaSocket {
   socket: SocketIOServer
   // FYI: What will be better? Maybe { [serverId: string]:  RanaServer }?
   servers: RanaServer[];
-  logger: Logger = new Logger(RanaSocket.TAG)
+  logger: Logger;
 
   constructor(server: HTTPServer) {
+    this.logger = new Logger(RanaSocket.TAG)
     this.socket = new SocketIOServer(server, {
       cors: { origin: "*" }
     });
@@ -24,16 +25,16 @@ export default class RanaSocket {
     this.init();
   }
 
-  private init() {
+  private init = () => {
     this.socket.on('connection', client => {
       this.logger.log('Client connected');
 
-      client.on(ServerActions.InstallCore, this.installServerCore);
-      client.on(ServerActions.Start, this.startServer);
-      client.on(ServerActions.ExecCommand, this.execServerCommand);
-      client.on(ServerActions.Stop, this.stopServer);
-      client.on(ServerActions.RemoveCore, this.removeCore);
-      client.on(ServerActions.Clear, this.clearServer);
+      client.on(ServerActions.InstallCore, this.installServerCore.bind(this));
+      client.on(ServerActions.Start, this.startServer.bind(this));
+      client.on(ServerActions.ExecCommand, this.execServerCommand.bind(this));
+      client.on(ServerActions.Stop, this.stopServer.bind(this));
+      client.on(ServerActions.RemoveCore, this.removeCore.bind(this));
+      client.on(ServerActions.Clear, this.clearServer.bind(this));
 
       client.on('disconnect', () => {
         this.logger.log('Client disconnected');
@@ -44,7 +45,7 @@ export default class RanaSocket {
   /**
    * Init this.servers and create listeners.
    */
-  public initServers(servers: Server[]) {
+  public initServers = (servers: Server[]) => {
     this.servers = servers
       .map((server) => {
         // TODO: Make it by switch and case? Or function?
@@ -59,7 +60,7 @@ export default class RanaSocket {
         // FYI: Strange case, cuz we always got correct server core type, right?
         return null;
       })
-      .map(this.appendListeners);
+      .map((server: RanaServer) => this.appendListeners(server));
   }
 
   /**

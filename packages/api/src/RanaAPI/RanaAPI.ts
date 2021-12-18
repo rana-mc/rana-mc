@@ -9,6 +9,7 @@ import SettingsAPI from './apis/settings';
 import VersionsAPI from './apis/versions';
 import ServersAPI from './apis/servers';
 import RanaSocket from './socket/RanaSocket';
+import { ranaDB } from '../RanaDB/RanaDB';
 
 export default class RanaAPI {
 
@@ -29,6 +30,8 @@ export default class RanaAPI {
   }
 
   async init() {
+    // TODO: Wont use ranaDB here, but where?
+    this.ranaSocket.initServers(ranaDB.getServers())
     this.applyUtilityMiddlewares();
     this.applyApis();
   }

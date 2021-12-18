@@ -20,7 +20,7 @@ const updateServerStatus = async (server: Server, status: ServerStatus) => {
 export const installServerAC = createAsyncThunk(
   'server/install',
   async (server: Server) => {
-    ranaSocket.emit(ServerActions.InstallCore);
+    ranaSocket.emit(ServerActions.InstallCore, server);
     return updateServerStatus(server, ServerStatus.Installing);
   }
 );
@@ -28,7 +28,7 @@ export const installServerAC = createAsyncThunk(
 export const startServerAC = createAsyncThunk(
   'server/start',
   async (server: Server) => {
-    ranaSocket.emit(ServerActions.Start);
+    ranaSocket.emit(ServerActions.Start, server);
     return updateServerStatus(server, ServerStatus.Starting);
   }
 );
@@ -36,7 +36,7 @@ export const startServerAC = createAsyncThunk(
 export const stopServerAC = createAsyncThunk(
   'server/stop',
   async (server: Server) => {
-    ranaSocket.emit(ServerActions.Stop);
+    ranaSocket.emit(ServerActions.Stop, server);
     return updateServerStatus(server, ServerStatus.Stopping);
   }
 );
