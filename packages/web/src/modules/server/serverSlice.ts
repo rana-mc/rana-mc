@@ -1,6 +1,7 @@
+import { updateServer } from "@modules/servers/serversAPI";
+import { ServerStatus } from "@rana-mc/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { installServer, startServer, stopServer } from "./serverAPI";
 
 export interface ServerActionState {
   status: 'idle' | 'loading' | 'failed';
@@ -10,27 +11,29 @@ const initialState: ServerActionState = {
   status: 'idle',
 };
 
+const updateServerStatus = async (server: Server, status: ServerStatus) => {
+  const response = await updateServer({ ...server, status });
+  return response.data;
+};
+
 export const installServerAC = createAsyncThunk(
   'server/install',
   async (server: Server) => {
-    const response = await installServer(server);
-    return response.data;
+    return updateServerStatus(server, ServerStatus.Installing);
   }
 );
 
 export const startServerAC = createAsyncThunk(
   'server/start',
   async (server: Server) => {
-    const response = await startServer(server);
-    return response.data;
+    return updateServerStatus(server, ServerStatus.Starting);
   }
 );
 
 export const stopServerAC = createAsyncThunk(
   'server/stop',
   async (server: Server) => {
-    const response = await stopServer(server);
-    return response.data;
+    return updateServerStatus(server, ServerStatus.Stopping);
   }
 );
 

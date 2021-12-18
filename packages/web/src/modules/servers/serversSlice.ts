@@ -1,6 +1,7 @@
+import { installServerAC, startServerAC, stopServerAC } from "@modules/server/serverSlice";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { fetchServers, createServer, removeServer } from "./serversAPI";
+import { fetchServers, createServer, removeServer, updateServer } from "./serversAPI";
 
 export interface ServersState {
   values: Server[] | null;
@@ -38,6 +39,14 @@ export const removeServerAC = createAsyncThunk(
   }
 );
 
+export const updateServerAC = createAsyncThunk(
+  'servers/update',
+  async (server: Server) => {
+    const response = await updateServer(server);
+    return response.data;
+  }
+);
+
 export const serversSlice = createSlice({
   name: 'servers',
   initialState,
@@ -48,6 +57,8 @@ export const serversSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      // REST actions
       .addCase(fetchServersAC.pending, (state) => {
         state.status = 'loading';
       })
@@ -69,15 +80,31 @@ export const serversSlice = createSlice({
         state.status = 'idle';
         state.values = action.payload;
       })
+      .addCase(updateServerAC.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateServerAC.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.values = action.payload;
+      })
+
+      // Actions with RanaSocket
+      .addCase(installServerAC.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.values = action.payload;
+      })
+      .addCase(startServerAC.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.values = action.payload;
+      })
+      .addCase(stopServerAC.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.values = action.payload;
+      });
   },
 });
 
 export const { setCurrentServerId } = serversSlice.actions;
-
 export const selectServers = (state: RootState) => state.servers.values;
-export const selectCurrentServerId = (state: RootState) => state.servers.currentId;
-export const selectCurrentServer = (state: RootState) => {
-  return state.servers.values ? state.servers.values.find(server => state.servers.currentId) : null;
-}
 
 export default serversSlice.reducer;

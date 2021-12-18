@@ -42,5 +42,13 @@ export default class ServersAPI extends APIRoute {
       res.send(servers);
     });
 
+    this.router.put('/servers/:id', async (req, res) => {
+      const serverId = req.params.id;
+      const server: Server = req.body;
+      await this.ranaDB.updateServer(server);
+
+      const servers = await this.ranaDB.getServers();
+      res.send(servers);
+    });
   }
 }

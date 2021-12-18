@@ -11,3 +11,7 @@ export const createServer = (server: Server) => {
 export const removeServer = (server: Server) => {
   return apiClient.delete(`/api/servers/${server.id}`);
 };
+
+export const updateServer = (server: Server) => {
+  return apiClient.put(`/api/servers/${server.id}`, { ...server });
+};
