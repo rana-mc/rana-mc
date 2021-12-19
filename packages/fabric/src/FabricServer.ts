@@ -43,6 +43,10 @@ export class FabricServer extends EventEmitter {
 
   }
 
+  update(server: Server): FabricServer {
+    return this;
+  }
+
   acceptEULA(accept: boolean) {
 
   }

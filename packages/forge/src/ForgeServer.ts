@@ -128,6 +128,14 @@ export class ForgeServer extends EventEmitter {
   }
 
   /**
+   * Update server data.
+   */
+  public update(server: Server): ForgeServer {
+    this.server = server;
+    return this;
+  }
+
+  /**
    * Accepting or not of Mojang EULA.
    * Just replacing eula=accept_value in eula.txt.
    */
