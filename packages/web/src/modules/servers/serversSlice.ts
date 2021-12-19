@@ -37,7 +37,7 @@ export const removeServerAC = createAsyncThunk(
   'servers/remove',
   async (server: Server) => {
     const response = await removeServer(server);
-    ranaSocket.emit(ServerActions.FlushServers);
+    ranaSocket.emit(ServerActions.RemoveServer, server);
     return response.data;
   }
 );
@@ -63,7 +63,7 @@ export const serversSlice = createSlice({
 
       if (state.values) {
         state.values = state.values?.map(server => {
-          return server.id === updatedServer.id ? { ...server, ...updatedServer } : server;
+          return server.id === updatedServer?.id ? { ...server, ...updatedServer } : server;
         });
       } else {
         console.error('Something went wrong. Unknown error.');
