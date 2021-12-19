@@ -30,8 +30,6 @@ export enum ServerEvents {
   // TODO: Use when got crash in console output.
   Crashed = "crashed",
   Logs = "logs",
-  // FIY: Sure, we need this event?
-  EulaChanging = "eulaChanged",
   EulaChanged = "eulaChanged",
 }
 
