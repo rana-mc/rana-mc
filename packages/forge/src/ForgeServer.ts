@@ -102,7 +102,7 @@ export class ForgeServer extends EventEmitter {
    * Stop server.
    */
   public stop() {
-    this.emit(ServerEvents.Starting);
+    this.emit(ServerEvents.Stopping);
 
     this.process.stdin.write('stop\n');
     this.process.stdout.pipe(process.stdout);
