@@ -19,6 +19,10 @@
   margin-bottom: 12px;
 }
 
+.valuesDisabled {
+  color: #d8d8d8;
+}
+
 .value {
   padding-bottom: 12px;
   font-size: 16px;

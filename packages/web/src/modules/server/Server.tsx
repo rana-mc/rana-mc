@@ -13,6 +13,7 @@ import {
 import { removeServerAC } from '@modules/servers/serversSlice';
 import Switch from '@ui/Switch';
 import Label from '@ui/Label';
+import { ServerStatus } from '@rana-mc/types';
 
 type Props = {
   server: Server;
@@ -20,6 +21,10 @@ type Props = {
 
 const Server = ({ server }: Props) => {
   const dispatch = useAppDispatch();
+
+  const availableToEdit =
+    server.status === ServerStatus.Created ||
+    server.status === ServerStatus.Stopped;
 
   const handleInstall = (server: Server) => () => {
     dispatch(installServerAC(server));
@@ -43,7 +48,7 @@ const Server = ({ server }: Props) => {
 
   return (
     <div key={server.id} className={cn(styles.server)}>
-      <div className={cn(styles.values)}>
+      <div className={cn(styles.values, { [styles.values]: !availableToEdit })}>
         <span className={cn(styles.value)}>id: {server.id}</span>
         <span className={cn(styles.value)}>name: {server.name}</span>
         <span className={cn(styles.value)}>
