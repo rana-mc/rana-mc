@@ -24,9 +24,19 @@ declare type ExternalForgeCoreUrl = {
   name: string;
 };
 
+declare type OriginalFabricCore = {
+  url: string;
+  maven: string;
+  version: string;
+  stable: boolean;
+}
+
 declare type FabricCore = {
+  gameVersion: '*';
   coreVersion: string;
   installerUrl: string | null;
+  maven: string;
+  stable: boolean;
 };
 
 declare type CoreType = 'forge' | 'fabric';
