@@ -29,6 +29,8 @@ export class ForgeServer extends EventEmitter {
    * Maybe in future: arg for saving logs after install.
    */
   public async installCore() {
+    this.emit(ServerEvents.CoreInstalling);
+
     const installer = this.workspace.getInstaller();
     this.logger.log(`Installing: ${installer.filename}`);
 
@@ -56,6 +58,8 @@ export class ForgeServer extends EventEmitter {
    * Start server with core.
    */
   public async start() {
+    this.emit(ServerEvents.Starting);
+
     const core = this.workspace.getCore();
     this.logger.log(`Starting...: ${core.filename}`);
 
@@ -64,6 +68,12 @@ export class ForgeServer extends EventEmitter {
 
     const process = core.exec();
     this.process = process;
+
+    /** Little bit incorrect method to parse server start event. */
+    process.stdout.on('data', (message) => {
+      if (this.isServerStartedMessage(message))
+        this.emit(ServerEvents.Started, this.parseServerStartTime(message));
+    })
 
     process.stdout.on('data', (message) => {
       this.logger.log(`(ServerEvent): name = ${ServerEvents.Logs}, message = ${message}`);
@@ -136,5 +146,25 @@ export class ForgeServer extends EventEmitter {
    */
   public getTag() {
     return `${ForgeServer.TAG}-${this.id}`
+  }
+
+  /**
+  * Well, just parse server starting event;
+  */
+  private isServerStartedMessage(message: string): boolean {
+    return message.includes('For help, type "help"');
+  }
+
+  /**
+  * Parse with regular server start time.
+  */
+  private parseServerStartTime(message: string): number {
+    try {
+      const startTime = message.match(/Done \((.+)s\)! For help, type "help"/);
+
+      return parseFloat(startTime[1]);
+    } catch (err) {
+      return 0;
+    }
   }
 }
