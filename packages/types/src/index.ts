@@ -8,7 +8,8 @@ export enum ServerActions {
   RemoveCore = "removeCore",
   Clear = "clear",
   Eula = "eula",
-  FlushServers = "flushServers"
+  FlushServers = "flushServers",
+  RemoveServer = "removeServer",
 }
 
 export enum ServerStatus {
@@ -18,7 +19,8 @@ export enum ServerStatus {
   Starting = "starting",
   Started = "started",
   Stopping = "stopping",
-  Stopped = "stopped"
+  Stopped = "stopped",
+  Removing = "removing",
 }
 
 export enum ServerEvents {
@@ -33,6 +35,8 @@ export enum ServerEvents {
   Logs = "logs",
   EulaChanged = "eulaChanged",
   StartTime = "startTime",
+  Removing = "removing",
+  Removed = "removed",
 }
 
 export enum RanaSocketEvents {
