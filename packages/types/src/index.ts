@@ -36,6 +36,7 @@ export enum ServerEvents {
 
 export enum RanaSocketEvents {
   ServerUpdate = "serverUpdate",
+  ClientServerUpdate = "clientServerUpdate",
 }
 
 export enum ServerCoreType {
