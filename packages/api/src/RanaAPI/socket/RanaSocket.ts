@@ -146,6 +146,7 @@ export default class RanaSocket extends EventEmitter {
    */
   private updateServerStatus(server: RanaServer, status: ServerStatus) {
     this.emit(RanaSocketEvents.ServerUpdate, { ...this.getServerData(server), status });
+    this.socket.emit(RanaSocketEvents.ServerUpdate, { ...this.getServerData(server), status });
   }
 
   /**
@@ -153,6 +154,7 @@ export default class RanaSocket extends EventEmitter {
    */
   private updateServerEULA(server: RanaServer, eula: boolean) {
     this.emit(RanaSocketEvents.ServerUpdate, { ...this.getServerData(server), eula });
+    this.socket.emit(RanaSocketEvents.ServerUpdate, { ...this.getServerData(server), eula });
   }
 
   /**
