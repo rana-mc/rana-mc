@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CreateServer from '@modules/servers/CreateServer';
 
 import './App.css';
 import RanaLogo from './Rana-logo.svg';
 import ServersList from '@modules/servers/ServersList';
 import Settings from '@modules/settings/Settings';
+import { startListenSocket } from '@modules/server/serverSlice';
+import { useAppDispatch } from '../../app/hooks';
 
-function App() {
+const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(startListenSocket());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -27,6 +35,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;

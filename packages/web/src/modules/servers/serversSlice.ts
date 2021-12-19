@@ -1,4 +1,3 @@
-import { installServerAC, startServerAC, stopServerAC } from "@modules/server/serverSlice";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { fetchServers, createServer, removeServer, updateServer } from "./serversAPI";
@@ -57,8 +56,6 @@ export const serversSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
-      // REST actions
       .addCase(fetchServersAC.pending, (state) => {
         state.status = 'loading';
       })
@@ -87,20 +84,6 @@ export const serversSlice = createSlice({
         state.status = 'idle';
         state.values = action.payload;
       })
-
-      // Actions with RanaSocket
-      .addCase(installServerAC.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.values = action.payload;
-      })
-      .addCase(startServerAC.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.values = action.payload;
-      })
-      .addCase(stopServerAC.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.values = action.payload;
-      });
   },
 });
 
