@@ -160,13 +160,15 @@ export default class RanaSocket extends EventEmitter {
    * Events by ServerEvents.
    */
   private appendListeners(server: RanaServer) {
-    server.on(ServerEvents.EulaChanged, (eula) => this.updateServerEULA(server, eula));
+
+    /** Events for update server in RanaDB. */
     server.on(ServerEvents.CoreInstalled, () => this.updateServerStatus(server, ServerStatus.CoreInstalled));
     server.on(ServerEvents.Started, () => this.updateServerStatus(server, ServerStatus.Started));
     server.on(ServerEvents.Stopped, () => this.updateServerStatus(server, ServerStatus.Stopped));
     server.on(ServerEvents.Crashed, () => this.updateServerStatus(server, ServerStatus.Stopped));
+    server.on(ServerEvents.EulaChanged, (eula) => this.updateServerEULA(server, eula));
 
-    // TODO: Logs for server, not for all?
-    // server.on(ServerEvents.Logs, (message) => this.socket.emit(ServerEvents.Logs, message));
+    /** Events for sending info to socket clients. Like logs. */
+    server.on(ServerEvents.Logs, (message) => this.socket.emit(ServerEvents.Logs, server.id, message));
   }
 }
