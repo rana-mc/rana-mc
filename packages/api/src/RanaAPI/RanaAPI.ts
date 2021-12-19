@@ -9,7 +9,8 @@ import SettingsAPI from './apis/settings';
 import VersionsAPI from './apis/versions';
 import ServersAPI from './apis/servers';
 import RanaSocket from './socket/RanaSocket';
-import { ranaDB } from '../RanaDB/RanaDB';
+import RanaDB, { ranaDB } from '../RanaDB/RanaDB';
+import { RanaSocketEvents } from '@rana-mc/types';
 
 export default class RanaAPI {
 
@@ -21,34 +22,58 @@ export default class RanaAPI {
   private server: HTTPServer;
   private app: Express;
   private ranaSocket: RanaSocket;
+  private ranaDB: RanaDB;
 
   constructor() {
-    this.logger = new Logger(RanaAPI.TAG);
     this.app = express();
+    this.ranaDB = ranaDB;
+    this.logger = new Logger(RanaAPI.TAG);
     this.server = createHTTPServer(this.app);
     this.ranaSocket = new RanaSocket(this.server);
   }
 
-  async init() {
-    // TODO: Wont use ranaDB here, but where?
-    this.ranaSocket.initServers(ranaDB.getServers())
+  /**
+   * Init Rana REST API and RanaSocket server.
+   */
+  public async init() {
+    this.applyRanaSocket();
     this.applyUtilityMiddlewares();
     this.applyApis();
   }
 
-  applyApis() {
+  /**
+   * Apply REST API endpoints.
+   */
+  private applyApis() {
     this.app.use(RanaAPI.ENDPOINT, new CoresAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new ServersAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new SettingsAPI().router);
     this.app.use(RanaAPI.ENDPOINT, new VersionsAPI().router);
   }
 
-  applyUtilityMiddlewares() {
+  /**
+   * Apply utility middlewares, like cors() and bodyParser.
+   */
+  private applyUtilityMiddlewares() {
     this.app.use(cors({ origin: '*' }));
     this.app.use(bodyParser.json());
   }
 
-  listen() {
+  /**
+   * Apply RanaSocket at same port of REST API server.
+   */
+  private applyRanaSocket() {
+    this.ranaSocket.initServers(this.ranaDB.getServers());
+    this.ranaSocket.on(RanaSocketEvents.ServerUpdate, (server) => {
+      this.logger.log(`(ServerUpdate): ${JSON.stringify(server)}`);
+      this.ranaDB.updateServer(server);
+    });
+  }
+
+  /**
+   * Start listen Rana REST API and RanaSocket server.
+   */
+  public listen() {
     this.server.listen(RanaAPI.PORT, () => {
       this.logger.log(`Working on ${RanaAPI.PORT} port...`);
     });
