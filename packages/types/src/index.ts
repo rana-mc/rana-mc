@@ -35,5 +35,5 @@ export enum ServerStatus {
 }
 
 export enum RanaSocketEvents {
-  Update = "update",
+  ServerUpdate = "serverUpdate",
 }
