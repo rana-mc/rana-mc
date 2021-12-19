@@ -27,6 +27,13 @@ export enum ServerActions {
 export enum ServerStatus {
   Created = "created",
   Installing = "installing",
+  CoreInstalled = "coreInstalled",
   Starting = "starting",
-  Stopping = "stopping"
+  Started = "started",
+  Stopping = "stopping",
+  Stopped = "stopped"
+}
+
+export enum RanaSocketEvents {
+  Update = "update",
 }

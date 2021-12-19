@@ -1,22 +1,29 @@
+import EventEmitter from "events";
 import { Server as SocketIOServer } from 'socket.io'
 import { Server as HTTPServer } from 'http'
 import { Logger } from '../Logger';
 import { FabricServer } from '@rana-mc/fabric';
 import { ForgeServer } from '@rana-mc/forge';
-import { ServerActions, ServerCoreType } from '@rana-mc/types';
+import { RanaSocketEvents, ServerActions, ServerCoreType, ServerEvents, ServerStatus } from '@rana-mc/types';
 
 type RanaServer = ForgeServer | FabricServer;
 
-export default class RanaSocket {
+export default class RanaSocket extends EventEmitter {
 
   public static TAG = 'RanaSocket';
 
-  socket: SocketIOServer
   // FYI: What will be better? Maybe { [serverId: string]:  RanaServer }?
-  servers: RanaServer[];
-  logger: Logger;
+  private servers: RanaServer[];
+
+  // FYI: Better naming? serversData serverDatas?
+  private data: Server[];
+
+  private socket: SocketIOServer
+  private logger: Logger;
 
   constructor(server: HTTPServer) {
+    super();
+
     this.logger = new Logger(RanaSocket.TAG)
     this.socket = new SocketIOServer(server, {
       cors: { origin: "*" }
@@ -47,6 +54,8 @@ export default class RanaSocket {
    * Init this.servers and create listeners.
    */
   public initServers = (servers: Server[]) => {
+    this.data = servers;
+
     this.servers = servers
       .map((server) => {
         // TODO: Make it by switch and case? Or function?
@@ -61,6 +70,7 @@ export default class RanaSocket {
         // FYI: Strange case, cuz we always got correct server core type, right?
         return null;
       });
+
     this.servers.forEach(this.appendListeners.bind(this))
   }
 
@@ -123,14 +133,40 @@ export default class RanaSocket {
   }
 
   /**
+   * Get data (Server) by .id of RanaServer.
+   */
+  private getServerData(server: RanaServer): Server {
+    return this.data.find((_server: Server) => {
+      return _server.id === server.id;
+    });
+  }
+
+  /**
+   * Just helper for send event of server status updates.
+   */
+  private updateServerStatus(server: RanaServer, status: ServerStatus) {
+    this.emit(RanaSocketEvents.Update, { ...this.getServerData(server), status });
+  }
+
+  /**
+   * Just helper for send event of server eula updates.
+   */
+  private updateServerEULA(server: RanaServer, eula: boolean) {
+    this.emit(RanaSocketEvents.Update, { ...this.getServerData(server), eula });
+  }
+
+  /**
    * Append listeners to RanaServer.
    * Events by ServerEvents.
    */
   private appendListeners(server: RanaServer) {
-    server.eventNames().forEach((event) => {
-      server.on(event, (message) => {
-        this.socket.emit(event.toString(), message);
-      });
-    });
+    server.on(ServerEvents.EulaChanged, (eula) => this.updateServerEULA(server, eula));
+    server.on(ServerEvents.CoreInstalled, () => this.updateServerStatus(server, ServerStatus.CoreInstalled));
+    server.on(ServerEvents.Started, () => this.updateServerStatus(server, ServerStatus.Started));
+    server.on(ServerEvents.Stopped, () => this.updateServerStatus(server, ServerStatus.Stopped));
+    server.on(ServerEvents.Crashed, () => this.updateServerStatus(server, ServerStatus.Stopped));
+
+    // TODO: Logs for server, not for all?
+    // server.on(ServerEvents.Logs, (message) => this.socket.emit(ServerEvents.Logs, message));
   }
 }
