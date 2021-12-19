@@ -123,8 +123,9 @@ export class ForgeServer extends EventEmitter {
   /**
    * Remove server folder.
    */
-  public clear() {
-    this.workspace.clear();
+  public async remove() {
+    this.emit(ServerEvents.Removing);
+    await this.workspace.clear();
   }
 
   /**

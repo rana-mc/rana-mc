@@ -39,7 +39,7 @@ export class FabricServer extends EventEmitter {
 
   }
 
-  clear() {
+  remove() {
 
   }
 
