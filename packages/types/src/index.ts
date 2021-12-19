@@ -1,19 +1,5 @@
 /// <reference path="../types/index.d.ts" />
 
-export enum ServerEvents {
-  CoreInstalled = "coreInstalled",
-  Started = "started",
-  Stopped = "stopped",
-  Crashed = "crashed",
-  Logs = "logs",
-  EulaChanged = "eulaChanged",
-}
-
-export enum ServerCoreType {
-  Forge = "forge",
-  Fabric = "fabric"
-}
-
 export enum ServerActions {
   InstallCore = "installCore",
   Start = "start",
@@ -26,7 +12,7 @@ export enum ServerActions {
 
 export enum ServerStatus {
   Created = "created",
-  Installing = "installing",
+  CoreInstalling = "coreInstalling",
   CoreInstalled = "coreInstalled",
   Starting = "starting",
   Started = "started",
@@ -34,6 +20,26 @@ export enum ServerStatus {
   Stopped = "stopped"
 }
 
+export enum ServerEvents {
+  CoreInstalling = "coreInstalling",
+  CoreInstalled = "coreInstalled",
+  Starting = "starting",
+  Started = "started",
+  Stopping = "stopping",
+  Stopped = "stopped",
+  // TODO: Use when got crash in console output.
+  Crashed = "crashed",
+  Logs = "logs",
+  // FIY: Sure, we need this event?
+  EulaChanging = "eulaChanged",
+  EulaChanged = "eulaChanged",
+}
+
 export enum RanaSocketEvents {
   ServerUpdate = "serverUpdate",
+}
+
+export enum ServerCoreType {
+  Forge = "forge",
+  Fabric = "fabric"
 }
