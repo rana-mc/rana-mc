@@ -7,7 +7,8 @@ export enum ServerActions {
   ExecCommand = "execCommand",
   RemoveCore = "removeCore",
   Clear = "clear",
-  Eula = "eula"
+  Eula = "eula",
+  FlushServers = "flushServers"
 }
 
 export enum ServerStatus {
@@ -37,6 +38,8 @@ export enum ServerEvents {
 export enum RanaSocketEvents {
   ServerUpdate = "serverUpdate",
   ClientServerUpdate = "clientServerUpdate",
+  ServersFlush = "serversFlush",
+  SocketServersFlush = "socketServersFlush"
 }
 
 export enum ServerCoreType {

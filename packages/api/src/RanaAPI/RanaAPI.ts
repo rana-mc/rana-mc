@@ -65,6 +65,7 @@ export default class RanaAPI {
    */
   private applyRanaSocket() {
     this.ranaSocket.initServers(this.ranaDB.getServers());
+
     this.ranaSocket.on(RanaSocketEvents.ServerUpdate, async (server) => {
       await this.ranaDB.updateServer(server)
 
@@ -73,6 +74,14 @@ export default class RanaAPI {
 
       /** Sending updated server from ranaDB to socket clients. */
       this.ranaSocket.emit(RanaSocketEvents.ClientServerUpdate, updated);
+    });
+
+    this.ranaSocket.on(RanaSocketEvents.ServersFlush, () => {
+      const servers = this.ranaDB.getServers();
+      this.logger.log(`(ServersFlush): ${JSON.stringify(servers)}`);
+
+      /** Flush servers at socket. */
+      this.ranaSocket.emit(RanaSocketEvents.SocketServersFlush, servers);
     });
   }
 

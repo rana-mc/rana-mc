@@ -1,4 +1,6 @@
+import { ServerActions } from "@rana-mc/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ranaSocket } from "../../vendors/ranaSocketIo";
 import { RootState } from "../../app/store";
 import { fetchServers, createServer, removeServer, updateServer } from "./serversAPI";
 
@@ -26,6 +28,7 @@ export const createServerAC = createAsyncThunk(
   'servers/create',
   async (server: Server) => {
     const response = await createServer(server);
+    ranaSocket.emit(ServerActions.FlushServers);
     return response.data;
   }
 );
@@ -34,6 +37,7 @@ export const removeServerAC = createAsyncThunk(
   'servers/remove',
   async (server: Server) => {
     const response = await removeServer(server);
+    ranaSocket.emit(ServerActions.FlushServers);
     return response.data;
   }
 );
@@ -42,6 +46,7 @@ export const updateServerAC = createAsyncThunk(
   'servers/update',
   async (server: Server) => {
     const response = await updateServer(server);
+    ranaSocket.emit(ServerActions.FlushServers);
     return response.data;
   }
 );

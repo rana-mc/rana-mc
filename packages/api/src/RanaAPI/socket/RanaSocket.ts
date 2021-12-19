@@ -33,6 +33,8 @@ export default class RanaSocket extends EventEmitter {
   }
 
   private init = () => {
+  
+    /** Socket client actions. */
     this.socket.on('connection', client => {
       this.logger.log('Client connected');
 
@@ -43,13 +45,16 @@ export default class RanaSocket extends EventEmitter {
       client.on(ServerActions.RemoveCore, this.removeCore.bind(this));
       client.on(ServerActions.Clear, this.clearServer.bind(this));
       client.on(ServerActions.Eula, this.acceptEULA.bind(this));
+      client.on(ServerActions.FlushServers, this.flushServers.bind(this));
 
       client.on('disconnect', () => {
         this.logger.log('Client disconnected');
       });
     });
 
+    /** Utility actions. */
     this.on(RanaSocketEvents.ClientServerUpdate, this.onClientServerUpdate.bind(this));
+    this.on(RanaSocketEvents.SocketServersFlush, this.onSocketServersFlush.bind(this));
   }
 
   /**
@@ -57,22 +62,7 @@ export default class RanaSocket extends EventEmitter {
    */
   public initServers = (servers: Server[]) => {
     this.data = servers;
-
-    this.servers = servers
-      .map((server) => {
-        // TODO: Make it by switch and case? Or function?
-        if (server.core.type === ServerCoreType.Forge) {
-          return new ForgeServer(server);
-        }
-
-        if (server.core.type === ServerCoreType.Fabric) {
-          return new FabricServer(server);
-        }
-
-        // FYI: Strange case, cuz we always got correct server core type, right?
-        return null;
-      });
-
+    this.servers = servers.map(this.createServer);
     this.servers.forEach(this.appendListeners.bind(this))
   }
 
@@ -151,6 +141,17 @@ export default class RanaSocket extends EventEmitter {
   }
 
   /**
+   * Flush new or updated servers at this.servers and this.data.
+   */
+  private onSocketServersFlush(servers: Server[]) {
+    // TODO: Flush servers.
+  }
+
+  private flushServers() {
+    this.emit(RanaSocketEvents.ServersFlush);
+  }
+
+  /**
    * Just helper for send event of server status updates.
    */
   private updateServerStatus(server: RanaServer, status: ServerStatus) {
@@ -197,5 +198,24 @@ export default class RanaSocket extends EventEmitter {
 
     /** Events for sending info to socket clients. Like logs. */
     server.on(ServerEvents.Logs, (message) => this.socket.emit(ServerEvents.Logs, server.id, message));
+  }
+
+  /**
+   * Create server by core type.
+   * Return ForgeServer, FabricServer, etc.
+   */
+  private createServer(server: Server) {
+
+    // TODO: Make it by switch and case? Or function?
+    if (server.core.type === ServerCoreType.Forge) {
+      return new ForgeServer(server);
+    }
+
+    if (server.core.type === ServerCoreType.Fabric) {
+      return new FabricServer(server);
+    }
+
+    // FYI: Strange case, cuz we always got correct server core type, right?
+    return null;
   }
 }
