@@ -1,7 +1,8 @@
 import { RanaSocketEvents, ServerActions } from "@rana-mc/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ranaSocket } from '../../vendors/ranaSocketIo';
-import { RootState } from "../../app/store";
+import { AppThunk, RootState } from "../../app/store";
+import { updateServerState } from "@modules/servers/serversSlice";
 
 export interface ServerActionState {
   status: 'idle' | 'loading' | 'failed';
@@ -42,13 +43,7 @@ export const acceptEULAServerAC = createAsyncThunk(
 export const serverSlice = createSlice({
   name: 'server',
   initialState,
-  reducers: {
-    startListenSocket: () => {
-      ranaSocket.on(RanaSocketEvents.ServerUpdate, (server) => {
-        console.log(server);
-      });
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(installServerAC.pending, (state) => {
@@ -78,7 +73,14 @@ export const serverSlice = createSlice({
   },
 });
 
-export const { startListenSocket } = serverSlice.actions;
 export const selectServerActionStatus = (state: RootState) => state.server.status;
+
+export const startListenSocket = (): AppThunk => (
+  dispatch
+) => {
+  ranaSocket.on(RanaSocketEvents.ServerUpdate, (server) => {
+    dispatch(updateServerState(server));
+  });
+};
 
 export default serverSlice.reducer;

@@ -53,6 +53,17 @@ export const serversSlice = createSlice({
     setCurrentServerId: (state, action: PayloadAction<string>) => {
       state.currentId = action.payload;
     },
+    updateServerState: (state, action: PayloadAction<Server>) => {
+      const updatedServer = action.payload;
+
+      if (state.values) {
+        state.values = state.values?.map(server => {
+          return server.id === updatedServer.id ? { ...server, ...updatedServer } : server;
+        });
+      } else {
+        console.error('Something went wrong. Unknown error.');
+      }
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -87,7 +98,7 @@ export const serversSlice = createSlice({
   },
 });
 
-export const { setCurrentServerId } = serversSlice.actions;
+export const { setCurrentServerId, updateServerState } = serversSlice.actions;
 export const selectServers = (state: RootState) => state.servers.values;
 
 export default serversSlice.reducer;
