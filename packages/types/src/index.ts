@@ -5,7 +5,8 @@ export enum ServerEvents {
   Started = "started",
   Stopped = "stopped",
   Crashed = "crashed",
-  Logs = "logs"
+  Logs = "logs",
+  EulaChanged = "eulaChanged",
 }
 
 export enum ServerCoreType {

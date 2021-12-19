@@ -99,11 +99,11 @@ export class ForgeServer extends EventEmitter {
   /**
    * Remove server core.
    */
-  public removeCore() {
+  public async removeCore() {
     const core = this.workspace.getCore();
 
     this.logger.log(`Removing...: ${core.filename}`);
-    core.clear();
+    await core.clear();
   }
 
   /**
@@ -119,6 +119,8 @@ export class ForgeServer extends EventEmitter {
    */
   public async acceptEULA(accept: boolean) {
     this.logger.log(`Accepting EULA...: ${accept}`);
+    this.emit(ServerEvents.EulaChanged, accept);
+
     return await this.workspace.acceptEULA(accept);
   }
 
