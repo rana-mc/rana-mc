@@ -1,9 +1,11 @@
+import { FabricCores } from '@rana-mc/fabric';
 import { ForgeCores } from '@rana-mc/forge';
 import APIRoute from '../APIRoute';
 
 export default class CoresAPI extends APIRoute {
 
   forgeCores: ForgeCores;
+  fabricCores: FabricCores;
 
   get TAG() {
     return "RanaAPI-cores";
@@ -13,11 +15,12 @@ export default class CoresAPI extends APIRoute {
     super();
 
     this.forgeCores = new ForgeCores();
+    this.fabricCores = new FabricCores();
+
     this.init();
   }
 
   init = async () => {
-    // TODO: make it by 'type' in query
     this.useForgeCores();
     this.useFabricCores();
   }
@@ -34,7 +37,11 @@ export default class CoresAPI extends APIRoute {
 
   useFabricCores() {
     this.router.use('/fabric-cores', async (req, res) => {
-      res.send([]);
+      const { force } = req.query as { version: string, force: string };
+      const cores = await this.fabricCores.getCores();
+
+      if (!cores) return res.sendStatus(500);
+      res.send(cores);
     });
   }
 }
