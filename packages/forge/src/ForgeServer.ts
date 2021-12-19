@@ -71,8 +71,10 @@ export class ForgeServer extends EventEmitter {
 
     /** Little bit incorrect method to parse server start event. */
     process.stdout.on('data', (message) => {
-      if (this.isServerStartedMessage(message))
-        this.emit(ServerEvents.Started, this.parseServerStartTime(message));
+      if (this.isServerStartedMessage(message)) {
+        this.emit(ServerEvents.Started);
+        this.emit(ServerEvents.StartTime, this.parseServerStartTime(message));
+      }
     })
 
     process.stdout.on('data', (message) => {
@@ -100,6 +102,8 @@ export class ForgeServer extends EventEmitter {
    * Stop server.
    */
   public stop() {
+    this.emit(ServerEvents.Starting);
+
     this.process.stdin.write('stop\n');
     this.process.stdout.pipe(process.stdout);
 
@@ -161,7 +165,6 @@ export class ForgeServer extends EventEmitter {
   private parseServerStartTime(message: string): number {
     try {
       const startTime = message.match(/Done \((.+)s\)! For help, type "help"/);
-
       return parseFloat(startTime[1]);
     } catch (err) {
       return 0;

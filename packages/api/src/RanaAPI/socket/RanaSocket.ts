@@ -145,16 +145,31 @@ export default class RanaSocket extends EventEmitter {
    * Just helper for send event of server status updates.
    */
   private updateServerStatus(server: RanaServer, status: ServerStatus) {
-    this.emit(RanaSocketEvents.ServerUpdate, { ...this.getServerData(server), status });
-    this.socket.emit(RanaSocketEvents.ServerUpdate, { ...this.getServerData(server), status });
+    const update = { ...this.getServerData(server), status };
+
+    this.emit(RanaSocketEvents.ServerUpdate, update);
+    this.socket.emit(RanaSocketEvents.ServerUpdate, update);
   }
 
   /**
    * Just helper for send event of server eula updates.
    */
   private updateServerEULA(server: RanaServer, eula: boolean) {
-    this.emit(RanaSocketEvents.ServerUpdate, { ...this.getServerData(server), eula });
-    this.socket.emit(RanaSocketEvents.ServerUpdate, { ...this.getServerData(server), eula });
+    const update = { ...this.getServerData(server), eula };
+
+    this.emit(RanaSocketEvents.ServerUpdate, update);
+    this.socket.emit(RanaSocketEvents.ServerUpdate, update);
+  }
+
+  /**
+   * Just helper for send event of server startTimes updates.
+   */
+  private updateServerStartTimes(server: RanaServer, startTime: boolean) {
+    const data = this.getServerData(server);
+    const update = { ...data, startTimes: [...data.startTimes || [], startTime] }
+
+    this.emit(RanaSocketEvents.ServerUpdate, update);
+    this.socket.emit(RanaSocketEvents.ServerUpdate, update);
   }
 
   /**
@@ -164,10 +179,16 @@ export default class RanaSocket extends EventEmitter {
   private appendListeners(server: RanaServer) {
 
     /** Events for update server in RanaDB. */
+    server.on(ServerEvents.CoreInstalling, () => this.updateServerStatus(server, ServerStatus.CoreInstalling));
     server.on(ServerEvents.CoreInstalled, () => this.updateServerStatus(server, ServerStatus.CoreInstalled));
+    server.on(ServerEvents.Starting, () => this.updateServerStatus(server, ServerStatus.Starting));
     server.on(ServerEvents.Started, () => this.updateServerStatus(server, ServerStatus.Started));
+    server.on(ServerEvents.Stopping, () => this.updateServerStatus(server, ServerStatus.Stopping));
     server.on(ServerEvents.Stopped, () => this.updateServerStatus(server, ServerStatus.Stopped));
+
+    /** Utility events for update server in RanaDB. */
     server.on(ServerEvents.Crashed, () => this.updateServerStatus(server, ServerStatus.Stopped));
+    server.on(ServerEvents.StartTime, (startTime) => this.updateServerStartTimes(server, startTime));
     server.on(ServerEvents.EulaChanged, (eula) => this.updateServerEULA(server, eula));
 
     /** Events for sending info to socket clients. Like logs. */
