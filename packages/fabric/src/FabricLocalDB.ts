@@ -2,7 +2,7 @@ import { JSONFile, Low } from "lowdb";
 
 export default class FabricLocalDB {
     public static PATH = './fabric.db.json';
-    public static DEFAULTS: FabricLocalDBData = { cores: [] };
+    public static DEFAULTS: FabricLocalDBData = { cores: null };
 
     private db: Low<FabricLocalDBData>;
 

@@ -16,9 +16,7 @@ export class FabricCores {
 
     try {
       const response = await axios.get(this.baseUrl);
-      const cores = response.data;
-
-      console.log(cores);
+      const cores: FabricCore[] = response.data;
 
       fabricLocalDB.setFabricCores(cores);
       return cores;
