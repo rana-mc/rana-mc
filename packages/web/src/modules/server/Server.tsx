@@ -95,7 +95,7 @@ const Server = ({ server }: Props) => {
         />
         <div>
           <Label text="EULA?" />
-          <Switch value={true} size="s" onChange={handleEULAChange} />
+          <Switch value={server.eula} size="s" onChange={handleEULAChange} />
         </div>
       </div>
     </div>

@@ -43,8 +43,10 @@ export const stopServerAC = createAsyncThunk(
 
 export const acceptEULAServerAC = createAsyncThunk(
   'server/eula',
-  async ({ server, accept }: { server: Server, accept: boolean }) => {
-    ranaSocket.emit(ServerActions.Eula, server, accept);
+  async ({ server, accept: acceptEULA }: { server: Server, accept: boolean }) => {
+    ranaSocket.emit(ServerActions.Eula, server, acceptEULA);
+    const response = await updateServer({ ...server, eula: acceptEULA });
+    return response.data;
   }
 );
 

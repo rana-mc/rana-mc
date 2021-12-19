@@ -47,6 +47,7 @@ const CreateServer = () => {
           type: currentCoreType,
         },
         mods: [],
+        eula: false
       };
 
       // FYI: Support link of Forge

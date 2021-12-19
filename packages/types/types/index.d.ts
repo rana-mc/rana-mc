@@ -40,7 +40,7 @@ declare type Server = {
   mods: ServerMod[];
   gameVersion: string;
   gameVersionTypeId: number;
-  processId?: number;
+  eula: boolean;
 };
 
 // TODO: what is it? links? file/names? mb
