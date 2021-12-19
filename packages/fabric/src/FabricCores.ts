@@ -16,9 +16,16 @@ export class FabricCores {
 
     try {
       const response = await axios.get(this.baseUrl);
-      const cores: FabricCore[] = response.data;
+      const cores: OriginalFabricCore[] = response.data;
+      const convertedCores: FabricCore[] = cores.map((core: OriginalFabricCore) => ({
+        gameVersion: '*',
+        coreVersion: core.version,
+        installerUrl: core.url,
+        maven: core.maven,
+        stable: core.stable
+      }));
 
-      fabricLocalDB.setFabricCores(cores);
+      fabricLocalDB.setFabricCores(convertedCores);
       return cores;
     } catch (err) {
       FabricCores.logger.log(`Got error after getCores – ${err.message}`);
