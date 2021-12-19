@@ -26,7 +26,7 @@ export class FabricCores {
       }));
 
       fabricLocalDB.setFabricCores(convertedCores);
-      return cores;
+      return fabricLocalDB;
     } catch (err) {
       FabricCores.logger.log(`Got error after getCores – ${err.message}`);
     }
