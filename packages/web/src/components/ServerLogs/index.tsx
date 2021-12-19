@@ -9,7 +9,11 @@ import { parseLine, prepareLines } from './utils';
 
 const UPDATE_LOGS_DELAY = 500;
 
-const ServerLogs = () => {
+type Props = {
+  serverId?: string;
+};
+
+const ServerLogs = ({ serverId }: Props) => {
   const fullServerLogs: string[] = [];
   const [logs, setLogs] = useState<string[]>([]);
 
@@ -22,7 +26,15 @@ const ServerLogs = () => {
     []
   );
 
-  ranaSocket.on(ServerEvents.Logs, (message: string) => {
+  ranaSocket.on(ServerEvents.Logs, (logsServerId: string, message: string) => {
+    if (serverId) {
+      if (serverId === logsServerId) {
+        fullServerLogs.push(message);
+        handleLogAppend(fullServerLogs);
+      }
+      return;
+    }
+
     fullServerLogs.push(message);
     handleLogAppend(fullServerLogs);
   });
@@ -36,7 +48,7 @@ const ServerLogs = () => {
       );
     });
   };
-  
+
   return (
     <div className={cn(styles.serverLogs)}>
       {logs.map((log) => (
