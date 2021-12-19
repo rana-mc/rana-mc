@@ -61,6 +61,7 @@ export default class RanaAPI {
 
   /**
    * Apply RanaSocket at same port of REST API server.
+   * And listen servers updates.
    */
   private applyRanaSocket() {
     this.ranaSocket.initServers(this.ranaDB.getServers());
