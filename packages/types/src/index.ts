@@ -31,6 +31,7 @@ export enum ServerEvents {
   Crashed = "crashed",
   Logs = "logs",
   EulaChanged = "eulaChanged",
+  StartTime = "startTime",
 }
 
 export enum RanaSocketEvents {

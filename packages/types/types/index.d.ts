@@ -41,7 +41,7 @@ declare type Server = {
   gameVersion: string;
   gameVersionTypeId: number;
   eula: boolean;
-  startTimes?: []
+  startTimes: []
 };
 
 // TODO: what is it? links? file/names? mb
