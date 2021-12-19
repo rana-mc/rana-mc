@@ -48,6 +48,8 @@ export default class RanaSocket extends EventEmitter {
         this.logger.log('Client disconnected');
       });
     });
+
+    this.on(RanaSocketEvents.ClientServerUpdate, this.onClientServerUpdate.bind(this));
   }
 
   /**
@@ -142,23 +144,26 @@ export default class RanaSocket extends EventEmitter {
   }
 
   /**
+   * Sending updated server from ranaDB to socket clients.
+   */
+  private onClientServerUpdate(server: Server) {
+    this.socket.emit(RanaSocketEvents.ServerUpdate, server);
+  }
+
+  /**
    * Just helper for send event of server status updates.
    */
   private updateServerStatus(server: RanaServer, status: ServerStatus) {
-    const update = { ...this.getServerData(server), status };
-
+    const update = { id: this.getServerData(server).id, status };
     this.emit(RanaSocketEvents.ServerUpdate, update);
-    this.socket.emit(RanaSocketEvents.ServerUpdate, update);
   }
 
   /**
    * Just helper for send event of server eula updates.
    */
   private updateServerEULA(server: RanaServer, eula: boolean) {
-    const update = { ...this.getServerData(server), eula };
-
+    const update = { id: this.getServerData(server).id, eula };
     this.emit(RanaSocketEvents.ServerUpdate, update);
-    this.socket.emit(RanaSocketEvents.ServerUpdate, update);
   }
 
   /**
@@ -166,10 +171,9 @@ export default class RanaSocket extends EventEmitter {
    */
   private updateServerStartTimes(server: RanaServer, startTime: boolean) {
     const data = this.getServerData(server);
-    const update = { ...data, startTimes: [...data.startTimes || [], startTime] }
+    const update = { id: data.id, startTimes: [...data.startTimes || [], startTime] }
 
     this.emit(RanaSocketEvents.ServerUpdate, update);
-    this.socket.emit(RanaSocketEvents.ServerUpdate, update);
   }
 
   /**

@@ -65,9 +65,14 @@ export default class RanaAPI {
    */
   private applyRanaSocket() {
     this.ranaSocket.initServers(this.ranaDB.getServers());
-    this.ranaSocket.on(RanaSocketEvents.ServerUpdate, (server) => {
-      this.logger.log(`(ServerUpdate): ${JSON.stringify(server)}`);
-      this.ranaDB.updateServer(server);
+    this.ranaSocket.on(RanaSocketEvents.ServerUpdate, async (server) => {
+      await this.ranaDB.updateServer(server)
+
+      const updated = this.ranaDB.findServer(server.id);
+      this.logger.log(`(ServerUpdate): ${JSON.stringify(updated)}`);
+
+      /** Sending updated server from ranaDB to socket clients. */
+      this.ranaSocket.emit(RanaSocketEvents.ClientServerUpdate, updated);
     });
   }
 
