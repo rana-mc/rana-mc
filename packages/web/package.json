@@ -18,16 +18,8 @@
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/react-redux": "^7.1.20",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
-    "eslint-config-airbnb": "^19.0.2",
-    "eslint-config-airbnb-typescript": "^16.1.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.27.1",
-    "eslint-plugin-react-hooks": "^4.3.0",
     "install-peerdeps": "^3.0.3",
     "lodash.debounce": "^4.0.8",
     "react": "^17.0.2",
@@ -44,7 +36,8 @@
     "watch": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -70,6 +63,9 @@
   },
   "devDependencies": {
     "eslint": "^8.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-airbnb": "19.0.2",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
