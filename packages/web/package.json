@@ -8,26 +8,32 @@
   "dependencies": {
     "@craco/craco": "^6.4.3",
     "@rana-mc/types": "^0.0.7-alpha.0",
-    "@reduxjs/toolkit": "^1.6.2",
+    "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.0.3",
     "@types/lodash.debounce": "^4.0.6",
-    "@types/node": "^16.11.12",
+    "@types/node": "^17.0.1",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/react-redux": "^7.1.20",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "install-peerdeps": "^3.0.3",
     "lodash.debounce": "^4.0.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "react-scripts": "4.0.3",
-    "react-svg": "^14.1.4",
+    "react-scripts": "5.0.0",
+    "react-svg": "^14.1.5",
     "socket.io-client": "^4.4.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.4"
   },
   "scripts": {
     "postinstall": "craco build",
@@ -57,5 +63,13 @@
       "^@modules(.*)$": "<rootDir>/src/modules$1",
       "^@utils(.*)$": "<rootDir>/src/utils$1"
     }
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "19.0.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0"
   }
 }
