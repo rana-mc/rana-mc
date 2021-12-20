@@ -1,14 +1,16 @@
-import { ServerActions } from "@rana-mc/types";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ranaSocket } from "../../vendors/ranaSocketIo";
-import { RootState } from "../../app/store";
-import { fetchServers, createServer, removeServer, updateServer } from "./serversAPI";
+import { ServerActions } from '@rana-mc/types';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ranaSocket } from '../../vendors/ranaSocketIo';
+import { RootState } from '../../app/store';
+import {
+  fetchServers, createServer, removeServer, updateServer,
+} from './serversAPI';
 
 export interface ServersState {
   values: Server[] | null;
   currentId: string | null;
   status: 'idle' | 'loading' | 'failed';
-};
+}
 
 const initialState: ServersState = {
   values: null,
@@ -21,7 +23,7 @@ export const fetchServersAC = createAsyncThunk(
   async () => {
     const response = await fetchServers();
     return response.data;
-  }
+  },
 );
 
 export const createServerAC = createAsyncThunk(
@@ -30,7 +32,7 @@ export const createServerAC = createAsyncThunk(
     const response = await createServer(server);
     ranaSocket.emit(ServerActions.FlushServers);
     return response.data;
-  }
+  },
 );
 
 export const removeServerAC = createAsyncThunk(
@@ -39,7 +41,7 @@ export const removeServerAC = createAsyncThunk(
     const response = await removeServer(server);
     ranaSocket.emit(ServerActions.RemoveServer, server);
     return response.data;
-  }
+  },
 );
 
 export const updateServerAC = createAsyncThunk(
@@ -48,7 +50,7 @@ export const updateServerAC = createAsyncThunk(
     const response = await updateServer(server);
     ranaSocket.emit(ServerActions.FlushServers);
     return response.data;
-  }
+  },
 );
 
 export const serversSlice = createSlice({
@@ -62,13 +64,12 @@ export const serversSlice = createSlice({
       const updatedServer = action.payload;
 
       if (state.values) {
-        state.values = state.values?.map(server => {
-          return server.id === updatedServer?.id ? { ...server, ...updatedServer } : server;
-        });
+        state.values = state.values?.map((server) =>
+          (server.id === updatedServer?.id ? { ...server, ...updatedServer } : server));
       } else {
         console.error('Something went wrong. Unknown error.');
       }
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -99,7 +100,7 @@ export const serversSlice = createSlice({
       .addCase(updateServerAC.fulfilled, (state, action) => {
         state.status = 'idle';
         state.values = action.payload;
-      })
+      });
   },
 });
 

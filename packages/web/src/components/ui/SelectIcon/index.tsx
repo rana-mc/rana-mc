@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 
-import styles from './SelectIcon.module.css';
 import Icon, { IconName } from '@ui/Icon';
+import styles from './SelectIcon.module.css';
 
 type Props = {
   name: IconName;
@@ -15,14 +15,13 @@ const ICON_COLORS = {
   fabric: '#BADCBA',
 };
 
-const SelectIcon = ({ name, size }: Props) => {
-  return (
-    <div
-      className={cn(styles.selectIcon, styles[`size-${size}`])}
-      style={{ background: ICON_COLORS[name] || 'transparent' }}>
-      <Icon name={name} />
-    </div>
-  );
-};
+const SelectIcon = ({ name, size }: Props) => (
+  <div
+    className={cn(styles.selectIcon, styles[`size-${size}`])}
+    style={{ background: ICON_COLORS[name] || 'transparent' }}
+  >
+    <Icon name={name} />
+  </div>
+);
 
 export default SelectIcon;

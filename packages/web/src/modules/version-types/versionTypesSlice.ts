@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { fetchVersionTypes } from "./versionTypesAPI";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
+import { fetchVersionTypes } from './versionTypesAPI';
 
 export interface VersionTypesState {
   values: VersionType[] | null;
   current: number | null;
   status: 'idle' | 'loading' | 'failed';
-};
+}
 
 const initialState: VersionTypesState = {
   values: null,
@@ -19,7 +19,7 @@ export const fetchVersionTypesAC = createAsyncThunk(
   async () => {
     const response = await fetchVersionTypes();
     return response.data;
-  }
+  },
 );
 
 export const versionTypesSlice = createSlice({

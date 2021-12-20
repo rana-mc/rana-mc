@@ -1,14 +1,14 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { fetchForgeCores, fetchFabricCores } from "./coresAPI";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ServerCoreType as CoreType } from '@rana-mc/types';
+import { RootState } from '../../app/store';
+import { fetchForgeCores, fetchFabricCores } from './coresAPI';
 
 export interface CoresState {
   value: Core[] | null;
   type: CoreType.Forge | CoreType.Fabric | null;
   current: Core | null;
   status: 'idle' | 'loading' | 'failed';
-};
+}
 
 const initialState: CoresState = {
   value: null,
@@ -23,7 +23,7 @@ export const fetchForgeCoresAC = createAsyncThunk(
   async (gameVersion: string) => {
     const response = await fetchForgeCores(gameVersion);
     return response.data;
-  }
+  },
 );
 
 export const fetchFabricCoresAC = createAsyncThunk(
@@ -31,7 +31,7 @@ export const fetchFabricCoresAC = createAsyncThunk(
   async (gameVersion: string) => {
     const response = await fetchFabricCores(gameVersion);
     return response.data;
-  }
+  },
 );
 
 export const coresSlice = createSlice({

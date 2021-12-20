@@ -1,11 +1,11 @@
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import React, { useEffect } from 'react';
 import cn from 'classnames';
+import Empty from '@ui/Empty';
+import Server from '@modules/server/Server';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchServersAC, selectServers } from './serversSlice';
 import styles from './ServersList.module.css';
-import Empty from '@ui/Empty';
 import ServerLogs from '../../components/ServerLogs';
-import Server from '@modules/server/Server';
 
 const ServersList = () => {
   const dispatch = useAppDispatch();

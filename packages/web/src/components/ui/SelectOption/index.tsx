@@ -1,9 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
 
-import styles from './SelectOption.module.css';
 import { IconName } from '@ui/Icon';
 import SelectIcon from '@ui/SelectIcon';
+import styles from './SelectOption.module.css';
 
 type Props = {
   icon?: IconName;
@@ -30,7 +30,8 @@ const SelectOption = ({
       className={cn(styles.selectOption, styles[`size-${size}`], {
         [styles.active]: active,
       })}
-      onClick={handleClick}>
+      onClick={handleClick}
+    >
       {icon && <SelectIcon size={size === 'm' ? 's' : 'xs'} name={icon} />}
       <span className={cn(styles.text)}>{text}</span>
     </div>

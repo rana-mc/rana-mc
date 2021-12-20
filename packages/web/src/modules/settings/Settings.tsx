@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import Input from '@ui/Input';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchSettingsAC, selectSettings } from './settingsSlice';
 import Button, { ButtonSize } from '@ui/Button';
-
-import { setSettingsAC } from './settingsSlice';
-import styles from './Settings.module.css';
 import Label from '@ui/Label';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchSettingsAC, selectSettings, setSettingsAC } from './settingsSlice';
+
+import styles from './Settings.module.css';
 
 const Settings = () => {
   const dispatch = useAppDispatch();

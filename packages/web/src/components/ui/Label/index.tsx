@@ -4,15 +4,14 @@ import cn from 'classnames';
 import styles from './Label.module.css';
 
 type Props = {
+  forId?: string;
   text: string;
 };
 
-const Label = ({ text }: Props) => {
-  return (
-    <label className={cn(styles.label)}>
-      <span className={cn(styles.text)}>{text}</span>
-    </label>
-  );
-};
+const Label = ({ forId, text }: Props) => (
+  <label className={cn(styles.label)} htmlFor={forId}>
+    <span className={cn(styles.text)}>{text}</span>
+  </label>
+);
 
 export default Label;

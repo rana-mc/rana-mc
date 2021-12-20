@@ -1,12 +1,12 @@
 type LightLine = {
   raw: string;
   groups: LightGroup[]
-}
+};
 
 type LightGroup = {
   name?: string;
   value: string;
-}
+};
 
 const NODES = [
   {
@@ -31,20 +31,16 @@ const NODES = [
   },
   {
     name: 'path',
-    regex: /(\/.+)( |)/gm
+    regex: /(\/.+)( |)/gm,
   },
 ];
 
-export const prepareLines = (logs: string[]) => {
-  return logs.reduce((acc: string[], curr: string) => {
-    return [...acc, ...curr.split('\n')]
-  }, []);
-}
+export const prepareLines = (logs: string[]) => logs.reduce((acc: string[], curr: string) => [...acc, ...curr.split('\n')], []);
 
 export const parseLine = (line: string) => {
   const light: LightLine = {
     raw: line,
-    groups: []
+    groups: [],
   };
 
   const nodes = NODES.reduce((acc, curr) => {
@@ -54,7 +50,7 @@ export const parseLine = (line: string) => {
       const split = acc.raw.split(node[0]);
 
       acc.groups.push({
-        value: split[0]
+        value: split[0],
       });
 
       acc.groups.push({
@@ -63,7 +59,7 @@ export const parseLine = (line: string) => {
       });
 
       acc.groups.push({
-        value: split[1]
+        value: split[1],
       });
 
       acc.raw = acc.raw.replace(node[0], '');
@@ -74,9 +70,9 @@ export const parseLine = (line: string) => {
 
   if (!nodes.groups.length) {
     nodes.groups.push({
-      value: nodes.raw
+      value: nodes.raw,
     });
   }
 
   return nodes;
-}
+};

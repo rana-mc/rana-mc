@@ -1,5 +1,3 @@
-import { apiClient } from "@utils";
+import { apiClient } from '@utils';
 
-export const fetchVersionTypes = () => {
-  return apiClient.get('/api/version-types');
-};
+export const fetchVersionTypes = () => apiClient.get('/api/version-types');

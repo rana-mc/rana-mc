@@ -1,12 +1,12 @@
-import axios from "axios";
-import { log } from ".";
+import axios from 'axios';
+import { log } from '.';
 
 // TODO: prod / dev envs
 const API_URL = 'http://localhost:3001/';
 
 export const createApiClient = () => {
   const client = axios.create({
-    baseURL: API_URL
+    baseURL: API_URL,
   });
 
   client.interceptors.request.use((config) => {

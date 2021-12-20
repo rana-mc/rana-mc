@@ -14,17 +14,15 @@ const SelectCore = ({ defaultId, children, onChange }: Props) => {
 
   const handleClick = (selectId: string) => {
     setCurrentId(selectId);
-    onChange && onChange(selectId);
+    if (onChange) onChange(selectId);
   };
 
   return (
     <div className={cn(styles.selectCore)}>
-      {Children.map(children, (selectCoreOption) => {
-        return React.cloneElement(selectCoreOption, {
-          active: currentId === selectCoreOption.props.type,
-          onClick: handleClick,
-        });
-      })}
+      {Children.map(children, (selectCoreOption) => React.cloneElement(selectCoreOption, {
+        active: currentId === selectCoreOption.props.type,
+        onClick: handleClick,
+      }))}
     </div>
   );
 };

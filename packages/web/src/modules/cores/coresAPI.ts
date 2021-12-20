@@ -1,10 +1,5 @@
-import { apiClient } from "@utils";
+import { apiClient } from '@utils';
 
-export const fetchForgeCores = (gameVersion: string) => {
-  return apiClient.get('/api/forge-cores', { params: { version: gameVersion } });
-};
+export const fetchForgeCores = (gameVersion: string) => apiClient.get('/api/forge-cores', { params: { version: gameVersion } });
 
-
-export const fetchFabricCores = (gameVersion: string) => {
-  return apiClient.get('/api/fabric-cores', { params: { version: gameVersion } });
-};
+export const fetchFabricCores = (gameVersion: string) => apiClient.get('/api/fabric-cores', { params: { version: gameVersion } });

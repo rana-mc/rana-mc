@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { fetchGameVersions } from "./gameVersionsAPI";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
+import { fetchGameVersions } from './gameVersionsAPI';
 
 export interface GameVersionsState {
   values: GameVersion[] | null;
   current: string | null;
   status: 'idle' | 'loading' | 'failed';
-};
+}
 
 const initialState: GameVersionsState = {
   values: null,
@@ -19,7 +19,7 @@ export const fetchGameVersionsAC = createAsyncThunk(
   async () => {
     const response = await fetchGameVersions();
     return response.data;
-  }
+  },
 );
 
 export const gameVersionSlice = createSlice({

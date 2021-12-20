@@ -14,17 +14,16 @@ const Tabs = ({ defaultId, children, onChange }: Props) => {
 
   const handleClick = (tabId: string) => {
     setCurrentId(tabId);
-    onChange && onChange(tabId);
+    if (onChange) onChange(tabId);
   };
 
   return (
     <div className={cn(styles.tabs)}>
-      {Children.map(children, (tab) => {
-        return React.cloneElement(tab, {
+      {Children.map(children, (tab) =>
+        React.cloneElement(tab, {
           active: currentId === tab.props.id,
           onClick: handleClick,
-        });
-      })}
+        }))}
     </div>
   );
 };

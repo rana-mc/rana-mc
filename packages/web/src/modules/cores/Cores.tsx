@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import SelectCore from '@ui/SelectCore';
 import SelectCoreOption from '@ui/SelectCoreOption';
+import { ServerCoreType as CoreType } from '@rana-mc/types';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectCurrentGameVersion } from '../game-versions/gameVersionsSlice';
 
@@ -13,7 +14,6 @@ import {
   setCurrentCore,
 } from './coresSlice';
 import CoreSelect from './CoreSelect';
-import { ServerCoreType as CoreType } from '@rana-mc/types';
 
 const Cores = () => {
   const dispatch = useAppDispatch();
@@ -24,10 +24,8 @@ const Cores = () => {
 
   useEffect(() => {
     if (currentVersion) {
-      if (currentCoreType === CoreType.Forge)
-        dispatch(fetchForgeCoresAC(currentVersion));
-      if (currentCoreType === CoreType.Fabric)
-        dispatch(fetchFabricCoresAC(currentVersion));
+      if (currentCoreType === CoreType.Forge) dispatch(fetchForgeCoresAC(currentVersion));
+      if (currentCoreType === CoreType.Fabric) dispatch(fetchFabricCoresAC(currentVersion));
     }
   }, [dispatch, currentVersion, currentCoreType]);
 

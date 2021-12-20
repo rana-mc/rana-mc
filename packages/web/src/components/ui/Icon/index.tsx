@@ -8,6 +8,7 @@ type Props = {
 };
 
 const Icon = ({ name }: Props) => {
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   const iconSVGSrc = require(`./assets/${name}.svg`).default;
 
   return <ReactSVG src={iconSVGSrc} />;

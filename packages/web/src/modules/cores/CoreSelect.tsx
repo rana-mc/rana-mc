@@ -19,7 +19,7 @@ const CoreSelect = ({ type, cores, onSelect }: Props) => {
 
   const handleChange = (coreVersion: string) => {
     const selectedCore = cores.find((core) => core.coreVersion === coreVersion);
-    if (selectedCore) onSelect && onSelect(selectedCore);
+    if (selectedCore && onSelect) onSelect(selectedCore);
   };
 
   return (

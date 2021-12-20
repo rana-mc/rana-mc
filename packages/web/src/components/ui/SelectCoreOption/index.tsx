@@ -19,7 +19,8 @@ const SelectCoreOption = ({ type, onClick, active }: Props) => {
     <div
       role="presentation"
       className={cn(styles.selectCoreOption, { [styles.active]: active })}
-      onClick={handleClick}>
+      onClick={handleClick}
+    >
       <SelectIcon name={type} size="l" />
       <div className={cn(styles.title)}>
         {type === 'forge' && <b>Forge</b>}

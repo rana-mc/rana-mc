@@ -1,20 +1,12 @@
-export const formatName = (name: string) => {
-  return name.replace(/Minecraft/i, '').trim();
-};
+export const formatName = (name: string) => name.replace(/Minecraft/i, '').trim();
 
-export const sortTypes = (versionTypes: VersionType[]) => {
-  return versionTypes.slice().sort((a, b) => {
-    return b?.id - a?.id;
-  });
-};
+export const sortTypes = (versionTypes: VersionType[]) =>
+  // eslint-disable-next-line no-unsafe-optional-chaining
+  versionTypes.slice().sort((a, b) => b?.id - a?.id);
 
 export const filterTypes = (versionTypes: VersionType[]) => {
   const TYPES_TO_REMOVE = ['Bukkit', 'Modloader', 'Addons', 'Minecraft Beta'];
-  return versionTypes.filter((type) => {
-    return !TYPES_TO_REMOVE.includes(type.name);
-  });
+  return versionTypes.filter((type) => !TYPES_TO_REMOVE.includes(type.name));
 };
 
-export const formatTypes = (versionTypes: VersionType[]) => {
-  return filterTypes(sortTypes(versionTypes));
-}
+export const formatTypes = (versionTypes: VersionType[]) => filterTypes(sortTypes(versionTypes));

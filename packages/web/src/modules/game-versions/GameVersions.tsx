@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react';
+import SelectOption from '@ui/SelectOption';
+import Select from '@ui/Select';
+import Empty from '@ui/Empty';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
   fetchGameVersionsAC,
@@ -7,9 +10,6 @@ import {
 } from './gameVersionsSlice';
 
 import { selectCurrentVersionType } from '../version-types/versionTypesSlice';
-import SelectOption from '@ui/SelectOption';
-import Select from '@ui/Select';
-import Empty from '@ui/Empty';
 import { formatVersions } from './utils';
 
 const GameVersions = () => {
@@ -18,7 +18,7 @@ const GameVersions = () => {
   const versionType = useAppSelector(selectCurrentVersionType);
 
   const gameVersion = allGameVersions?.find(
-    (gameVersion) => gameVersion.type === versionType
+    (_gameVersion) => _gameVersion.type === versionType,
   );
 
   useEffect(() => {

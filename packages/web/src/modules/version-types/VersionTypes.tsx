@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
+import Tabs from '@ui/Tabs';
+import Tab from '@ui/Tab';
+import Empty from '@ui/Empty';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
   fetchVersionTypesAC,
   selectVersionTypes,
   setCurrentVersionType,
 } from './versionTypesSlice';
-import Tabs from '@ui/Tabs';
-import Tab from '@ui/Tab';
 import { formatName, formatTypes } from './utils';
-import Empty from '@ui/Empty';
 
 const VersionTypes = () => {
   const dispatch = useAppDispatch();

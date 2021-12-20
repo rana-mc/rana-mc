@@ -1,15 +1,6 @@
-export const sortVersions = (versions: string[]) => {
-  return versions.slice().sort((a, b) => {
-    return parseInt(b) - parseInt(a)
-  });
-};
+export const sortVersions = (versions: string[]) =>
+  versions.slice().sort((a, b) => parseInt(b) - parseInt(a));
 
-export const filterVersions = (versions: string[]) => {
-  return versions.filter((version) => {
-    return !version.includes('Snapshot');
-  });
-};
+export const filterVersions = (versions: string[]) => versions.filter((version) => !version.includes('Snapshot'));
 
-export const formatVersions = (versions: string[]) => {
-  return filterVersions(sortVersions(versions));
-}
+export const formatVersions = (versions: string[]) => filterVersions(sortVersions(versions));

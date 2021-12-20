@@ -1,9 +1,5 @@
-import { apiClient } from "@utils";
+import { apiClient } from '@utils';
 
-export const fetchSettings = () => {
-  return apiClient.get('/api/settings');
-};
+export const fetchSettings = () => apiClient.get('/api/settings');
 
-export const setSettings = (settings: Partial<Settings>) => {
-  return apiClient.post('/api/settings', settings);
-};
+export const setSettings = (settings: Partial<Settings>) => apiClient.post('/api/settings', settings);

@@ -2,8 +2,6 @@ import React from 'react';
 import cn from 'classnames';
 import Button, { ButtonSize, ButtonType, ButtonView } from '@ui/Button';
 
-import styles from './Server.module.css';
-import { useAppDispatch } from '../../app/hooks';
 import {
   installServerAC,
   startServerAC,
@@ -14,6 +12,8 @@ import { removeServerAC } from '@modules/servers/serversSlice';
 import Switch from '@ui/Switch';
 import Label from '@ui/Label';
 import { ServerStatus } from '@rana-mc/types';
+import { useAppDispatch } from '../../app/hooks';
+import styles from './Server.module.css';
 
 type Props = {
   server: Server;
@@ -22,23 +22,22 @@ type Props = {
 const Server = ({ server }: Props) => {
   const dispatch = useAppDispatch();
 
-  const availableToEdit =
-    server.status === ServerStatus.Created ||
-    server.status === ServerStatus.Stopped;
+  const availableToEdit = server.status === ServerStatus.Created
+    || server.status === ServerStatus.Stopped;
 
-  const handleInstall = (server: Server) => () => {
+  const handleInstall = () => () => {
     dispatch(installServerAC(server));
   };
 
-  const handleStart = (server: Server) => () => {
+  const handleStart = () => () => {
     dispatch(startServerAC(server));
   };
 
-  const handleStop = (server: Server) => () => {
+  const handleStop = () => () => {
     dispatch(stopServerAC(server));
   };
 
-  const handleRemove = (server: Server) => () => {
+  const handleRemove = () => () => {
     dispatch(removeServerAC(server));
   };
 
@@ -49,23 +48,42 @@ const Server = ({ server }: Props) => {
   return (
     <div key={server.id} className={cn(styles.server)}>
       <div className={cn(styles.values, { [styles.values]: !availableToEdit })}>
-        <span className={cn(styles.value)}>id: {server.id}</span>
-        <span className={cn(styles.value)}>name: {server.name}</span>
         <span className={cn(styles.value)}>
-          gameVersion: {server.gameVersion}
+          id:
+          {server.id}
         </span>
         <span className={cn(styles.value)}>
-          gameVersionTypeId: {server.gameVersionTypeId}
-        </span>
-        <span className={cn(styles.value)}>core: {server.core.type}</span>
-        <span className={cn(styles.value)}>
-          coreVersion: {server.core.coreVersion}
+          name:
+          {server.name}
         </span>
         <span className={cn(styles.value)}>
-          installerUrl: {server.core.installerUrl}
+          gameVersion:
+          {' '}
+          {server.gameVersion}
         </span>
         <span className={cn(styles.value)}>
-          status: {server.status || 'unknown'}
+          gameVersionTypeId:
+          {' '}
+          {server.gameVersionTypeId}
+        </span>
+        <span className={cn(styles.value)}>
+          core:
+          {server.core.type}
+        </span>
+        <span className={cn(styles.value)}>
+          coreVersion:
+          {' '}
+          {server.core.coreVersion}
+        </span>
+        <span className={cn(styles.value)}>
+          installerUrl:
+          {' '}
+          {server.core.installerUrl}
+        </span>
+        <span className={cn(styles.value)}>
+          status:
+          {' '}
+          {server.status || 'unknown'}
         </span>
       </div>
       <div className={cn(styles.buttons)}>
@@ -74,21 +92,21 @@ const Server = ({ server }: Props) => {
           size={ButtonSize.Small}
           type={ButtonType.Secondary}
           text="Install"
-          onClick={handleInstall(server)}
+          onClick={handleInstall}
         />
         <Button
           className={cn(styles.button)}
           size={ButtonSize.Small}
           type={ButtonType.Secondary}
           text="Start"
-          onClick={handleStart(server)}
+          onClick={handleStart}
         />
         <Button
           className={cn(styles.button)}
           size={ButtonSize.Small}
           type={ButtonType.Secondary}
           text="Stop"
-          onClick={handleStop(server)}
+          onClick={handleStop}
         />
         <Button
           className={cn(styles.button)}
@@ -96,7 +114,7 @@ const Server = ({ server }: Props) => {
           type={ButtonType.Secondary}
           view={ButtonView.Danger}
           text="Remove"
-          onClick={handleRemove(server)}
+          onClick={handleRemove}
         />
         <div>
           <Label text="EULA?" />
