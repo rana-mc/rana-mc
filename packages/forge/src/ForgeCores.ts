@@ -5,11 +5,11 @@ import { Logger } from './Logger';
 import { parseCoresFromHTML } from './utils/parse';
 
 export class ForgeCores {
-
   public static TAG = 'ForgeCores';
+
   public static logger: Logger = new Logger(ForgeCores.TAG);
 
-  private baseUrl: string = `https://files.minecraftforge.net/net/minecraftforge/forge/`;
+  private baseUrl: string = 'https://files.minecraftforge.net/net/minecraftforge/forge/';
 
   getVersionCoresUrl(version: string) {
     const htmlForVersion = `index_${version}.html`;

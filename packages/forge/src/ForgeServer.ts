@@ -1,16 +1,18 @@
-import { ServerEvents } from "@rana-mc/types";
-import { ChildProcess } from "child_process";
-import EventEmitter from "events";
-import { Logger } from "./Logger";
-import ServerWorkspace from "./ServerWorkspace";
+import { ServerEvents } from '@rana-mc/types';
+import { ChildProcess } from 'child_process';
+import EventEmitter from 'events';
+import { Logger } from './Logger';
+import ServerWorkspace from './ServerWorkspace';
 
 export class ForgeServer extends EventEmitter {
-
-  public static TAG = "ForgeServer";
+  public static TAG = 'ForgeServer';
 
   private logger: Logger;
+
   private server: Server;
-  private process: ChildProcess
+
+  private process: ChildProcess;
+
   private workspace: ServerWorkspace;
 
   constructor(server: Server) {
@@ -21,7 +23,7 @@ export class ForgeServer extends EventEmitter {
     this.logger = new Logger(this.getTag());
   }
 
-  public get id() { return this.server.id }
+  public get id() { return this.server.id; }
 
   /**
    * Install server core.
@@ -37,7 +39,7 @@ export class ForgeServer extends EventEmitter {
     await installer.download();
     this.logger.log('Downloading...');
 
-    const command = installer.command;
+    const { command } = installer;
     this.logger.log(`Install with: ${command}`);
 
     const process = installer.exec();
@@ -63,7 +65,7 @@ export class ForgeServer extends EventEmitter {
     const core = this.workspace.getCore();
     this.logger.log(`Starting...: ${core.filename}`);
 
-    const command = core.command;
+    const { command } = core;
     this.logger.log(`Start with: ${command}`);
 
     const process = core.exec();
@@ -75,7 +77,7 @@ export class ForgeServer extends EventEmitter {
         this.emit(ServerEvents.Started);
         this.emit(ServerEvents.StartTime, this.parseServerStartTime(message));
       }
-    })
+    });
 
     process.stdout.on('data', (message) => {
       this.logger.log(`(ServerEvent): name = ${ServerEvents.Logs}, message = ${message}`);
@@ -146,7 +148,7 @@ export class ForgeServer extends EventEmitter {
     this.logger.log(`Accepting EULA...: ${accept}`);
     this.emit(ServerEvents.EulaChanged, accept);
 
-    return await this.workspace.acceptEULA(accept);
+    return this.workspace.acceptEULA(accept);
   }
 
   /**
@@ -160,7 +162,7 @@ export class ForgeServer extends EventEmitter {
    * Return tag for logger. Like ForgeServer-123;
    */
   public getTag() {
-    return `${ForgeServer.TAG}-${this.id}`
+    return `${ForgeServer.TAG}-${this.id}`;
   }
 
   /**
