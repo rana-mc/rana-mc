@@ -7,7 +7,9 @@
   "scripts": {
     "postinstall": "tsc",
     "build": "tsc",
-    "prestart": "tsc"
+    "prestart": "tsc",
+    "start": "",
+    "watch": ""
   },
   "license": "MIT",
   "publishConfig": {

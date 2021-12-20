@@ -41,6 +41,7 @@
   "scripts": {
     "postinstall": "craco build",
     "start": "craco start",
+    "watch": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"

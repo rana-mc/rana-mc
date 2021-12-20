@@ -12,7 +12,8 @@
     "postinstall": "tsc",
     "build": "tsc",
     "prestart": "tsc",
-    "start": "node --es-module-specifier-resolution=node build/main.js"
+    "start": "node --es-module-specifier-resolution=node build/main.js",
+    "watch": ""
   },
   "dependencies": {
     "@rana-mc/api": "^0.0.7-alpha.0",

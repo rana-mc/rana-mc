@@ -6,6 +6,7 @@
   "scripts": {
     "build": "lerna run build",
     "start": "lerna run --parallel --ignore @rana-mc/cli start",
+    "watch": "lerna run --parallel --ignore @rana-mc/cli watch",
     "bootstrap": "lerna bootstrap",
     "release": "lerna version && lerna publish from-package"
   },
