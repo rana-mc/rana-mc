@@ -8,14 +8,14 @@
     "postinstall": "tsc",
     "build": "tsc",
     "prestart": "tsc",
-    "start": "",
-    "watch": ""
+    "watch": "tsc-watch --onSuccess \"node --es-module-specifier-resolution=node build/main.js\""
   },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
+    "tsc-watch": "^4.6.0",
     "typescript": "^4.5.2"
   }
 }
