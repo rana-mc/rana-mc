@@ -26,7 +26,7 @@ const ServersList = () => {
   return (
     <div className={cn(styles.serversList)}>
       {servers.map((server) => (
-        <Server server={server} />
+        <Server key={server.id} server={server} />
       ))}
       <ServerLogs />
     </div>
