@@ -1,73 +1,73 @@
-import { JSONFile, Low } from "lowdb";
+import { JSONFile, Low } from 'lowdb';
 
-type SettingsHandler = (settings: Settings) => void
+type SettingsHandler = (settings: Settings) => void;
 
 export default class RanaDB {
-    public static DB_PATH = './db.json';
-    public static DB_DEFAULT: RanaDBData = { servers: [], settings: {} };
+  public static DB_PATH = './db.json';
 
-    private db: Low<RanaDBData>;
-    private settingsHandler: SettingsHandler;
+  public static DB_DEFAULT: RanaDBData = { servers: [], settings: {} };
 
-    constructor() { }
+  private db: Low<RanaDBData>;
 
-    async init() {
-        const adapter = new JSONFile<RanaDBData>(RanaDB.DB_PATH);
-        const db = new Low<RanaDBData>(adapter)
+  private settingsHandler: SettingsHandler;
 
-        this.db = db;
-        await db.read();
+  async init() {
+    const adapter = new JSONFile<RanaDBData>(RanaDB.DB_PATH);
+    const db = new Low<RanaDBData>(adapter);
 
-        this.db.data = this.db.data || RanaDB.DB_DEFAULT;
-        await this.db.write();
-    }
+    this.db = db;
+    await db.read();
 
-    getServers() {
-        return this.db.data.servers || [];
-    }
+    this.db.data = this.db.data || RanaDB.DB_DEFAULT;
+    await this.db.write();
+  }
 
-    async addServer(server: Server) {
-        this.db.data.servers.push(server);
-        return await this.db.write();
-    }
+  getServers() {
+    return this.db.data.servers || [];
+  }
 
-    getSettings() {
-        return this.db.data.settings;
-    }
+  async addServer(server: Server) {
+    this.db.data.servers.push(server);
+    return this.db.write();
+  }
 
-    async setSettings(settings: Partial<Settings>) {
-        this.db.data.settings = {
-            ...this.db.data.settings,
-            ...settings
-        };
+  getSettings() {
+    return this.db.data.settings;
+  }
 
-        this.settingsHandler && this.settingsHandler(settings);
-
-        return await this.db.write();
-    }
-
-    async removeServer(serverId: string) {
-        this.db.data.servers =
-            this.db.data.servers.filter(server => server.id !== serverId);
-
-        return await this.db.write();
-    }
-
-    findServer(serverId: string) {
-        return this.db.data.servers.find(server => server.id === serverId);
-    }
-
-    async updateServer(updatedServer: Server) {
-        this.db.data.servers = this.db.data.servers.map((server) => {
-            return server.id === updatedServer.id ? { ...server, ...updatedServer } : server;
-        });
-
-        return await this.db.write();
-    }
-
-    setSettingsHandler(handler: SettingsHandler) {
-        this.settingsHandler = handler;
+  async setSettings(settings: Partial<Settings>) {
+    this.db.data.settings = {
+      ...this.db.data.settings,
+      ...settings,
     };
+
+    if (this.settingsHandler)
+      this.settingsHandler(settings);
+
+    return this.db.write();
+  }
+
+  async removeServer(serverId: string) {
+    this.db.data.servers = this.db.data.servers.filter((server) => server.id !== serverId);
+
+    return this.db.write();
+  }
+
+  findServer(serverId: string) {
+    return this.db.data.servers.find((server) => server.id === serverId);
+  }
+
+  async updateServer(updatedServer: Server) {
+    this.db.data.servers = this.db.data.servers.map(
+      (server) => (server.id === updatedServer.id ? { ...server, ...updatedServer } : server),
+    );
+
+    return this.db.write();
+  }
+
+  setSettingsHandler(handler: SettingsHandler) {
+    this.settingsHandler = handler;
+  }
 }
 
 export const ranaDB = new RanaDB();

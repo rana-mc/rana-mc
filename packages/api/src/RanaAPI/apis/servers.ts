@@ -2,11 +2,10 @@ import RanaDB, { ranaDB } from '../../RanaDB/RanaDB';
 import APIRoute from '../APIRoute';
 
 export default class ServersAPI extends APIRoute {
-
   ranaDB: RanaDB;
 
   get TAG() {
-    return "RanaAPI-servers";
+    return 'RanaAPI-servers';
   }
 
   constructor() {
@@ -18,7 +17,7 @@ export default class ServersAPI extends APIRoute {
 
   init = async () => {
     this.useServers();
-  }
+  };
 
   useServers() {
     this.router.get('/servers', async (req, res) => {
@@ -31,7 +30,7 @@ export default class ServersAPI extends APIRoute {
       await this.ranaDB.addServer(server);
 
       const servers = await this.ranaDB.getServers();
-      res.send(servers);
+      return res.send(servers);
     });
 
     this.router.delete('/servers/:id', async (req, res) => {
@@ -39,16 +38,21 @@ export default class ServersAPI extends APIRoute {
       await this.ranaDB.removeServer(serverId);
 
       const servers = await this.ranaDB.getServers();
-      res.send(servers);
+      return res.send(servers);
     });
 
     this.router.put('/servers/:id', async (req, res) => {
-      const serverId = req.params.id;
       const server: Server = req.body;
+      const serverId = req.params.id;
+
+      if (serverId !== server.id) {
+        return res.sendStatus(403);
+      }
+
       await this.ranaDB.updateServer(server);
 
       const servers = await this.ranaDB.getServers();
-      res.send(servers);
+      return res.send(servers);
     });
   }
 }

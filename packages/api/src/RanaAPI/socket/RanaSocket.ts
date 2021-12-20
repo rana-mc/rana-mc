@@ -1,15 +1,16 @@
-import EventEmitter from "events";
-import { Server as SocketIOServer } from 'socket.io'
-import { Server as HTTPServer } from 'http'
-import { Logger } from '../Logger';
+import EventEmitter from 'events';
+import { Server as SocketIOServer } from 'socket.io';
+import { Server as HTTPServer } from 'http';
 import { FabricServer } from '@rana-mc/fabric';
 import { ForgeServer } from '@rana-mc/forge';
-import { RanaSocketEvents, ServerActions, ServerCoreType, ServerEvents, ServerStatus } from '@rana-mc/types';
+import {
+  RanaSocketEvents, ServerActions, ServerCoreType, ServerEvents, ServerStatus,
+} from '@rana-mc/types';
+import { Logger } from '../Logger';
 
 type RanaServer = ForgeServer | FabricServer;
 
 export default class RanaSocket extends EventEmitter {
-
   public static TAG = 'RanaSocket';
 
   // FYI: What will be better? Maybe { [serverId: string]:  RanaServer }?
@@ -18,24 +19,24 @@ export default class RanaSocket extends EventEmitter {
   // FYI: Better naming? serversData serverDatas?
   private data: Server[];
 
-  private socket: SocketIOServer
+  private socket: SocketIOServer;
+
   private logger: Logger;
 
   constructor(server: HTTPServer) {
     super();
 
-    this.logger = new Logger(RanaSocket.TAG)
+    this.logger = new Logger(RanaSocket.TAG);
     this.socket = new SocketIOServer(server, {
-      cors: { origin: "*" }
+      cors: { origin: '*' },
     });
 
     this.init();
   }
 
   private init = () => {
-
     /** Socket client actions. */
-    this.socket.on('connection', client => {
+    this.socket.on('connection', (client) => {
       this.logger.log('Client connected');
 
       client.on(ServerActions.InstallCore, this.installServerCore.bind(this));
@@ -55,7 +56,7 @@ export default class RanaSocket extends EventEmitter {
     /** Utility actions. */
     this.on(RanaSocketEvents.ClientServerUpdate, this.onClientServerUpdate.bind(this));
     this.on(RanaSocketEvents.SocketServersFlush, this.onSocketServersFlush.bind(this));
-  }
+  };
 
   /**
    * Init this.servers and create listeners.
@@ -63,7 +64,7 @@ export default class RanaSocket extends EventEmitter {
   public initServers = (servers: Server[]) => {
     this.data = servers;
     this.servers = servers.map(this.createServer.bind(this));
-  }
+  };
 
   /**
    * At first, we should to install server core.
@@ -118,18 +119,14 @@ export default class RanaSocket extends EventEmitter {
    * Get RanaServer by .id of Server.
    */
   private getServer(server: Server): RanaServer {
-    return this.servers.find((_server: RanaServer) => {
-      return _server.id === server.id;
-    });
+    return this.servers.find((_server: RanaServer) => _server.id === server.id);
   }
 
   /**
    * Get data (Server) by .id of RanaServer.
    */
   private getServerData(server: RanaServer): Server {
-    return this.data.find((_server: Server) => {
-      return _server.id === server.id;
-    });
+    return this.data.find((_server: Server) => _server.id === server.id);
   }
 
   /**
@@ -145,7 +142,7 @@ export default class RanaSocket extends EventEmitter {
   private onSocketServersFlush(servers: Server[]) {
     this.data = servers;
     this.servers = servers.map((_server) => {
-      const ranaServer = this.servers.find(_ranaServer => _ranaServer.id === _server.id);
+      const ranaServer = this.servers.find((_ranaServer) => _ranaServer.id === _server.id);
       return ranaServer ? ranaServer.update(_server) : this.createServer(_server);
     });
   }
@@ -175,7 +172,7 @@ export default class RanaSocket extends EventEmitter {
    */
   private updateServerStartTimes(server: RanaServer, startTime: boolean) {
     const data = this.getServerData(server);
-    const update = { id: data.id, startTimes: [...data.startTimes || [], startTime] }
+    const update = { id: data.id, startTimes: [...data.startTimes || [], startTime] };
 
     this.emit(RanaSocketEvents.ServerUpdate, update);
   }
@@ -185,10 +182,11 @@ export default class RanaSocket extends EventEmitter {
    * Events by ServerEvents.
    */
   private appendListeners(server: RanaServer) {
-
     /** Events for update server in RanaDB. */
-    server.on(ServerEvents.CoreInstalling, () => this.updateServerStatus(server, ServerStatus.CoreInstalling));
-    server.on(ServerEvents.CoreInstalled, () => this.updateServerStatus(server, ServerStatus.CoreInstalled));
+    server.on(ServerEvents.CoreInstalling, () =>
+      this.updateServerStatus(server, ServerStatus.CoreInstalling));
+    server.on(ServerEvents.CoreInstalled, () =>
+      this.updateServerStatus(server, ServerStatus.CoreInstalled));
     server.on(ServerEvents.Starting, () => this.updateServerStatus(server, ServerStatus.Starting));
     server.on(ServerEvents.Started, () => this.updateServerStatus(server, ServerStatus.Started));
     server.on(ServerEvents.Stopping, () => this.updateServerStatus(server, ServerStatus.Stopping));
@@ -197,12 +195,14 @@ export default class RanaSocket extends EventEmitter {
 
     /** Utility events. */
     server.on(ServerEvents.Crashed, () => this.updateServerStatus(server, ServerStatus.Stopped));
-    server.on(ServerEvents.StartTime, (startTime) => this.updateServerStartTimes(server, startTime));
+    server.on(ServerEvents.StartTime, (startTime) =>
+      this.updateServerStartTimes(server, startTime));
     server.on(ServerEvents.EulaChanged, (eula) => this.updateServerEULA(server, eula));
     server.on(ServerEvents.Removed, () => this.removeServerInstance(server));
 
     /** Events for sending info to socket clients. Like logs. */
-    server.on(ServerEvents.Logs, (message) => this.socket.emit(ServerEvents.Logs, server.id, message));
+    server.on(ServerEvents.Logs, (message) =>
+      this.socket.emit(ServerEvents.Logs, server.id, message));
   }
 
   /**
@@ -210,6 +210,7 @@ export default class RanaSocket extends EventEmitter {
    * Return ForgeServer, FabricServer, etc.
    */
   private createServer(server: Server) {
+    // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
     let _server = null;
 
     // TODO: Make it by switch and case? Or function?
@@ -231,7 +232,7 @@ export default class RanaSocket extends EventEmitter {
    * Remove server instance from this.servers after workspace.clear().
    */
   private removeServerInstance(server: RanaServer) {
-    this.servers = this.servers.filter(_server => _server.id !== server.id);
+    this.servers = this.servers.filter((_server) => _server.id !== server.id);
     this.flushServers();
   }
 }

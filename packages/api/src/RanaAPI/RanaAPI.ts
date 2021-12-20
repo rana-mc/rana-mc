@@ -1,8 +1,9 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { createServer as createHTTPServer, Server as HTTPServer } from 'http'
+import { createServer as createHTTPServer, Server as HTTPServer } from 'http';
 
+import { RanaSocketEvents } from '@rana-mc/types';
 import { Logger } from './Logger';
 import CoresAPI from './apis/cores';
 import SettingsAPI from './apis/settings';
@@ -10,18 +11,22 @@ import VersionsAPI from './apis/versions';
 import ServersAPI from './apis/servers';
 import RanaSocket from './socket/RanaSocket';
 import RanaDB, { ranaDB } from '../RanaDB/RanaDB';
-import { RanaSocketEvents } from '@rana-mc/types';
 
 export default class RanaAPI {
-
   public static TAG = 'RanaAPI';
+
   public static ENDPOINT = '/api';
+
   public static PORT: number = 3001;
 
   private logger: Logger;
+
   private server: HTTPServer;
+
   private app: Express;
+
   private ranaSocket: RanaSocket;
+
   private ranaDB: RanaDB;
 
   constructor() {
@@ -67,7 +72,7 @@ export default class RanaAPI {
     this.ranaSocket.initServers(this.ranaDB.getServers());
 
     this.ranaSocket.on(RanaSocketEvents.ServerUpdate, async (server) => {
-      await this.ranaDB.updateServer(server)
+      await this.ranaDB.updateServer(server);
 
       const updated = this.ranaDB.findServer(server.id);
       this.logger.log(`(ServerUpdate): ${JSON.stringify(updated)}`);

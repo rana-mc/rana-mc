@@ -2,11 +2,10 @@ import RanaDB, { ranaDB } from '../../RanaDB/RanaDB';
 import APIRoute from '../APIRoute';
 
 export default class SettingsAPI extends APIRoute {
-
   ranaDB: RanaDB;
 
   get TAG() {
-    return "RanaAPI-settings";
+    return 'RanaAPI-settings';
   }
 
   constructor() {
@@ -18,7 +17,7 @@ export default class SettingsAPI extends APIRoute {
 
   init = async () => {
     this.useSettings();
-  }
+  };
 
   useSettings() {
     this.router.get('/settings', async (req, res) => {
@@ -27,7 +26,7 @@ export default class SettingsAPI extends APIRoute {
     });
 
     this.router.post('/settings', async (req, res) => {
-      const body: Partial<Settings> = req.body;
+      const { body } = req;
       await this.ranaDB.setSettings(body);
 
       const settings = await this.ranaDB.getSettings();

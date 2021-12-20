@@ -3,12 +3,12 @@ import RanaDB, { ranaDB } from '../../RanaDB/RanaDB';
 import APIRoute from '../APIRoute';
 
 export default class VersionsAPI extends APIRoute {
-
   ranaDB: RanaDB;
+
   curseForge: CurseForge;
 
   get TAG() {
-    return "RanaAPI-versions";
+    return 'RanaAPI-versions';
   }
 
   constructor() {
@@ -23,7 +23,7 @@ export default class VersionsAPI extends APIRoute {
     this.useVersions();
     this.useVersionTypes();
     this.applySettingsHandler();
-  }
+  };
 
   applySettings() {
     const settings = this.ranaDB.getSettings();
@@ -45,7 +45,7 @@ export default class VersionsAPI extends APIRoute {
       const versions = await this.curseForge.getGameVersions();
 
       if (!versions) return res.sendStatus(500);
-      res.send(versions);
+      return res.send(versions);
     });
   }
 
@@ -54,7 +54,7 @@ export default class VersionsAPI extends APIRoute {
       const versionTypes = await this.curseForge.getVersionTypes();
 
       if (!versionTypes) return res.sendStatus(500);
-      res.send(versionTypes);
+      return res.send(versionTypes);
     });
   }
 }
