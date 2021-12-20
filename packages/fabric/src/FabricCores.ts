@@ -4,11 +4,11 @@ import { fabricLocalDB } from './FabricLocalDB';
 import { Logger } from './Logger';
 
 export class FabricCores {
-
   public static TAG = 'FabricCores';
+
   public static logger: Logger = new Logger(FabricCores.TAG);
 
-  private baseUrl: string = `https://meta.fabricmc.net/v2/versions/installer`;
+  private baseUrl: string = 'https://meta.fabricmc.net/v2/versions/installer';
 
   async getCores(refresh?: boolean) {
     const coresFromDB = fabricLocalDB.getFabricCores();
@@ -22,7 +22,7 @@ export class FabricCores {
         coreVersion: core.version,
         installerUrl: core.url,
         maven: core.maven,
-        stable: core.stable
+        stable: core.stable,
       }));
 
       fabricLocalDB.setFabricCores(convertedCores);

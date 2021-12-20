@@ -1,3 +1,3 @@
 type FabricLocalDBData = {
   cores: FabricCore[];
-}
+};

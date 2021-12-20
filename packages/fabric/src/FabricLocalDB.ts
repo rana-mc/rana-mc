@@ -1,34 +1,35 @@
-import { JSONFile, Low } from "lowdb";
+import { JSONFile, Low } from 'lowdb';
 
 export default class FabricLocalDB {
-    public static PATH = './fabric.db.json';
-    public static DEFAULTS: FabricLocalDBData = { cores: null };
+  public static PATH = './fabric.db.json';
 
-    private db: Low<FabricLocalDBData>;
+  public static DEFAULTS: FabricLocalDBData = { cores: null };
 
-    constructor() {
-        this.init();
-    }
+  private db: Low<FabricLocalDBData>;
 
-    async init() {
-        const adapter = new JSONFile<FabricLocalDBData>(FabricLocalDB.PATH);
-        const db = new Low<FabricLocalDBData>(adapter)
+  constructor() {
+    this.init();
+  }
 
-        this.db = db;
-        await this.db.read();
+  async init() {
+    const adapter = new JSONFile<FabricLocalDBData>(FabricLocalDB.PATH);
+    const db = new Low<FabricLocalDBData>(adapter);
 
-        this.db.data = this.db.data || FabricLocalDB.DEFAULTS;
-        await this.db.write();
-    }
+    this.db = db;
+    await this.db.read();
 
-    getFabricCores(): FabricCore[] | null {
-        return this.db.data.cores || null;
-    }
+    this.db.data = this.db.data || FabricLocalDB.DEFAULTS;
+    await this.db.write();
+  }
 
-    async setFabricCores(cores: FabricCore[]) {
-        this.db.data.cores = cores;
-        return await this.db.write();
-    }
+  getFabricCores(): FabricCore[] | null {
+    return this.db.data.cores || null;
+  }
+
+  async setFabricCores(cores: FabricCore[]) {
+    this.db.data.cores = cores;
+    return this.db.write();
+  }
 }
 
 export const fabricLocalDB = new FabricLocalDB();
