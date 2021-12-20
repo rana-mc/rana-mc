@@ -1,6 +1,27 @@
 {
   "extends": ["airbnb", "airbnb-typescript"],
+  "plugins": [
+    "react-hooks"
+  ],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "../../packages/web/tsconfig.json"
+  },
+  "rules": {
+    "import/no-cycle": 0,
+    "no-param-reassign": 0,
+    "radix": 0,
+    "no-console": 0,
+    "implicit-arrow-linebreak": 0,
+    "import/prefer-default-export": 0,
+    "react/require-default-props": 0,
+    "react/button-has-type": 0,
+    "func-names": 0,
+    "react/function-component-definition": [
+      1,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
   }
 }
