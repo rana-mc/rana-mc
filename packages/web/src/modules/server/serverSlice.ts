@@ -78,7 +78,7 @@ export const selectServerActionStatus = (state: RootState) => state.server.statu
 export const startListenSocket = (): AppThunk => (
   dispatch,
 ) => {
-  ranaSocket.on(RanaSocketEvents.ServerUpdate, (server) => {
+  ranaSocket.on(RanaSocketEvents.ServerUpdate, (server: Server) => {
     dispatch(updateServerState(server));
   });
 };

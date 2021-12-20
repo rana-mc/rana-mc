@@ -25,19 +25,19 @@ const Server = ({ server }: Props) => {
   const availableToEdit = server.status === ServerStatus.Created
     || server.status === ServerStatus.Stopped;
 
-  const handleInstall = () => () => {
+  const handleInstall = () => {
     dispatch(installServerAC(server));
   };
 
-  const handleStart = () => () => {
+  const handleStart = () => {
     dispatch(startServerAC(server));
   };
 
-  const handleStop = () => () => {
+  const handleStop = () => {
     dispatch(stopServerAC(server));
   };
 
-  const handleRemove = () => () => {
+  const handleRemove = () => {
     dispatch(removeServerAC(server));
   };
 
