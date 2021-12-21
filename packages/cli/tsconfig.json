@@ -1,16 +1,7 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "build",
-    "declaration": true,
-    "target": "esnext",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "outDir": "build"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

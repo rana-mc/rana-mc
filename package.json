@@ -7,7 +7,7 @@
     "build": "lerna run build",
     "start": "lerna run --parallel --ignore @rana-mc/cli start",
     "watch": "lerna run --parallel --ignore @rana-mc/cli watch",
-    "lint": "lerna run --parallel lint",
+    "lint": "lerna exec --parallel eslint src",
     "bootstrap": "lerna bootstrap",
     "release": "lerna version && lerna publish from-package"
   },
@@ -21,5 +21,17 @@
   },
   "dependencies": {
     "lerna": "^4.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0"
   }
 }
