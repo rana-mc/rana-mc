@@ -1,13 +1,13 @@
+<br/>
 <p align="center">
   <a href="https://github.com/rana-mc">
     <img alt="rana-mc" src="https://raw.githubusercontent.com/rana-mc/logo/master/logo.png" width="146">
   </a>
 </p>
-
+<br />
 <p align="center">
  Free and opensource panel for minecraft servers. Find, download and install cores. Add mods, edit settings.
 </p>
-
 <br/>
 
 ### Status:
