@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io-client';
 
 const SOCKET_URL = 'http://localhost:3001';
-const SOCKET_MOCK = { emit: () => { }, on: () => { } };
+const SOCKET_MOCK = { emit: () => {}, on: () => {} };
 
 // eslint-disable-next-line import/no-mutable-exports
 export let ranaSocket: Socket | typeof SOCKET_MOCK = SOCKET_MOCK;
