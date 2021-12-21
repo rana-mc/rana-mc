@@ -1,15 +1,16 @@
-import axios, { AxiosInstance } from "axios";
-import APIUrls from "./APIUrls";
-import { curseForgeLocalDB } from "./CurseForgeLocalDB";
-import { Logger } from "./Logger";
+import axios, { AxiosInstance } from 'axios';
+import APIUrls from './APIUrls';
+import { curseForgeLocalDB } from './CurseForgeLocalDB';
+import { Logger } from './Logger';
 
 // TODO: handle no apiKey case
 export class CurseForge {
-
-  public static TAG: string = "CurseForge";
+  public static TAG: string = 'CurseForge';
 
   private logger: Logger = new Logger(CurseForge.TAG);
+
   private apiKey: string;
+
   private apiClient: AxiosInstance;
 
   constructor(apiKey?: string) {
@@ -64,9 +65,9 @@ export class CurseForge {
   }
 
   updateApiKey(apiKey: string) {
-    this.logger.log(`call updateApiKey`);
+    this.logger.log('call updateApiKey');
     this.apiClient.defaults.headers.common = {
-      'x-api-key': apiKey
+      'x-api-key': apiKey,
     };
   }
 }

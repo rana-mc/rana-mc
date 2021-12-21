@@ -3,6 +3,7 @@
   "extends": ["airbnb-base", "airbnb-typescript/base"],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "quotes": [2, "single"],
     "radix": 0,
     "curly": 0,
     "no-console": 0,
@@ -13,6 +14,7 @@
     "func-names": 0,
     "implicit-arrow-linebreak": 0,
     "import/prefer-default-export": 0,
-    "import/no-cycle": 0
+    "import/no-cycle": 0,
+    "import/extensions": 0
   }
 }

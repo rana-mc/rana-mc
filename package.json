@@ -7,7 +7,8 @@
     "build": "lerna run build",
     "start": "lerna run --parallel --ignore @rana-mc/cli start",
     "watch": "lerna run --parallel --ignore @rana-mc/cli watch",
-    "lint": "lerna exec --parallel eslint src",
+    "lint": "lerna exec --parallel \"eslint src\"",
+    "lint:fix": "lerna exec --parallel \"eslint src --fix\"",
     "bootstrap": "lerna bootstrap",
     "release": "lerna version && lerna publish from-package"
   },

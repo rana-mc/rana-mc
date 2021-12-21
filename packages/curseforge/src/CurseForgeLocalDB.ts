@@ -1,9 +1,9 @@
-import { JSONFile, Low } from "lowdb";
+import { JSONFile, Low } from 'lowdb';
 
 export default class CurseForgeLocalDB {
   public static PATH = './curseforge.db.json';
-  public static DEFAULTS: CurseForgeLocalDBData =
-    { gameVersions: [], versionTypes: [] };
+
+  public static DEFAULTS: CurseForgeLocalDBData = { gameVersions: [], versionTypes: [] };
 
   private db: Low<CurseForgeLocalDBData>;
 
@@ -13,7 +13,7 @@ export default class CurseForgeLocalDB {
 
   async init() {
     const adapter = new JSONFile<CurseForgeLocalDBData>(CurseForgeLocalDB.PATH);
-    const db = new Low<CurseForgeLocalDBData>(adapter)
+    const db = new Low<CurseForgeLocalDBData>(adapter);
 
     this.db = db;
     await this.db.read();
@@ -28,7 +28,7 @@ export default class CurseForgeLocalDB {
 
   async setGameVersions(gameVersions: GameVersion[]) {
     this.db.data.gameVersions = gameVersions;
-    return await this.db.write();
+    return this.db.write();
   }
 
   getVersionTypes() {
@@ -37,7 +37,7 @@ export default class CurseForgeLocalDB {
 
   async setVersionTypes(versionTypes: VersionType[]) {
     this.db.data.versionTypes = versionTypes;
-    return await this.db.write();
+    return this.db.write();
   }
 }
 
