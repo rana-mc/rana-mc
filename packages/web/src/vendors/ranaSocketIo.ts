@@ -10,7 +10,9 @@ export const startListenRanaSocketIo = () => {
     // @ts-ignore
     ranaSocket = io(SOCKET_URL);
   } catch (e: unknown) {
-    if (typeof e === "string") alert(e);
+    // eslint-disable-next-line no-alert
+    if (typeof e === 'string') alert(e);
+    // eslint-disable-next-line no-alert
     else if (e instanceof Error) alert(e.message);
   }
 };
