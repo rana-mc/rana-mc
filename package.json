@@ -4,7 +4,7 @@
   "main": "index.js",
   "author": "Evgeny Bykovskikh <redzumi.tao@gmail.com>",
   "scripts": {
-    "prepare": "husky install",
+    "postinstall": "husky install",
     "build": "lerna run build",
     "start": "lerna run --parallel --ignore @rana-mc/cli start",
     "watch": "lerna run --parallel --ignore @rana-mc/cli watch",

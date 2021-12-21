@@ -5,3 +5,4 @@ db.json
 *.db.json
 .DS_Store
 .vscode
+.husky
