@@ -7,7 +7,7 @@ import Button from '@ui/Button';
 
 import Label from '@ui/Label';
 import Input from '@ui/Input';
-import styles from './CreateServer.module.css';
+import styles from './ServerCreate.module.css';
 
 const CreateServer = () => {
   const [id, setId] = useState('');

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import CreateServer from '@modules/servers/CreateServer';
+import CreateServer from '@modules/servers/ServerCreate';
 
 import './App.css';
 import ServersList from '@modules/servers/ServersList';
