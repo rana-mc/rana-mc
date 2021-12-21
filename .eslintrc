@@ -7,6 +7,7 @@
     "radix": 0,
     "curly": 0,
     "no-console": 0,
+    "no-tabs": 0,
     "no-underscore-dangle": "warn",
     "no-param-reassign": 0,
     "nonblock-statement-body-position": 0,
@@ -15,6 +16,7 @@
     "implicit-arrow-linebreak": 0,
     "import/prefer-default-export": 0,
     "import/no-cycle": 0,
-    "import/extensions": 0
+    "import/extensions": 0,
+    "@typescript-eslint/comma-dangle": [2, "only-multiline"]
   }
 }

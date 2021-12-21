@@ -1,18 +1,19 @@
 {
-  "extends": ["airbnb", "airbnb-typescript", "../../.eslintrc"],
-  "plugins": ["react-hooks"],
-  "parserOptions": {
-    "project": ["tsconfig.json"]
-  },
-  "rules": {
-    "react/require-default-props": 0,
-    "react/button-has-type": 0,
-    "react/function-component-definition": [
-      1,
-      {
-        "namedComponents": "arrow-function",
-        "unnamedComponents": "arrow-function"
-      }
-    ]
-  }
+	"extends": ["airbnb", "airbnb-typescript", "../../.eslintrc"],
+	"plugins": ["react-hooks"],
+	"parserOptions": {
+		"project": ["tsconfig.json"]
+	},
+	"rules": {
+		"react/jsx-indent": [2, "tab"],
+		"react/require-default-props": 0,
+		"react/button-has-type": 0,
+		"react/function-component-definition": [
+			1,
+			{
+				"namedComponents": "arrow-function",
+				"unnamedComponents": "arrow-function"
+			}
+		]
+	}
 }
