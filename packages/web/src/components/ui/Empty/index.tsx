@@ -12,10 +12,7 @@ type Props = {
 };
 
 const Empty = ({
-  select = false,
-  size = 'm',
-  text = '',
-  textOnly = false,
+  select = false, size = 'm', text = '', textOnly = false
 }: Props) => {
   // eslint-disable-next-line global-require
   const emptyIconSVG = require('./assets/undraw_empty_re_opql.svg').default;
@@ -44,17 +41,14 @@ const Empty = ({
     return (
       <div className={cn(styles.empty, styles[`size-${size}`])}>
         <div className={cn(styles.icon)}>
-          <ReactSVG
-            className={cn({ [styles.withText]: text })}
-            src={selectIconSVG}
-          />
+          <ReactSVG className={cn({ [styles.withText]: text })} src={selectIconSVG} />
         </div>
         {text && (
-        <span className={cn(styles.title)}>
-          {text}
-          {' '}
-          😏
-        </span>
+          <span className={cn(styles.title)}>
+            {text}
+            {' '}
+            😏
+          </span>
         )}
       </div>
     );
@@ -63,17 +57,14 @@ const Empty = ({
   return (
     <div className={cn(styles.empty, styles[`size-${size}`])}>
       <div className={cn(styles.icon)}>
-        <ReactSVG
-          className={cn({ [styles.withText]: text })}
-          src={emptyIconSVG}
-        />
+        <ReactSVG className={cn({ [styles.withText]: text })} src={emptyIconSVG} />
       </div>
       {text && (
-      <span className={cn(styles.title)}>
-        {text}
-        {' '}
-        😓
-      </span>
+        <span className={cn(styles.title)}>
+          {text}
+          {' '}
+          😓
+        </span>
       )}
     </div>
   );

@@ -19,10 +19,11 @@ const Select = ({ defaultId, children, onChange }: Props) => {
 
   return (
     <div className={cn(styles.select)}>
-      {Children.map(children, (selectOption) => React.cloneElement(selectOption, {
-        active: currentId === selectOption.props.id,
-        onClick: handleClick,
-      }))}
+      {Children.map(children, (selectOption) =>
+        React.cloneElement(selectOption, {
+          active: currentId === selectOption.props.id,
+          onClick: handleClick,
+        }))}
     </div>
   );
 };

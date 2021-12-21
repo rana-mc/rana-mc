@@ -5,7 +5,7 @@
 		"project": ["tsconfig.json"]
 	},
 	"rules": {
-		"react/jsx-indent": [2, "tab"],
+		"react/jsx-indent": [2, 2],
 		"react/require-default-props": 0,
 		"react/button-has-type": 0,
 		"react/function-component-definition": [
