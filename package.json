@@ -9,7 +9,8 @@
     "start": "lerna run --parallel --ignore @rana-mc/cli start",
     "watch": "lerna run --parallel --ignore @rana-mc/cli watch",
     "prettier": "prettier . -w",
-    "lint": "prettier . -s -w && lerna exec --parallel \"eslint src --fix\"",
+    "prelint": "prettier . --loglevel silent -w",
+    "lint": "lerna exec --parallel \"eslint src --fix\"",
     "bootstrap": "lerna bootstrap",
     "release": "lerna version && lerna publish from-package"
   },
