@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Tab = ({
-  id, text, active, onClick,
+  id, text, active, onClick
 }: Props) => {
   const handleClick = () => onClick && onClick(id);
 

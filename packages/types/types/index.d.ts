@@ -1,5 +1,5 @@
 declare type GameVersion = {
-  type: number,
+  type: number;
   versions: string[];
 };
 
@@ -8,7 +8,7 @@ declare type VersionType = {
   gameId: number;
   name: string;
   slug: string;
-}
+};
 
 declare type ForgeCore = {
   gameVersion: string;
@@ -29,7 +29,7 @@ declare type OriginalFabricCore = {
   maven: string;
   version: string;
   stable: boolean;
-}
+};
 
 declare type FabricCore = {
   gameVersion: '*';
@@ -40,7 +40,7 @@ declare type FabricCore = {
 };
 
 declare type CoreType = 'forge' | 'fabric';
-declare type Core = { type: CoreType } & ForgeCore | { type: CoreType } & FabricCore;
+declare type Core = ({ type: CoreType } & ForgeCore) | ({ type: CoreType } & FabricCore);
 
 declare type Server = {
   id: string;
@@ -51,7 +51,7 @@ declare type Server = {
   gameVersion: string;
   gameVersionTypeId: number;
   eula: boolean;
-  startTimes: []
+  startTimes: [];
 };
 
 // TODO: what is it? links? file/names? mb

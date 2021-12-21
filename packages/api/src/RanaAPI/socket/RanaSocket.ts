@@ -4,7 +4,11 @@ import { Server as HTTPServer } from 'http';
 import { FabricServer } from '@rana-mc/fabric';
 import { ForgeServer } from '@rana-mc/forge';
 import {
-  RanaSocketEvents, ServerActions, ServerCoreType, ServerEvents, ServerStatus,
+  RanaSocketEvents,
+  ServerActions,
+  ServerCoreType,
+  ServerEvents,
+  ServerStatus,
 } from '@rana-mc/types';
 import { Logger } from '../Logger';
 
@@ -142,7 +146,9 @@ export default class RanaSocket extends EventEmitter {
   private onSocketServersFlush(servers: Server[]) {
     this.data = servers;
     this.servers = servers.map((_server) => {
-      const ranaServer = this.servers.find((_ranaServer) => _ranaServer.id === _server.id);
+      const ranaServer = this.servers.find(
+        (_ranaServer) => _ranaServer.id === _server.id
+      );
       return ranaServer ? ranaServer.update(_server) : this.createServer(_server);
     });
   }
@@ -172,7 +178,10 @@ export default class RanaSocket extends EventEmitter {
    */
   private updateServerStartTimes(server: RanaServer, startTime: boolean) {
     const data = this.getServerData(server);
-    const update = { id: data.id, startTimes: [...data.startTimes || [], startTime] };
+    const update = {
+      id: data.id,
+      startTimes: [...(data.startTimes || []), startTime],
+    };
 
     this.emit(RanaSocketEvents.ServerUpdate, update);
   }
@@ -187,14 +196,20 @@ export default class RanaSocket extends EventEmitter {
       this.updateServerStatus(server, ServerStatus.CoreInstalling));
     server.on(ServerEvents.CoreInstalled, () =>
       this.updateServerStatus(server, ServerStatus.CoreInstalled));
-    server.on(ServerEvents.Starting, () => this.updateServerStatus(server, ServerStatus.Starting));
-    server.on(ServerEvents.Started, () => this.updateServerStatus(server, ServerStatus.Started));
-    server.on(ServerEvents.Stopping, () => this.updateServerStatus(server, ServerStatus.Stopping));
-    server.on(ServerEvents.Stopped, () => this.updateServerStatus(server, ServerStatus.Stopped));
-    server.on(ServerEvents.Removing, () => this.updateServerStatus(server, ServerStatus.Removing));
+    server.on(ServerEvents.Starting, () =>
+      this.updateServerStatus(server, ServerStatus.Starting));
+    server.on(ServerEvents.Started, () =>
+      this.updateServerStatus(server, ServerStatus.Started));
+    server.on(ServerEvents.Stopping, () =>
+      this.updateServerStatus(server, ServerStatus.Stopping));
+    server.on(ServerEvents.Stopped, () =>
+      this.updateServerStatus(server, ServerStatus.Stopped));
+    server.on(ServerEvents.Removing, () =>
+      this.updateServerStatus(server, ServerStatus.Removing));
 
     /** Utility events. */
-    server.on(ServerEvents.Crashed, () => this.updateServerStatus(server, ServerStatus.Stopped));
+    server.on(ServerEvents.Crashed, () =>
+      this.updateServerStatus(server, ServerStatus.Stopped));
     server.on(ServerEvents.StartTime, (startTime) =>
       this.updateServerStartTimes(server, startTime));
     server.on(ServerEvents.EulaChanged, (eula) => this.updateServerEULA(server, eula));

@@ -14,13 +14,10 @@ const initialState: VersionTypesState = {
   status: 'idle',
 };
 
-export const fetchVersionTypesAC = createAsyncThunk(
-  'version-types/fetch',
-  async () => {
-    const response = await fetchVersionTypes();
-    return response.data;
-  },
-);
+export const fetchVersionTypesAC = createAsyncThunk('version-types/fetch', async () => {
+  const response = await fetchVersionTypes();
+  return response.data;
+});
 
 export const versionTypesSlice = createSlice({
   name: 'versionTypes',

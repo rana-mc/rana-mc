@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ranaSocket } from '../../vendors/ranaSocketIo';
 import { RootState } from '../../app/store';
 import {
-  fetchServers, createServer, removeServer, updateServer,
+  fetchServers, createServer, removeServer, updateServer
 } from './serversAPI';
 
 export interface ServersState {
@@ -18,13 +18,10 @@ const initialState: ServersState = {
   status: 'idle',
 };
 
-export const fetchServersAC = createAsyncThunk(
-  'servers/fetch',
-  async () => {
-    const response = await fetchServers();
-    return response.data;
-  },
-);
+export const fetchServersAC = createAsyncThunk('servers/fetch', async () => {
+  const response = await fetchServers();
+  return response.data;
+});
 
 export const createServerAC = createAsyncThunk(
   'servers/create',
@@ -32,7 +29,7 @@ export const createServerAC = createAsyncThunk(
     const response = await createServer(server);
     ranaSocket.emit(ServerActions.FlushServers);
     return response.data;
-  },
+  }
 );
 
 export const removeServerAC = createAsyncThunk(
@@ -41,7 +38,7 @@ export const removeServerAC = createAsyncThunk(
     const response = await removeServer(server);
     ranaSocket.emit(ServerActions.RemoveServer, server);
     return response.data;
-  },
+  }
 );
 
 export const updateServerAC = createAsyncThunk(
@@ -50,7 +47,7 @@ export const updateServerAC = createAsyncThunk(
     const response = await updateServer(server);
     ranaSocket.emit(ServerActions.FlushServers);
     return response.data;
-  },
+  }
 );
 
 export const serversSlice = createSlice({

@@ -25,8 +25,7 @@ export class CurseForge {
   async getVersionTypes(refresh?: boolean) {
     const versionTypesFromDB = curseForgeLocalDB.getVersionTypes();
 
-    if (!refresh && versionTypesFromDB.length)
-      return versionTypesFromDB;
+    if (!refresh && versionTypesFromDB.length) return versionTypesFromDB;
 
     try {
       const response = await this.apiClient.get(APIUrls.VersionTypesUrl);
@@ -46,8 +45,7 @@ export class CurseForge {
   async getGameVersions(refresh?: boolean) {
     const gameVersionsFromDB = curseForgeLocalDB.getGameVersions();
 
-    if (!refresh && gameVersionsFromDB.length)
-      return gameVersionsFromDB;
+    if (!refresh && gameVersionsFromDB.length) return gameVersionsFromDB;
 
     try {
       const response = await this.apiClient.get(APIUrls.GameVersionsUrl);

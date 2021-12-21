@@ -7,6 +7,7 @@
     "build": "lerna run build",
     "start": "lerna run --parallel --ignore @rana-mc/cli start",
     "watch": "lerna run --parallel --ignore @rana-mc/cli watch",
+    "prettier": "prettier packages -w",
     "lint": "lerna exec --parallel \"eslint src\"",
     "lint:fix": "lerna exec --parallel \"eslint src --fix\"",
     "bootstrap": "lerna bootstrap",
@@ -21,7 +22,8 @@
     "access": "public"
   },
   "dependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "prettier": "^2.5.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.8.0",

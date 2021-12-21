@@ -41,14 +41,15 @@ export default class RanaDB {
       ...settings,
     };
 
-    if (this.settingsHandler)
-      this.settingsHandler(settings);
+    if (this.settingsHandler) this.settingsHandler(settings);
 
     return this.db.write();
   }
 
   async removeServer(serverId: string) {
-    this.db.data.servers = this.db.data.servers.filter((server) => server.id !== serverId);
+    this.db.data.servers = this.db.data.servers.filter(
+      (server) => server.id !== serverId
+    );
 
     return this.db.write();
   }
@@ -58,9 +59,8 @@ export default class RanaDB {
   }
 
   async updateServer(updatedServer: Server) {
-    this.db.data.servers = this.db.data.servers.map(
-      (server) => (server.id === updatedServer.id ? { ...server, ...updatedServer } : server),
-    );
+    this.db.data.servers = this.db.data.servers.map((server) =>
+      (server.id === updatedServer.id ? { ...server, ...updatedServer } : server));
 
     return this.db.write();
   }

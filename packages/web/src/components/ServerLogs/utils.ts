@@ -1,6 +1,6 @@
 type LightLine = {
   raw: string;
-  groups: LightGroup[]
+  groups: LightGroup[];
 };
 
 type LightGroup = {
@@ -35,7 +35,8 @@ const NODES = [
   },
 ];
 
-export const prepareLines = (logs: string[]) => logs.reduce((acc: string[], curr: string) => [...acc, ...curr.split('\n')], []);
+export const prepareLines = (logs: string[]) =>
+  logs.reduce((acc: string[], curr: string) => [...acc, ...curr.split('\n')], []);
 
 export const parseLine = (line: string) => {
   const light: LightLine = {

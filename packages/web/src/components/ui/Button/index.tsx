@@ -45,7 +45,7 @@ const Button = ({
         styles.button,
         styles[`type-${type}`],
         styles[`size-${size}`],
-        styles[`view-${view}`],
+        styles[`view-${view}`]
       )}
       onClick={handleClick}
     >

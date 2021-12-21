@@ -23,7 +23,9 @@ export class ForgeServer extends EventEmitter {
     this.logger = new Logger(this.getTag());
   }
 
-  public get id() { return this.server.id; }
+  public get id() {
+    return this.server.id;
+  }
 
   /**
    * Install server core.
@@ -166,15 +168,15 @@ export class ForgeServer extends EventEmitter {
   }
 
   /**
-  * Well, just parse server starting event;
-  */
+   * Well, just parse server starting event;
+   */
   private isServerStartedMessage(message: string): boolean {
     return message.includes('For help, type "help"');
   }
 
   /**
-  * Parse with regular server start time.
-  */
+   * Parse with regular server start time.
+   */
   private parseServerStartTime(message: string): number {
     try {
       const startTime = message.match(/Done \((.+)s\)! For help, type "help"/);

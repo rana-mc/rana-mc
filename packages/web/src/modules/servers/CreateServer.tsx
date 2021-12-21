@@ -7,10 +7,7 @@ import VersionTypes from '@modules/version-types/VersionTypes';
 import Button from '@ui/Button';
 
 import { selectCurrentGameVersion } from '@modules/game-versions/gameVersionsSlice';
-import {
-  selecCurrentCore,
-  selectCurrentCoreType,
-} from '@modules/cores/coresSlice';
+import { selecCurrentCore, selectCurrentCoreType } from '@modules/cores/coresSlice';
 import Label from '@ui/Label';
 import Input from '@ui/Input';
 import { ServerCoreType as CoreType, ServerStatus } from '@rana-mc/types';
@@ -30,12 +27,7 @@ const CreateServer = () => {
   const [name, setName] = useState('');
 
   const handleCreate = () => {
-    if (
-      currentGameVersion
-      && currentCoreType
-      && currentVersionType
-      && currentCore
-    ) {
+    if (currentGameVersion && currentCoreType && currentVersionType && currentCore) {
       const server: Server = {
         id,
         name,

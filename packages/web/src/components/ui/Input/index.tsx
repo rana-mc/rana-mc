@@ -12,9 +12,7 @@ const Input = ({ onChange, value }: Props) => {
   const handleChange = (event: React.FormEvent<HTMLInputElement>) =>
     onChange && onChange(event.currentTarget.value);
 
-  return (
-    <input className={cn(styles.input)} value={value} onChange={handleChange} />
-  );
+  return <input className={cn(styles.input)} value={value} onChange={handleChange} />;
 };
 
 export default Input;

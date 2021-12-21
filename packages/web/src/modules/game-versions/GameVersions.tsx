@@ -18,7 +18,7 @@ const GameVersions = () => {
   const versionType = useAppSelector(selectCurrentVersionType);
 
   const gameVersion = allGameVersions?.find(
-    (_gameVersion) => _gameVersion.type === versionType,
+    (_gameVersion) => _gameVersion.type === versionType
   );
 
   useEffect(() => {
@@ -26,9 +26,7 @@ const GameVersions = () => {
   }, [dispatch, gameVersion]);
 
   if (!gameVersion) {
-    return (
-      <Empty textOnly select size="s" text="Please, select game version" />
-    );
+    return <Empty textOnly select size="s" text="Please, select game version" />;
   }
 
   if (gameVersion?.versions?.length === 0) {
@@ -43,12 +41,7 @@ const GameVersions = () => {
     <div>
       <Select onChange={handleChange}>
         {formatVersions(gameVersion.versions).map((version) => (
-          <SelectOption
-            key={version}
-            id={version}
-            icon="minecraft"
-            text={version}
-          />
+          <SelectOption key={version} id={version} icon="minecraft" text={version} />
         ))}
       </Select>
     </div>

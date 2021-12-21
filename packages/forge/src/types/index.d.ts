@@ -1,5 +1,5 @@
 type ForgeLocalDBData = {
   cores: {
-    [version: string]: ForgeCore[]
-  }
+    [version: string]: ForgeCore[];
+  };
 };

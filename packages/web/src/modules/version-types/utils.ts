@@ -9,4 +9,5 @@ export const filterTypes = (versionTypes: VersionType[]) => {
   return versionTypes.filter((type) => !TYPES_TO_REMOVE.includes(type.name));
 };
 
-export const formatTypes = (versionTypes: VersionType[]) => filterTypes(sortTypes(versionTypes));
+export const formatTypes = (versionTypes: VersionType[]) =>
+  filterTypes(sortTypes(versionTypes));

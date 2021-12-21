@@ -15,12 +15,7 @@ type Props = {
 };
 
 const SelectOption = ({
-  icon,
-  id,
-  size = 'm',
-  text,
-  onClick,
-  active,
+  icon, id, size = 'm', text, onClick, active
 }: Props) => {
   const handleClick = () => onClick && onClick(id);
 

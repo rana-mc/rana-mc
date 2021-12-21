@@ -16,28 +16,22 @@ export const installServerAC = createAsyncThunk(
   'server/install',
   async (server: Server) => {
     ranaSocket.emit(ServerActions.InstallCore, server);
-  },
+  }
 );
 
-export const startServerAC = createAsyncThunk(
-  'server/start',
-  async (server: Server) => {
-    ranaSocket.emit(ServerActions.Start, server);
-  },
-);
+export const startServerAC = createAsyncThunk('server/start', async (server: Server) => {
+  ranaSocket.emit(ServerActions.Start, server);
+});
 
-export const stopServerAC = createAsyncThunk(
-  'server/stop',
-  async (server: Server) => {
-    ranaSocket.emit(ServerActions.Stop, server);
-  },
-);
+export const stopServerAC = createAsyncThunk('server/stop', async (server: Server) => {
+  ranaSocket.emit(ServerActions.Stop, server);
+});
 
 export const acceptEULAServerAC = createAsyncThunk(
   'server/eula',
-  async ({ server, accept: acceptEULA }: { server: Server, accept: boolean }) => {
+  async ({ server, accept: acceptEULA }: { server: Server; accept: boolean }) => {
     ranaSocket.emit(ServerActions.Eula, server, acceptEULA);
-  },
+  }
 );
 
 export const serverSlice = createSlice({
@@ -75,9 +69,7 @@ export const serverSlice = createSlice({
 
 export const selectServerActionStatus = (state: RootState) => state.server.status;
 
-export const startListenSocket = (): AppThunk => (
-  dispatch,
-) => {
+export const startListenSocket = (): AppThunk => (dispatch) => {
   ranaSocket.on(RanaSocketEvents.ServerUpdate, (server: Server) => {
     dispatch(updateServerState(server));
   });

@@ -14,13 +14,10 @@ const initialState: GameVersionsState = {
   status: 'idle',
 };
 
-export const fetchGameVersionsAC = createAsyncThunk(
-  'game-versions/fetch',
-  async () => {
-    const response = await fetchGameVersions();
-    return response.data;
-  },
-);
+export const fetchGameVersionsAC = createAsyncThunk('game-versions/fetch', async () => {
+  const response = await fetchGameVersions();
+  return response.data;
+});
 
 export const gameVersionSlice = createSlice({
   name: 'gameVersions',

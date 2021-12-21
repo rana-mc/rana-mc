@@ -6,7 +6,7 @@
       "@ui/*": ["components/ui/*"],
       "@modules/*": ["modules/*"],
       "@utils/*": ["utils/*"],
-      "@utils": ["utils/index.ts"],
+      "@utils": ["utils/index.ts"]
     }
   }
 }

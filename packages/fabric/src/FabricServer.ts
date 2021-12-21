@@ -1,4 +1,5 @@
-import EventEmitter from 'events'; import { Logger } from './Logger';
+import EventEmitter from 'events';
+import { Logger } from './Logger';
 
 export class FabricServer extends EventEmitter {
   public static TAG = 'FabricServer';
@@ -26,21 +27,13 @@ export class FabricServer extends EventEmitter {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  exec(command: string) {
+  exec(command: string) {}
 
-  }
+  stop() {}
 
-  stop() {
+  removeCore() {}
 
-  }
-
-  removeCore() {
-
-  }
-
-  remove() {
-
-  }
+  remove() {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(server: Server): FabricServer {
@@ -48,7 +41,5 @@ export class FabricServer extends EventEmitter {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  acceptEULA(accept: boolean) {
-
-  }
+  acceptEULA(accept: boolean) {}
 }

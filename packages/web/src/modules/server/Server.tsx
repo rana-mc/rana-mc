@@ -22,8 +22,8 @@ type Props = {
 const Server = ({ server }: Props) => {
   const dispatch = useAppDispatch();
 
-  const availableToEdit = server.status === ServerStatus.Created
-    || server.status === ServerStatus.Stopped;
+  const availableToEdit =
+    server.status === ServerStatus.Created || server.status === ServerStatus.Stopped;
 
   const handleInstall = () => {
     dispatch(installServerAC(server));
@@ -58,12 +58,10 @@ const Server = ({ server }: Props) => {
         </span>
         <span className={cn(styles.value)}>
           gameVersion:
-          {' '}
           {server.gameVersion}
         </span>
         <span className={cn(styles.value)}>
           gameVersionTypeId:
-          {' '}
           {server.gameVersionTypeId}
         </span>
         <span className={cn(styles.value)}>
@@ -72,17 +70,14 @@ const Server = ({ server }: Props) => {
         </span>
         <span className={cn(styles.value)}>
           coreVersion:
-          {' '}
           {server.core.coreVersion}
         </span>
         <span className={cn(styles.value)}>
           installerUrl:
-          {' '}
           {server.core.installerUrl}
         </span>
         <span className={cn(styles.value)}>
           status:
-          {' '}
           {server.status || 'unknown'}
         </span>
       </div>

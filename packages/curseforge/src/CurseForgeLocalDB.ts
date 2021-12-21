@@ -3,7 +3,10 @@ import { JSONFile, Low } from 'lowdb';
 export default class CurseForgeLocalDB {
   public static PATH = './curseforge.db.json';
 
-  public static DEFAULTS: CurseForgeLocalDBData = { gameVersions: [], versionTypes: [] };
+  public static DEFAULTS: CurseForgeLocalDBData = {
+    gameVersions: [],
+    versionTypes: [],
+  };
 
   private db: Low<CurseForgeLocalDBData>;
 

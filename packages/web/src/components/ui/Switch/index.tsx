@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Switch = ({
-  forId, value, onChange, size,
+  forId, value, onChange, size
 }: Props) => {
   const [checked, setChecked] = useState(value || false);
 

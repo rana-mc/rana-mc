@@ -12,20 +12,17 @@ const initialState: SettingsState = {
   status: 'idle',
 };
 
-export const fetchSettingsAC = createAsyncThunk(
-  'settings/fetch',
-  async () => {
-    const response = await fetchSettings();
-    return response.data;
-  },
-);
+export const fetchSettingsAC = createAsyncThunk('settings/fetch', async () => {
+  const response = await fetchSettings();
+  return response.data;
+});
 
 export const setSettingsAC = createAsyncThunk(
   'settings/set',
   async (settings: Partial<Settings>) => {
     const response = await setSettings(settings);
     return response.data;
-  },
+  }
 );
 
 export const settingsSlice = createSlice({

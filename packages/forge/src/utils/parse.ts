@@ -1,7 +1,10 @@
 import { parse } from 'node-html-parser';
 import { convertExternalUrls } from './links';
 
-export const parseCoresFromHTML = async (html: string, version: string): Promise<ForgeCore[]> => {
+export const parseCoresFromHTML = async (
+  html: string,
+  version: string
+): Promise<ForgeCore[]> => {
   const page = parse(html);
   const downloads = [...page.querySelectorAll('.download-list tbody tr')];
 

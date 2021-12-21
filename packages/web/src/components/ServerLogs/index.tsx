@@ -21,9 +21,9 @@ const ServerLogs = ({ serverId }: Props) => {
   const handleLogAppend = useCallback(
     debounce(
       (logsToUpdate) => setLogs(prepareLines(logsToUpdate.slice(-100))),
-      UPDATE_LOGS_DELAY,
+      UPDATE_LOGS_DELAY
     ),
-    [],
+    []
   );
 
   ranaSocket.on(ServerEvents.Logs, (logsServerId: string, message: string) => {
@@ -39,11 +39,13 @@ const ServerLogs = ({ serverId }: Props) => {
     handleLogAppend(fullServerLogs);
   });
 
-  const renderLine = (line: string) => parseLine(line).groups.map((group) => (group.name ? (
-    <span className={cn(styles[group.name])}>{group.value}</span>
-  ) : (
-    <span className={cn(styles.line)}>{group.value}</span>
-  )));
+  const renderLine = (line: string) =>
+    parseLine(line).groups.map((group) =>
+      (group.name ? (
+        <span className={cn(styles[group.name])}>{group.value}</span>
+      ) : (
+        <span className={cn(styles.line)}>{group.value}</span>
+      )));
 
   return (
     <div className={cn(styles.serverLogs)}>

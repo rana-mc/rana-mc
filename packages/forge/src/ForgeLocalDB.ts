@@ -23,8 +23,7 @@ export default class ForgeLocalDB {
   }
 
   getForgeCores(version: string): ForgeCore[] | null {
-    if (this.db.data.cores[version])
-      return this.db.data.cores[version] || null;
+    if (this.db.data.cores[version]) return this.db.data.cores[version] || null;
     return null;
   }
 

@@ -25,7 +25,8 @@ const Cores = () => {
   useEffect(() => {
     if (currentVersion) {
       if (currentCoreType === CoreType.Forge) dispatch(fetchForgeCoresAC(currentVersion));
-      if (currentCoreType === CoreType.Fabric) dispatch(fetchFabricCoresAC(currentVersion));
+      if (currentCoreType === CoreType.Fabric)
+        dispatch(fetchFabricCoresAC(currentVersion));
     }
   }, [dispatch, currentVersion, currentCoreType]);
 
@@ -44,11 +45,7 @@ const Cores = () => {
         <SelectCoreOption type="fabric" />
       </SelectCore>
       {currentCoreType && (
-        <CoreSelect
-          type={currentCoreType}
-          cores={cores}
-          onSelect={handleSelect}
-        />
+        <CoreSelect type={currentCoreType} cores={cores} onSelect={handleSelect} />
       )}
     </div>
   );

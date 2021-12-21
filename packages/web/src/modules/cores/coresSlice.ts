@@ -23,7 +23,7 @@ export const fetchForgeCoresAC = createAsyncThunk(
   async (gameVersion: string) => {
     const response = await fetchForgeCores(gameVersion);
     return response.data;
-  },
+  }
 );
 
 export const fetchFabricCoresAC = createAsyncThunk(
@@ -31,7 +31,7 @@ export const fetchFabricCoresAC = createAsyncThunk(
   async (gameVersion: string) => {
     const response = await fetchFabricCores(gameVersion);
     return response.data;
-  },
+  }
 );
 
 export const coresSlice = createSlice({

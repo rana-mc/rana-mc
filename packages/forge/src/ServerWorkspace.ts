@@ -2,7 +2,11 @@ import os from 'os';
 import download from 'download';
 import { ChildProcess } from 'child_process';
 import shell from 'shelljs';
-import { extractInstallerFilename, extractCoreFilename, extractDownloadUrl } from './utils/links';
+import {
+  extractInstallerFilename,
+  extractCoreFilename,
+  extractDownloadUrl,
+} from './utils/links';
 
 type Executable = {
   filename: string;
@@ -86,15 +90,20 @@ export default class ServerWorkspace {
     const value = accept ? 'eula=false/eula=true' : 'eula=true/eula=false';
 
     // TODO: Find better way to do this?
-    const command = String.raw`cd ${this.path} && find ./ -type f -exec sed -i '' -e "s/${value}/" ${filename} \;`;
+    /* eslint-disable max-len */
+    const cd = `cd ${this.path}`;
+    const find = String.raw`find ./ -type f -exec sed -i '' -e "s/${value}/" ${filename} \;`;
+    const command = `${cd} && ${find}`;
+    /* eslint-enable max-len */
 
-    const exec = (): Promise<void> => new Promise((resolve) => {
-      const process = shell.exec(command, { silent: true, async: true });
+    const exec = (): Promise<void> =>
+      new Promise((resolve) => {
+        const process = shell.exec(command, { silent: true, async: true });
 
-      process.on('exit', () => {
-        resolve();
+        process.on('exit', () => {
+          resolve();
+        });
       });
-    });
 
     const eula = { filename, command, exec };
 

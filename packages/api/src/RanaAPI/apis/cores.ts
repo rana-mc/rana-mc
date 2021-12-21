@@ -27,7 +27,10 @@ export default class CoresAPI extends APIRoute {
 
   useForgeCores() {
     this.router.use('/forge-cores', async (req, res) => {
-      const { version, force } = req.query as { version: string, force: string };
+      const { version, force } = req.query as {
+        version: string;
+        force: string;
+      };
       const refresh = !!force;
 
       const cores = await this.forgeCores.getCores(version, refresh);
@@ -39,7 +42,7 @@ export default class CoresAPI extends APIRoute {
 
   useFabricCores() {
     this.router.use('/fabric-cores', async (req, res) => {
-      const { force } = req.query as { version: string, force: string };
+      const { force } = req.query as { version: string; force: string };
       const refresh = !!force;
 
       const cores = await this.fabricCores.getCores(refresh);
