@@ -6,7 +6,9 @@
 </p>
 <br />
 <p align="center">
- Free and opensource panel for minecraft servers. Find, download and install cores. Add mods, edit settings.
+ Free and opensource panel for minecraft servers.
+ <br/>
+ Find, download and install cores. Add mods, edit settings.
 </p>
 <br/>
 
