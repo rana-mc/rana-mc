@@ -3,17 +3,21 @@ import cn from 'classnames';
 
 import SelectIcon from '@ui/SelectIcon';
 
+import { IconName } from '@ui/Icon';
 import styles from './SelectCoreOption.module.css';
 
 type Props = {
-  type: 'forge' | 'fabric';
-  onClick?: (coreId: string) => void;
+  title: string;
+  description: string;
+  icon: IconName;
+  onClick?: () => void;
   active?: boolean;
 };
 
-// TODO: remove as hardcoded
-const SelectCoreOption = ({ type, onClick, active }: Props) => {
-  const handleClick = () => onClick && onClick(type);
+const SelectCoreOption = ({
+  title, description, icon, onClick, active
+}: Props) => {
+  const handleClick = () => onClick && onClick();
 
   return (
     <div
@@ -21,14 +25,12 @@ const SelectCoreOption = ({ type, onClick, active }: Props) => {
       className={cn(styles.selectCoreOption, { [styles.active]: active })}
       onClick={handleClick}
     >
-      <SelectIcon name={type} size="l" />
+      <SelectIcon name={icon} size="l" />
       <div className={cn(styles.title)}>
-        {type === 'forge' && <b>Forge</b>}
-        {type === 'fabric' && <b>Fabric</b>}
+        <b>{title}</b>
       </div>
       <div className={cn(styles.description)}>
-        {type === 'forge' && <span>Popular choice</span>}
-        {type === 'fabric' && <span>Lightweight</span>}
+        <span>{description}</span>
       </div>
     </div>
   );
