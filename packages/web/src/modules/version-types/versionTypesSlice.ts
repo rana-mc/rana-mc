@@ -42,6 +42,7 @@ export const versionTypesSlice = createSlice({
 export const { setCurrentVersionType } = versionTypesSlice.actions;
 
 export const selectVersionTypes = (state: RootState) => state.versionTypes.values;
-export const selectCurrentVersionTypeId = (state: RootState) => state.versionTypes.current;
+export const selectCurrentVersionTypeId = (state: RootState) =>
+  state.versionTypes.current;
 
 export default versionTypesSlice.reducer;

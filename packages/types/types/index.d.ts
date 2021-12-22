@@ -48,8 +48,8 @@ declare type FabricCore = {
 
 declare type ServerCoreTypeValues = 'forge' | 'fabric';
 declare type ServerCore =
-  ({ type: ServerCoreTypeValues } & ForgeCore) |
-  ({ type: ServerCoreTypeValues } & FabricCore);
+  | ({ type: ServerCoreTypeValues } & ForgeCore)
+  | ({ type: ServerCoreTypeValues } & FabricCore);
 
 declare type Server = {
   id: string;

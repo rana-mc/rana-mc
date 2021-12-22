@@ -6,7 +6,7 @@ export default class FabricLocalDB {
   public static DEFAULTS: FabricLocalDBData = {
     installers: null,
     loaders: null,
-    status: {}
+    status: {},
   };
 
   private db: Low<FabricLocalDBData>;

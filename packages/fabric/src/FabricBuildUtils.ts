@@ -46,11 +46,14 @@ export class FabricBuildUtils {
     return null;
   }
 
-  async getCoreStatus(options: {
-    game: string,
-    loader: string,
-    installer: string
-  }, refresh?: boolean) {
+  async getCoreStatus(
+    options: {
+      game: string;
+      loader: string;
+      installer: string;
+    },
+    refresh?: boolean
+  ) {
     const { game, loader, installer } = options;
     const coreName = `${game}_${loader}_${installer}`;
 
