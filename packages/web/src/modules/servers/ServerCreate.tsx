@@ -7,6 +7,7 @@ import Button from '@ui/Button';
 
 import Label from '@ui/Label';
 import Input from '@ui/Input';
+import CoreBuilder from '../core-builder/CoreBuilder';
 import styles from './ServerCreate.module.css';
 
 const CreateServer = () => {
@@ -45,7 +46,7 @@ const CreateServer = () => {
         <GameVersions />
       </section>
       <section className={cn(styles.section)}>
-        cores
+        <CoreBuilder />
       </section>
       <section className={cn(styles.section)}>
         <Label text="Server Id" />
