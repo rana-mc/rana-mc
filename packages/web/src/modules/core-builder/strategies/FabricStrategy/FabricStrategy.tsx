@@ -7,7 +7,7 @@ import SelectCoreOption from '@ui/SelectCoreOption';
 import SelectOption from '@ui/SelectOption';
 import Spinner, { SpinnerSize } from '@ui/Spinner';
 import { UseQueryResult } from 'react-query';
-import { useFabricQueries } from './fabricAPI';
+import { useFabricCoreStatusQuery, useFabricQueries } from './fabricAPI';
 
 import styles from './FabricStrategy.module.css';
 import { getFabricServerUrl } from './utils';
@@ -34,6 +34,14 @@ export const FabricCoreBuilder = ({
 
   const [loader, setLoader] = useState<FabricLoader>();
   const [installer, setInstaller] = useState<FabricInstaller>();
+
+  const status = useFabricCoreStatusQuery(
+    gameVersion,
+    loader?.version,
+    installer?.version
+  );
+
+  const hasFabricServer = status?.isSuccess;
 
   const isLoading = loaders.isLoading || installers.isLoading;
   const error = loaders.error || installers.error;
@@ -81,9 +89,11 @@ export const FabricCoreBuilder = ({
 
   return (
     <div className={cn(styles.fabricStrategy)}>
-      <Select onChange={handleChangeLoader}>
-        {loaders?.data.map((loader: FabricLoader) => (
-          <SelectOption
+      {hasFabricServer ? <>We got server.</> : <>Server not found.</>}
+      <div className={cn(styles.list)}>
+        <Select onChange={handleChangeLoader}>
+          {loaders?.data.map((loader: FabricLoader) => (
+            <SelectOption
             icon="fabric"
             size="s"
             key={loader.version}
@@ -91,10 +101,10 @@ export const FabricCoreBuilder = ({
             text={loader.version}
           />
         ))}
-      </Select>
-      <Select onChange={handleChangeInstaller}>
-        {installers?.data.map((installer: FabricInstaller) => (
-          <SelectOption
+        </Select>
+        <Select onChange={handleChangeInstaller}>
+          {installers?.data.map((installer: FabricInstaller) => (
+            <SelectOption
             icon="fabric"
             size="m"
             key={installer.version}
@@ -102,7 +112,8 @@ export const FabricCoreBuilder = ({
             text={installer.version}
           />
         ))}
-      </Select>
+        </Select>
+      </div>
     </div>
   );
 };

@@ -45,8 +45,12 @@ const CreateServer = () => {
       };
 
       // FYI: Support link of Forge
-      if (core.type === ServerCoreType.Forge && core?.installerUrl) {
-        window.open(core?.installerUrl, '_blank', 'noopener,noreferrer');
+      if (core.type === ServerCoreType.Forge) {
+        const forgeCore = core as ForgeCore;
+
+        if (forgeCore?.installerUrl) {
+          window.open(forgeCore?.installerUrl, '_blank', 'noopener,noreferrer');
+        }
       }
 
       dispatch(createServerAC(server));

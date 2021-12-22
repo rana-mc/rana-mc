@@ -69,12 +69,8 @@ const Server = ({ server }: Props) => {
           {server.core.type}
         </span>
         <span className={cn(styles.value)}>
-          coreVersion:
-          {server.core.coreVersion}
-        </span>
-        <span className={cn(styles.value)}>
-          installerUrl:
-          {server.core.installerUrl}
+          core JSON:
+          {JSON.stringify(server.core)}
         </span>
         <span className={cn(styles.value)}>
           status:
