@@ -101,7 +101,7 @@ export const FabricCoreBuilder = ({
       <Status
         available={hasFabricServer}
         availableText="Available core!"
-        unavailableText={status?.isLoading ? "Loading..." : "Wrong server core :("}
+        unavailableText={status?.isLoading ? 'Loading...' : 'Wrong server core :('}
       />
       <div className={cn(styles.list)}>
         <Select onChange={handleChangeLoader}>
