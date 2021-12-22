@@ -11,6 +11,7 @@ import { useFabricCoreStatusQuery, useFabricQueries } from './fabricAPI';
 
 import styles from './FabricStrategy.module.css';
 import { getFabricServerUrl } from './utils';
+import Status from '@ui/Status';
 
 export const FabricStrategyId = 'fabric';
 
@@ -97,7 +98,11 @@ export const FabricCoreBuilder = ({
 
   return (
     <div className={cn(styles.fabricStrategy)}>
-      {hasFabricServer ? <>We got server.</> : <>Server not found.</>}
+      <Status
+        available={hasFabricServer}
+        availableText="Available core!"
+        unavailableText={status?.isLoading ? "Loading..." : "Wrong server core :("}
+      />
       <div className={cn(styles.list)}>
         <Select onChange={handleChangeLoader}>
           {loaders?.data.map((loader: FabricLoader) => (
