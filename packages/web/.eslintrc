@@ -1,7 +1,5 @@
 {
-  "root": true,
-  "extends": ["airbnb", "airbnb-typescript", "../../eslintrc.rules.json"],
-  "plugins": ["react-hooks"],
+  "extends": [ "react-app"],
   "parserOptions": {
     "project": ["tsconfig.json"]
   },
