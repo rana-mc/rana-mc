@@ -19,10 +19,10 @@ type Executable = {
 export default class ServerWorkspace {
   public static TAG = 'ServerWorkspace';
 
-  private server: Server;
+  private server: Server<ForgeServerCore>;
 
   constructor(server: Server) {
-    this.server = server;
+    this.server = server as Server<ForgeServerCore>;
   }
 
   /**

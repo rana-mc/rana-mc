@@ -47,15 +47,16 @@ declare type FabricCore = {
 };
 
 declare type ServerCoreTypeValues = 'forge' | 'fabric';
-declare type ServerCore =
-  | ({ type: ServerCoreTypeValues } & ForgeCore)
-  | ({ type: ServerCoreTypeValues } & FabricCore);
+declare type ForgeServerCore = { type: ServerCoreTypeValues } & ForgeCore;
+declare type FabricServerCore = { type: ServerCoreTypeValues } & FabricCore;
 
-declare type Server = {
+declare type ServerCore = ForgeServerCore | FabricServerCore;
+
+declare type Server<T = ServerCore> = {
   id: string;
   name: string;
   status: string;
-  core: ServerCore;
+  core: T;
   mods: ServerMod[];
   gameVersion: string;
   gameVersionTypeId: number;
