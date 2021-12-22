@@ -1,3 +1,4 @@
 type FabricLocalDBData = {
-  cores: FabricCore[];
+  installers: FabricInstaller[];
+  loaders: FabricLoader[];
 };

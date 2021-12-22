@@ -24,7 +24,14 @@ declare type ExternalForgeCoreUrl = {
   name: string;
 };
 
-declare type OriginalFabricCore = {
+declare type FabricInstaller = {
+  url: string;
+  maven: string;
+  version: string;
+  stable: boolean;
+};
+
+declare type FabricLoader = {
   url: string;
   maven: string;
   version: string;
