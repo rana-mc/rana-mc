@@ -3,7 +3,11 @@ import { JSONFile, Low } from 'lowdb';
 export default class FabricLocalDB {
   public static PATH = './fabric.db.json';
 
-  public static DEFAULTS: FabricLocalDBData = { installers: null, loaders: null };
+  public static DEFAULTS: FabricLocalDBData = {
+    installers: null,
+    loaders: null,
+    status: null
+  };
 
   private db: Low<FabricLocalDBData>;
 
@@ -37,6 +41,15 @@ export default class FabricLocalDB {
 
   async setFabricLoaders(loaders: FabricLoader[]) {
     this.db.data.loaders = loaders;
+    return this.db.write();
+  }
+
+  getCoreStatus(coreName: string): number | null {
+    return this.db.data.status[coreName] || null;
+  }
+
+  async setCoreStatus(coreName: string, status: number) {
+    this.db.data.status[coreName] = status;
     return this.db.write();
   }
 }

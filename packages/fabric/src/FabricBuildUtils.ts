@@ -45,4 +45,34 @@ export class FabricBuildUtils {
 
     return null;
   }
+
+  async getCoreStatus(options: {
+    game: string,
+    loader: string,
+    installer: string
+  }, refresh?: boolean) {
+    const { game, loader, installer } = options;
+    const coreName = `${game}_${loader}_${installer}`;
+
+    const statusFromDB = fabricLocalDB.getCoreStatus(coreName);
+    if (!refresh && statusFromDB) return statusFromDB;
+
+    try {
+      const urlByVersion = `${this.loadersUrl}/`;
+      const serverPath = `${options.game}/${loader}/${installer}/`;
+      const serverUrl = `${urlByVersion}${serverPath}server/jar`;
+
+      console.log(serverUrl);
+
+      const response = await axios.get(serverUrl);
+      const { status } = response;
+
+      fabricLocalDB.setCoreStatus(coreName, status);
+      return fabricLocalDB.getCoreStatus(coreName);
+    } catch (err) {
+      FabricBuildUtils.logger.log(`Got error after getCoreStatus – ${err.message}`);
+    }
+
+    return null;
+  }
 }
