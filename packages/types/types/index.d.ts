@@ -33,16 +33,16 @@ declare type FabricInstaller = {
 
 declare type FabricLoader = {
   separator: string;
-  build: number,
+  build: number;
   maven: string;
   version: string;
   stable: boolean;
 };
 
 declare type FabricCore = {
-  gameVersion: string,
-  loader: FabricLoader,
-  installer: FabricInstaller,
+  gameVersion: string;
+  loader: FabricLoader;
+  installer: FabricInstaller;
   serverInstallerUrl: string;
 };
 

@@ -12,7 +12,7 @@ import { useFabricCoreStatusQuery, useFabricQueries } from './fabricAPI';
 import styles from './FabricStrategy.module.css';
 import { getFabricServerUrl } from './utils';
 
-export const FabricStrategyId = "fabric";
+export const FabricStrategyId = 'fabric';
 
 type SelectorProps = {
   onChange: () => void;
@@ -25,7 +25,7 @@ export const FabricCoreSelector = ({ onChange, currentStrategyId }: SelectorProp
     title="Fabric"
     description="Lightweight"
     onClick={onChange}
-    active={ currentStrategyId === FabricStrategyId }
+    active={currentStrategyId === FabricStrategyId}
   />
 );
 
