@@ -2,6 +2,7 @@ import axios from 'axios';
 import { fabricLocalDB } from './FabricLocalDB';
 
 import { Logger } from './Logger';
+import { getFabricServerPath } from './utils';
 
 export class FabricBuildUtils {
   public static TAG = 'FabricBuildUtils';
@@ -61,9 +62,8 @@ export class FabricBuildUtils {
     if (!refresh && statusFromDB) return statusFromDB;
 
     try {
-      const urlByVersion = `${this.loadersUrl}/`;
-      const serverPath = `${options.game}/${loader}/${installer}/`;
-      const serverUrl = `${urlByVersion}${serverPath}server/jar`;
+      const serverPath = getFabricServerPath(game, loader, installer);
+      const serverUrl = `${this.loadersUrl}/${serverPath}`;
 
       const response = await axios.get(serverUrl);
       const { status } = response;

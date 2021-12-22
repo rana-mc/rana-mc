@@ -7,12 +7,20 @@ import { useForgeCoresQuery } from './forgeAPI';
 import Spinner, { SpinnerSize } from '@ui/Spinner';
 import { ServerCoreType } from '@rana-mc/types';
 
-export const ForgeCoreSelector = ({ onChange }: { onChange: () => void }) => (
+export const ForgeStrategyId = "forge";
+
+type SelectorProps = {
+  onChange: () => void;
+  currentStrategyId?: string;
+};
+
+export const ForgeCoreSelector = ({ onChange, currentStrategyId }: SelectorProps) => (
   <SelectCoreOption
     icon="forge"
     title="Forge"
     description="Popular choice"
     onClick={onChange}
+    active={ currentStrategyId === ForgeStrategyId }
   />
 );
 
@@ -59,6 +67,7 @@ export const ForgeCoreBuilder = ({
 };
 
 export const ForgeStrategy = {
+  StrategyId: ForgeStrategyId,
   Selector: ForgeCoreSelector,
   CoreBuilder: ForgeCoreBuilder,
 };

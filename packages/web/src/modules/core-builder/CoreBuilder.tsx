@@ -28,10 +28,16 @@ const CoreBuilder = ({ onCoreBuild }: Props) => {
     <>
       {strategies.map((_strategy) => (
         // eslint-disable-next-line react/jsx-pascal-case
-        <_strategy.Selector onChange={handlerStrategyChange(_strategy)} />
+        <_strategy.Selector
+          currentStrategyId={strategy?.StrategyId}
+          onChange={handlerStrategyChange(_strategy)}
+        />
       ))}
       {strategy?.CoreBuilder ? (
-        <strategy.CoreBuilder gameVersion={gameVersionValue} onCoreBuild={handleCoreBuild} />
+        <strategy.CoreBuilder
+          gameVersion={gameVersionValue}
+          onCoreBuild={handleCoreBuild}
+        />
       ) : (
         <Empty text="Please, select server core" />
       )}

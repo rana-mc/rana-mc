@@ -12,12 +12,20 @@ import { useFabricCoreStatusQuery, useFabricQueries } from './fabricAPI';
 import styles from './FabricStrategy.module.css';
 import { getFabricServerUrl } from './utils';
 
-export const FabricCoreSelector = ({ onChange }: { onChange: () => void }) => (
+export const FabricStrategyId = "fabric";
+
+type SelectorProps = {
+  onChange: () => void;
+  currentStrategyId?: string;
+};
+
+export const FabricCoreSelector = ({ onChange, currentStrategyId }: SelectorProps) => (
   <SelectCoreOption
     icon="fabric"
     title="Fabric"
     description="Lightweight"
     onClick={onChange}
+    active={ currentStrategyId === FabricStrategyId }
   />
 );
 
@@ -94,24 +102,24 @@ export const FabricCoreBuilder = ({
         <Select onChange={handleChangeLoader}>
           {loaders?.data.map((loader: FabricLoader) => (
             <SelectOption
-            icon="fabric"
-            size="s"
-            key={loader.version}
-            id={loader.version}
-            text={loader.version}
-          />
-        ))}
+              icon="fabric"
+              size="s"
+              key={loader.version}
+              id={loader.version}
+              text={loader.version}
+            />
+          ))}
         </Select>
         <Select onChange={handleChangeInstaller}>
           {installers?.data.map((installer: FabricInstaller) => (
             <SelectOption
-            icon="fabric"
-            size="m"
-            key={installer.version}
-            id={installer.version}
-            text={installer.version}
-          />
-        ))}
+              icon="fabric"
+              size="m"
+              key={installer.version}
+              id={installer.version}
+              text={installer.version}
+            />
+          ))}
         </Select>
       </div>
     </div>
@@ -119,6 +127,7 @@ export const FabricCoreBuilder = ({
 };
 
 export const FabricStrategy = {
+  StrategyId: FabricStrategyId,
   Selector: FabricCoreSelector,
   CoreBuilder: FabricCoreBuilder,
 };
