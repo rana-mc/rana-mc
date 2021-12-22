@@ -1,6 +1,6 @@
 {
   "name": "@rana-mc/forge",
-  "version": "0.0.7-alpha.0",
+  "version": "0.1.0-alpha.0",
   "main": "./build/main.js",
   "types": "./build/main.d.ts",
   "type": "module",
@@ -16,7 +16,7 @@
     "watch": "tsc-watch --onSuccess \"node --es-module-specifier-resolution=node build/main.js\""
   },
   "dependencies": {
-    "@rana-mc/types": "^0.0.7-alpha.0",
+    "@rana-mc/types": "^0.1.0-alpha.0",
     "@types/download": "^8.0.1",
     "@types/node": "^16.11.13",
     "@types/shelljs": "^0.8.9",
