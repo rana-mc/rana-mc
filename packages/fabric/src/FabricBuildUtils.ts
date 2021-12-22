@@ -62,14 +62,18 @@ export class FabricBuildUtils {
       const serverPath = `${options.game}/${loader}/${installer}/`;
       const serverUrl = `${urlByVersion}${serverPath}server/jar`;
 
-      console.log(serverUrl);
-
       const response = await axios.get(serverUrl);
       const { status } = response;
 
       fabricLocalDB.setCoreStatus(coreName, status);
       return fabricLocalDB.getCoreStatus(coreName);
     } catch (err) {
+      // FIY: Bad request – invalid game / loader / installer version
+      if (err?.response?.status === 400) {
+        fabricLocalDB.setCoreStatus(coreName, err?.response?.status);
+        return err?.response?.status;
+      }
+
       FabricBuildUtils.logger.log(`Got error after getCoreStatus – ${err.message}`);
     }
 
