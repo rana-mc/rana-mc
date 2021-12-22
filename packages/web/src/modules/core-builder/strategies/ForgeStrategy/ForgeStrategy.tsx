@@ -17,13 +17,13 @@ export const ForgeCoreSelector = ({ onChange }: { onChange: () => void }) => (
 );
 
 export const ForgeCoreBuilder = ({
-  version,
+  gameVersion,
   onCoreBuild,
 }: {
-  version: string;
+  gameVersion: string;
   onCoreBuild: (core: ServerCore) => void;
 }) => {
-  const { isLoading, error, data: cores } = useForgeCoresQuery(version);
+  const { isLoading, error, data: cores } = useForgeCoresQuery(gameVersion);
 
   if (isLoading) return <Spinner size={SpinnerSize.Small} />;
   if (error) return <Empty error />;

@@ -32,18 +32,18 @@ declare type FabricInstaller = {
 };
 
 declare type FabricLoader = {
-  url: string;
+  separator: string;
+  build: number,
   maven: string;
   version: string;
   stable: boolean;
 };
 
 declare type FabricCore = {
-  gameVersion: '*';
-  coreVersion: string;
-  installerUrl: string | null;
-  maven: string;
-  stable: boolean;
+  gameVersion: string,
+  loader: FabricLoader,
+  installer: FabricInstaller,
+  serverInstallerUrl: string;
 };
 
 declare type ServerCoreTypeValues = 'forge' | 'fabric';

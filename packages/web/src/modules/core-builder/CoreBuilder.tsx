@@ -31,7 +31,7 @@ const CoreBuilder = ({ onCoreBuild }: Props) => {
         <_strategy.Selector onChange={handlerStrategyChange(_strategy)} />
       ))}
       {strategy?.CoreBuilder ? (
-        <strategy.CoreBuilder version={gameVersionValue} onCoreBuild={handleCoreBuild} />
+        <strategy.CoreBuilder gameVersion={gameVersionValue} onCoreBuild={handleCoreBuild} />
       ) : (
         <Empty text="Please, select server core" />
       )}
