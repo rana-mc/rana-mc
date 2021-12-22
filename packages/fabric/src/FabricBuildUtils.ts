@@ -2,7 +2,7 @@ import axios from 'axios';
 import { fabricLocalDB } from './FabricLocalDB';
 
 import { Logger } from './Logger';
-import { getFabricServerPath } from './utils';
+import { getFabricServerPath } from './utils/server';
 
 export class FabricBuildUtils {
   public static TAG = 'FabricBuildUtils';
