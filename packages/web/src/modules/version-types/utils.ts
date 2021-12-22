@@ -5,7 +5,16 @@ export const sortTypes = (versionTypes: VersionType[]) =>
   versionTypes.slice().sort((a, b) => b?.id - a?.id);
 
 export const filterTypes = (versionTypes: VersionType[]) => {
-  const TYPES_TO_REMOVE = ['Bukkit', 'Modloader', 'Addons', 'Minecraft Beta'];
+  const TYPES_TO_REMOVE = [
+    'Bukkit',
+    'Forge',
+    'Fabric',
+    'Java',
+    'Modloader',
+    'Addons',
+    'Minecraft Beta'
+  ];
+
   return versionTypes.filter((type) => !TYPES_TO_REMOVE.includes(type.name));
 };
 
