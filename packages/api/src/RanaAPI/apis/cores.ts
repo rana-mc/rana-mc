@@ -1,11 +1,11 @@
-import { FabricCores } from '@rana-mc/fabric';
-import { ForgeCores } from '@rana-mc/forge';
+import { FabricBuildUtils } from '@rana-mc/fabric';
+import { ForgeBuildUtils } from '@rana-mc/forge';
 import APIRoute from '../APIRoute';
 
 export default class CoresAPI extends APIRoute {
-  forgeCores: ForgeCores;
+  forgeBuildUtils: ForgeBuildUtils;
 
-  fabricCores: FabricCores;
+  fabricBuildUtils: FabricBuildUtils;
 
   get TAG() {
     return 'RanaAPI-cores';
@@ -14,15 +14,15 @@ export default class CoresAPI extends APIRoute {
   constructor() {
     super();
 
-    this.forgeCores = new ForgeCores();
-    this.fabricCores = new FabricCores();
+    this.forgeBuildUtils = new ForgeBuildUtils();
+    this.fabricBuildUtils = new FabricBuildUtils();
 
     this.init();
   }
 
   init = async () => {
     this.useForgeCores();
-    this.useFabricCores();
+    this.useFabricBuildUtils();
   };
 
   useForgeCores() {
@@ -33,22 +33,32 @@ export default class CoresAPI extends APIRoute {
       };
       const refresh = !!force;
 
-      const cores = await this.forgeCores.getCores(version, refresh);
+      const cores = await this.forgeBuildUtils.getCores(version, refresh);
 
       if (!cores) return res.sendStatus(500);
       return res.send(cores);
     });
   }
 
-  useFabricCores() {
-    this.router.use('/fabric-cores', async (req, res) => {
+  useFabricBuildUtils() {
+    this.router.use('/fabric-installers', async (req, res) => {
       const { force } = req.query as { version: string; force: string };
       const refresh = !!force;
 
-      const cores = await this.fabricCores.getCores(refresh);
+      const installers = await this.fabricBuildUtils.getInstallers(refresh);
 
-      if (!cores) return res.sendStatus(500);
-      return res.send(cores);
+      if (!installers) return res.sendStatus(500);
+      return res.send(installers);
+    });
+
+    this.router.use('/fabric-loaders', async (req, res) => {
+      const { force } = req.query as { version: string; force: string };
+      const refresh = !!force;
+
+      const loaders = await this.fabricBuildUtils.getLoaders(refresh);
+
+      if (!loaders) return res.sendStatus(500);
+      return res.send(loaders);
     });
   }
 }
