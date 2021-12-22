@@ -4,21 +4,15 @@ import { forgeLocalDB } from './ForgeLocalDB';
 import { Logger } from './Logger';
 import { parseCoresFromHTML } from './utils/parse';
 
-export class ForgeCores {
-  public static TAG = 'ForgeCores';
+export class ForgeBuildUtils {
+  public static TAG = 'ForgeBuildUtils';
 
-  public static logger: Logger = new Logger(ForgeCores.TAG);
+  public static logger: Logger = new Logger(ForgeBuildUtils.TAG);
 
-  private baseUrl: string = 'https://files.minecraftforge.net/net/minecraftforge/forge/';
-
-  getVersionCoresUrl(version: string) {
-    const htmlForVersion = `index_${version}.html`;
-
-    return `${this.baseUrl}${htmlForVersion}`;
-  }
+  private coresUrl: string = 'https://files.minecraftforge.net/net/minecraftforge/forge/';
 
   async getCores(version: string, refresh?: boolean) {
-    const forgeCoresUrl = this.getVersionCoresUrl(version);
+    const forgeCoresUrl = `${this.coresUrl}${`index_${version}.html`}`;
     if (!version) return null;
 
     const coresFromDB = forgeLocalDB.getForgeCores(version);
@@ -32,7 +26,9 @@ export class ForgeCores {
       forgeLocalDB.setForgeCores(version, coresFromHTML);
       return coresFromHTML;
     } catch (err) {
-      ForgeCores.logger.log(`(${version}) Got error after getCores – ${err.message}`);
+      ForgeBuildUtils.logger.log(
+        `(${version}) Got error after getCores – ${err.message}`
+      );
     }
 
     return null;
