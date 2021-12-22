@@ -4,7 +4,11 @@ import React, { useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { strategies, Strategy } from './strategies';
 
-const CoreBuilder = () => {
+type Props = {
+  onCoreBuild: (core: ServerCore) => void;
+};
+
+const CoreBuilder = ({ onCoreBuild }: Props) => {
   const [strategy, setStrategy] = useState<Strategy>();
   const gameVersionValue = useAppSelector(selectCurrentGameVersion);
 
@@ -12,8 +16,8 @@ const CoreBuilder = () => {
     setStrategy(_strategy);
   };
 
-  const handleCoreBuild = (core: ForgeCore | FabricCore) => {
-    console.log(core);
+  const handleCoreBuild = (core: ServerCore) => {
+    onCoreBuild(core);
   };
 
   if (!gameVersionValue) {

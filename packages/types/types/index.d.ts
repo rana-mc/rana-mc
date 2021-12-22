@@ -39,14 +39,16 @@ declare type FabricCore = {
   stable: boolean;
 };
 
-declare type CoreType = 'forge' | 'fabric';
-declare type Core = ({ type: CoreType } & ForgeCore) | ({ type: CoreType } & FabricCore);
+declare type ServerCoreTypeValues = 'forge' | 'fabric';
+declare type ServerCore =
+  ({ type: ServerCoreTypeValues } & ForgeCore) |
+  ({ type: ServerCoreTypeValues } & FabricCore);
 
 declare type Server = {
   id: string;
   name: string;
   status: string;
-  core: Core;
+  core: ServerCore;
   mods: ServerMod[];
   gameVersion: string;
   gameVersionTypeId: number;

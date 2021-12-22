@@ -3,8 +3,9 @@ import React from 'react';
 import Select from '@ui/Select';
 import SelectOption from '@ui/SelectOption';
 import Empty from '@ui/Empty';
-import { useForgeCoresQuery } from './ForgeStrategy/forgeAPI';
+import { useForgeCoresQuery } from './forgeAPI';
 import Spinner, { SpinnerSize } from '@ui/Spinner';
+import { ServerCoreType } from '@rana-mc/types';
 
 export const ForgeCoreSelector = ({ onChange }: { onChange: () => void }) => (
   <SelectCoreOption
@@ -20,7 +21,7 @@ export const ForgeCoreBuilder = ({
   onCoreBuild,
 }: {
   version: string;
-  onCoreBuild: (core: ForgeCore) => void;
+  onCoreBuild: (core: ServerCore) => void;
 }) => {
   const { isLoading, error, data: cores } = useForgeCoresQuery(version);
 
@@ -33,7 +34,11 @@ export const ForgeCoreBuilder = ({
       (core: ForgeCore) => core.coreVersion === coreVersion
     );
 
-    if (onCoreBuild && selectedCore) onCoreBuild(selectedCore);
+    if (onCoreBuild && selectedCore)
+      onCoreBuild({
+        type: ServerCoreType.Forge,
+        ...selectedCore,
+      });
   };
 
   return (

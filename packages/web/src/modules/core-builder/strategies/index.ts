@@ -1,5 +1,5 @@
 import FabricStrategy from './FabricStrategy/FabricStrategy';
-import ForgeStrategy from './ForgeStrategy';
+import ForgeStrategy from './ForgeStrategy/ForgeStrategy';
 
 export type Strategy = typeof ForgeStrategy | typeof FabricStrategy;
 

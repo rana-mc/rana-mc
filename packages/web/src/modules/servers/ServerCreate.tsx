@@ -9,30 +9,48 @@ import Label from '@ui/Label';
 import Input from '@ui/Input';
 import CoreBuilder from '../core-builder/CoreBuilder';
 import styles from './ServerCreate.module.css';
+import { selectCurrentGameVersion } from '@modules/game-versions/gameVersionsSlice';
+import { selectCurrentVersionTypeId } from '@modules/version-types/versionTypesSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { ServerCoreType, ServerStatus } from '@rana-mc/types';
+import { createServerAC } from './serversSlice';
 
 const CreateServer = () => {
-  const [id, setId] = useState('');
-  const [name, setName] = useState('');
+  const dispatch = useAppDispatch();
+
+  const [id, setId] = useState<string>();
+  const [name, setName] = useState<string>();
+  const [core, setCore] = useState<ServerCore>();
+
+  const gameVersion = useAppSelector(selectCurrentGameVersion);
+  const versionTypeId = useAppSelector(selectCurrentVersionTypeId);
+
+  const handleCoreBuild = (core: ServerCore) => {
+    console.log(core);
+    setCore(core);
+  };
 
   const handleCreate = () => {
-    // if (currentGameVersion && currentCoreType && currentVersionType && currentCore) {
-    //   const server: Server = {
-    //     id,
-    //     name,
-    //     gameVersion: currentGameVersion,
-    //     gameVersionTypeId: currentVersionType,
-    //     status: ServerStatus.Created,
-    //     core: {},
-    //     mods: [],
-    //     eula: false,
-    //     startTimes: [],
-    //   };
-    //   // FYI: Support link of Forge
-    //   if (currentCoreType === CoreType.Forge && currentCore?.installerUrl) {
-    //     window.open(currentCore?.installerUrl, '_blank', 'noopener,noreferrer');
-    //   }
-    //   dispatch(createServerAC(server));
-    // }
+    if (id && name && gameVersion && versionTypeId && core) {
+      const server: Server = {
+        id,
+        name,
+        gameVersion,
+        gameVersionTypeId: versionTypeId,
+        status: ServerStatus.Created,
+        core,
+        mods: [],
+        eula: false,
+        startTimes: [],
+      };
+
+      // FYI: Support link of Forge
+      if (core.type === ServerCoreType.Forge && core?.installerUrl) {
+        window.open(core?.installerUrl, '_blank', 'noopener,noreferrer');
+      }
+
+      dispatch(createServerAC(server));
+    }
   };
 
   return (
@@ -44,7 +62,7 @@ const CreateServer = () => {
         <GameVersions />
       </section>
       <section className={cn(styles.section)}>
-        <CoreBuilder />
+        <CoreBuilder onCoreBuild={handleCoreBuild} />
       </section>
       <section className={cn(styles.section)}>
         <Label text="Server Id" />

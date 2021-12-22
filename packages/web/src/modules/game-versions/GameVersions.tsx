@@ -9,16 +9,16 @@ import {
   setCurrentGameVersion,
 } from './gameVersionsSlice';
 
-import { selectCurrentVersionType } from '../version-types/versionTypesSlice';
+import { selectCurrentVersionTypeId } from '../version-types/versionTypesSlice';
 import { formatVersions } from './utils';
 
 const GameVersions = () => {
   const dispatch = useAppDispatch();
   const allGameVersions = useAppSelector(selectGameVersions);
-  const versionType = useAppSelector(selectCurrentVersionType);
+  const versionTypeId = useAppSelector(selectCurrentVersionTypeId);
 
   const gameVersion = allGameVersions?.find(
-    (_gameVersion) => _gameVersion.type === versionType
+    (_gameVersion) => _gameVersion.type === versionTypeId
   );
 
   useEffect(() => {

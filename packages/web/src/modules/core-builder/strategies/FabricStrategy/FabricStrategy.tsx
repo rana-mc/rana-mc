@@ -1,3 +1,4 @@
+import { ServerCoreType } from '@rana-mc/types';
 import SelectCoreOption from '@ui/SelectCoreOption';
 import React from 'react';
 
@@ -15,11 +16,12 @@ export const FabricCoreBuilder = ({
   onCoreBuild,
 }: {
   version: string;
-  onCoreBuild: (core: FabricCore) => void;
+  onCoreBuild: (core: ServerCore) => void;
 }) => {
   const handleCoreBuild = () => {
     if (onCoreBuild)
       onCoreBuild({
+        type: ServerCoreType.Fabric,
         gameVersion: '*',
         coreVersion: '1',
         installerUrl: '2',
