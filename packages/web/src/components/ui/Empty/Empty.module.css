@@ -33,7 +33,9 @@
 }
 
 .title {
+  font-weight: 300;
   font-size: 18px;
+  padding: 24px;
 }
 
 .textOnly {
