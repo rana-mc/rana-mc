@@ -23,7 +23,8 @@ const Tabs = ({ defaultId, children, onChange }: Props) => {
         React.cloneElement(tab, {
           active: currentId === tab.props.id,
           onClick: handleClick,
-        }))}
+        })
+      )}
     </div>
   );
 };

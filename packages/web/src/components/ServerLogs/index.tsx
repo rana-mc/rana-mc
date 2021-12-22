@@ -41,11 +41,12 @@ const ServerLogs = ({ serverId }: Props) => {
 
   const renderLine = (line: string) =>
     parseLine(line).groups.map((group) =>
-      (group.name ? (
+      group.name ? (
         <span className={cn(styles[group.name])}>{group.value}</span>
       ) : (
         <span className={cn(styles.line)}>{group.value}</span>
-      )));
+      )
+    );
 
   return (
     <div className={cn(styles.serverLogs)}>

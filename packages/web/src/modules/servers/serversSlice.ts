@@ -2,9 +2,7 @@ import { ServerActions } from '@rana-mc/types';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ranaSocket } from '../../vendors/ranaSocketIo';
 import { RootState } from '../../app/store';
-import {
-  fetchServers, createServer, removeServer, updateServer
-} from './serversAPI';
+import { fetchServers, createServer, removeServer, updateServer } from './serversAPI';
 
 export interface ServersState {
   values: Server[] | null;
@@ -62,7 +60,8 @@ export const serversSlice = createSlice({
 
       if (state.values) {
         state.values = state.values?.map((server) =>
-          (server.id === updatedServer?.id ? { ...server, ...updatedServer } : server));
+          server.id === updatedServer?.id ? { ...server, ...updatedServer } : server
+        );
       } else {
         console.error('Something went wrong. Unknown error.');
       }

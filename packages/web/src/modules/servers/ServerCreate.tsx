@@ -27,12 +27,10 @@ const CreateServer = () => {
     //     eula: false,
     //     startTimes: [],
     //   };
-
     //   // FYI: Support link of Forge
     //   if (currentCoreType === CoreType.Forge && currentCore?.installerUrl) {
     //     window.open(currentCore?.installerUrl, '_blank', 'noopener,noreferrer');
     //   }
-
     //   dispatch(createServerAC(server));
     // }
   };

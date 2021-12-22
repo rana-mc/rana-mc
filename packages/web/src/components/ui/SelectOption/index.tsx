@@ -14,9 +14,7 @@ type Props = {
   active?: boolean;
 };
 
-const SelectOption = ({
-  icon, id, size = 'm', text, onClick, active
-}: Props) => {
+const SelectOption = ({ icon, id, size = 'm', text, onClick, active }: Props) => {
   const handleClick = () => onClick && onClick(id);
 
   return (
@@ -25,8 +23,7 @@ const SelectOption = ({
       className={cn(styles.selectOption, styles[`size-${size}`], {
         [styles.active]: active,
       })}
-      onClick={handleClick}
-    >
+      onClick={handleClick}>
       {icon && <SelectIcon size={size === 'm' ? 's' : 'xs'} name={icon} />}
       <span className={cn(styles.text)}>{text}</span>
     </div>

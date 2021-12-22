@@ -12,7 +12,7 @@ export const filterTypes = (versionTypes: VersionType[]) => {
     'Java',
     'Modloader',
     'Addons',
-    'Minecraft Beta'
+    'Minecraft Beta',
   ];
 
   return versionTypes.filter((type) => !TYPES_TO_REMOVE.includes(type.name));

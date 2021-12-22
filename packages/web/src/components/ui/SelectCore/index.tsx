@@ -23,7 +23,8 @@ const SelectCore = ({ defaultId, children, onChange }: Props) => {
         React.cloneElement(selectCoreOption, {
           active: currentId === selectCoreOption.props.type,
           onClick: handleClick,
-        }))}
+        })
+      )}
     </div>
   );
 };

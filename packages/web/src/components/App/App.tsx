@@ -28,8 +28,7 @@ const App = () => {
             className="HowToUser-link"
             href="/docs"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             How To Use Rana MC
           </a>
         </section>

@@ -12,9 +12,7 @@ type Props = {
   size?: SwitchSize;
 };
 
-const Switch = ({
-  forId, value, onChange, size
-}: Props) => {
+const Switch = ({ forId, value, onChange, size }: Props) => {
   const [checked, setChecked] = useState(value || false);
 
   const handleChange = () => {

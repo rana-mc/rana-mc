@@ -10,17 +10,14 @@ type Props = {
   active?: boolean;
 };
 
-const Tab = ({
-  id, text, active, onClick
-}: Props) => {
+const Tab = ({ id, text, active, onClick }: Props) => {
   const handleClick = () => onClick && onClick(id);
 
   return (
     <div
       role="presentation"
       className={cn(styles.tab, { [styles.active]: active })}
-      onClick={handleClick}
-    >
+      onClick={handleClick}>
       <span className={cn(styles.text)}>{text}</span>
     </div>
   );
