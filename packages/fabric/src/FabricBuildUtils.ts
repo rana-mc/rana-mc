@@ -21,7 +21,7 @@ export class FabricBuildUtils {
       const installers: FabricInstaller[] = response.data;
 
       fabricLocalDB.setFabricInstallers(installers);
-      return fabricLocalDB;
+      return fabricLocalDB.getFabricInstallers();
     } catch (err) {
       FabricBuildUtils.logger.log(`Got error after getInstallers – ${err.message}`);
     }
@@ -38,7 +38,7 @@ export class FabricBuildUtils {
       const loaders: FabricLoader[] = response.data;
 
       fabricLocalDB.setFabricLoaders(loaders);
-      return fabricLocalDB;
+      return fabricLocalDB.getFabricLoaders();
     } catch (err) {
       FabricBuildUtils.logger.log(`Got error after getLoaders – ${err.message}`);
     }
