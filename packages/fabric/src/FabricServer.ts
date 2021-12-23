@@ -160,8 +160,8 @@ export class FabricServer extends EventEmitter {
   }
 
   /**
-     * Parse with regular server start time.
-     */
+   * Parse with regular server start time.
+   */
   private parseServerStartTime(message: string): number {
     try {
       const startTime = message.match(/Done \((.+)s\)! For help, type "help"/);
