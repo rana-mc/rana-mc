@@ -20,6 +20,7 @@
 
 # TODOs:
 
+- [ ] Refactory Expand
 - [ ] Single .env?
 - [x] Single class for CurseForge (with api methods?)
 - [x] Single class for MinecraftForge (with parse methods?)
@@ -29,7 +30,7 @@
 - [x] Package for types? @rana-mc/types?
 - [ ] Select as Single component with contraction
 - [x] Packages like @rana-mc/forge (parse, types, install), @rana-mc/fabric (parse, types, install)
-- [ ] Packages like @rana-mc/wizard (server output), or mb @rana-mc/mc-server
+- [x] Packages like @rana-mc/wizard (server output), or mb @rana-mc/mc-server
 
 # Thanks:
 

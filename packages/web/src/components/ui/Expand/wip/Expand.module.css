@@ -1,5 +1,20 @@
+.expand {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chunk {
+  transition: height 0.25s;
+  width: 100%;
+}
+
+.fixed {
+  height: 100%;
+  transition: height 0s;
+}
+
 .button {
-  margin-top: 24px;
   padding: 8px 32px;
   cursor: pointer;
   font-weight: 300;
