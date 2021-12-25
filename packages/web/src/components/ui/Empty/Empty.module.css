@@ -40,7 +40,7 @@
 
 .textOnly {
   padding: 8px 12px;
-  display: inline-flex;
+  display: flex;
   width: auto;
   max-width: none;
   background-color: #f8f8f8;
