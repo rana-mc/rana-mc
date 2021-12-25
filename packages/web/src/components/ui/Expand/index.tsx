@@ -36,6 +36,8 @@ const ExpandChunk = ({ children, fixed }: ChunkProps) => {
   });
 
   useEffect(() => {
+    if (fixed) return;
+
     const handleAnimation = () => {
       if (chunk?.current?.clientHeight === height) {
         chunk.current.style.overflow = 'visible';
@@ -44,6 +46,7 @@ const ExpandChunk = ({ children, fixed }: ChunkProps) => {
         window.requestAnimationFrame(handleAnimation);
       }
     };
+    
     window.requestAnimationFrame(handleAnimation);
   });
 
