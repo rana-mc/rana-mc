@@ -9,16 +9,11 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.15s;
-  margin-left: 32px;
-  margin-top: 16px;
-}
-
-.selectOption + .selectOption {
-  margin-left: 32px;
 }
 
 .text {
   margin-left: 10px;
+  font-size: 16px;
 }
 
 .selectOption:hover {

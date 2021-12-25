@@ -2,6 +2,7 @@ import React, { Children, useState } from 'react';
 import cn from 'classnames';
 
 import styles from './Select.module.css';
+import Space, { SpaceDirection, SpaceSize } from '@ui/Space';
 
 type Props = {
   children: React.ReactElement | React.ReactElement[];
@@ -19,12 +20,14 @@ const Select = ({ defaultId, children, onChange }: Props) => {
 
   return (
     <div className={cn(styles.select)}>
-      {Children.map(children, (selectOption) =>
-        React.cloneElement(selectOption, {
-          active: currentId === selectOption.props.id,
-          onClick: handleClick,
-        })
-      )}
+      <Space size={SpaceSize.Small} direction={SpaceDirection.Horizontal}>
+        {Children.map(children, (selectOption) =>
+          React.cloneElement(selectOption, {
+            active: currentId === selectOption.props.id,
+            onClick: handleClick,
+          })
+        )}
+      </Space>
     </div>
   );
 };

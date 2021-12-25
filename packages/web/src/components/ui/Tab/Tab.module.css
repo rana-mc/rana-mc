@@ -2,7 +2,7 @@
   position: relative;
   cursor: pointer;
   padding: 8px 0;
-  border-bottom: 2px solid #f8f8f8;
+  border-bottom: 2px solid #EEEEEE;
   transition: border 0.15s;
 }
 

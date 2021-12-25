@@ -14,6 +14,8 @@ import { selectCurrentVersionTypeId } from '@modules/version-types/versionTypesS
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ServerCoreType, ServerStatus } from '@rana-mc/types';
 import { createServerAC } from './serversSlice';
+import Card from '@ui/Card';
+import Space, { SpaceDirection, SpaceSize } from '@ui/Space';
 
 const CreateServer = () => {
   const dispatch = useAppDispatch();
@@ -59,12 +61,12 @@ const CreateServer = () => {
 
   return (
     <div className={cn(styles.createServer)}>
-      <section className={cn(styles.section)}>
-        <VersionTypes />
-      </section>
-      <section className={cn(styles.section)}>
-        <GameVersions />
-      </section>
+      <Card title="Game Version">
+        <Space size={SpaceSize.Large} direction={SpaceDirection.Horizontal}>
+          <VersionTypes />
+          <GameVersions />
+        </Space>
+      </Card>
       <section className={cn(styles.section)}>
         <CoreBuilder onCoreBuild={handleCoreBuild} />
       </section>
