@@ -67,9 +67,9 @@ const CreateServer = () => {
           <GameVersions />
         </Space>
       </Card>
-      <section className={cn(styles.section)}>
+      <Card title="Server Core">
         <CoreBuilder onCoreBuild={handleCoreBuild} />
-      </section>
+      </Card>
       <section className={cn(styles.section)}>
         <Label text="Server Id" />
         <Input onChange={setId} value={id} />

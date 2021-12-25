@@ -20,7 +20,11 @@ type Props = {
   direction?: SpaceDirection;
 };
 
-const Space = ({ children, size, direction }: Props) => {
+const Space = ({
+  children,
+  size = SpaceSize.Medium,
+  direction = SpaceDirection.Horizontal,
+}: Props) => {
   return (
     <div
       className={cn(

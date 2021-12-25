@@ -1,5 +1,6 @@
 import { selectCurrentGameVersion } from '@modules/game-versions/gameVersionsSlice';
 import Empty from '@ui/Empty';
+import Space, { SpaceDirection, SpaceSize } from '@ui/Space';
 import React, { useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { strategies, Strategy } from './strategies';
@@ -25,14 +26,16 @@ const CoreBuilder = ({ onCoreBuild }: Props) => {
   }
 
   return (
-    <>
-      {strategies.map((_strategy) => (
-        // eslint-disable-next-line react/jsx-pascal-case
-        <_strategy.Selector
-          currentStrategyId={strategy?.StrategyId}
-          onChange={handlerStrategyChange(_strategy)}
-        />
-      ))}
+    <Space size={SpaceSize.Medium} direction={SpaceDirection.Horizontal}>
+      <>
+        {strategies.map((_strategy) => (
+          // eslint-disable-next-line react/jsx-pascal-case
+          <_strategy.Selector
+            currentStrategyId={strategy?.StrategyId}
+            onChange={handlerStrategyChange(_strategy)}
+          />
+        ))}
+      </>
       {strategy?.CoreBuilder ? (
         <strategy.CoreBuilder
           gameVersion={gameVersionValue}
@@ -41,7 +44,7 @@ const CoreBuilder = ({ onCoreBuild }: Props) => {
       ) : (
         <Empty text="Please, select server core" />
       )}
-    </>
+    </Space>
   );
 };
 

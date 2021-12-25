@@ -23,8 +23,8 @@ export const useFabricInstallersQuery = () =>
 
 export const useFabricQueries = () =>
   useQueries([
-    { queryKey: ['loaders', 1], queryFn: fetchFabricLoaders },
-    { queryKey: ['installers', 2], queryFn: fetchFabricInstallers },
+    { queryKey: ['loaders'], queryFn: fetchFabricLoaders },
+    { queryKey: ['installers'], queryFn: fetchFabricInstallers },
   ]);
 
 const fetchFabricCoreStatus = async (

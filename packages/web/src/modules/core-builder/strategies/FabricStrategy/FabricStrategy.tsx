@@ -12,6 +12,7 @@ import { useFabricCoreStatusQuery, useFabricQueries } from './fabricAPI';
 import styles from './FabricStrategy.module.css';
 import { getFabricServerUrl } from './utils';
 import Status from '@ui/Status';
+import Space, { SpaceSize } from '@ui/Space';
 
 export const FabricStrategyId = 'fabric';
 
@@ -96,6 +97,7 @@ export const FabricCoreBuilder = ({
     handleCoreBuild();
   };
 
+  // TODO: Improve Status component
   return (
     <div className={cn(styles.fabricStrategy)}>
       <Status
@@ -104,28 +106,30 @@ export const FabricCoreBuilder = ({
         unavailableText={status?.isLoading ? 'Loading...' : 'Wrong server core :('}
       />
       <div className={cn(styles.list)}>
-        <Select onChange={handleChangeLoader}>
-          {loaders?.data.map((loader: FabricLoader) => (
-            <SelectOption
-              icon="fabric"
-              size="s"
-              key={loader.version}
-              id={loader.version}
-              text={loader.version}
-            />
-          ))}
-        </Select>
-        <Select onChange={handleChangeInstaller}>
-          {installers?.data.map((installer: FabricInstaller) => (
-            <SelectOption
-              icon="fabric"
-              size="m"
-              key={installer.version}
-              id={installer.version}
-              text={installer.version}
-            />
-          ))}
-        </Select>
+        <Space size={SpaceSize.Medium}>
+          <Select title="Loaders" onChange={handleChangeLoader}>
+            {loaders?.data.map((loader: FabricLoader) => (
+              <SelectOption
+                icon="fabric"
+                size="s"
+                key={loader.version}
+                id={loader.version}
+                text={loader.version}
+              />
+            ))}
+          </Select>
+          <Select title="Installers" onChange={handleChangeInstaller}>
+            {installers?.data.map((installer: FabricInstaller) => (
+              <SelectOption
+                icon="fabric"
+                size="m"
+                key={installer.version}
+                id={installer.version}
+                text={installer.version}
+              />
+            ))}
+          </Select>
+        </Space>
       </div>
     </div>
   );
