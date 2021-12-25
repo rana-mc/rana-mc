@@ -65,8 +65,10 @@ const ExpandChunk = ({ children, fixed }: ChunkProps) => {
 const Expand = ({ children, text, viewCount = 5 }: Props) => {
   const [currentChunkIndex, setCurrentChunkIndex] = useState(0);
   const chunks = chunk(React.Children.toArray(children), viewCount);
+  const slicedChunks = chunks.slice(0, currentChunkIndex + 1);
 
   const hasMore = React.Children.toArray(children).length > viewCount;
+  const hasNextChunk = currentChunkIndex < chunks.length - 1;
 
   if (!hasMore) {
     return <Space>{children}</Space>;
@@ -79,10 +81,10 @@ const Expand = ({ children, text, viewCount = 5 }: Props) => {
   return (
     <div className={cn(styles.expand)}>
       <Space>
-        {chunks.slice(0, currentChunkIndex + 1).map((chunk, index) => (
+        {slicedChunks.map((chunk, index) => (
           <ExpandChunk fixed={index + 1 === 1}>{chunk}</ExpandChunk>
         ))}
-        {hasMore && (
+        {hasMore && hasNextChunk && (
           <div className={cn(styles.button)} onClick={handleExpand}>
             {text || 'More'}
           </div>
