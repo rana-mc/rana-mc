@@ -15,18 +15,23 @@ export enum SpaceDirection {
 }
 
 type Props = {
-  children: React.ReactElement | React.ReactElement[];
+  children:
+    | React.ReactElement
+    | (React.ReactElement | React.ReactChild | React.ReactFragment | React.ReactPortal)[];
   size?: SpaceSize;
   direction?: SpaceDirection;
+  ref?: React.MutableRefObject<HTMLDivElement>;
 };
 
 const Space = ({
+  ref,
   children,
   size = SpaceSize.Medium,
   direction = SpaceDirection.Horizontal,
 }: Props) => {
   return (
     <div
+      ref={ref}
       className={cn(
         styles.space,
         styles[`size-${size}`],
