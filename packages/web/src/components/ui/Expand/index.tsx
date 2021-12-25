@@ -46,7 +46,7 @@ const ExpandChunk = ({ children, fixed }: ChunkProps) => {
         window.requestAnimationFrame(handleAnimation);
       }
     };
-    
+
     window.requestAnimationFrame(handleAnimation);
   });
 

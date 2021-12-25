@@ -17,8 +17,14 @@
 .button {
   padding: 8px 32px;
   cursor: pointer;
+  font-weight: 300;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   background-color: #f8f8f8;
-  border-radius: 12px;
+  border-radius: 8px;
+  border: 1px solid #c0c0c0;
 }
 
 .button:hover {
