@@ -1,11 +1,14 @@
 import SelectCoreOption from '@ui/SelectCoreOption';
 import React from 'react';
+import cn from 'classnames';
 import Select from '@ui/Select';
 import SelectOption from '@ui/SelectOption';
 import Empty from '@ui/Empty';
 import { useForgeCoresQuery } from './forgeAPI';
 import Spinner, { SpinnerSize } from '@ui/Spinner';
 import { ServerCoreType } from '@rana-mc/types';
+
+import styles from './ForgeStrategy.module.css';
 
 export const ForgeStrategyId = 'forge';
 
@@ -33,7 +36,12 @@ export const ForgeCoreBuilder = ({
 }) => {
   const { isLoading, error, data: cores } = useForgeCoresQuery(gameVersion);
 
-  if (isLoading) return <Spinner size={SpinnerSize.Small} />;
+  if (isLoading)
+    return (
+      <div className={cn(styles.forgeStrategyLoading)}>
+        <Spinner size={SpinnerSize.Small} />
+      </div>
+    );
   if (error) return <Empty error />;
   if (!cores) return <Empty />;
 

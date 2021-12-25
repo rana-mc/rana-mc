@@ -57,7 +57,12 @@ export const FabricCoreBuilder = ({
   const error = loaders.error || installers.error;
   const hasFabric = loaders.data && installers.data;
 
-  if (isLoading) return <Spinner size={SpinnerSize.Small} />;
+  if (isLoading)
+    return (
+      <div className={cn(styles.fabricStrategyLoading)}>
+        <Spinner size={SpinnerSize.Small} />
+      </div>
+    );
   if (error) return <Empty error />;
   if (!hasFabric) return <Empty />;
 
