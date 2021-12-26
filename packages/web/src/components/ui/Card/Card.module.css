@@ -5,6 +5,7 @@
   border: 1px solid #c4c4c4;
   padding: 48px;
   border-radius: 16px;
+  background-color: #fff;
 }
 
 .card + .card {

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchSettingsAC, selectSettings, setSettingsAC } from './settingsSlice';
 
 import styles from './Settings.module.css';
+import Card from '@ui/Card';
 
 const Settings = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +34,7 @@ const Settings = () => {
   };
 
   return (
-    <div className={cn(styles.settings)}>
+    <Card className={cn(styles.settings)}>
       <section className={cn(styles.section)}>
         <Label text="Curse API Key" />
         <Input
@@ -44,7 +45,7 @@ const Settings = () => {
       <section className={cn(styles.section)}>
         <Button size={ButtonSize.Small} text="Save" onClick={handleSave} />
       </section>
-    </div>
+    </Card>
   );
 };
 

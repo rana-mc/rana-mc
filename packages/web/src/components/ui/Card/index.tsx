@@ -5,12 +5,13 @@ import styles from './Card.module.css';
 
 type Props = {
   title?: string;
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactElement | React.ReactElement[] | React.ReactNode;
+  className?: string;
 };
 
-const Card = ({ title, children }: Props) => {
+const Card = ({ className, title, children }: Props) => {
   return (
-    <div className={cn(styles.card)}>
+    <div className={cn(styles.card, className)}>
       {title && <h3 className={cn(styles.title)}>{title}</h3>}
       {children}
     </div>

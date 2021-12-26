@@ -1,0 +1,23 @@
+.logo {
+  height: 20vmin;
+  pointer-events: none;
+  margin-bottom: 32px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-float infinite 3s ease-in-out;
+  }
+}
+
+@keyframes logo-float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import cn from 'classnames';
 import Empty from '@ui/Empty';
 import Server from '@modules/server/Server';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchServersAC, selectServers } from './serversSlice';
-import styles from './ServersList.module.css';
 import ServerLogs from '../../components/ServerLogs';
+import Card from '@ui/Card';
 
 const ServersList = () => {
   const dispatch = useAppDispatch();
@@ -24,12 +23,12 @@ const ServersList = () => {
   }
 
   return (
-    <div className={cn(styles.serversList)}>
+    <Card>
       {servers.map((server) => (
         <Server key={server.id} server={server} />
       ))}
       <ServerLogs />
-    </div>
+    </Card>
   );
 };
 

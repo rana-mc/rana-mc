@@ -1,8 +1,6 @@
 .createServer {
   display: flex;
   flex-direction: column;
-  max-width: 40%;
-  margin: 0 auto;
 }
 
 .section {

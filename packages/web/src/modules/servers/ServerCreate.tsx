@@ -5,8 +5,6 @@ import GameVersions from '@modules/game-versions/GameVersions';
 import VersionTypes from '@modules/version-types/VersionTypes';
 import Button from '@ui/Button';
 
-import Label from '@ui/Label';
-import Input from '@ui/Input';
 import CoreBuilder from '../core-builder/CoreBuilder';
 import styles from './ServerCreate.module.css';
 import { selectCurrentGameVersion } from '@modules/game-versions/gameVersionsSlice';
@@ -20,8 +18,10 @@ import Space, { SpaceDirection, SpaceSize } from '@ui/Space';
 const CreateServer = () => {
   const dispatch = useAppDispatch();
 
-  const [id, setId] = useState<string>();
-  const [name, setName] = useState<string>();
+  /** TODO: From store */
+  const id = 'test';
+  const name = 'test';
+
   const [core, setCore] = useState<ServerCore>();
 
   const gameVersion = useAppSelector(selectCurrentGameVersion);
@@ -70,12 +70,6 @@ const CreateServer = () => {
       <Card title="Server Core">
         <CoreBuilder onCoreBuild={handleCoreBuild} />
       </Card>
-      <section className={cn(styles.section)}>
-        <Label text="Server Id" />
-        <Input onChange={setId} value={id} />
-        <Label text="Server Name" />
-        <Input onChange={setName} value={name} />
-      </section>
       <section className={cn(styles.section)}>
         <Button text="Create Server" onClick={handleCreate} />
       </section>
