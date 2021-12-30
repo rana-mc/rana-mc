@@ -19,6 +19,8 @@
 <br/>
 
 # TODOs:
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc?ref=badge_shield)
+
 
 - [ ] Refactory Expand
 - [ ] Single .env?
@@ -39,3 +41,6 @@
 # License
 
 - MIT
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc?ref=badge_large)
