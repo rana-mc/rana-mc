@@ -1,0 +1,49 @@
+.serverCoreSelect {
+  overflow: scroll;
+  padding-bottom: 4px;
+
+  .rs-radio-checker {
+    padding-left: 0;
+    padding-right: 12px;
+
+    .rs-radio-wrapper {
+      left: -5px;
+      top: 6px;
+    }
+  }
+}
+
+.serverCoreType {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 90px;
+  background: #f8f8f8;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px solid #8cc8ff;
+  }
+
+  &_active {
+    border: 1px solid #317cf4;
+  }
+
+  &__title {
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 32px;
+  }
+
+  &__description {
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 4px;
+    color: #9a9aaf;
+  }
+}

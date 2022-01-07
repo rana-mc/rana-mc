@@ -13,6 +13,9 @@ import CreateServerForm, {
 import GameVersionSelect, {
   links as gameVersionSelectLinks,
 } from '~/components/GameVersionSelect';
+import ServerCoreTypeSelect, {
+  links as serverCoreTypeSelectLinks,
+} from '~/components/ServerCoreTypeSelect';
 
 type GameVersion = { type: number; versions: string[] };
 type VersionType = { id: number; gameId: number; name: string; slug: string };
@@ -42,6 +45,7 @@ const CreateServer = () => {
   const { gameVersions, versionTypes } = useLoaderData<GreateServerData>();
   const [gameVersion, setGameVersion] = useState<GameVersion>();
   const [version, setVersion] = useState<string>();
+  const [serverCoreType, setServerCoreType] = useState<string>();
 
   const handleVersionTypeChange = (value: number) => {
     const currentGameVersion = gameVersions.find(
@@ -53,6 +57,10 @@ const CreateServer = () => {
 
   const handleVersionChange = (value: string) => {
     setVersion(value);
+  };
+
+  const handleServerCoreTypeChange = (value: string) => {
+    setServerCoreType(value);
   };
 
   return (
@@ -67,14 +75,21 @@ const CreateServer = () => {
           onChange={handleVersionTypeChange}
         />
         {gameVersion && (
-          <GameVersionSelect
-            gameVersion={gameVersion}
-            onChange={handleVersionChange}
-          />
+          <GameVersionSelect gameVersion={gameVersion} onChange={handleVersionChange} />
         )}
+      </Panel>
+      <Panel
+        style={{ backgroundColor: '#fff', marginBottom: 32 }}
+        header={<h4 style={{ fontWeight: 600 }}>Server Core</h4>}
+        bordered
+      >
+        <ServerCoreTypeSelect onChange={handleServerCoreTypeChange} />
       </Panel>
       <FloatBottom>
         <Panel style={{ backgroundColor: '#F5F5F5' }} bordered>
+          {version}
+          -
+          {serverCoreType}
           <CreateServerForm />
         </Panel>
       </FloatBottom>
@@ -101,6 +116,7 @@ export const links = () => [
   ...versionTypeSelectLinks(),
   ...floatBottomLinks(),
   ...createServerFormLinks(),
+  ...serverCoreTypeSelectLinks(),
 ];
 
 export default CreateServer;
