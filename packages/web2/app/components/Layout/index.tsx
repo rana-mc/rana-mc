@@ -29,12 +29,13 @@ const Layout = ({ children, pageTitle, path }: LayoutProps) => (
           {pageTitle && (
             <h3>
               <PageIcon style={{ fontSize: '0.8em' }} />
-              {' '}
               {pageTitle}
             </h3>
           )}
         </Header>
-        <Content>{children}</Content>
+        <Content>
+          {children}
+        </Content>
       </Container>
     </Container>
   </CustomProvider>

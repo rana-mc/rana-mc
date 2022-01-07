@@ -3,7 +3,7 @@ import {
   Button, ButtonToolbar, Panel, Form
 } from 'rsuite';
 import {
-  Form as RemixForm, useLoaderData, useSubmit, useTransition
+  useLoaderData, useSubmit, useTransition
 } from 'remix';
 import axios from 'axios';
 // TODO: WTF?
@@ -47,7 +47,6 @@ const CurseForgeSettings = () => {
       <Panel style={{ backgroundColor: '#fff' }} bordered>
         <Form
           formValue={currentSettings}
-          as={RemixForm}
           method="post"
           disabled={transition.state === 'submitting'}
           onChange={handleChange}

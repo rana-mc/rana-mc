@@ -1,0 +1,22 @@
+@import '../../styles/variables.less';
+
+.createServerForm {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+
+  @media @mobile-media {
+    flex-wrap: wrap;
+  }
+
+  .rs-form-control-label {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+  
+  .rs-form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+}

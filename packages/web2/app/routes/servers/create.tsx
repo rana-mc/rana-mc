@@ -5,6 +5,10 @@ import Layout, { links as layoutLinks } from '~/components/Layout';
 import GameVersionSelect, {
   links as gameVersionSelectLinks,
 } from '~/components/GameVersionSelect';
+import FloatBottom, { links as floatBottomLinks } from '~/components/FloatBottom';
+import CreateServerForm, {
+  links as createServerFormLinks,
+} from '~/components/CreateServerForm';
 
 type GameVersion = { type: number; versions: string[] };
 type VersionType = { id: number; gameId: number; name: string; slug: string };
@@ -36,12 +40,20 @@ const CreateServer = () => {
   return (
     <Layout pageTitle="Create server" path={['Home', 'Servers']}>
       <Panel
-        style={{ backgroundColor: '#fff' }}
+        style={{ backgroundColor: '#fff', marginBottom: 32 }}
         header={<h4 style={{ fontWeight: 600 }}>Game Version</h4>}
         bordered
       >
         <GameVersionSelect gameVersions={gameVersions} versionTypes={versionTypes} />
       </Panel>
+      <FloatBottom>
+        <Panel
+          style={{ backgroundColor: '#F5F5F5' }}
+          bordered
+        >
+          <CreateServerForm />
+        </Panel>
+      </FloatBottom>
     </Layout>
   );
 };
@@ -59,6 +71,11 @@ export const meta = () => ({
   title: 'RanaMC | Create Server',
 });
 
-export const links = () => [...layoutLinks(), ...gameVersionSelectLinks()];
+export const links = () => [
+  ...layoutLinks(),
+  ...gameVersionSelectLinks(),
+  ...floatBottomLinks(),
+  ...createServerFormLinks(),
+];
 
 export default CreateServer;
