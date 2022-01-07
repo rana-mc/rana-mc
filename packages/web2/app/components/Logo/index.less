@@ -1,0 +1,22 @@
+@import '../../styles/variables.less';
+
+.logo {
+  display: block;
+  width: 105px;
+  height: 118px;
+  background-image: url('/icons/logo.svg');
+  transition: transform 0.25s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media @mobile-media {
+    transform: scale(0.5);
+
+    &:hover {
+      transform: scale(0.55);
+    }
+  }
+}

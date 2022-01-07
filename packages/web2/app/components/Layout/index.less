@@ -1,0 +1,22 @@
+@import '../../styles/variables.less';
+
+.layout {
+  &__container {
+    width: 100%;
+    max-width: 100%;
+    background-color: #fafafa;
+    padding: 76px 48px;
+
+    @media @mobile-media {
+      padding: 24px 16px;
+    }
+  }
+
+  &__header {
+    margin-bottom: 48px;
+
+    &:empty {
+      margin-bottom: 0px;
+    }
+  }
+}

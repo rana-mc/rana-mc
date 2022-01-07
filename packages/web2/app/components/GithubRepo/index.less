@@ -1,0 +1,19 @@
+@import '../../styles/variables.less';
+
+.githubRepo {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background-image: url('/icons/github.svg');
+  transition: opacity 0.25s ease-in-out;
+
+  @media @mobile-media {
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

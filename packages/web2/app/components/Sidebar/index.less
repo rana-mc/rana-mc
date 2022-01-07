@@ -1,0 +1,70 @@
+@import '../../styles/variables.less';
+
+.sidebar {
+  position: relative;
+  height: 100vh;
+  border-right: 1px solid #e5e5ea;
+  padding-top: 48px;
+
+  &_mobile {
+    max-width: 64px;
+  }
+
+  &_mobile &__header {
+    margin-bottom: 16px;
+  }
+
+  &_mobile &__nav {
+    .rs-sidenav-item {
+      .rs-icon {
+        left: 24px !important;
+      }
+    }
+
+    .rs-dropdown-toggle {
+      .rs-dropdown-toggle-icon {
+        left: 24px !important;
+      }
+    }
+  }
+
+  &__github {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+  }
+
+  &__header {
+    margin-bottom: 32px;
+  }
+
+  &__nav {
+    .rs-sidenav-item {
+      padding-left: 64px;
+
+      .rs-icon {
+        top: 16px !important;
+        left: 32px !important;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: #e4f2ff;
+      }
+    }
+
+    .rs-dropdown-toggle {
+      padding-left: 64px !important;
+
+      .rs-dropdown-toggle-icon {
+        top: 16px !important;
+        left: 32px !important;
+      }
+    }
+
+    .rs-sidenav-item-active {
+      background-color: #e4f2ff;
+      color: #4ba1ff;
+    }
+  }
+}
