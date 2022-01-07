@@ -1,0 +1,7 @@
+{
+  "watchFolder": "app",
+  "outputFolder": "app",
+  "sourceMap": false,
+  "enableJs": true,
+  "lessArgs": "modify-var=\"primary-color=#4BA1FF\""
+}
