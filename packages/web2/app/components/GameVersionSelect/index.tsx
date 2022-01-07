@@ -1,60 +1,42 @@
-import { useState } from 'react';
-import { Radio, RadioGroup } from 'rsuite';
+import { Radio, Stack, RadioGroup } from 'rsuite';
 import { ValueType } from 'rsuite/esm/Radio';
+import SelectIcon, { links as selectIconLinks } from '../SelectIcon';
 import styles from './index.css';
 
 type GameVersion = { type: number; versions: string[] };
-type VersionType = { id: number; gameId: number; name: string; slug: string };
 
 type Props = {
-  gameVersions: GameVersion[];
-  versionTypes: VersionType[];
+  gameVersion: GameVersion;
+  onChange?: (version: string) => void;
 };
 
-const filterVersionTypes = (versionTypes: VersionType[]) => {
-  const RESTRICTED_TYPES: string[] = [
-    'Java',
-    'Fabric',
-    'Forge',
-    'Addons',
-    'Bukkit',
-    'Modloader',
-    'Minecraft Beta',
-  ];
-  return versionTypes.filter((version) => !RESTRICTED_TYPES.includes(version.name));
-};
+const filterVersions = (versions: string[]) =>
+  versions.filter((version) => !version.includes('Snapshot'));
 
-const formatVersionTypeName = (name: string) => name.replace(/Minecraft/gm, '');
-
-const GameVersionSelect = ({ gameVersions, versionTypes }: Props) => {
-  const [gameVersion, setGameVersion] = useState<GameVersion>();
-
+const GameVersionSelect = ({ gameVersion, onChange }: Props) => {
   const handleChange = (value: ValueType) => {
-    const currentGameVersion = gameVersions.find((version) => version.type === value);
-
-    setGameVersion(currentGameVersion);
+    if (onChange) onChange(value as string);
   };
 
   return (
-    <>
-      <RadioGroup
-        className="gameVersionSelect"
-        name="version"
-        inline
-        appearance="picker"
-        onChange={handleChange}
-      >
-        {filterVersionTypes(versionTypes).map((version) => (
-          <Radio key={version.id} value={version.id}>
-            {formatVersionTypeName(version.name)}
-          </Radio>
-        ))}
-      </RadioGroup>
-      {JSON.stringify(gameVersion)}
-    </>
+    <RadioGroup
+      className="gameVersionSelect"
+      inline
+      name="gameVersionSelect"
+      onChange={handleChange}
+    >
+      {filterVersions(gameVersion.versions).map((version) => (
+        <Radio key={version} value={version}>
+          <Stack direction="column" spacing={4} alignItems="flex-start">
+            <SelectIcon name="minecraft" />
+            {version}
+          </Stack>
+        </Radio>
+      ))}
+    </RadioGroup>
   );
 };
 
-export const links = () => [{ rel: 'stylesheet', href: styles }];
+export const links = () => [{ rel: 'stylesheet', href: styles }, ...selectIconLinks()];
 
 export default GameVersionSelect;

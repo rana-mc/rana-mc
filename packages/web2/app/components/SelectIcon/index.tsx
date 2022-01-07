@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ICON_COLORS = {
-  minecraft: '#D8D8D8',
+  minecraft: '#F5F5F5',
   forge: '#202C44',
   fabric: '#BADCBA',
 };
