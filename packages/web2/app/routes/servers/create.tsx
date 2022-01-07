@@ -76,6 +76,7 @@ export const links = () => [
   ...gameVersionSelectLinks(),
   ...floatBottomLinks(),
   ...createServerFormLinks(),
+  ...selectIconLinks()
 ];
 
 export default CreateServer;
