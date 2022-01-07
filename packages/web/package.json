@@ -35,8 +35,8 @@
   },
   "scripts": {
     "postinstall": "craco build",
-    "start": "craco start",
-    "watch": "craco start",
+    "start": "echo @rana-mc/web now is deprecated",
+    "watch": "echo @rana-mc/web now is deprecated",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
