@@ -2,5 +2,18 @@
   "extends": "../../.eslintrc",
   "parserOptions": {
     "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-indent": [2, 2],
+    "react/require-default-props": 0,
+    "react/button-has-type": 0,
+    "react/function-component-definition": [
+      1,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
   }
 }
