@@ -5,6 +5,7 @@ import styles from './index.css';
 
 type Props = {
   coreType?: string;
+  onChange?: (serverCore: ServerCore) => void;
 };
 
 const CoreVersionSelect = ({ coreType }: Props) => (
