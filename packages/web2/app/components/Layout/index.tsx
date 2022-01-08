@@ -6,6 +6,7 @@ import PageIcon from '@rsuite/icons/Page';
 import Sidebar, { links as sidebarLinks } from '../Sidebar';
 
 import styles from './index.css';
+import NavHeader, { links as navHeaderLinks } from '../NavHeader';
 
 type LayoutProps = {
   children?: React.ReactChild | React.ReactChild[];
@@ -18,6 +19,7 @@ const Layout = ({ children, pageTitle, path }: LayoutProps) => (
     <Container>
       <Sidebar />
       <Container className="layout__container">
+        <NavHeader />
         <Header className="layout__header">
           {path && (
             <Breadcrumb>
@@ -33,14 +35,16 @@ const Layout = ({ children, pageTitle, path }: LayoutProps) => (
             </h3>
           )}
         </Header>
-        <Content>
-          {children}
-        </Content>
+        <Content>{children}</Content>
       </Container>
     </Container>
   </CustomProvider>
 );
 
-export const links = () => [{ rel: 'stylesheet', href: styles }, ...sidebarLinks()];
+export const links = () => [
+  { rel: 'stylesheet', href: styles },
+  ...sidebarLinks(),
+  ...navHeaderLinks(),
+];
 
 export default Layout;
