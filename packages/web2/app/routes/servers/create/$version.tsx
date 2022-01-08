@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import axios from 'axios';
-import { useLoaderData } from 'remix';
+import { Outlet, useLoaderData, useNavigate } from 'remix';
 import { Panel } from 'rsuite';
 import GameVersionSelect, {
   links as gameVersionSelectLinks,
@@ -29,6 +29,7 @@ export const loader = async () => {
 };
 
 const $version = () => {
+  const navigate = useNavigate();
   const { gameVersions, versionTypes } = useLoaderData<LoaderData>();
 
   const [versionTypeId, setVersionTypeId] = useState<number>();
@@ -45,25 +46,28 @@ const $version = () => {
 
   const handleGameVersionIdChange = (value: string) => {
     setGameVersionId(value);
+    navigate(`./${value}`);
   };
 
   return (
-    <Panel
-      style={{ backgroundColor: '#fff', marginBottom: 32 }}
-      header={<h4 style={{ fontWeight: 600 }}>Game Version</h4>}
-      bordered>
-      <VersionTypeSelect
-        versionTypes={versionTypes}
-        onChange={handleVersionTypeIdChange}
-      />
-      {gameVersion && (
-        <GameVersionSelect
-          gameVersion={gameVersion}
-          onChange={handleGameVersionIdChange}
+    <React.Fragment>
+      <Panel
+        style={{ backgroundColor: '#fff', marginBottom: 32 }}
+        header={<h4 style={{ fontWeight: 600 }}>Game Version</h4>}
+        bordered>
+        <VersionTypeSelect
+          versionTypes={versionTypes}
+          onChange={handleVersionTypeIdChange}
         />
-      )}
-      {gameVersionId}
-    </Panel>
+        {gameVersion && (
+          <GameVersionSelect
+            gameVersion={gameVersion}
+            onChange={handleGameVersionIdChange}
+          />
+        )}
+      </Panel>
+      <Outlet />
+    </React.Fragment>
   );
 };
 

@@ -4,12 +4,13 @@ import CoreVersionSelect, {
   links as coreVersionSelectLinks,
 } from '~/components/CoreVersionSelect';
 
-const $version$type$core = () => {
+const $core = () => {
   const serverCoreType = 'forge';
   const [serverCore, setServerCore] = useState<ServerCore>();
 
   const handleServerCoreChange = (value: ServerCore) => {
     setServerCore(value);
+    console.log(serverCore);
   };
 
   return (
@@ -18,11 +19,10 @@ const $version$type$core = () => {
       header={<h4 style={{ fontWeight: 600 }}>Core Version</h4>}
       bordered>
       <CoreVersionSelect coreType={serverCoreType} onChange={handleServerCoreChange} />
-      {serverCore}
     </Panel>
   );
 };
 
 export const links = () => [...coreVersionSelectLinks()];
 
-export default $version$type$core;
+export default $core;
