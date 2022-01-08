@@ -3,7 +3,6 @@
 .sidebar {
   position: relative;
   height: 100vh;
-  border-right: 1px solid #e5e5ea;
   padding-top: 48px;
 
   &_mobile {
@@ -50,6 +49,14 @@
       &:hover,
       &:focus {
         background-color: #e4f2ff;
+      }
+    }
+
+    .rs-dropdown-item {
+      padding-left: 64px;
+
+      @media @mobile-media {
+        padding-left: 12px;
       }
     }
 

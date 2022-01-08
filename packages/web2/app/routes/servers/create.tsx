@@ -85,6 +85,13 @@ const CreateServer = () => {
       >
         <ServerCoreTypeSelect onChange={handleServerCoreTypeChange} />
       </Panel>
+      <Panel
+        style={{ backgroundColor: '#fff', marginBottom: 32 }}
+        header={<h4 style={{ fontWeight: 600 }}>Core Version</h4>}
+        bordered
+      >
+        core versions
+      </Panel>
       <FloatBottom>
         <Panel style={{ backgroundColor: '#F5F5F5' }} bordered>
           {version}
