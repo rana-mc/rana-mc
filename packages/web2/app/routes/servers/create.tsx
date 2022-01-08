@@ -16,7 +16,9 @@ import GameVersionSelect, {
 import ServerCoreTypeSelect, {
   links as serverCoreTypeSelectLinks,
 } from '~/components/ServerCoreTypeSelect';
-import CoreVersionSelect from '~/components/CoreVersionSelect';
+import CoreVersionSelect, {
+  links as coreVersionSelectLinks,
+} from '~/components/CoreVersionSelect';
 
 type GameVersion = { type: number; versions: string[] };
 type VersionType = { id: number; gameId: number; name: string; slug: string };
@@ -125,6 +127,7 @@ export const links = () => [
   ...floatBottomLinks(),
   ...createServerFormLinks(),
   ...serverCoreTypeSelectLinks(),
+  ...coreVersionSelectLinks(),
 ];
 
 export default CreateServer;

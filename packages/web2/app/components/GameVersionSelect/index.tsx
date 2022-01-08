@@ -27,7 +27,7 @@ const GameVersionSelect = ({ gameVersion, onChange }: Props) => {
     >
       {filterVersions(gameVersion.versions).map((version) => (
         <Radio key={version} value={version}>
-          <Stack direction="column" spacing={4} alignItems="flex-start">
+          <Stack direction="column" spacing={8} alignItems="flex-start">
             <SelectIcon name="minecraft" />
             {version}
           </Stack>
