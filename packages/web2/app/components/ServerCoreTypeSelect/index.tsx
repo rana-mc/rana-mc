@@ -29,8 +29,7 @@ const ServerCoreType = ({
     <div
       role="presentation"
       className={cn('serverCoreType', { serverCoreType_active: active })}
-      onClick={handleClick}
-    >
+      onClick={handleClick}>
       <SelectIcon name={icon} size="l" />
       <div className="serverCoreType__title">
         <b>{title}</b>
@@ -58,21 +57,22 @@ const SERVER_CORE_TYPES = [
 ];
 
 type Props = {
+  defaultValue?: string;
   onChange?: (serverCoreType: string) => void;
 };
 
-const ServerCoreTypeSelect = ({ onChange }: Props) => {
+const ServerCoreTypeSelect = ({ defaultValue, onChange }: Props) => {
   const handleChange = (value: ValueType) => {
     if (onChange) onChange(value as string);
   };
 
   return (
     <RadioGroup
+      defaultValue={defaultValue}
       className="serverCoreSelect"
       inline
       name="serverCoreSelect"
-      onChange={handleChange}
-    >
+      onChange={handleChange}>
       {SERVER_CORE_TYPES.map((serverCoreType) => (
         <Radio key={serverCoreType.id} value={serverCoreType.id}>
           <ServerCoreType
