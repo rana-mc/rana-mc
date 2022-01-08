@@ -11,7 +11,7 @@ const $type = () => {
 
   const handleServerCoreTypeChange = (value: string) => {
     setServerCoreType(value);
-    navigate(`./${value}`);
+    navigate(`../${value}/core`);
   };
 
   return (

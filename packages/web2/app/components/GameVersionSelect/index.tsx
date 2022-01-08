@@ -6,6 +6,7 @@ import styles from './index.css';
 type GameVersion = { type: number; versions: string[] };
 
 type Props = {
+  defaultValue?: string;
   gameVersion: GameVersion;
   onChange?: (version: string) => void;
 };
@@ -13,18 +14,18 @@ type Props = {
 const filterVersions = (versions: string[]) =>
   versions.filter((version) => !version.includes('Snapshot'));
 
-const GameVersionSelect = ({ gameVersion, onChange }: Props) => {
+const GameVersionSelect = ({ defaultValue, gameVersion, onChange }: Props) => {
   const handleChange = (value: ValueType) => {
     if (onChange) onChange(value as string);
   };
 
   return (
     <RadioGroup
+      defaultValue={defaultValue}
       className="gameVersionSelect"
       inline
       name="gameVersionSelect"
-      onChange={handleChange}
-    >
+      onChange={handleChange}>
       {filterVersions(gameVersion.versions).map((version) => (
         <Radio key={version} value={version}>
           <Stack direction="column" spacing={8} alignItems="flex-start">

@@ -51,7 +51,7 @@ const Sidebar = () => {
               icon={<Dashboard />}
               placement="rightStart"
             >
-              <Dropdown.Item eventKey="/servers/create">Create</Dropdown.Item>
+              <Dropdown.Item eventKey="/servers/create/version">Create</Dropdown.Item>
               <Dropdown.Item eventKey="/servers">List</Dropdown.Item>
             </Dropdown>
             <Dropdown

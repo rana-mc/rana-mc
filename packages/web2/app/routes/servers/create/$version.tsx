@@ -1,17 +1,23 @@
 import React, { useMemo, useState } from 'react';
 import axios from 'axios';
-import { Outlet, useLoaderData, useNavigate } from 'remix';
+import { Outlet, useLoaderData, useNavigate, useParams } from 'remix';
 import { Panel } from 'rsuite';
-import GameVersionSelect, {
+import GameVersionIdSelect, {
   links as gameVersionSelectLinks,
 } from '~/components/GameVersionSelect';
-import VersionTypeSelect, {
+import VersionTypeIdSelect, {
   links as versionTypeSelectLinks,
 } from '~/components/VersionTypeSelect';
+import { RESTRICTED_TYPE_IDS } from '~/constants';
+
+// TODO: Move into utils?
+const filterGameVersions = (gameVersions: GameVersion[]) => {
+  return gameVersions.filter((el) => !RESTRICTED_TYPE_IDS.includes(el.type));
+};
 
 const fetchGameVersions = async () => {
   const response = await axios.get('http://localhost:3001/api/versions');
-  return response.data;
+  return filterGameVersions(response.data);
 };
 
 const fetchVersionTypes = async () => {
@@ -30,14 +36,22 @@ export const loader = async () => {
 
 const $version = () => {
   const navigate = useNavigate();
+  const params = useParams<{ version?: string }>();
   const { gameVersions, versionTypes } = useLoaderData<LoaderData>();
 
-  const [versionTypeId, setVersionTypeId] = useState<number>();
-  const [gameVersionId, setGameVersionId] = useState<string>();
+  const defaultGameVersionId = params.version || '';
+  const defaultVersionTypeId = useMemo(() => {
+    return (
+      gameVersions.find((el) => el.versions.includes(defaultGameVersionId))?.type || -1
+    );
+  }, [gameVersions, defaultGameVersionId]);
+
+  const [versionTypeId, setVersionTypeId] = useState<number>(defaultVersionTypeId);
+  const [gameVersionId, setGameVersionId] = useState<string>(defaultGameVersionId);
 
   const gameVersion = useMemo(
-    () => gameVersions.find((version) => version.type === versionTypeId),
-    [versionTypeId]
+    () => gameVersions.find((el) => el.type === versionTypeId),
+    [versionTypeId, defaultVersionTypeId]
   );
 
   const handleVersionTypeIdChange = (value: number) => {
@@ -46,7 +60,7 @@ const $version = () => {
 
   const handleGameVersionIdChange = (value: string) => {
     setGameVersionId(value);
-    navigate(`./${value}`);
+    navigate(`../${value}/type`, { replace: false });
   };
 
   return (
@@ -55,12 +69,14 @@ const $version = () => {
         style={{ backgroundColor: '#fff', marginBottom: 32 }}
         header={<h4 style={{ fontWeight: 600 }}>Game Version</h4>}
         bordered>
-        <VersionTypeSelect
+        <VersionTypeIdSelect
+          defaultValue={defaultVersionTypeId}
           versionTypes={versionTypes}
           onChange={handleVersionTypeIdChange}
         />
         {gameVersion && (
-          <GameVersionSelect
+          <GameVersionIdSelect
+            defaultValue={defaultGameVersionId}
             gameVersion={gameVersion}
             onChange={handleGameVersionIdChange}
           />

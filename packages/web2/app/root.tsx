@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Links,
   LinksFunction,
@@ -27,7 +28,9 @@ const App = () => (
       <Links />
     </head>
     <body>
-      <Outlet />
+      <React.StrictMode>
+        <Outlet />
+      </React.StrictMode>
       <ScrollRestoration />
       <Scripts />
       {process.env.NODE_ENV === 'development' && <LiveReload />}
@@ -52,9 +55,7 @@ export const CatchBoundary = () => {
       </head>
       <body className="not-found">
         <h1>
-          {caught.status}
-          {' '}
-          {caught.statusText}
+          {caught.status} {caught.statusText}
         </h1>
         <Button appearance="primary" onClick={handleGoBack}>
           Go Home
