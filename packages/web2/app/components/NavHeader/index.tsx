@@ -37,7 +37,7 @@ const NavHeader = () => {
           </Nav>
         </Navbar>
       </div>
-      <Drawer open={open} size="sm" full={isMobile} onClose={() => setOpen(false)}>
+      <Drawer open={open} size="xs" full={isMobile} onClose={() => setOpen(false)}>
         <Drawer.Body>
           <List>
             <List.Item>
