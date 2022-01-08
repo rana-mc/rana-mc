@@ -16,6 +16,7 @@ import GameVersionSelect, {
 import ServerCoreTypeSelect, {
   links as serverCoreTypeSelectLinks,
 } from '~/components/ServerCoreTypeSelect';
+import CoreVersionSelect from '~/components/CoreVersionSelect';
 
 type GameVersion = { type: number; versions: string[] };
 type VersionType = { id: number; gameId: number; name: string; slug: string };
@@ -90,7 +91,7 @@ const CreateServer = () => {
         header={<h4 style={{ fontWeight: 600 }}>Core Version</h4>}
         bordered
       >
-        core versions
+        <CoreVersionSelect coreType={serverCoreType} />
       </Panel>
       <FloatBottom>
         <Panel style={{ backgroundColor: '#F5F5F5' }} bordered>
