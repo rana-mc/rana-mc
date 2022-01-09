@@ -19,7 +19,7 @@ export const loader = async ({ params }: Loader) => {
 };
 
 const $core = () => {
-  const { core: serverCoreType } = useParams();
+  const { type: serverCoreType } = useParams();
   const forgeCores = useLoaderData<LoaderData>();
   const [serverCore, setServerCore] = useState<ServerCore>();
 
