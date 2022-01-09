@@ -24,6 +24,7 @@ const $type = () => {
         header={<h4 style={{ fontWeight: 600 }}>Server Core</h4>}
         bordered>
         <ServerCoreTypeSelect
+          key={params.type}
           defaultValue={defaultServerCoreType}
           onChange={handleServerCoreTypeChange}
         />
