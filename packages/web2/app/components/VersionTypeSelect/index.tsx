@@ -6,7 +6,8 @@ import styles from './index.css';
 type VersionType = { id: number; gameId: number; name: string; slug: string };
 
 type Props = {
-  defaultValue?: number;
+  // TODO: Use only one type
+  defaultValue?: string | number | undefined;
   versionTypes: VersionType[];
   onChange?: (versionTypeId: number) => void;
 };
