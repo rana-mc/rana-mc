@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useMemo, useState } from 'react';
-import { Outlet, useFetcher, useNavigate, useLoaderData } from 'remix';
+import { useFetcher, useLoaderData } from 'remix';
 import { Panel } from 'rsuite';
 import CreateServerForm from '~/components/CreateServerForm';
 import FloatBottom from '~/components/FloatBottom';
 import GameVersionSelect from '~/components/GameVersionSelect';
 import Layout, { links as layoutLinks } from '~/components/Layout';
+import ServerCoreBuilder from '~/components/ServerCoreBuilder';
 import ServerCoreTypeSelect from '~/components/ServerCoreTypeSelect';
 import VersionTypeSelect from '~/components/VersionTypeSelect';
 
@@ -29,8 +30,6 @@ const findGameVersionByVersionTypeId = (
 ) => gameVersions?.find((el) => el.type === versionTypeId);
 
 const Test = () => {
-  const navigate = useNavigate();
-
   const [versionTypeId, setVersionTypeId] = useState<number>();
   const [gameVersionId, setGameVersionId] = useState<string>();
   const [serverCoreTypeId, setServerCoreTypeId] = useState<string>();
@@ -54,19 +53,16 @@ const Test = () => {
 
   const handleServerCoreTypeIdChange = (value: string) => {
     setServerCoreTypeId(value);
-    navigate(`./${value}`);
+  };
+
+  const handleServerCoreBuild = (value: ServerCore) => {
+    setServerCore(value);
   };
 
   const gameVersion = useMemo(
     () => findGameVersionByVersionTypeId(gameVersions.data, versionTypeId),
     [versionTypeId, gameVersions]
   );
-
-  const createServerContext: CreateServerContext = {
-    gameVersionId,
-    serverCore,
-    setServerCore,
-  };
 
   return (
     <Layout pageTitle="About" path={['Home', 'Test']}>
@@ -99,11 +95,16 @@ const Test = () => {
         style={{ backgroundColor: '#fff', marginBottom: 32 }}
         header={<h4 style={{ fontWeight: 600 }}>Core Version</h4>}
         bordered>
-        <Outlet context={createServerContext} />
+        {serverCoreTypeId && (
+          <ServerCoreBuilder
+            coreTypeId={serverCoreTypeId}
+            onBuild={handleServerCoreBuild}
+          />
+        )}
       </Panel>
       <FloatBottom>
         <Panel style={{ backgroundColor: '#F5F5F5' }} bordered>
-          {JSON.stringify(createServerContext.serverCore)}
+          {JSON.stringify(serverCore)}
           <CreateServerForm />
         </Panel>
       </FloatBottom>
