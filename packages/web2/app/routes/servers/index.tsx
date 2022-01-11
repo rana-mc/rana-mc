@@ -1,6 +1,8 @@
 import { useLoaderData } from 'remix';
 import axios from 'axios';
 import Layout, { links as layoutLinks } from '~/components/Layout';
+import { Stack } from 'rsuite';
+import ServerCard, { links as serverCardLinks } from '~/components/ServerCard';
 
 export const loader = async () => {
   try {
@@ -19,8 +21,11 @@ const Servers = () => {
 
   return (
     <Layout pageTitle="Servers" path={['Home', 'Servers']}>
-      <h3>...servers</h3>
-      {JSON.stringify(servers)}
+      <Stack wrap spacing={24}>
+        {servers?.map((server: Server) => (
+          <ServerCard key={server.id} server={server} />
+        ))}
+      </Stack>
     </Layout>
   );
 };
@@ -38,6 +43,6 @@ export const meta = () => ({
   title: 'RanaMC | Servers',
 });
 
-export const links = () => [...layoutLinks()];
+export const links = () => [...layoutLinks(), ...serverCardLinks()];
 
 export default Servers;

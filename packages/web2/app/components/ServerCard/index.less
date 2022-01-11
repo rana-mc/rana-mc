@@ -1,0 +1,32 @@
+@import '../../styles/variables.less';
+
+.serverCard {
+  cursor: pointer;
+  display: inline-block;
+  width: 240px;
+  transition: box-shadow .3s;
+
+  @media @mobile-media {
+    width: 300px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  }
+
+  &__header {
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  &__divider {
+    margin: 16px 0;
+  }
+
+  &__footer {
+    border-radius: 0;
+    padding: 12px;
+    background-color: #f2f2f2;
+  }
+}
