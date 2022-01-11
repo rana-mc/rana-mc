@@ -229,11 +229,11 @@ export default class RanaSocket extends EventEmitter {
     let _server = null;
 
     // TODO: Make it by switch and case? Or function?
-    if (server.core.type === ServerCoreType.Forge) {
+    if (server?.core?.type === ServerCoreType.Forge) {
       _server = new ForgeServer(server);
     }
 
-    if (server.core.type === ServerCoreType.Fabric) {
+    if (server?.core?.type === ServerCoreType.Fabric) {
       _server = new FabricServer(server);
     }
 
