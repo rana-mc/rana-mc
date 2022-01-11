@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useMemo, useState } from 'react';
-import { useFetcher, useLoaderData } from 'remix';
+import { useFetcher, useLoaderData, useSubmit } from 'remix';
 import { Panel } from 'rsuite';
-import CreateServerForm from '~/components/CreateServerForm';
+import CreateServerForm, { CreateServerFormData } from '~/components/CreateServerForm';
 import FloatBottom, { links as floatBottomLinks } from '~/components/FloatBottom';
 import GameVersionSelect, {
   links as gameVersionSelectLinks,
@@ -32,12 +32,18 @@ export const loader = async () => {
   return response.data;
 };
 
+export const action = () => {
+  console.log(123);
+};
+
 const findGameVersionByVersionTypeId = (
   gameVersions: GameVersion[] = [],
   versionTypeId: number = -1
 ) => gameVersions?.find((el) => el.type === versionTypeId);
 
 const CreateIndexRoute = () => {
+  const submit = useSubmit();
+
   const [versionTypeId, setVersionTypeId] = useState<number>();
   const [gameVersionId, setGameVersionId] = useState<string>();
   const [serverCoreTypeId, setServerCoreTypeId] = useState<string>();
@@ -65,6 +71,40 @@ const CreateIndexRoute = () => {
 
   const handleServerCoreBuild = (value: ServerCore) => {
     setServerCore(value);
+  };
+
+  const handleCreateServerFormSubmit = (value: CreateServerFormData) => {
+    const { id, name } = value;
+
+    // TODO: Make it better
+    if (id && name && gameVersionId && versionTypeId && serverCore) {
+      const server: Server<ServerCore> = {
+        id,
+        name,
+        gameVersion: gameVersionId,
+        gameVersionTypeId: versionTypeId,
+        // TODO: Fix enum import
+        status: 'created',
+        core: serverCore,
+        mods: [],
+        eula: false,
+        startTimes: [],
+      };
+
+      // FYI: Support link of Forge, open in new window
+      if (serverCore.type === 'forge') {
+        const forgeCore = serverCore as ForgeCore;
+
+        if (forgeCore?.installerUrl) {
+          window.open(forgeCore?.installerUrl, '_blank', 'noopener,noreferrer');
+        }
+      }
+
+      submit(server as Record<string, any>, {
+        method: 'post',
+        action: 'servers/create/api/createServer',
+      });
+    }
   };
 
   const gameVersion = useMemo(
@@ -113,8 +153,7 @@ const CreateIndexRoute = () => {
       </Panel>
       <FloatBottom>
         <Panel style={{ backgroundColor: '#F5F5F5' }} bordered>
-          {JSON.stringify(serverCore)}
-          <CreateServerForm />
+          <CreateServerForm onSubmit={handleCreateServerFormSubmit} />
         </Panel>
       </FloatBottom>
     </Layout>
