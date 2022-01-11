@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useFetcher } from 'remix';
 import { RadioGroup, Stack, Radio } from 'rsuite';
 import { ValueType } from 'rsuite/esm/Radio';
-import SelectIcon from '~/components/SelectIcon';
+import SelectIcon, { links as selectIconLinks } from '~/components/SelectIcon';
 
 type Props = {
   gameVersionId: string;
@@ -28,9 +28,9 @@ const ForgeCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
 
   return (
     <RadioGroup
-      className="coreVersionSelect"
+      className="forgeCoreSelect"
       inline
-      name="coreVersionSelect"
+      name="forgeCoreSelect"
       onChange={handleChange}>
       {forgeCores.data?.success &&
         forgeCores.data.data.map((core) => (
@@ -44,5 +44,7 @@ const ForgeCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
     </RadioGroup>
   );
 };
+
+export const links = () => [...selectIconLinks()];
 
 export default ForgeCoreBuilder;

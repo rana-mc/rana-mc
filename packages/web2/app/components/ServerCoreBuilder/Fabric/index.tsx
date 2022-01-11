@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useFetcher } from 'remix';
-import { RadioGroup, Stack, Radio } from 'rsuite';
+import { Panel, RadioGroup, Stack, Radio } from 'rsuite';
 import { ValueType } from 'rsuite/esm/Radio';
-import SelectIcon from '~/components/SelectIcon';
+import SelectIcon, { links as selectIconLinks } from '~/components/SelectIcon';
 import { getFabricServerUrl } from '../utils';
 
 type Props = {
@@ -68,38 +68,44 @@ const FabricCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
 
   return (
     <>
-      <RadioGroup
-        className="fabricInstallerSelect"
-        inline
-        name="fabricInstallerSelect"
-        onChange={handleInstallerChange}>
-        {fabricInstallers.data?.success &&
-          fabricInstallers.data.data.map((installer) => (
-            <Radio key={installer.version} value={installer.version}>
-              <Stack direction="row" spacing={8} alignItems="flex-start">
-                <SelectIcon name="minecraft" />
-                {installer.version}
-              </Stack>
-            </Radio>
-          ))}
-      </RadioGroup>
-      <RadioGroup
-        className="fabricLoaderSelect"
-        inline
-        name="fabricLoaderSelect"
-        onChange={handleLoaderChange}>
-        {fabricLoaders.data?.success &&
-          fabricLoaders.data.data.map((loader) => (
-            <Radio key={loader.version} value={loader.version}>
-              <Stack direction="row" spacing={8} alignItems="flex-start">
-                <SelectIcon name="minecraft" />
-                {loader.version}
-              </Stack>
-            </Radio>
-          ))}
-      </RadioGroup>
+      <Panel header="Fabric Installer Version">
+        <RadioGroup
+          className="fabricInstallerSelect"
+          inline
+          name="fabricInstallerSelect"
+          onChange={handleInstallerChange}>
+          {fabricInstallers.data?.success &&
+            fabricInstallers.data.data.map((installer) => (
+              <Radio key={installer.version} value={installer.version}>
+                <Stack direction="row" spacing={8} alignItems="flex-start">
+                  <SelectIcon name="minecraft" />
+                  {installer.version}
+                </Stack>
+              </Radio>
+            ))}
+        </RadioGroup>
+      </Panel>
+      <Panel header="Fabric Loader Version">
+        <RadioGroup
+          className="fabricLoaderSelect"
+          inline
+          name="fabricLoaderSelect"
+          onChange={handleLoaderChange}>
+          {fabricLoaders.data?.success &&
+            fabricLoaders.data.data.map((loader) => (
+              <Radio key={loader.version} value={loader.version}>
+                <Stack direction="row" spacing={8} alignItems="flex-start">
+                  <SelectIcon name="minecraft" />
+                  {loader.version}
+                </Stack>
+              </Radio>
+            ))}
+        </RadioGroup>
+      </Panel>
     </>
   );
 };
+
+export const links = () => [...selectIconLinks()];
 
 export default FabricCoreBuilder;

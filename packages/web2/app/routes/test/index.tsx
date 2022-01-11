@@ -3,12 +3,20 @@ import { useMemo, useState } from 'react';
 import { useFetcher, useLoaderData } from 'remix';
 import { Panel } from 'rsuite';
 import CreateServerForm from '~/components/CreateServerForm';
-import FloatBottom from '~/components/FloatBottom';
-import GameVersionSelect from '~/components/GameVersionSelect';
+import FloatBottom, { links as floatBottomLinks } from '~/components/FloatBottom';
+import GameVersionSelect, {
+  links as gameVersionSelectLinks,
+} from '~/components/GameVersionSelect';
 import Layout, { links as layoutLinks } from '~/components/Layout';
-import ServerCoreBuilder from '~/components/ServerCoreBuilder';
-import ServerCoreTypeSelect from '~/components/ServerCoreTypeSelect';
-import VersionTypeSelect from '~/components/VersionTypeSelect';
+import ServerCoreBuilder, {
+  links as serverCoreBuilderLinks,
+} from '~/components/ServerCoreBuilder';
+import ServerCoreTypeSelect, {
+  links as serverCoreTypeSelectLinks,
+} from '~/components/ServerCoreTypeSelect';
+import VersionTypeSelect, {
+  links as versionTypeSelectLinks,
+} from '~/components/VersionTypeSelect';
 
 export type CreateServerContext = {
   gameVersionId?: string;
@@ -17,7 +25,6 @@ export type CreateServerContext = {
 };
 
 export const meta = () => ({ title: 'RanaMC | Test' });
-export const links = () => [...layoutLinks()];
 
 export const loader = async () => {
   const response = await axios.get('http://localhost:3001/api/version-types');
@@ -112,5 +119,14 @@ const Test = () => {
     </Layout>
   );
 };
+
+export const links = () => [
+  ...layoutLinks(),
+  ...floatBottomLinks(),
+  ...gameVersionSelectLinks(),
+  ...serverCoreBuilderLinks(),
+  ...serverCoreTypeSelectLinks(),
+  ...versionTypeSelectLinks(),
+];
 
 export default Test;

@@ -1,5 +1,6 @@
 import Fabric from './Fabric';
 import Forge from './Forge';
+import styles from './index.css';
 
 type Props = {
   gameVersionId?: string;
@@ -26,5 +27,7 @@ const ServerCoreBuilder = ({ gameVersionId, coreTypeId, onBuild }: Props) => {
     </>
   );
 };
+
+export const links = () => [{ rel: 'stylesheet', href: styles }];
 
 export default ServerCoreBuilder;
