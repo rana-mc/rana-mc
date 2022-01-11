@@ -17,7 +17,7 @@ const ForgeCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
   useEffect(() => {
     forgeCores.submit(
       { version: gameVersionId },
-      { action: 'test/api/forgeCores', method: 'post' }
+      { action: 'servers/create/api/forgeCores', method: 'post' }
     );
   }, [gameVersionId]);
 

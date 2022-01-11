@@ -22,11 +22,11 @@ const FabricCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
 
   useEffect(() => {
     fabricInstallers.submit(null, {
-      action: 'test/api/fabricInstallers',
+      action: 'servers/create/api/fabricInstallers',
       method: 'post',
     });
     fabricLoaders.submit(null, {
-      action: 'test/api/fabricLoaders',
+      action: 'servers/create/api/fabricLoaders',
       method: 'post',
     });
   }, [gameVersionId]);

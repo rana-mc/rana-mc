@@ -26,6 +26,7 @@ export type CreateServerContext = {
 
 export const meta = () => ({ title: 'RanaMC | Servers' });
 
+// TODO: Maybe move into api?
 export const loader = async () => {
   const response = await axios.get('http://localhost:3001/api/version-types');
   return response.data;
@@ -36,7 +37,7 @@ const findGameVersionByVersionTypeId = (
   versionTypeId: number = -1
 ) => gameVersions?.find((el) => el.type === versionTypeId);
 
-const Test = () => {
+const CreateIndexRoute = () => {
   const [versionTypeId, setVersionTypeId] = useState<number>();
   const [gameVersionId, setGameVersionId] = useState<string>();
   const [serverCoreTypeId, setServerCoreTypeId] = useState<string>();
@@ -50,7 +51,7 @@ const Test = () => {
 
     gameVersions.submit(
       { version: value.toString() },
-      { method: 'post', action: '/test/api/gameVersions' }
+      { method: 'post', action: '/servers/create/api/gameVersions' }
     );
   };
 
@@ -129,4 +130,4 @@ export const links = () => [
   ...versionTypeSelectLinks(),
 ];
 
-export default Test;
+export default CreateIndexRoute;
