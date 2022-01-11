@@ -24,7 +24,7 @@ export type CreateServerContext = {
   setServerCore: (serverCore: ServerCore) => void;
 };
 
-export const meta = () => ({ title: 'RanaMC | Test' });
+export const meta = () => ({ title: 'RanaMC | Servers' });
 
 export const loader = async () => {
   const response = await axios.get('http://localhost:3001/api/version-types');
@@ -72,7 +72,7 @@ const Test = () => {
   );
 
   return (
-    <Layout pageTitle="About" path={['Home', 'Test']}>
+    <Layout pageTitle="Create Server" path={['Home', 'Servers']}>
       <Panel
         style={{ backgroundColor: '#fff', marginBottom: 32 }}
         header={<h4 style={{ fontWeight: 600 }}>Game Version</h4>}
@@ -91,7 +91,7 @@ const Test = () => {
       </Panel>
       <Panel
         style={{ backgroundColor: '#fff', marginBottom: 32 }}
-        header={<h4 style={{ fontWeight: 600 }}>Server Core</h4>}
+        header={<h4 style={{ fontWeight: 600 }}>Server Type</h4>}
         bordered>
         <ServerCoreTypeSelect
           defaultValue={serverCoreTypeId}
@@ -100,7 +100,7 @@ const Test = () => {
       </Panel>
       <Panel
         style={{ backgroundColor: '#fff', marginBottom: 32 }}
-        header={<h4 style={{ fontWeight: 600 }}>Core Version</h4>}
+        header={<h4 style={{ fontWeight: 600 }}>Core</h4>}
         bordered>
         {serverCoreTypeId && (
           <ServerCoreBuilder
