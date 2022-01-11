@@ -3,7 +3,8 @@ import { ValueType } from 'rsuite/esm/Radio';
 import SelectIcon from '~/components/SelectIcon';
 
 type Props = {
-  onBuild?: (core: FabricCore) => void;
+  gameVersionId: string;
+  onBuild: (core: FabricCore) => void;
 };
 
 // TODO: Use loader and installer for build core
@@ -30,7 +31,7 @@ const FabricCoreBuilder = ({ onBuild }: Props) => {
 
   const handleChange = (value: ValueType) => {
     const core = cores.find((core) => core.serverInstallerUrl === value);
-    if (onBuild && core) onBuild(core);
+    if (core) onBuild(core);
   };
 
   return (

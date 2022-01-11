@@ -97,6 +97,7 @@ const Test = () => {
         bordered>
         {serverCoreTypeId && (
           <ServerCoreBuilder
+            gameVersionId={gameVersionId}
             coreTypeId={serverCoreTypeId}
             onBuild={handleServerCoreBuild}
           />

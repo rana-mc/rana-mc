@@ -1,26 +1,29 @@
+import { useEffect } from 'react';
+import { useFetcher } from 'remix';
 import { RadioGroup, Stack, Radio } from 'rsuite';
 import { ValueType } from 'rsuite/esm/Radio';
 import SelectIcon from '~/components/SelectIcon';
 
 type Props = {
-  onBuild?: (core: ForgeCore) => void;
+  gameVersionId: string;
+  onBuild: (core: ForgeCore) => void;
 };
 
-const ForgeCoreBuilder = ({ onBuild }: Props) => {
-  const cores: ForgeCore[] = [
-    {
-      gameVersion: '123',
-      coreVersion: 'test',
-      uploadTime: '',
-      changelogUrl: '',
-      installerUrl: '',
-      mdkUrl: '',
-    },
-  ];
+type ForgeCoresResponse = { data: ForgeCore[]; success: boolean };
+
+const ForgeCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
+  const forgeCores = useFetcher<ForgeCoresResponse>();
+
+  useEffect(() => {
+    forgeCores.submit(
+      { version: gameVersionId },
+      { action: 'test/api/forge', method: 'post' }
+    );
+  }, [gameVersionId]);
 
   const handleChange = (value: ValueType) => {
-    const core = cores.find((core) => core.coreVersion === value);
-    if (onBuild && core) onBuild(core);
+    const core = forgeCores.data?.data.find((core) => core.coreVersion === value);
+    if (core) onBuild(core);
   };
 
   return (
@@ -29,14 +32,15 @@ const ForgeCoreBuilder = ({ onBuild }: Props) => {
       inline
       name="coreVersionSelect"
       onChange={handleChange}>
-      {cores.map((core) => (
-        <Radio key={core.coreVersion} value={core.coreVersion}>
-          <Stack direction="row" spacing={8} alignItems="flex-start">
-            <SelectIcon name="minecraft" />
-            {core.coreVersion}
-          </Stack>
-        </Radio>
-      ))}
+      {forgeCores.data?.success &&
+        forgeCores.data.data.map((core) => (
+          <Radio key={core.coreVersion} value={core.coreVersion}>
+            <Stack direction="row" spacing={8} alignItems="flex-start">
+              <SelectIcon name="minecraft" />
+              {core.coreVersion}
+            </Stack>
+          </Radio>
+        ))}
     </RadioGroup>
   );
 };
