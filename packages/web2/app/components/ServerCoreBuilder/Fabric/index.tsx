@@ -31,7 +31,7 @@ const FabricCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
     });
   }, [gameVersionId]);
 
-  const handleCoreBuild = () => {
+  useEffect(() => {
     if (loader && installer) {
       const loaderVersion = loader.version;
       const installerVersion = installer.version;
@@ -48,22 +48,20 @@ const FabricCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
         serverInstallerUrl,
       });
     }
-  };
+  }, [installer, loader]);
 
   const handleInstallerChange = (installerVersion: ValueType) => {
     const selectedInstaller = fabricInstallers.data?.data?.find(
-      (_installer) => _installer.version === installerVersion
+      (el) => el.version === installerVersion
     );
     setInstaller(selectedInstaller);
-    handleCoreBuild();
   };
 
   const handleLoaderChange = (loaderVersion: ValueType) => {
     const selectedLoader = fabricLoaders.data?.data?.find(
-      (_loader) => _loader.version === loaderVersion
+      (el) => el.version === loaderVersion
     );
     setLoader(selectedLoader);
-    handleCoreBuild();
   };
 
   return (

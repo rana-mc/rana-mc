@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useFetcher } from 'remix';
-import { RadioGroup, Stack, Radio } from 'rsuite';
+import { RadioGroup, Stack, Radio, Panel } from 'rsuite';
 import { ValueType } from 'rsuite/esm/Radio';
 import SelectIcon, { links as selectIconLinks } from '~/components/SelectIcon';
 
@@ -27,21 +27,23 @@ const ForgeCoreBuilder = ({ gameVersionId, onBuild }: Props) => {
   };
 
   return (
-    <RadioGroup
-      className="forgeCoreSelect"
-      inline
-      name="forgeCoreSelect"
-      onChange={handleChange}>
-      {forgeCores.data?.success &&
-        forgeCores.data.data.map((core) => (
-          <Radio key={core.coreVersion} value={core.coreVersion}>
-            <Stack direction="row" spacing={8} alignItems="flex-start">
-              <SelectIcon name="minecraft" />
-              {core.coreVersion}
-            </Stack>
-          </Radio>
-        ))}
-    </RadioGroup>
+    <Panel header="Forge Core Version">
+      <RadioGroup
+        className="forgeCoreSelect"
+        inline
+        name="forgeCoreSelect"
+        onChange={handleChange}>
+        {forgeCores.data?.success &&
+          forgeCores.data.data.map((core) => (
+            <Radio key={core.coreVersion} value={core.coreVersion}>
+              <Stack direction="row" spacing={8} alignItems="flex-start">
+                <SelectIcon name="minecraft" />
+                {core.coreVersion}
+              </Stack>
+            </Radio>
+          ))}
+      </RadioGroup>
+    </Panel>
   );
 };
 
