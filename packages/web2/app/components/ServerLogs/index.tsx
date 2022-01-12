@@ -1,9 +1,8 @@
 import { useCallback, useState } from 'react';
 import debounce from 'lodash.debounce';
 import styles from './index.css';
-import { ServerEvents } from '@rana-mc/types';
 
-import { ranaSocket } from '../../vendors/ranaSocketIo';
+import { ranaSocket } from '~/vendors/ranaSocketIo';
 import { parseLine, prepareLines } from './utils';
 
 const UPDATE_LOGS_DELAY = 500;
@@ -25,7 +24,8 @@ const ServerLogs = ({ serverId }: Props) => {
     []
   );
 
-  ranaSocket.on(ServerEvents.Logs, (logsServerId: string, message: string) => {
+  // TODO: Replace with ServerEvents.Logs
+  ranaSocket.on('logs', (logsServerId: string, message: string) => {
     if (serverId) {
       if (serverId === logsServerId) {
         fullServerLogs.push(message);
