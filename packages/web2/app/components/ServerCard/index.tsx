@@ -1,7 +1,8 @@
-import { Panel, Stack, Tag, Divider, Button } from 'rsuite';
+import { Panel, Toggle, Stack, Tag, Divider, Button } from 'rsuite';
 import CodeIcon from '@rsuite/icons/Code';
 import ToolsIcon from '@rsuite/icons/Tools';
 import AppSelectIcon from '@rsuite/icons/AppSelect';
+import DocPassIcon from '@rsuite/icons/DocPass';
 import styles from './index.css';
 import { useNavigate } from 'remix';
 
@@ -15,6 +16,9 @@ const ServerCard = ({ server }: Props) => {
   const handleClick = () => {
     navigate(`/servers/${server.id}`);
   };
+
+  const handleToggleClick: React.MouseEventHandler<HTMLDivElement> = (event) =>
+    event.stopPropagation();
 
   return (
     <Panel
@@ -59,6 +63,17 @@ const ServerCard = ({ server }: Props) => {
             </Stack>
             <Stack>32</Stack>
           </Stack>
+          <div onClick={handleToggleClick}>
+            <Stack justifyContent="space-between" alignItems="center">
+              <Stack alignItems="center" spacing={8}>
+                <DocPassIcon />
+                EULA
+              </Stack>
+              <Stack>
+                <Toggle />
+              </Stack>
+            </Stack>
+          </div>
         </Stack>
       </Panel>
       <Panel bodyFill className="serverCard__footer">
