@@ -18,16 +18,31 @@ import DocPassIcon from '@rsuite/icons/DocPass';
 import ServerLogs, { links as serverLogsLinks } from '~/components/ServerLogs';
 import styles from './index.css';
 import Badge, { links as badgeLinks } from '../Badge';
+import { ServerStatus } from '~/vendors/ranaSocketIo';
 
 type Props = {
   server: Server;
-  onStart?: () => void;
-  onStop?: () => void;
-  onRemove?: () => void;
-  onEulaChange?: (value: boolean) => void;
+  onInstall: () => void;
+  onStart: () => void;
+  onStop: () => void;
+  onRemove: () => void;
+  onEulaChange: (value: boolean) => void;
 };
 
-const ServerCardLarge = ({ server }: Props) => {
+const ServerCardLarge = ({
+  server,
+  onInstall,
+  onStart,
+  onStop,
+  onRemove,
+  onEulaChange,
+}: Props) => {
+  const handleInstall = () => onInstall();
+  const handleStart = () => onStart();
+  const handleStop = () => onStop();
+  const handleRemove = () => onRemove();
+  const handleEulaChange = (value: boolean) => onEulaChange(value);
+
   return (
     <PanelGroup style={{ backgroundColor: '#fff' }} accordion bordered>
       <Panel defaultExpanded collapsible={false}>
@@ -78,7 +93,7 @@ const ServerCardLarge = ({ server }: Props) => {
                     EULA
                   </Stack>
                   <Stack>
-                    <Toggle defaultChecked={server.eula} />
+                    <Toggle defaultChecked={server.eula} onChange={handleEulaChange} />
                   </Stack>
                 </Stack>
               </Stack>
@@ -86,15 +101,28 @@ const ServerCardLarge = ({ server }: Props) => {
             <Panel bodyFill defaultExpanded className="serverCardLarge__footer">
               <ButtonToolbar>
                 <Stack justifyContent="space-between">
-                  <Button appearance="link" color="red" size="md">
-                    Remove
+                  <Button appearance="link" color="red" size="md" onClick={handleRemove}>
+                    {server.status === ServerStatus.Removing ? 'Removing...' : 'Remove'}
                   </Button>
                   <Stack spacing={12}>
-                    <Button appearance="link" color="orange" size="md">
-                      Stop server
+                    <Button
+                      appearance="link"
+                      color="cyan"
+                      size="md"
+                      onClick={handleInstall}>
+                      {server.status === ServerStatus.CoreInstalling
+                        ? 'Installing...'
+                        : 'Install'}
                     </Button>
-                    <Button appearance="ghost" size="md">
-                      Start server
+                    <Button
+                      appearance="link"
+                      color="orange"
+                      size="md"
+                      onClick={handleStop}>
+                      {server.status === ServerStatus.Stopping ? 'Stopping...' : 'Stop'}
+                    </Button>
+                    <Button appearance="ghost" size="md" onClick={handleStart}>
+                      {server.status === ServerStatus.Starting ? 'Starting...' : 'Start'}
                     </Button>
                   </Stack>
                 </Stack>

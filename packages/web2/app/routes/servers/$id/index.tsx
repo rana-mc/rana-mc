@@ -1,10 +1,10 @@
-import { LoaderFunction, useLoaderData } from 'remix';
+import { LoaderFunction, useFetcher, useLoaderData } from 'remix';
 import axios from 'axios';
 import Layout, { links as layoutLinks } from '~/components/Layout';
 import ServerCardLarge, {
   links as serverCardLargeLinks,
 } from '~/components/ServerCardLarge';
-import { ranaSocket } from '~/vendors/ranaSocketIo';
+import { ranaSocket, ServerActions } from '~/vendors/ranaSocketIo';
 
 type ServerDataResponse = { data: Server; success: boolean };
 export const loader: LoaderFunction = async ({ params }) => {
@@ -19,6 +19,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 const Server = () => {
   const server = useLoaderData<ServerDataResponse>();
+  const removeServer = useFetcher();
 
   if (!server?.success) {
     return (
@@ -28,18 +29,34 @@ const Server = () => {
     );
   }
 
-  const handleStart = () => {};
+  const handleInstall = () => {
+    ranaSocket.emit(ServerActions.InstallCore, server.data);
+  };
 
-  const handleStop = () => {};
+  const handleStart = () => {
+    ranaSocket.emit(ServerActions.Start, server.data);
+  };
 
-  const handleRemove = () => {};
+  const handleStop = () => {
+    ranaSocket.emit(ServerActions.Stop, server.data);
+  };
 
-  const handleEulaChange = () => {};
+  const handleRemove = () => {
+    removeServer.submit(null, {
+      method: 'delete',
+      action: `servers/${server.data.id}/api/remove`,
+    });
+  };
+
+  const handleEulaChange = (value: boolean) => {
+    ranaSocket.emit(ServerActions.Eula, server.data, value);
+  };
 
   return (
     <Layout pageTitle="Servers" path={['Servers']}>
       <ServerCardLarge
         server={server.data}
+        onInstall={handleInstall}
         onStart={handleStart}
         onStop={handleStop}
         onRemove={handleRemove}
