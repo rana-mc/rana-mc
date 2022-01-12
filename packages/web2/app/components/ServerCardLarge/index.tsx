@@ -9,7 +9,6 @@ import {
   Divider,
   Stack,
   ButtonToolbar,
-  ButtonGroup,
   PanelGroup,
 } from 'rsuite';
 import CodeIcon from '@rsuite/icons/Code';
@@ -18,9 +17,14 @@ import AppSelectIcon from '@rsuite/icons/AppSelect';
 import DocPassIcon from '@rsuite/icons/DocPass';
 import ServerLogs, { links as serverLogsLinks } from '~/components/ServerLogs';
 import styles from './index.css';
+import Badge, { links as badgeLinks } from '../Badge';
 
 type Props = {
   server: Server;
+  onStart?: () => void;
+  onStop?: () => void;
+  onRemove?: () => void;
+  onEulaChange?: (value: boolean) => void;
 };
 
 const ServerCardLarge = ({ server }: Props) => {
@@ -28,7 +32,10 @@ const ServerCardLarge = ({ server }: Props) => {
     <PanelGroup style={{ backgroundColor: '#fff' }} accordion bordered>
       <Panel defaultExpanded collapsible={false}>
         <Stack justifyContent="space-between" alignItems="center">
-          <h5 className="serverCardLarge__header">{server.name}</h5>
+          <Stack alignItems="flex-start" spacing={12}>
+            <h5 className="serverCardLarge__header">{server.name}</h5>
+            <Badge altColor="grey" content={server.id} />
+          </Stack>
           <Tag size="sm" color="cyan">
             {server.status}
           </Tag>
@@ -41,7 +48,6 @@ const ServerCardLarge = ({ server }: Props) => {
               <Stack
                 direction="column"
                 alignItems="stretch"
-                // spacing={16}
                 divider={<Divider className="serverCardLarge__divider" />}>
                 <Stack justifyContent="space-between" alignItems="center">
                   <Stack alignItems="center" spacing={8}>
@@ -106,6 +112,10 @@ const ServerCardLarge = ({ server }: Props) => {
   );
 };
 
-export const links = () => [{ rel: 'stylesheet', href: styles }, ...serverLogsLinks()];
+export const links = () => [
+  { rel: 'stylesheet', href: styles },
+  ...serverLogsLinks(),
+  ...badgeLinks(),
+];
 
 export default ServerCardLarge;

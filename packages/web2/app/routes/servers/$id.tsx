@@ -28,9 +28,23 @@ const Server = () => {
     );
   }
 
+  const handleStart = () => {};
+
+  const handleStop = () => {};
+
+  const handleRemove = () => {};
+
+  const handleEulaChange = () => {};
+
   return (
     <Layout pageTitle="Servers" path={['Servers']}>
-      <ServerCardLarge server={server.data} />
+      <ServerCardLarge
+        server={server.data}
+        onStart={handleStart}
+        onStop={handleStop}
+        onRemove={handleRemove}
+        onEulaChange={handleEulaChange}
+      />
     </Layout>
   );
 };
