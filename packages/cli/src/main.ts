@@ -6,7 +6,7 @@ const WEB_PORT = 3000;
 
 const startWebServer = async () => {
   const app = express();
-  const webPath = path.resolve('.', 'node_modules/@rana-mc/web/build');
+  const webPath = path.resolve('.', 'node_modules/@rana-mc/web2/build');
 
   console.log(`RanaMC web path: ${webPath}`);
   app.use(express.static(webPath));
