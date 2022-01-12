@@ -1,3 +1,5 @@
+export const FABRIC_LOADERS_URL: string = 'https://meta.fabricmc.net/v2/versions/loader';
+
 export const getFabricServerPath = (
   gameVersion: string,
   loaderVersion: string,
@@ -19,3 +21,14 @@ export const getInstallerFilename = (core: FabricCore) => {
 };
 
 export const getCoreFilename = getInstallerFilename;
+
+export const getFabricServerInstallerUrl = (
+  gameVersion: string,
+  loaderVersion: string,
+  installerVersion: string
+) => {
+  const serverPath = `${gameVersion}/${loaderVersion}/${installerVersion}/`;
+  const serverUrl = `${FABRIC_LOADERS_URL}/${serverPath}server/jar`;
+
+  return serverUrl;
+};

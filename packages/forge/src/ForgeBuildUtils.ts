@@ -33,4 +33,14 @@ export class ForgeBuildUtils {
 
     return null;
   }
+
+  async buildCore(gameVersionId: string, 
+    coreVersion: string): Promise<ForgeServerCore> {
+    const core = forgeLocalDB.findCoreByVersion(gameVersionId, coreVersion);
+
+    return {
+      type: 'forge',
+      ...core
+    };
+  }
 }

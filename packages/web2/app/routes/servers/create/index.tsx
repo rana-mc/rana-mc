@@ -74,29 +74,33 @@ const CreateIndexRoute = () => {
 
     // TODO: Make it better
     if (id && name && gameVersionId && versionTypeId && serverCore) {
-      const server: Server<ServerCore> = {
+      const data: CreateServerRequestData = {
         id,
         name,
-        gameVersion: gameVersionId,
-        gameVersionTypeId: versionTypeId,
-        // TODO: Fix enum import
-        status: 'created',
-        core: serverCore,
-        mods: [],
-        eula: false,
-        startTimes: [],
+        gameVersionId,
+        versionTypeId,
+        coreType: serverCore.type,
       };
 
-      // FYI: Support link of Forge, open in new window
       if (serverCore.type === 'forge') {
         const forgeCore = serverCore as ForgeCore;
 
+        // FYI: Support link of Forge, open in new window
         if (forgeCore?.installerUrl) {
           window.open(forgeCore?.installerUrl, '_blank', 'noopener,noreferrer');
         }
+
+        data.coreVersion = forgeCore.coreVersion;
       }
 
-      submit(server as Record<string, any>, {
+      if (serverCore.type === 'fabric') {
+        const fabricCore = serverCore as FabricCore;
+
+        data.installerVersion = fabricCore.installer.version;
+        data.loaderVersion = fabricCore.loader.version;
+      }
+
+      submit(data as Record<string, any>, {
         method: 'post',
         action: 'servers/create/api/createServer',
       });

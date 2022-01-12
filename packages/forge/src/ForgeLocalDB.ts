@@ -31,6 +31,10 @@ export default class ForgeLocalDB {
     this.db.data.cores[version] = cores;
     return this.db.write();
   }
+
+  findCoreByVersion(gameVersionId: string, coreVersion: string): ForgeCore {
+    return this.db.data.cores[gameVersionId].find(core => core.coreVersion === coreVersion);
+  }
 }
 
 export const forgeLocalDB = new ForgeLocalDB();

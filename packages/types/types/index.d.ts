@@ -77,3 +77,15 @@ declare type RanaDBData = {
 };
 
 declare type OutputHandler = (message: string) => void;
+
+declare type BuildServerFunction = (data: CreateServerRequestData) => Promise<Server>;
+declare type CreateServerRequestData = {
+  id: string;
+  name: string;
+  gameVersionId: string;
+  versionTypeId: number;
+  coreType: ServerCoreTypeValues;
+  installerVersion?: string;
+  loaderVersion?: string;
+  coreVersion?: string;
+}

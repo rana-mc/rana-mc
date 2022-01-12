@@ -2,7 +2,7 @@ import axios from 'axios';
 import { fabricLocalDB } from './FabricLocalDB';
 
 import { Logger } from './Logger';
-import { getFabricServerPath } from './utils/server';
+import { getFabricServerInstallerUrl, getFabricServerPath } from './utils/server';
 
 export class FabricBuildUtils {
   public static TAG = 'FabricBuildUtils';
@@ -81,5 +81,19 @@ export class FabricBuildUtils {
     }
 
     return null;
+  }
+
+  async buildCore(gameVersionId: string, installerVersion: string, loaderVersion: string): Promise<FabricServerCore> {
+    const installer = fabricLocalDB.findInstallerByVersion(installerVersion);
+    const loader = fabricLocalDB.findLoaderByVersion(loaderVersion);
+    const serverInstallerUrl = getFabricServerInstallerUrl(gameVersionId, installer.version, loader.version);
+
+    return {
+      type: 'fabric',
+      gameVersion: gameVersionId,
+      installer,
+      loader,
+      serverInstallerUrl
+    }
   }
 }

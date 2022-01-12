@@ -52,6 +52,14 @@ export default class FabricLocalDB {
     this.db.data.status[coreName] = status;
     return this.db.write();
   }
+
+  findInstallerByVersion(installerVersion: string) {
+    return this.db.data.installers.find(installer => installer.version === installerVersion);
+  }
+
+  findLoaderByVersion(loaderVersion: string) {
+    return this.db.data.loaders.find(loader => loader.version === loaderVersion);
+  }
 }
 
 export const fabricLocalDB = new FabricLocalDB();
