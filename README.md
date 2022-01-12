@@ -20,7 +20,7 @@
 
 ### Used:
 <a href="https://remix.run/">
-    <img alt="rana-mc" src="https://raw.githubusercontent.com/rana-mc/rana-mc/master/assets/logo.png" width="146">
+    <img alt="rana-mc" src="https://raw.githubusercontent.com/rana-mc/rana-mc/master/assets/remix-logo.png" width="146">
   </a>
 
 <br/>
