@@ -1,6 +1,6 @@
 {
   "name": "@rana-mc/web",
-  "version": "0.1.1-alpha.0",
+  "version": "0.2.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -14,7 +14,7 @@
     "start": "remix-serve build"
   },
   "dependencies": {
-    "@rana-mc/types": "^0.1.1-alpha.0",
+    "@rana-mc/types": "^0.2.0",
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
     "@rsuite/icons": "^1.0.2",
