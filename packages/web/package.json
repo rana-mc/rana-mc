@@ -6,7 +6,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "remix build",
+    "build": "cross-env NODE_ENV=production remix build",
     "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
     "watch": "npm run dev",
     "dev:css": "less-watch-compiler",
@@ -21,6 +21,7 @@
     "@types/lodash.debounce": "^4.0.6",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
+    "cross-env": "^7.0.3",
     "less-watch-compiler": "^1.16.3",
     "lodash.debounce": "^4.0.8",
     "react": "^17.0.2",
