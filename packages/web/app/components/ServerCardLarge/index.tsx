@@ -19,6 +19,8 @@ import ServerLogs, { links as serverLogsLinks } from '~/components/ServerLogs';
 import styles from './index.css';
 import Badge, { links as badgeLinks } from '../Badge';
 import { ServerStatus } from '~/vendors/ranaSocketIo';
+import { MOBILE_QUREY } from '~/constants';
+import { useMediaQuery } from '~/hooks/useMediaQuery';
 
 type Props = {
   server: Server;
@@ -37,6 +39,8 @@ const ServerCardLarge = ({
   onRemove,
   onEulaChange,
 }: Props) => {
+  const isMobile = useMediaQuery(MOBILE_QUREY);
+
   const handleInstall = () => onInstall();
   const handleStart = () => onStart();
   const handleStop = () => onStop();
@@ -58,7 +62,7 @@ const ServerCardLarge = ({
       </Panel>
       <Grid fluid>
         <Row>
-          <Col xs={12}>
+          <Col xs={isMobile ? 24 : 12}>
             <Panel collapsible defaultExpanded>
               <Stack
                 direction="column"
@@ -154,7 +158,7 @@ const ServerCardLarge = ({
               </ButtonToolbar>
             </Panel>
           </Col>
-          <Col xs={12}>
+          <Col xs={isMobile ? 24 : 12}>
             <Panel collapsible defaultExpanded header="Logs">
               <ServerLogs />
             </Panel>
