@@ -17,6 +17,7 @@
   "dependencies": {
     "@rana-mc/api": "^0.1.1-alpha.0",
     "@rana-mc/web": "^0.1.1-alpha.0",
+    "@remix-run/express": "^1.1.1",
     "@types/node": "^16.11.12",
     "express": "^4.17.1",
     "typescript": "^4.5.2"
