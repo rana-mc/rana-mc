@@ -32,10 +32,6 @@ export const loader = async () => {
   return response.data;
 };
 
-export const action = () => {
-  console.log(123);
-};
-
 const findGameVersionByVersionTypeId = (
   gameVersions: GameVersion[] = [],
   versionTypeId: number = -1
