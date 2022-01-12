@@ -83,17 +83,25 @@ export class FabricBuildUtils {
     return null;
   }
 
-  async buildCore(gameVersionId: string, installerVersion: string, loaderVersion: string): Promise<FabricServerCore> {
+  async buildCore(
+    gameVersionId: string,
+    installerVersion: string,
+    loaderVersion: string
+  ): Promise<FabricServerCore> {
     const installer = fabricLocalDB.findInstallerByVersion(installerVersion);
     const loader = fabricLocalDB.findLoaderByVersion(loaderVersion);
-    const serverInstallerUrl = getFabricServerInstallerUrl(gameVersionId, installer.version, loader.version);
+    const serverInstallerUrl = getFabricServerInstallerUrl(
+      gameVersionId,
+      installer.version,
+      loader.version
+    );
 
     return {
       type: 'fabric',
       gameVersion: gameVersionId,
       installer,
       loader,
-      serverInstallerUrl
-    }
+      serverInstallerUrl,
+    };
   }
 }

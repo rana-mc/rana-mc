@@ -1,5 +1,5 @@
-import axios from "axios";
-import { ActionFunction, redirect } from "remix";
+import axios from 'axios';
+import { ActionFunction, redirect } from 'remix';
 
 export const loader = () => {
   return redirect('/');
@@ -11,8 +11,10 @@ export const action: ActionFunction = async ({ request }) => {
   const { version } = data;
 
   try {
-    const response = await axios.get('http://localhost:3001/api/forge-cores', { params: { version } });
-    return { success: true, data: response.data }
+    const response = await axios.get('http://localhost:3001/api/forge-cores', {
+      params: { version },
+    });
+    return { success: true, data: response.data };
   } catch (err) {
     return { success: false };
   }

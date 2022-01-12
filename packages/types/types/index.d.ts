@@ -88,4 +88,4 @@ declare type CreateServerRequestData = {
   installerVersion?: string;
   loaderVersion?: string;
   coreVersion?: string;
-}
+};

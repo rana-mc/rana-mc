@@ -1,6 +1,6 @@
-import axios from "axios";
-import { json, redirect } from "remix";
-import { RESTRICTED_TYPE_IDS } from "~/constants";
+import axios from 'axios';
+import { json, redirect } from 'remix';
+import { RESTRICTED_TYPE_IDS } from '~/constants';
 
 export const loader = () => {
   return redirect('/');

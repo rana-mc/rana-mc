@@ -60,7 +60,8 @@ export default class RanaDB {
 
   async updateServer(updatedServer: Server) {
     this.db.data.servers = this.db.data.servers.map((server) =>
-      (server.id === updatedServer.id ? { ...server, ...updatedServer } : server));
+      server.id === updatedServer.id ? { ...server, ...updatedServer } : server
+    );
 
     return this.db.write();
   }

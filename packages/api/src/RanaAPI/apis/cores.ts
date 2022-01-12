@@ -62,9 +62,7 @@ export default class CoresAPI extends APIRoute {
     });
 
     this.router.use('/fabric-core-status', async (req, res) => {
-      const {
-        gameVersion, loaderVersion, installerVersion, force
-      } = req.query as {
+      const { gameVersion, loaderVersion, installerVersion, force } = req.query as {
         gameVersion: string;
         loaderVersion: string;
         installerVersion: string;

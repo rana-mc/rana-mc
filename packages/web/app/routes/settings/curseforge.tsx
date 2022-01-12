@@ -1,10 +1,6 @@
 import { useState } from 'react';
-import {
-  Button, ButtonToolbar, Panel, Form
-} from 'rsuite';
-import {
-  useLoaderData, useSubmit, useTransition
-} from 'remix';
+import { Button, ButtonToolbar, Panel, Form } from 'rsuite';
+import { useLoaderData, useSubmit, useTransition } from 'remix';
 import axios from 'axios';
 // TODO: WTF?
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -50,8 +46,7 @@ const CurseForgeSettings = () => {
           method="post"
           disabled={transition.state === 'submitting'}
           onChange={handleChange}
-          onSubmit={handleSubmit}
-        >
+          onSubmit={handleSubmit}>
           <Form.Group controlId="curseApiKey">
             <Form.ControlLabel>API Key</Form.ControlLabel>
             <Form.Control name="curseApiKey" />
@@ -62,8 +57,7 @@ const CurseForgeSettings = () => {
               <Button
                 disabled={transition.state === 'submitting'}
                 type="submit"
-                appearance="primary"
-              >
+                appearance="primary">
                 Save
               </Button>
             </ButtonToolbar>

@@ -1,10 +1,6 @@
 import cn from 'classnames';
-import {
-  Nav, Dropdown, Sidebar as BaseSidebar, Sidenav, Stack
-} from 'rsuite';
-import {
-  Gear, HelpOutline, Dashboard, AppSelect
-} from '@rsuite/icons';
+import { Nav, Dropdown, Sidebar as BaseSidebar, Sidenav, Stack } from 'rsuite';
+import { Gear, HelpOutline, Dashboard, AppSelect } from '@rsuite/icons';
 import { useNavigate, useLocation } from 'remix';
 import Version, { links as versionLinks } from '../Version';
 import Logo, { links as logoLinks } from '../Logo';
@@ -41,16 +37,14 @@ const Sidebar = () => {
         expanded={!isMobile}
         defaultOpenKeys={['/servers', '/settings']}
         className="sidebar__nav"
-        appearance="subtle"
-      >
+        appearance="subtle">
         <Sidenav.Body>
           <Nav activeKey={pathname} onSelect={handleSelect}>
             <Dropdown
               eventKey="/servers"
               title="Servers"
               icon={<Dashboard />}
-              placement="rightStart"
-            >
+              placement="rightStart">
               <Dropdown.Item eventKey="/servers/create">Create</Dropdown.Item>
               <Dropdown.Item eventKey="/servers">List</Dropdown.Item>
             </Dropdown>
@@ -59,8 +53,7 @@ const Sidebar = () => {
               title="Mods"
               disabled
               icon={<AppSelect />}
-              placement="rightStart"
-            >
+              placement="rightStart">
               <Dropdown.Item eventKey="/mods/gallery" disabled>
                 Gallery
               </Dropdown.Item>
@@ -72,8 +65,7 @@ const Sidebar = () => {
               eventKey="/settings"
               title="Settings"
               icon={<Gear />}
-              placement="rightStart"
-            >
+              placement="rightStart">
               <Dropdown.Item eventKey="/settings/rana-mc">RanaMC</Dropdown.Item>
               <Dropdown.Item eventKey="/settings/curseforge">CurseForge</Dropdown.Item>
             </Dropdown>

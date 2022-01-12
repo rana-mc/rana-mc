@@ -17,15 +17,17 @@ const startWebServer = async () => {
   const router = express.Router({ strict: true });
 
   router.use(express.static(webPath));
-  router.use(createRequestHandler({
-    build,
-    getLoadContext(req, res) {
-      // FYI: Maybe later add context of host machine
-      return {};
-    }
-  }));
+  router.use(
+    createRequestHandler({
+      build,
+      getLoadContext(req, res) {
+        // FYI: Maybe later add context of host machine
+        return {};
+      },
+    })
+  );
 
-  app.use(router)
+  app.use(router);
   app.listen(WEB_PORT, () => {
     console.log(`Working on ${WEB_PORT} port...`);
   });

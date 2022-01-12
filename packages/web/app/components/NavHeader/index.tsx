@@ -1,8 +1,6 @@
 import { Notice, Admin } from '@rsuite/icons';
 import React from 'react';
-import {
-  Navbar, Stack, Badge, List, Drawer, Nav, Avatar
-} from 'rsuite';
+import { Navbar, Stack, Badge, List, Drawer, Nav, Avatar } from 'rsuite';
 import { MOBILE_QUREY } from '~/constants';
 import { useMediaQuery } from '~/hooks/useMediaQuery';
 import styles from './index.css';

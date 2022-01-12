@@ -19,6 +19,7 @@
 <br/>
 
 ### Used:
+
 <a href="https://remix.run/">
     <img alt="rana-mc" src="https://raw.githubusercontent.com/rana-mc/rana-mc/master/assets/remix-logo.png" width="146">
   </a>
@@ -26,8 +27,8 @@
 <br/>
 
 # TODOs:
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc?ref=badge_shield)
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc?ref=badge_shield)
 
 - [ ] Refactory Expand
 - [ ] Single .env?
@@ -48,6 +49,5 @@
 # License
 
 - MIT
-
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Frana-mc%2Frana-mc?ref=badge_large)

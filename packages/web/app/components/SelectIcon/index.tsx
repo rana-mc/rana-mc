@@ -18,8 +18,7 @@ const ICON_COLORS = {
 const SelectIcon = ({ name, size }: Props) => (
   <div
     className={cn('selectIcon', `selectIcon_size-${size}`)}
-    style={{ background: ICON_COLORS[name] || 'transparent' }}
-  >
+    style={{ background: ICON_COLORS[name] || 'transparent' }}>
     <Icon name={name} />
   </div>
 );

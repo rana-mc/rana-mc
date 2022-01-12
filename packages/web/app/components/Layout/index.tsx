@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Breadcrumb, Container, Header, Content, CustomProvider
-} from 'rsuite';
+import { Breadcrumb, Container, Header, Content, CustomProvider } from 'rsuite';
 import PageIcon from '@rsuite/icons/Page';
 import Sidebar, { links as sidebarLinks } from '../Sidebar';
 

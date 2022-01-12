@@ -34,7 +34,12 @@ export default class ServersAPI extends APIRoute {
     const coreBuilders = {
       // FIY: Yes, we can add more specific cores ;)
       forge: () => this.forgeBuildUtils.buildCore(data.gameVersionId, data.coreVersion),
-      fabric: () => this.fabricBuildUtils.buildCore(data.gameVersionId, data.installerVersion, data.loaderVersion)
+      fabric: () =>
+        this.fabricBuildUtils.buildCore(
+          data.gameVersionId,
+          data.installerVersion,
+          data.loaderVersion
+        ),
     };
 
     const core = await coreBuilders[data.coreType]();
@@ -49,9 +54,9 @@ export default class ServersAPI extends APIRoute {
       mods: [],
       eula: false,
       startTimes: [],
-      core
+      core,
     };
-  }
+  };
 
   useServers() {
     this.router.get('/servers', async (req, res) => {

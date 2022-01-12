@@ -1,5 +1,5 @@
-import axios from "axios";
-import { ActionFunction, redirect } from "remix";
+import axios from 'axios';
+import { ActionFunction, redirect } from 'remix';
 
 export const loader = () => {
   return redirect('/');

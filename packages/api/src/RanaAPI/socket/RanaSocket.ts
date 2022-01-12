@@ -193,31 +193,41 @@ export default class RanaSocket extends EventEmitter {
   private appendListeners(server: RanaServer) {
     /** Events for update server in RanaDB. */
     server.on(ServerEvents.CoreInstalling, () =>
-      this.updateServerStatus(server, ServerStatus.CoreInstalling));
+      this.updateServerStatus(server, ServerStatus.CoreInstalling)
+    );
     server.on(ServerEvents.CoreInstalled, () =>
-      this.updateServerStatus(server, ServerStatus.CoreInstalled));
+      this.updateServerStatus(server, ServerStatus.CoreInstalled)
+    );
     server.on(ServerEvents.Starting, () =>
-      this.updateServerStatus(server, ServerStatus.Starting));
+      this.updateServerStatus(server, ServerStatus.Starting)
+    );
     server.on(ServerEvents.Started, () =>
-      this.updateServerStatus(server, ServerStatus.Started));
+      this.updateServerStatus(server, ServerStatus.Started)
+    );
     server.on(ServerEvents.Stopping, () =>
-      this.updateServerStatus(server, ServerStatus.Stopping));
+      this.updateServerStatus(server, ServerStatus.Stopping)
+    );
     server.on(ServerEvents.Stopped, () =>
-      this.updateServerStatus(server, ServerStatus.Stopped));
+      this.updateServerStatus(server, ServerStatus.Stopped)
+    );
     server.on(ServerEvents.Removing, () =>
-      this.updateServerStatus(server, ServerStatus.Removing));
+      this.updateServerStatus(server, ServerStatus.Removing)
+    );
 
     /** Utility events. */
     server.on(ServerEvents.Crashed, () =>
-      this.updateServerStatus(server, ServerStatus.Stopped));
+      this.updateServerStatus(server, ServerStatus.Stopped)
+    );
     server.on(ServerEvents.StartTime, (startTime) =>
-      this.updateServerStartTimes(server, startTime));
+      this.updateServerStartTimes(server, startTime)
+    );
     server.on(ServerEvents.EulaChanged, (eula) => this.updateServerEULA(server, eula));
     server.on(ServerEvents.Removed, () => this.removeServerInstance(server));
 
     /** Events for sending info to socket clients. Like logs. */
     server.on(ServerEvents.Logs, (message) =>
-      this.socket.emit(ServerEvents.Logs, server.id, message));
+      this.socket.emit(ServerEvents.Logs, server.id, message)
+    );
   }
 
   /**

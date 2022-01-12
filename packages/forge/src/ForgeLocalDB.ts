@@ -33,7 +33,9 @@ export default class ForgeLocalDB {
   }
 
   findCoreByVersion(gameVersionId: string, coreVersion: string): ForgeCore {
-    return this.db.data.cores[gameVersionId].find(core => core.coreVersion === coreVersion);
+    return this.db.data.cores[gameVersionId].find(
+      (core) => core.coreVersion === coreVersion
+    );
   }
 }
 

@@ -54,11 +54,13 @@ export default class FabricLocalDB {
   }
 
   findInstallerByVersion(installerVersion: string) {
-    return this.db.data.installers.find(installer => installer.version === installerVersion);
+    return this.db.data.installers.find(
+      (installer) => installer.version === installerVersion
+    );
   }
 
   findLoaderByVersion(loaderVersion: string) {
-    return this.db.data.loaders.find(loader => loader.version === loaderVersion);
+    return this.db.data.loaders.find((loader) => loader.version === loaderVersion);
   }
 }
 
