@@ -27,3 +27,11 @@ export enum ServerStatus {
   Stopped = "stopped",
   Removing = "removing"
 }
+
+// TODO: Use from @rana-mc/types
+export enum RanaSocketEvents {
+  ServerUpdate = "serverUpdate",
+  ClientServerUpdate = "clientServerUpdate",
+  ServersFlush = "serversFlush",
+  SocketServersFlush = "socketServersFlush"
+}

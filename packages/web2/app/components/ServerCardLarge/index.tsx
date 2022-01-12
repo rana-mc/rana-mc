@@ -101,13 +101,27 @@ const ServerCardLarge = ({
             <Panel bodyFill defaultExpanded className="serverCardLarge__footer">
               <ButtonToolbar>
                 <Stack justifyContent="space-between">
-                  <Button appearance="link" color="red" size="md" onClick={handleRemove}>
+                  <Button
+                    appearance="link"
+                    color="red"
+                    size="md"
+                    disabled={
+                      !(
+                        server.status === ServerStatus.Created ||
+                        server.status === ServerStatus.Stopped
+                      )
+                    }
+                    onClick={handleRemove}>
                     {server.status === ServerStatus.Removing ? 'Removing...' : 'Remove'}
                   </Button>
                   <Stack spacing={12}>
                     <Button
                       appearance="link"
                       color="cyan"
+                      disabled={
+                        server.status === ServerStatus.CoreInstalled ||
+                        server.status === ServerStatus.CoreInstalling
+                      }
                       size="md"
                       onClick={handleInstall}>
                       {server.status === ServerStatus.CoreInstalling
@@ -117,11 +131,22 @@ const ServerCardLarge = ({
                     <Button
                       appearance="link"
                       color="orange"
+                      disabled={
+                        server.status === ServerStatus.Stopping ||
+                        server.status === ServerStatus.Stopped
+                      }
                       size="md"
                       onClick={handleStop}>
                       {server.status === ServerStatus.Stopping ? 'Stopping...' : 'Stop'}
                     </Button>
-                    <Button appearance="ghost" size="md" onClick={handleStart}>
+                    <Button
+                      appearance="ghost"
+                      disabled={
+                        server.status === ServerStatus.Starting ||
+                        server.status === ServerStatus.Started
+                      }
+                      size="md"
+                      onClick={handleStart}>
                       {server.status === ServerStatus.Starting ? 'Starting...' : 'Start'}
                     </Button>
                   </Stack>
