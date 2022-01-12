@@ -1,5 +1,5 @@
 {
-  "name": "@rana-mc/web2",
+  "name": "@rana-mc/web",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
