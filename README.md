@@ -18,11 +18,11 @@
 
 <br/>
 
-### Used:
+### Stack:
 
-<a href="https://remix.run/">
-    <img alt="rana-mc" src="https://raw.githubusercontent.com/rana-mc/rana-mc/master/assets/remix-logo.png" width="146">
-  </a>
+<div>
+  <img alt="rana-mc" src="https://raw.githubusercontent.com/rana-mc/rana-mc/master/assets/stack.png" width="100%">
+</div>
 
 <br/>
 
