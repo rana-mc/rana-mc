@@ -1,6 +1,6 @@
 {
   "name": "@rana-mc/fabric",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "./build/main.js",
   "types": "./build/main.d.ts",
   "type": "module",
@@ -16,7 +16,7 @@
     "watch": "tsc-watch --onSuccess \"node --es-module-specifier-resolution=node build/main.js\""
   },
   "dependencies": {
-    "@rana-mc/types": "^0.2.0",
+    "@rana-mc/types": "^0.2.1",
     "@types/download": "^8.0.1",
     "@types/node": "^16.11.13",
     "@types/shelljs": "^0.8.9",
