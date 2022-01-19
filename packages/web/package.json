@@ -10,7 +10,6 @@
     "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
     "watch": "npm run dev",
     "dev:css": "less-watch-compiler",
-    "postinstall": "remix setup node",
     "start": "remix-serve build"
   },
   "dependencies": {
