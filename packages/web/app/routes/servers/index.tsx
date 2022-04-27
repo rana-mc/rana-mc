@@ -1,4 +1,4 @@
-import { useLoaderData } from 'remix';
+import { useLoaderData } from '@remix-run/react';
 import axios from 'axios';
 import Layout, { links as layoutLinks } from '~/components/Layout';
 import { Stack } from 'rsuite';

@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { Nav, Dropdown, Sidebar as BaseSidebar, Sidenav, Stack } from 'rsuite';
 import { Gear, HelpOutline, Dashboard, AppSelect } from '@rsuite/icons';
-import { useNavigate, useLocation } from 'remix';
+import { useNavigate, useLocation } from '@remix-run/react';
 import Version, { links as versionLinks } from '../Version';
 import Logo, { links as logoLinks } from '../Logo';
 import styles from './index.css';

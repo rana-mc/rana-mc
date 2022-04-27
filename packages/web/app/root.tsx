@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Links,
-  LinksFunction,
   LiveReload,
   Meta,
   Outlet,
@@ -9,8 +8,8 @@ import {
   ScrollRestoration,
   useCatch,
   useNavigate,
-} from 'remix';
-import type { MetaFunction } from 'remix';
+} from '@remix-run/react';
+import type { LinksFunction, MetaFunction } from '@remix-run/server-runtime';
 
 // TODO: Replace by BackToHome component
 import { Button } from 'rsuite';

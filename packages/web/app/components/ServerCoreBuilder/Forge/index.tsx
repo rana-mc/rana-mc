@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useFetcher } from 'remix';
+import { useFetcher } from '@remix-run/react';
 import { RadioGroup, Stack, Radio, Panel } from 'rsuite';
 import { ValueType } from 'rsuite/esm/Radio';
 import SelectIcon, { links as selectIconLinks } from '~/components/SelectIcon';

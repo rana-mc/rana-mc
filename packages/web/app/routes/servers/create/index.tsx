@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useMemo, useState } from 'react';
-import { useFetcher, useLoaderData, useSubmit } from 'remix';
+import { useFetcher, useLoaderData, useSubmit } from '@remix-run/react';
 import { Panel } from 'rsuite';
 import CreateServerForm, { CreateServerFormData } from '~/components/CreateServerForm';
 import FloatBottom, { links as floatBottomLinks } from '~/components/FloatBottom';

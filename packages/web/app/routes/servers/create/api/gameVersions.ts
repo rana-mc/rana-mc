@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { json, redirect } from 'remix';
+import { json, redirect } from '@remix-run/server-runtime';
 import { RESTRICTED_TYPE_IDS } from '~/constants';
 
 export const loader = () => {

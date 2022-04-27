@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, ButtonToolbar, Panel, Form } from 'rsuite';
-import { useLoaderData, useSubmit, useTransition } from 'remix';
+import { useLoaderData, useSubmit, useTransition } from '@remix-run/react';
 import axios from 'axios';
 // TODO: WTF?
 // eslint-disable-next-line import/no-extraneous-dependencies

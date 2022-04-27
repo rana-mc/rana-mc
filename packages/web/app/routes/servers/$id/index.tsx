@@ -1,4 +1,4 @@
-import { LoaderFunction, useLoaderData, useSubmit } from 'remix';
+import { LoaderFunction, useLoaderData, useSubmit } from '@remix-run/react';
 import axios from 'axios';
 import Layout, { links as layoutLinks } from '~/components/Layout';
 import ServerCardLarge, {

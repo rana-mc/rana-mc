@@ -4,7 +4,7 @@ import ToolsIcon from '@rsuite/icons/Tools';
 import AppSelectIcon from '@rsuite/icons/AppSelect';
 import DocPassIcon from '@rsuite/icons/DocPass';
 import styles from './index.css';
-import { useNavigate } from 'remix';
+import { useNavigate } from '@remix-run/react';
 
 type Props = {
   server: Server;
