@@ -1,3 +1,8 @@
+```
+Q: Why rana-mc/rana-mc repo is not actual?
+A: That was bad idea, probably.
+https://alexey-soshin.medium.com/monorepo-is-a-bad-idea-5e587e848a07
+```
 <br/>
 <p align="center">
   <a href="https://github.com/rana-mc">
